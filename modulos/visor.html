@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cargando documento...</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #525659; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    iframe, embed { width: 100%; height: 100%; border: none; display: block; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/SUPABASETOKEN_vIYAdbiqIldZKuT1o1G5zqZkiG8y63UF1xSjphEHCnPnOw865G7ESgzNbC6pQNfdx4ZbaOCDI41K1SFRysHOO6bW1iiffwl9nFVWe7XLaqUS0wSdeRPcQvaRfGeFnfq9.js"></script>
+  <script src="../js/nucleo/auth.js"></script>
+  <script src="../js/servicios/estado.js"></script>
+  <script src="../js/servicios/rama.js"></script>
+</head>
+<body>
+  <iframe id="visor-frame" style="width:100%;height:100%;border:none;display:none;"></iframe>
+  <div id="cargando" style="display:flex;align-items:center;justify-content:center;height:100vh;color:#ffffff;font-size:1.1rem;">
+    Cargando...
+  </div>
+
+  <script src="../js/permisos/crypto.js"></script>
+  <script src="../js/permisos/supabase.js"></script>
+  <script src="../js/permisos/github.js"></script>
+  <script src="../js/permisos/visibilidad.js"></script>
+  <script src="../js/nucleo/anonimizador.js"></script>
+  <script src="../js/nucleo/permisos.js"></script>
+  <script src="../js/renderizadores/mostrar_archivos.js"></script>
+  <script>
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const ruta = (window.Estado ? window.Estado.obtener("archivo") : "") || params.get("archivo");
+      let nombre = (window.Estado ? window.Estado.obtener("nombre") : "") || params.get("nombre") || (ruta ? ruta.split("/").pop() : "documento.pdf");
+
+      if (window.sanearNombreInvitado) {
+        nombre = window.sanearNombreInvitado(nombre);
+      }
+
+      document.title = nombre;
+
+      if (!ruta) {
+        document.getElementById("cargando").textContent = "No se especificó la ruta del archivo.";
+        return;
+      }
+
+      if (/^https?:\/\//i.test(ruta)) {
+        window.location.replace(ruta);
+        return;
+      }
+
+      try {
+        if (window.Permisos) {
+          try { await window.Permisos.cargoSesion(); } catch (e) {}
+        }
+
+        const frame = document.getElementById("visor-frame");
+        const cargando = document.getElementById("cargando");
+        const rama = (window.Estado ? window.Estado.obtener("rama") : "") || (window.RamaActual ? window.RamaActual.obtener() : "compartido");
+
+        if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+          const urlNombrada = `../archivos/${encodeURIComponent(nombre)}?ruta=${encodeURIComponent(ruta)}&nombre=${encodeURIComponent(nombre)}&rama=${encodeURIComponent(rama)}`;
+          frame.src = urlNombrada;
+          frame.style.display = "block";
+          cargando.style.display = "none";
+          return;
+        }
+
+        const res = await fetchArchivoDesdeGitHub(ruta);
+        const rawBlob = await res.blob();
+        const ext = (nombre.split(".").pop() || "").toLowerCase();
+        const mime = ext === "pdf" ? "application/pdf" : (MIME_POR_EXTENSION[ext] || "application/octet-stream");
+        
+        const archivoConNombre = new File([rawBlob], nombre, { type: mime });
+        const objUrl = URL.createObjectURL(archivoConNombre);
+
+        frame.src = objUrl;
+        frame.style.display = "block";
+        cargando.style.display = "none";
+      } catch (err) {
+        document.getElementById("cargando").textContent = "Error al cargar el archivo: " + (err.message || err);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+/* ==========================================
+   Estilos del Botón y Panel de Ajustes
+   ========================================== */
+
+#barra-superior #boton-ajustes,
+#boton-ajustes,
+.btn-ajustes {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  border: none !important;
+  color: #475569 !important;
+  font-size: 17px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  margin-left: auto !important;
+}
+
+#barra-superior #boton-ajustes i,
+#boton-ajustes i,
+.btn-ajustes i {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+#barra-superior #boton-ajustes:hover,
+#boton-ajustes:hover,
+.btn-ajustes:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+#barra-superior #boton-ajustes:hover i,
+#boton-ajustes:hover i,
+.btn-ajustes:hover i {
+  transform: rotate(90deg) !important;
+}
+
+#barra-superior #boton-ajustes.abierto,
+#boton-ajustes.abierto,
+#barra-superior #boton-ajustes.visible,
+#boton-ajustes.visible,
+.btn-ajustes.visible {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Modal Emergente de Ajustes - Sin Bordes, Glassmorphism y Responsivo */
+#panel-ajustes {
+  position: fixed !important;
+  top: clamp(56px, 8vh, 74px) !important;
+  right: clamp(8px, 2vw, 20px) !important;
+  width: min(380px, calc(100vw - 16px)) !important;
+  max-width: calc(100vw - 16px) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: none !important;
+  border-radius: clamp(14px, 2vw, 20px) !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.6) !important;
+  z-index: 100010 !important;
+  display: none !important;
+  overflow: hidden !important;
+  text-align: left !important;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+  box-sizing: border-box !important;
+  max-height: calc(100dvh - 70px) !important;
+}
+
+html.modo-oscuro #panel-ajustes,
+body.modo-oscuro #panel-ajustes {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+#panel-ajustes .cuerpo-ajustes {
+  max-height: calc(100dvh - 130px) !important;
+  padding: 2px clamp(6px, 1.5vw, 10px) 14px clamp(6px, 1.5vw, 10px) !important;
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#panel-ajustes .cabecera-ajustes {
+  padding: clamp(12px, 2vw, 16px) clamp(14px, 2vw, 20px) !important;
+}
+
+#panel-ajustes .fila-ajuste {
+  padding: clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 14px) !important;
+  gap: clamp(8px, 1.5vw, 12px) !important;
+  border-radius: clamp(10px, 2vw, 14px) !important;
+}
+
+#panel-ajustes span {
+  margin: 0 !important;
+  filter: none !important;
+}
+
+#panel-ajustes.abierto,
+#panel-ajustes.visible {
+  display: block !important;
+  animation: modalEntrada 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes modalEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#panel-ajustes .cabecera-ajustes {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 16px 20px 14px 20px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
+  letter-spacing: -0.01em !important;
+}
+
+#panel-ajustes .btn-cerrar-ajustes {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 50% !important;
+  color: #64748b !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+#panel-ajustes .btn-cerrar-ajustes:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  transform: scale(1.08) !important;
+}
+
+html.modo-oscuro #panel-ajustes .btn-cerrar-ajustes,
+body.modo-oscuro #panel-ajustes .btn-cerrar-ajustes {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #94a3b8 !important;
+}
+
+html.modo-oscuro #panel-ajustes .btn-cerrar-ajustes:hover,
+body.modo-oscuro #panel-ajustes .btn-cerrar-ajustes:hover {
+  background: #475569 !important;
+  color: #f8fafc !important;
+}
+
+#panel-ajustes .seccion-ajustes-titulo {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6366f1;
+  padding: 12px 14px 4px 14px;
+  margin-top: 6px;
+}
+
+.cabecera-ajustes-icono {
+  margin-right: 8px;
+  color: #6366f1;
+}
+
+.seccion-ajustes-icono {
+  margin-right: 6px;
+  color: #6366f1;
+}
+
+.cuerpo-ajustes-cargando {
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.spinner-ajustes-cargando {
+  font-size: 24px;
+  color: #6366f1;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.texto-ajustes-cargando {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+#panel-ajustes .cuerpo-ajustes {
+  padding: 0 10px 14px 10px !important;
+  max-height: 70vh !important;
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.icono-ajuste-fila {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 8px !important;
+  background: #eef2ff !important;
+  color: #6366f1 !important;
+  font-size: 14px !important;
+  flex-shrink: 0 !important;
+}
+
+html.modo-oscuro .icono-ajuste-fila,
+body.modo-oscuro .icono-ajuste-fila {
+  background: #1e1b4b !important;
+  color: #a5b4fc !important;
+}
+
+#panel-ajustes .fila-ajuste {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  padding: 10px 12px !important;
+  margin-bottom: 4px !important;
+  border-radius: 14px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, transform 0.15s ease !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 220px !important;
+}
+
+#panel-ajustes .fila-ajuste:hover {
+  background: rgba(241, 245, 249, 0.8) !important;
+  transform: translateX(2px) !important;
+}
+
+#panel-ajustes .texto-ajuste {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  text-align: left !important;
+  align-items: flex-start !important;
+  overflow: hidden !important;
+}
+
+#panel-ajustes .texto-ajuste strong {
+  font-size: 13px !important;
+  color: #1e293b !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  white-space: normal !important;
+  text-align: left !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+
+
+/* Switch Deslizante de Diseño Moderno */
+.switch-clasico {
+  position: relative !important;
+  display: inline-block !important;
+  width: 46px !important;
+  min-width: 46px !important;
+  max-width: 46px !important;
+  height: 26px !important;
+  flex: 0 0 46px !important;
+  flex-shrink: 0 !important;
+  margin-left: 4px !important;
+}
+
+.switch-clasico input {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  opacity: 0 !important;
+  width: 46px !important;
+  height: 26px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  z-index: 2 !important;
+}
+
+.switch-clasico .slider-clasico {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 46px !important;
+  height: 26px !important;
+  background: #cbd5e1 !important;
+  border-radius: 9999px !important;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: none !important;
+}
+
+.switch-clasico .slider-clasico::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 3px !important;
+  top: 3px !important;
+  width: 20px !important;
+  height: 20px !important;
+  background: #ffffff !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) !important;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.switch-clasico input:checked + .slider-clasico {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+}
+
+.switch-clasico input:checked + .slider-clasico::before {
+  transform: translateX(20px) !important;
+}
+
+/* Modo Oscuro para Ajustes */
+html.modo-oscuro #panel-ajustes,
+body.modo-oscuro #panel-ajustes {
+  background: rgba(15, 23, 42, 0.94) !important;
+  border: none !important;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+}
+
+html.modo-oscuro #panel-ajustes .cabecera-ajustes,
+body.modo-oscuro #panel-ajustes .cabecera-ajustes {
+  background: transparent !important;
+  border: none !important;
+  color: #f8fafc !important;
+}
+
+html.modo-oscuro #panel-ajustes .fila-ajuste:hover,
+body.modo-oscuro #panel-ajustes .fila-ajuste:hover {
+  background: rgba(30, 41, 59, 0.8) !important;
+}
+
+html.modo-oscuro #panel-ajustes .texto-ajuste strong,
+body.modo-oscuro #panel-ajustes .texto-ajuste strong {
+  color: #f8fafc !important;
+}
+
+html.modo-oscuro #panel-ajustes .seccion-ajustes-titulo,
+body.modo-oscuro #panel-ajustes .seccion-ajustes-titulo {
+  color: #818cf8 !important;
+  border-top-color: rgba(51, 65, 85, 0.8) !important;
+}
+
+html.modo-oscuro #panel-ajustes .btn-cerrar-ajustes,
+body.modo-oscuro #panel-ajustes .btn-cerrar-ajustes {
+  background: rgba(51, 65, 85, 0.6) !important;
+  color: #cbd5e1 !important;
+}
+
+html.modo-oscuro #panel-ajustes .btn-cerrar-ajustes:hover,
+body.modo-oscuro #panel-ajustes .btn-cerrar-ajustes:hover {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+html.modo-oscuro #barra-superior #boton-ajustes,
+html.modo-oscuro #boton-ajustes,
+html.modo-oscuro .btn-ajustes,
+body.modo-oscuro #barra-superior #boton-ajustes,
+body.modo-oscuro #boton-ajustes,
+body.modo-oscuro .btn-ajustes {
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.45) !important;
+}
+
+html.modo-oscuro #barra-superior #boton-ajustes:hover,
+html.modo-oscuro #boton-ajustes:hover,
+html.modo-oscuro .btn-ajustes:hover,
+body.modo-oscuro #barra-superior #boton-ajustes:hover,
+body.modo-oscuro #boton-ajustes:hover,
+body.modo-oscuro .btn-ajustes:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 22px rgba(99, 102, 241, 0.6) !important;
+}

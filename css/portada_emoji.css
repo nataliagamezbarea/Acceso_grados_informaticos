@@ -1,0 +1,82 @@
+.portada_emoji_contenedor {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: clamp(140px, 20vw, 220px);
+  min-height: clamp(140px, 20vw, 220px);
+  max-height: clamp(140px, 20vw, 220px);
+  margin: clamp(12px, 3vh, 20px) auto clamp(16px, 4vh, 28px);
+  border-radius: clamp(12px, 2.5vw, 20px);
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: clamp(14px, 3vw, 28px) clamp(16px, 4vw, 36px);
+  box-sizing: border-box;
+  color: #ffffff;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed, #db2777);
+}
+
+#portada {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) saturate(1.2);
+  z-index: 1;
+}
+
+#emoji-trimestre,
+.portada_emoji_contenedor #titulo,
+.portada_emoji_contenedor #titulo-grado,
+.portada_emoji_contenedor h1 {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+#emoji-trimestre,
+#emoji-trimestre img.emoji {
+  display: inline-block;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  animation: flotar 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+#titulo,
+h1,
+.portada_emoji_contenedor #titulo-grado {
+  font-family: var(--font-heading, "Poppins", sans-serif);
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: #ffffff !important;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  line-height: 1.25;
+  text-align: right;
+  letter-spacing: -0.02em;
+}
+
+@keyframes flotar {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

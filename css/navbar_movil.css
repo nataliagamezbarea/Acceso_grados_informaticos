@@ -1,0 +1,334 @@
+/* Menu movil y hamburguesa */
+
+#btn-hamburguesa {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 100002;
+}
+
+#btn-hamburguesa:hover {
+  background: #f8fafc;
+  color: #7e22ce;
+  border-color: #d8b4fe;
+}
+
+#btn-hamburguesa:active {
+  transform: scale(0.95);
+}
+
+#btn-hamburguesa.activo {
+  background: #7e22ce !important;
+  color: #ffffff !important;
+  border-color: #6b21a8 !important;
+}
+
+/* Fondo oscurecido */
+#overlay-hamburguesa {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 100001;
+}
+
+#overlay-hamburguesa.activo {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Menu desplegable superior a lo ancho de la pagina */
+#menu-hamburguesa-desplegable {
+  position: fixed;
+  top: 58px;
+  left: 12px;
+  right: 12px;
+  width: calc(100vw - 24px);
+  max-width: 500px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 12px 30px -5px rgba(15, 23, 42, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 100005;
+  max-height: calc(100vh - 75px);
+  overflow-y: auto;
+}
+
+#menu-hamburguesa-desplegable.activo {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Opciones del menu */
+.hm-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  padding: 10px 12px !important;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
+  white-space: nowrap !important;
+}
+
+.hm-item:hover,
+.hm-item:focus {
+  background: #f1f5f9;
+  color: #7e22ce;
+}
+
+.hm-item:active {
+  transform: scale(0.98);
+}
+
+.hm-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.hm-item:hover .hm-icon {
+  background: #ede9fe;
+  border-color: #ddd6fe;
+  color: #7e22ce;
+}
+
+.hm-text {
+  display: block !important;
+  flex: 1 !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hm-badge {
+  display: inline-block !important;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  color: #475569;
+  text-transform: uppercase;
+}
+
+/* Modo edicion */
+.hm-item-modo {
+  background: #fdf2f8;
+  color: #be185d;
+}
+
+.hm-item-modo .hm-icon {
+  background: #fbcfe8;
+  border-color: #f472b6;
+  color: #be185d;
+}
+
+.hm-item-modo.modo-encendido {
+  background: #f1f5f9;
+  color: #0284c7;
+}
+
+.hm-item-modo.modo-encendido .hm-icon {
+  background: #e0f2fe;
+  border-color: #38bdf8;
+  color: #0284c7;
+}
+
+/* Cerrar sesion */
+.hm-item-peligro {
+  color: #dc2626;
+}
+
+.hm-item-peligro .hm-icon {
+  background: #fef2f2;
+  border-color: #fee2e2;
+  color: #dc2626;
+}
+
+.hm-item-peligro:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* Modo oscuro */
+html.modo-oscuro #btn-hamburguesa,
+body.modo-oscuro #btn-hamburguesa {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+html.modo-oscuro #btn-hamburguesa:hover,
+body.modo-oscuro #btn-hamburguesa:hover {
+  background: #334155;
+  color: #c084fc;
+}
+
+html.modo-oscuro #menu-hamburguesa-desplegable,
+body.modo-oscuro #menu-hamburguesa-desplegable {
+  background: #0f172a;
+  border-color: #334155;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+html.modo-oscuro .hm-item,
+body.modo-oscuro .hm-item {
+  color: #f1f5f9;
+}
+
+html.modo-oscuro .hm-item:hover,
+body.modo-oscuro .hm-item:hover {
+  background: #1e293b;
+  color: #c084fc;
+}
+
+html.modo-oscuro .hm-icon,
+body.modo-oscuro .hm-icon {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+html.modo-oscuro .hm-item:hover .hm-icon,
+body.modo-oscuro .hm-item:hover .hm-icon {
+  background: #334155;
+  border-color: #475569;
+  color: #c084fc;
+}
+
+html.modo-oscuro .hm-item-modo,
+body.modo-oscuro .hm-item-modo {
+  background: rgba(190, 24, 93, 0.15);
+  color: #f472b6;
+}
+
+html.modo-oscuro .hm-item-modo.modo-encendido,
+body.modo-oscuro .hm-item-modo.modo-encendido {
+  background: rgba(14, 165, 233, 0.15);
+  color: #38bdf8;
+}
+
+html.modo-oscuro .hm-item-peligro,
+body.modo-oscuro .hm-item-peligro {
+  color: #f87171;
+}
+
+html.modo-oscuro .hm-item-peligro .hm-icon,
+body.modo-oscuro .hm-item-peligro .hm-icon {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+
+
+
+ 
+/* Vista movil general (<= 500px: se activa cuando no caben los botones) */
+@media (max-width: 400px) {
+  #barra-superior {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    min-height: 52px !important;
+    padding: 6px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    z-index: 100000 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  html.modo-oscuro #barra-superior,
+  body.modo-oscuro #barra-superior {
+    background: rgba(15, 23, 42, 0.95) !important;
+    border-bottom-color: #334155 !important;
+  }
+
+  /* En movil ultra-estrecho, Inicio y Volver Atras se integran completamente dentro del menu hamburguesa */
+  #barra-superior .nav-left #btn-inicio,
+  #barra-superior .nav-left #volver-atras {
+    display: none !important;
+  }
+
+  /* Ocultar botones individuales de la derecha que estan integrados en el menu hamburguesa */
+  #barra-superior .nav-right #btn-modo-oscuro,
+  #barra-superior .nav-right #boton-ajustes,
+  #barra-superior .nav-right #btn-cerrar-sesion,
+  #barra-superior #boton-modo-edicion,
+  #boton-modo-edicion {
+    display: none !important;
+  }
+
+  /* Mostrar unicamente el boton de menu hamburguesa */
+  #btn-hamburguesa {
+    display: inline-flex !important;
+    margin-left: auto !important;
+  }
+
+  /* Ajustar contenedor de toasts para vista movil centrada */
+  #contenedor-toasts-descarga {
+    bottom: 12px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    width: calc(100vw - 20px) !important;
+    max-width: 360px !important;
+  }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detalles</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/navbar_movil.css" />
+    <link rel="stylesheet" href="../css/notificador.css" />
+    <link rel="stylesheet" href="../css/archivos.css" />
+    <link rel="stylesheet" href="../css/asignatura.css" />
+    <link rel="stylesheet" href="../css/apuntes_practicas_ejercicios_tareas.css" />
+    <link rel="stylesheet" href="../css/popover.css" />
+    <link rel="stylesheet" href="../css/ajustes.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/SUPABASETOKEN_vIYAdbiqIldZKuT1o1G5zqZkiG8y63UF1xSjphEHCnPnOw865G7ESgzNbC6pQNfdx4ZbaOCDI41K1SFRysHOO6bW1iiffwl9nFVWe7XLaqUS0wSdeRPcQvaRfGeFnfq9.js"></script>
+    <script src="../js/nucleo/auth.js"></script>
+    <script src="../js/componentes/navbar/navbar_movil.js"></script>
+    <script src="../js/componentes/navbar/navbar_modo_edicion.js"></script>
+    <script src="../js/componentes/navbar.js"></script>
+    <script src="../js/componentes/emojis.js"></script>
+    <script src="../js/servicios/estado.js"></script>
+    <script src="../js/permisos/crypto.js"></script>
+    <script src="../js/permisos/supabase.js"></script>
+    <script src="../js/permisos/github.js"></script>
+    <script src="../js/permisos/visibilidad.js"></script>
+    <script src="../js/nucleo/anonimizador.js"></script>
+    <script src="../js/nucleo/permisos.js"></script>
+    <script src="../js/componentes/ajustes.js"></script>
+    <script src="../js/servicios/trimestres.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="../js/servicios/rama.js"></script>
+    <script src="../js/descargas/notificador.js"></script>
+    <script src="../js/descargas/recolector_urls.js"></script>
+    <script src="../js/descargas/ziper.js"></script>
+    <script src="../js/modales/previsualizador.js"></script>
+    <script src="../js/modales/gestor_archivos_modal.js"></script>
+  </head>
+
+  <body>
+    <header id="barra-superior" class="barra-superior">
+      <div class="nav-left">
+        <a href="../index.html" id="btn-inicio" class="btn-inicio" title="Inicio"><i class="fa-solid fa-house"></i></a>
+        <a href="#" id="volver-atras" class="btn-volver" title="Volver Atrás"><i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+      <div class="nav-right">
+        <button id="btn-modo-oscuro" class="btn-modo-oscuro" title="Modo Oscuro"><i class="fa-solid fa-moon"></i></button>
+        <button id="boton-ajustes" class="btn-ajustes" title="Ajustes"><i class="fa-solid fa-gear"></i></button>
+        <button id="btn-cerrar-sesion" class="btn-cerrar-sesion" title="Cerrar Sesión"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </header>
+
+    <div class="flex center">
+      <div id="popover" popover>
+        <button class="cerrar-popover" popovertarget="popover" popovertargetaction="close">✖</button>
+        <div id="contenido-popover"></div>
+      </div>
+      <div id="contenido">Cargando...</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../js/renderizadores/mostrar_archivos.js"></script>
+    <script src="../js/renderizadores/apuntes_practicas_ejercicios_tareas.js"></script>
+  </body>
+</html>

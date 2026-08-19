@@ -1,0 +1,5 @@
+.env
+js/SUPABASETOKEN_*.js
+js/GITHUBTOKEN_*.js
+js/supabase-config.js
+js/github-config.js

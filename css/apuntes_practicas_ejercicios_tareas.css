@@ -1,0 +1,462 @@
+/* ==========================================================================
+   Estilos para Detalles de Apuntes, Prácticas, Ejercicios y Tareas
+   (Diseño 100% Fluido, Centrado y sin @media queries)
+   ========================================================================== */
+
+body {
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  padding-top: clamp(60px, 8vh, 80px) !important;
+  padding-bottom: clamp(20px, 4vh, 40px) !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
+}
+
+.flex.center,
+div.flex.center {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: min(1350px, 96vw) !important;
+  margin: auto !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 20px clamp(12px, 3vw, 28px) !important;
+  box-sizing: border-box !important;
+}
+
+#contenido {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: auto !important;
+  box-sizing: border-box !important;
+  gap: 18px !important;
+}
+
+/* Tarjeta de detalle centrada y fluida */
+.detalle-apunte {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: auto !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+  padding: clamp(22px, 3.5vw, 44px) clamp(18px, 4vw, 48px) !important;
+  border-radius: 18px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  color: #1e293b !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  overflow-x: hidden !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.detalle-apunte.tema-oculto-invitado {
+  background: #fff5f5 !important;
+  border-color: #fecaca !important;
+  border-left: 5px solid #ef4444 !important;
+}
+
+/* Campos clave/valor auto-adaptables sin @media */
+.campo {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: baseline !important;
+  gap: 8px 20px !important;
+  margin-bottom: 18px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding-bottom: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.campo:last-child {
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.clave {
+  flex: 1 0 140px !important;
+  max-width: 100% !important;
+  font-family: var(--font-heading, "Poppins", sans-serif) !important;
+  font-weight: 600 !important;
+  color: #7e22ce !important;
+  font-size: 0.9rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.4 !important;
+  word-break: break-word !important;
+}
+
+.valor {
+  flex: 999 1 min(100%, 260px) !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  font-size: 1rem !important;
+  color: #334155 !important;
+  line-height: 1.6 !important;
+  box-sizing: border-box !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 4 !important;
+  line-clamp: 4 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.valor a {
+  color: #7e22ce !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.valor a:hover {
+  color: #6b21a8 !important;
+  text-decoration: underline !important;
+}
+
+/* Contenedor y lista de archivos */
+.contenedor-archivos-lista,
+.bloque-archivos-desplegados {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.bloque-archivos-desplegados.oculto,
+.bloque-archivos-desplegados[style*="display: none"],
+.bloque-archivos-desplegados[style*="display:none"] {
+  display: none !important;
+}
+
+.item-archivo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 10px 14px !important;
+  background-color: #f5f3ff !important;
+  border: 1px solid #ddd6fe !important;
+  border-radius: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.item-archivo .enlace-archivo,
+.valor a.enlace-archivo {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  color: #7e22ce !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  vertical-align: middle !important;
+  text-decoration: none !important;
+  border: none !important;
+  background: transparent !important;
+  line-height: 1.4 !important;
+}
+
+.item-archivo a,
+.item-archivo a:hover,
+.item-archivo a:focus {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.item-archivo .btn-descarga,
+.item-archivo .btn-toggle-archivo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ver-mas-archivos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  gap: 4px;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-ver-mas-archivos:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+/* Botón toggle visibilidad archivo */
+.btn-toggle-archivo {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  line-height: 1;
+  flex-shrink: 0;
+  animation: aparecerOjo 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.btn-toggle-archivo:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15);
+}
+
+.btn-toggle-archivo i {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.btn-toggle-archivo:active i {
+  animation: girarOjo 0.3s ease;
+}
+
+@keyframes aparecerOjo {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes girarOjo {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.3);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* Caja de visibilidad para invitados (Modo Edición) */
+.caja-permiso-invitado {
+  margin-top: clamp(12px, 2.5vw, 18px);
+  padding: clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px);
+  background: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.caja-permiso-invitado .permiso-switch {
+  font-weight: 600 !important;
+  font-size: clamp(12px, 2vw, 13px) !important;
+  color: #7e22ce !important;
+  cursor: pointer !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+  user-select: none !important;
+}
+
+.caja-permiso-invitado .permiso-switch span {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+.caja-permiso-invitado .permiso-switch input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  accent-color: #9333ea !important;
+}
+
+.caja-permiso-invitado-oculto {
+  background: #fee2e2 !important;
+  border-color: #fca5a5 !important;
+}
+
+.caja-permiso-invitado-oculto .permiso-switch {
+  color: #dc2626 !important;
+}
+
+.caja-permiso-invitado-oculto .permiso-switch input[type="checkbox"] {
+  accent-color: #ef4444 !important;
+}
+
+.archivo-oculto-admin {
+  opacity: 0.82;
+  background: #fef2f2 !important;
+  border: 1.5px dashed #ef4444 !important;
+  border-radius: 6px;
+  color: #991b1b !important;
+}
+
+.archivo-oculto-admin a {
+  color: #b91c1c !important;
+}
+
+/* ==========================================================================
+   Modo Oscuro
+   ========================================================================== */
+
+html.modo-oscuro .detalle-apunte,
+body.modo-oscuro .detalle-apunte {
+  background: rgba(30, 41, 59, 0.85) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.modo-oscuro .campo,
+body.modo-oscuro .campo {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.modo-oscuro .detalle-apunte .clave,
+body.modo-oscuro .detalle-apunte .clave {
+  color: #c084fc !important;
+}
+
+html.modo-oscuro .detalle-apunte .valor,
+body.modo-oscuro .detalle-apunte .valor {
+  color: #f1f5f9 !important;
+}
+
+html.modo-oscuro .valor a,
+body.modo-oscuro .valor a {
+  color: #c084fc !important;
+}
+
+html.modo-oscuro .valor a:hover,
+body.modo-oscuro .valor a:hover {
+  color: #e9d5ff !important;
+}
+
+html.modo-oscuro .item-archivo,
+body.modo-oscuro .item-archivo {
+  background-color: rgba(126, 34, 206, 0.2) !important;
+  border-color: rgba(168, 85, 247, 0.35) !important;
+}
+
+html.modo-oscuro .item-archivo .enlace-archivo,
+body.modo-oscuro .item-archivo .enlace-archivo,
+html.modo-oscuro .valor a.enlace-archivo,
+body.modo-oscuro .valor a.enlace-archivo {
+  color: #d8b4fe !important;
+}
+
+html.modo-oscuro .item-archivo .btn-descarga,
+body.modo-oscuro .item-archivo .btn-descarga {
+  color: #d8b4fe !important;
+}
+
+html.modo-oscuro .btn-ver-mas-archivos,
+body.modo-oscuro .btn-ver-mas-archivos {
+  background: #1e293b !important;
+  color: #cbd5e1 !important;
+  border-color: #475569 !important;
+}
+
+html.modo-oscuro .btn-ver-mas-archivos:hover,
+body.modo-oscuro .btn-ver-mas-archivos:hover {
+  background: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+html.modo-oscuro .caja-permiso-invitado,
+body.modo-oscuro .caja-permiso-invitado {
+  background: rgba(88, 28, 135, 0.35) !important;
+  border-color: rgba(168, 85, 247, 0.4) !important;
+}
+
+html.modo-oscuro .caja-permiso-invitado .permiso-switch,
+body.modo-oscuro .caja-permiso-invitado .permiso-switch {
+  color: #d8b4fe !important;
+}
+
+html.modo-oscuro .caja-permiso-invitado-oculto,
+body.modo-oscuro .caja-permiso-invitado-oculto {
+  background: rgba(153, 27, 27, 0.45) !important;
+  border-color: #991b1b !important;
+}
+
+html.modo-oscuro .caja-permiso-invitado-oculto .permiso-switch,
+body.modo-oscuro .caja-permiso-invitado-oculto .permiso-switch {
+  color: #fca5a5 !important;
+}
+
+html.modo-oscuro .tema-oculto-invitado,
+body.modo-oscuro .tema-oculto-invitado {
+  background: rgba(127, 29, 29, 0.25) !important;
+  border-color: #7f1d1d !important;
+  border-left: 5px solid #ef4444 !important;
+}
+
+html.modo-oscuro .archivo-oculto-admin,
+body.modo-oscuro .archivo-oculto-admin {
+  background: rgba(153, 27, 27, 0.25) !important;
+  border: 1.5px dashed #f87171 !important;
+  color: #fca5a5 !important;
+
+
+
+}
+
+
