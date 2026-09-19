@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <modal-caja data-component="modal-caja">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker-box css-inline-a25ba2b8d1" id="customModalBox">
+    <button class="modal-close-btn custom-modal-close-x" id="customModalCloseBtn" type="button" aria-label="Cerrar" title="Cerrar (Esc)">✕</button>
+    <div class="css-inline-0e626981d0" id="customModalIcon">
+     <i class="fa-solid fa-circle-check">
+     </i>
+    </div>
+    <div class="css-inline-e4638fa873" id="customModalTitle">
+     Título
+    </div>
+    <div class="css-inline-1356299a78" id="customModalText">
+     Detalles...
+    </div>
+    <div class="css-inline-be5eaac538" id="customModalBtns">
+     <button class="btn-act accept css-inline-75d36b272c" id="customModalOkBtn">
+      <i class="fa-solid fa-check">
+      </i>
+      ACEPTAR
+     </button>
+     <button class="btn-act skip css-inline-a0fd43aec1" id="customModalCancelBtn">
+      CANCELAR
+     </button>
+    </div>
+   </div>
+  </modal-caja>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

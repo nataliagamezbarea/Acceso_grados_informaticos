@@ -1,0 +1,115 @@
+@media (max-width: 700px) {
+  body:has(app-view-apuntes) .detalle-apunte .campo {
+    grid-template-columns: 1fr !important;
+    column-gap: 0 !important;
+  }
+  body:has(app-view-apuntes) .detalle-apunte .clave {
+    white-space: normal !important;
+  }
+}
+
+/* V43 — MODO CLARO REAL DEL DETALLE
+   Este archivo tenía reglas antiguas de aislamiento que pintaban
+   .detalle-apunte en oscuro sin comprobar el tema. Las anulamos aquí,
+   al final del CSS, para que el modo claro tenga prioridad real.
+   El bloque oscuro sigue dependiendo exclusivamente de .modo-oscuro. */
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #1e293b !important;
+  border: 1px solid #e2e8f0 !important;
+  border-left: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  backdrop-filter: none !important;
+}
+
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte .campo,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte .campo {
+  color: #334155 !important;
+  border-bottom-color: #f1f5f9 !important;
+}
+
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte .clave,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte .clave {
+  color: #7e22ce !important;
+  text-shadow: none !important;
+}
+
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte .valor,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte .valor {
+  color: #334155 !important;
+  text-shadow: none !important;
+}
+
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte .valor a,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte .valor a {
+  color: #2563eb !important;
+}
+
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte .item-archivo,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte .item-archivo {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  border-color: #dbe2ea !important;
+  box-shadow: none !important;
+}
+
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte .caja-permiso-invitado,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte .caja-permiso-invitado {
+  background: #f8fafc !important;
+  background-color: #f8fafc !important;
+  color: #334155 !important;
+  border-color: #e2e8f0 !important;
+}
+
+body:has(app-view-apuntes) .detalle-apunte .caja-permiso-invitado {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+body:has(app-view-apuntes) .detalle-apunte .caja-permiso-invitado .permiso-switch {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+
+body:has(app-view-apuntes) .detalle-apunte .caja-permiso-invitado .permiso-switch .permiso-switch-check-wrapper {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body:has(app-view-apuntes) .detalle-apunte .caja-permiso-invitado .permiso-switch .permiso-switch-texto {
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+  line-height: 1.4 !important;
+}
+
+html:not(.modo-oscuro) body:has(app-view-apuntes) .detalle-apunte .permiso-switch,
+html[data-theme="light"] body:has(app-view-apuntes) .detalle-apunte .permiso-switch {
+  color: #334155 !important;
+}
+
+html.modo-oscuro body:has(app-view-apuntes) .detalle-apunte .caja-permiso-invitado {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+html.modo-oscuro body:has(app-view-apuntes) .detalle-apunte .permiso-switch {
+  color: #f1f5f9 !important;
+}

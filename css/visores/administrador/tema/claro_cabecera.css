@@ -1,0 +1,81 @@
+/* Inputs concretos que tenían fondo histórico #0c1322/#09101f. */
+html:not(.modo-oscuro) #inputApunteName,
+html:not(.modo-oscuro) #crearStart,
+html:not(.modo-oscuro) #editarOldText,
+html:not(.modo-oscuro) #crearNew,
+html:not(.modo-oscuro) #editarNewText,
+html:not(.modo-oscuro) #editarOldText,
+html:not(.modo-oscuro) #inputBuscarArchivo {
+  background: #ffffff !important;
+  color: #172033 !important;
+}
+
+/* Cabecera del panel y encabezados de secciones */
+html:not(.modo-oscuro) #app-root header,
+html:not(.modo-oscuro) #app-root .header-rama-box,
+html:not(.modo-oscuro) .tabs,
+html:not(.modo-oscuro) .stats,
+html:not(.modo-oscuro) .stats .stat,
+html:not(.modo-oscuro) .sec h2,
+html:not(.modo-oscuro) .sec h3,
+html:not(.modo-oscuro) .subfolder-header,
+html:not(.modo-oscuro) .seccion-subidos-app {
+  background-color: #ffffff !important;
+  color: #172033 !important;
+}
+html:not(.modo-oscuro) .sec h2,
+html:not(.modo-oscuro) .sec h3 {
+  border-color: #d7deea !important;
+  border-left-color: #6366f1 !important;
+  color: #1e293b !important;
+}
+html:not(.modo-oscuro) .summary-branch { color: #64748b !important; }
+html:not(.modo-oscuro) .summary-branch strong { color: #1e293b !important; }
+html:not(.modo-oscuro) .tab { color: #64748b !important; }
+html:not(.modo-oscuro) .tab:hover { color: #1e293b !important; }
+html:not(.modo-oscuro) .tab.sel { color: #3730a3 !important; background: #eef2ff !important; }
+
+/* Tarjetas y listados */
+html:not(.modo-oscuro) .stats .stat {
+  border-color: #d7deea !important;
+  box-shadow: 0 2px 8px rgba(15,23,42,.06) !important;
+}
+html:not(.modo-oscuro) .sec,
+html:not(.modo-oscuro) .card,
+html:not(.modo-oscuro) .subfolder-header {
+  color: #334155;
+}
+
+/* Barras del documento: claras en Light, conservando los colores semánticos
+   rojo/verde de Original y Cómo quedaría. */
+html:not(.modo-oscuro) #ov .ov-topbar,
+html:not(.modo-oscuro) #ov .ov-actionbar,
+html:not(.modo-oscuro) #ov .apunte-bar {
+  background: #f8fafc !important;
+  color: #172033 !important;
+  border-color: #d7deea !important;
+}
+html:not(.modo-oscuro) #ov .col-header {
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+html:not(.modo-oscuro) #ov .col-header.orig {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border-bottom-color: #fecaca !important;
+}
+html:not(.modo-oscuro) #ov .col-header.clean {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+  border-bottom-color: #bbf7d0 !important;
+}
+
+/* Nunca dejar una superficie negra heredada en el Light del visor. */
+html:not(.modo-oscuro) #ov .ovcol,
+html:not(.modo-oscuro) #ov .ovcols,
+html:not(.modo-oscuro) #ov .mupdf-page,
+html:not(.modo-oscuro) #ov .doc-viewer,
+html:not(.modo-oscuro) #ov .viewer-container {
+  background-color: #ffffff !important;
+}

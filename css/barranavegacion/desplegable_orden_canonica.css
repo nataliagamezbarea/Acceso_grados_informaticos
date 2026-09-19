@@ -1,0 +1,85 @@
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-edit{order:3 !important;}
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-theme{order:4 !important;}
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-settings{order:5 !important;}
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-logout{order:6 !important;}
+
+/* También funciona en el navbar standalone del Visor-Admin. */
+#app-navbar-cargando.navbar-context-visor-admin #navbar-menu-panel .popup-edit,
+html.visor-admin-active #navbar-menu-panel .popup-edit,
+html.visor-admin-embed #navbar-menu-panel .popup-edit,
+body.visor-admin-active #navbar-menu-panel .popup-edit,
+body.visor-admin-embed #navbar-menu-panel .popup-edit{display:none !important;}
+#app-navbar-cargando.navbar-context-visor-admin #navbar-menu-panel .popup-rama,
+html.visor-admin-active #navbar-menu-panel .popup-rama,
+html.visor-admin-embed #navbar-menu-panel .popup-rama,
+body.visor-admin-active #navbar-menu-panel .popup-rama,
+body.visor-admin-embed #navbar-menu-panel .popup-rama{display:flex !important;order:3 !important;}
+#app-navbar-cargando.navbar-context-visor-admin #navbar-menu-panel .popup-trimestre,
+html.visor-admin-active #navbar-menu-panel .popup-trimestre,
+html.visor-admin-embed #navbar-menu-panel .popup-trimestre,
+body.visor-admin-active #navbar-menu-panel .popup-trimestre,
+body.visor-admin-embed #navbar-menu-panel .popup-trimestre{display:flex !important;order:4 !important;}
+#app-navbar-cargando.navbar-context-visor-admin #navbar-menu-panel .popup-extra,
+html.visor-admin-active #navbar-menu-panel .popup-extra,
+html.visor-admin-embed #navbar-menu-panel .popup-extra,
+body.visor-admin-active #navbar-menu-panel .popup-extra,
+body.visor-admin-embed #navbar-menu-panel .popup-extra{display:flex !important;order:5 !important;}
+#app-navbar-cargando.navbar-context-visor-admin #navbar-menu-panel .popup-theme,
+#app-navbar-cargando.navbar-context-visor-admin #navbar-menu-panel .popup-logout,
+html.visor-admin-active #navbar-menu-panel .popup-theme,
+html.visor-admin-active #navbar-menu-panel .popup-logout,
+html.visor-admin-embed #navbar-menu-panel .popup-theme,
+html.visor-admin-embed #navbar-menu-panel .popup-logout,
+body.visor-admin-active #navbar-menu-panel .popup-theme,
+body.visor-admin-active #navbar-menu-panel .popup-logout,
+body.visor-admin-embed #navbar-menu-panel .popup-theme,
+body.visor-admin-embed #navbar-menu-panel .popup-logout{order:20 !important;}
+
+/* ============================================================================
+   NAVBAR TEMPLATE — RESPONSIVE FINAL SIN JS
+   - El JS solo instancia el <template>.
+   - CSS/Flex controla el colapso por grupos completos.
+   - El popup solo muestra copias del grupo que acaba de colapsar.
+   - Orden físico del template: Inicio > Volver > Editar/Rama > Trimestre
+     > extras > generales.
+   ============================================================================ */
+
+/* ---- Estado base: popup vacío salvo cuando un grupo ha colapsado ---- */
+#navbar-menu-panel > .navbar-popup-list {
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:8px !important;
+}
+
+#navbar-menu-panel > .navbar-popup-list > .navbar-popup-item {
+  display:none !important;
+  order:initial !important;
+  flex:0 0 42px !important;
+  width:100% !important;
+  min-width:0 !important;
+  max-width:none !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  margin:0 !important;
+  box-sizing:border-box !important;
+}
+
+/* Nunca se ve una copia del Visor fuera del contexto Visor-Admin. */
+html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .visor-admin-only,
+body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .visor-admin-only {
+  display:none !important;
+}
+
+/* Inicio: las copias visor no participan. */
+html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-rama,
+html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-trimestre,
+html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-extra,
+body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-rama,
+body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-trimestre,
+body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-extra {
+  display:none !important;
+}
+
+/* ---- El popup nunca debe mostrar botones que siguen visibles fuera ---- */

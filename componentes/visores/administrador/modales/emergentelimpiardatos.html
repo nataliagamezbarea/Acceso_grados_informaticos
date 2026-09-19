@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-modal-limpiar-datos data-component="modal-limpiar-datos">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+    <div class="blocker css-inline-02ecaefe68" id="modalLimpiarDatos">
+     <div class="blocker-box css-inline-746d2e5408">
+      <div class="css-inline-42a734a9dd">
+       <h3 class="css-inline-cb7427136f">
+        <i class="fa-solid fa-broom">
+        </i>
+        Limpiar Datos de Revisión (JSON)
+       </h3>
+       <button class="modal-close-btn custom-modal-close-x css-inline-6fec57c101" id="modalLimpiarDatosCloseBtn" onclick="closeLimpiarDatosModal()" data-event-click="closeLimpiarDatosModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+        ✕
+       </button>
+      </div>
+      <p class="css-inline-037aa495e4">
+       Selecciona qué datos del JSON de revisión deseas eliminar para la rama actual (
+       <b class="css-inline-68d9815d1e" id="lblRamaLimpiar">
+       </b>
+       ) o si deseas limpiar todo:
+      </p>
+      <div class="css-inline-91da941fd3">
+       <label class="css-inline-12bf8bc54f">
+        <input checked="" id="chkLimpiarEnunciados" type="checkbox"/>
+        <i class="fa-solid fa-pen-fancy">
+        </i>
+        Enunciados sustituidos
+       </label>
+       <label class="css-inline-e4887c6585">
+        <input checked="" id="chkLimpiarNombres" type="checkbox"/>
+        <i class="fa-solid fa-user-slash">
+        </i>
+        Nombres de autores
+       </label>
+       <label class="css-inline-09d05bc230">
+        <input checked="" id="chkLimpiarColegios" type="checkbox"/>
+        <i class="fa-solid fa-school">
+        </i>
+        Colegios y Logos
+       </label>
+       <label class="css-inline-39805bee3a">
+        <input checked="" id="chkLimpiarImagenes" type="checkbox"/>
+        <i class="fa-solid fa-image">
+        </i>
+        Acciones de Imágenes
+       </label>
+       <hr class="css-inline-5e325d435e"/>
+       <label class="css-inline-a1b7c13de2">
+        <input data-event-change="toggleCheckTodo(this.checked)" id="chkLimpiarTodo" type="checkbox"/>
+        <i class="fa-solid fa-triangle-exclamation">
+        </i>
+        ELIMINAR TODO (Limpiar JSON por completo)
+       </label>
+       <hr class="css-inline-5e325d435e"/>
+       <label class="css-inline-f8290b94e3">
+        <input checked="" id="chkSubirGithubLimpieza" type="checkbox"/>
+        <i class="fa-brands fa-github">
+        </i>
+        Actualizar JSON en GitHub
+       </label>
+      </div>
+      <div class="css-inline-5fd3120e31">
+       <button class="css-inline-f24f90f9ee" data-event-click="ejecutarLimpiarDatos()" type="button">
+        <i class="fa-solid fa-check">
+        </i>
+        Confirmar y Limpiar
+       </button>
+       <button class="btn-act skip css-inline-af9b0a4d92" onclick="closeLimpiarDatosModal()" data-event-click="closeLimpiarDatosModal()" type="button">
+        Cancelar
+       </button>
+      </div>
+     </div>
+    </div>
+  </visor-modal-limpiar-datos>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

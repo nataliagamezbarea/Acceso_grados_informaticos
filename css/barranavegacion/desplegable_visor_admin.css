@@ -1,0 +1,85 @@
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general-group > .navbar-popup-item{
+  display:flex !important;
+  order:20 !important;
+}
+
+/* Si una regla antigua intenta devolver el grupo a order 10/20/30,
+   no puede alterar el orden porque los grupos son display:contents. */
+
+/* V cache marker */
+
+
+/* ========================================================================
+   V — ORDEN REAL DEL POPUP + VISOR-ADMIN IZQUIERDA
+   No se usa display:contents para ordenar grupos. El DOM y FLEX conservan
+   una jerarquía estable:
+     INICIO: Inicio -> Volver atrás -> Lectura/Edición -> resto
+     VISOR:  Inicio -> Volver atrás -> Rama -> Trimestre -> resto
+   ======================================================================== */
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open .navbar-popup-list{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:8px !important;
+  width:100% !important;
+}
+
+/* Nunca usar display:contents: los grupos siguen siendo contenedores flexibles
+   para que sus hijos mantengan el orden interno. */
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-group{
+  display:none !important;
+  flex-direction:column !important;
+  gap:8px !important;
+  width:100% !important;
+  order:initial !important;
+}
+
+/* ---------------- INICIO ---------------- */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group{
+  display:flex !important;
+  order:1 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-nav{
+  display:flex !important;
+  order:initial !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:flex !important;
+  order:initial !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector{
+  display:none !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general-group{
+  display:flex !important;
+  order:2 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-visor-group{
+  display:none !important;
+}
+
+/* ---------------- VISOR-ADMIN ---------------- */
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group{
+  display:flex !important;
+  order:1 !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-nav{
+  display:flex !important;
+  order:initial !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:none !important;
+}

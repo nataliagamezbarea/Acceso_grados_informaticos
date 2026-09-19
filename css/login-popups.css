@@ -1,0 +1,153 @@
+/* Popups en LOGIN: siempre Light y aislados del tema global. */
+body[data-vista="login"] .popup-operacion,
+html[data-vista="login"] .popup-operacion { color:#1e293b !important; }
+body[data-vista="login"] .popup-operacion__panel,
+html[data-vista="login"] .popup-operacion__panel {
+  background:#fff !important;
+  color:#1e293b !important;
+  border:1px solid #dbe2ea !important;
+  box-shadow:0 20px 45px rgba(15,23,42,.16) !important;
+}
+body[data-vista="login"] .popup-operacion__panel::after,
+html[data-vista="login"] .popup-operacion__panel::after { background:none !important; }
+body[data-vista="login"] .popup-operacion__titulo,
+html[data-vista="login"] .popup-operacion__titulo { color:#0f172a !important; }
+body[data-vista="login"] .popup-operacion__mensaje,
+body[data-vista="login"] .popup-operacion__actual,
+html[data-vista="login"] .popup-operacion__mensaje,
+html[data-vista="login"] .popup-operacion__actual { color:#64748b !important; }
+body[data-vista="login"] .popup-operacion__icono,
+html[data-vista="login"] .popup-operacion__icono {
+  background:#eef2ff !important; color:#4f46e5 !important; border-color:#c7d2fe !important;
+}
+body[data-vista="login"] .popup-operacion__progreso,
+html[data-vista="login"] .popup-operacion__progreso { background:#e2e8f0 !important; }
+body[data-vista="login"] .popup-operacion__porcentaje,
+html[data-vista="login"] .popup-operacion__porcentaje {
+  color:#4338ca !important; background:#eef2ff !important; border-color:#c7d2fe !important;
+}
+body[data-vista="login"] .popup-operacion__cerrar,
+html[data-vista="login"] .popup-operacion__cerrar {
+  background:#f1f5f9 !important; border-color:#dbe2ea !important; color:#64748b !important;
+}
+body[data-vista="login"] .popup-operacion__boton.secundario,
+html[data-vista="login"] .popup-operacion__boton.secundario {
+  background:#e2e8f0 !important; color:#0f172a !important;
+}
+
+/* Popup/cola de descargas antigua, si llega a usarse durante LOGIN. */
+body[data-vista="login"] .toast-descarga-card,
+html[data-vista="login"] .toast-descarga-card {
+  background:#fff !important;
+  color:#1e293b !important;
+  border:1px solid rgba(15,23,42,.12) !important;
+  box-shadow:0 25px 50px -12px rgba(15,23,42,.22),0 0 0 1px rgba(15,23,42,.06) !important;
+}
+body[data-vista="login"] .toast-descarga-texto,
+html[data-vista="login"] .toast-descarga-texto { color:#0f172a !important; }
+body[data-vista="login"] .toast-descarga-icono,
+html[data-vista="login"] .toast-descarga-icono {
+  background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(79,70,229,.18)) !important;
+  color:#4f46e5 !important; border-color:rgba(79,70,229,.18) !important;
+}
+body[data-vista="login"] .tag-estado.procesando,
+html[data-vista="login"] .tag-estado.procesando { color:#4f46e5 !important; }
+body[data-vista="login"] .tag-estado.completado,
+html[data-vista="login"] .tag-estado.completado { color:#059669 !important; }
+body[data-vista="login"] .tag-estado.cancelado,
+body[data-vista="login"] .tag-estado.error,
+html[data-vista="login"] .tag-estado.cancelado,
+html[data-vista="login"] .tag-estado.error { color:#dc2626 !important; }
+body[data-vista="login"] .toast-descarga-porcentaje,
+html[data-vista="login"] .toast-descarga-porcentaje {
+  color:#4f46e5 !important; background:rgba(99,102,241,.10) !important; border-color:rgba(99,102,241,.20) !important;
+}
+body[data-vista="login"] .toast-descarga-cerrar,
+html[data-vista="login"] .toast-descarga-cerrar {
+  background:rgba(15,23,42,.05) !important; border-color:rgba(15,23,42,.10) !important; color:#64748b !important;
+}
+body[data-vista="login"] .toast-descarga-barra-fondo,
+html[data-vista="login"] .toast-descarga-barra-fondo { background:rgba(15,23,42,.09) !important; }
+body[data-vista="login"] .modal-overlay-cancelar.tema-light,
+html[data-vista="login"] .modal-overlay-cancelar.tema-light { background:rgba(15,23,42,.38) !important; }
+body[data-vista="login"] .modal-card-cancelar,
+body[data-vista="login"] .modal-card-cancelar.tema-light,
+html[data-vista="login"] .modal-card-cancelar,
+html[data-vista="login"] .modal-card-cancelar.tema-light {
+  background:#fff !important; color:#0f172a !important; border-color:rgba(15,23,42,.12) !important;
+  box-shadow:0 25px 50px -12px rgba(15,23,42,.24) !important;
+}
+body[data-vista="login"] .modal-card-cancelar p,
+html[data-vista="login"] .modal-card-cancelar p { color:#64748b !important; }
+body[data-vista="login"] .btn-cancelar-no,
+html[data-vista="login"] .btn-cancelar-no { background:#e2e8f0 !important; color:#334155 !important; }
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

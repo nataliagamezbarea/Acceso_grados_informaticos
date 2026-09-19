@@ -1,0 +1,25 @@
+/* Variables base del visor. La superficie principal procede del tema global. */
+:root {
+  --bg-main: var(--app-background);
+  --bg-card: var(--surface-bg);
+  --bg-card-hover: var(--surface-subtle);
+  --bg-bar: var(--navbar-bg);
+  --border-color: var(--surface-border);
+  --text-main: var(--app-text-color);
+  --text-muted: #9ca3af;
+  --accent-red: #ef4444;
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+  --accent-amber: #f59e0b;
+  --accent-purple: #8b5cf6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+#app-root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--app-background);
+  color: var(--app-text-color);
+  line-height: 1.5;
+  overflow-x: hidden;
+}

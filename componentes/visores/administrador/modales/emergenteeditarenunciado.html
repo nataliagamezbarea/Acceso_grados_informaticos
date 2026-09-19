@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-modal-editar-enunciado data-component="modal-editar-enunciado">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="modalEditarEnunciado">
+    <modal-caja data-component="modal-caja">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="blocker-box css-inline-8d132760b3">
+      <div class="css-inline-10828d56e5">
+       <h3 class="css-inline-c47521e0ab">
+        <i class="fa-solid fa-pen-fancy">
+        </i>
+        Sustituir Enunciado Detectado
+       </h3>
+       <button class="modal-close-btn custom-modal-close-x css-inline-5592c5dc14" id="modalEditarEnunciadoCloseBtn" onclick="closeEditarEnunciadoModal()" data-event-click="closeEditarEnunciadoModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+        ✕
+       </button>
+      </div>
+      <div class="css-inline-78ff47a551">
+       <div>
+        <label class="css-inline-e93923cab2">
+         Texto que quieres cambiar:
+        </label>
+        <textarea class="css-inline-3f6bc2e52d" id="editarOldText" placeholder="Escribe o modifica exactamente el texto que quieres sustituir..."></textarea>
+       </div>
+       <div>
+        <label class="css-inline-4049faa557">
+         Nuevo Texto de Enunciado Sustituto:
+        </label>
+        <textarea class="css-inline-faf3deaa8e" id="editarNewText" placeholder="Escribe el texto con el que deseas reemplazar el enunciado original..."></textarea>
+       </div>
+      </div>
+      <div class="css-inline-5fd3120e31">
+       <button class="btn-act accept css-inline-90b7755797" data-event-click="guardarEditarEnunciado()" type="button">
+        <i class="fa-solid fa-floppy-disk">
+        </i>
+        Guardar y Previsualizar
+       </button>
+       <button class="btn-act skip" onclick="closeEditarEnunciadoModal()" data-event-click="closeEditarEnunciadoModal()" type="button">
+        Cancelar
+       </button>
+      </div>
+     </div>
+    </modal-caja>
+   </div>
+  </visor-modal-editar-enunciado>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

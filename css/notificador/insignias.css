@@ -1,0 +1,96 @@
+.toast-descarga-card.oculto { display: none; opacity: 0; }
+.toast-descarga-card.activo { display: flex; opacity: 1; }
+/* Modos Lectura e Invitado */
+.toast-descarga-badge {
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.2;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.toast-descarga-badge span {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; flex: 1;
+}
+.toast-descarga-badge.modo-lectura {
+  background: rgba(59, 130, 246, 0.15); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);
+}
+.toast-descarga-badge.modo-invitado {
+  background: rgba(234, 179, 8, 0.15); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

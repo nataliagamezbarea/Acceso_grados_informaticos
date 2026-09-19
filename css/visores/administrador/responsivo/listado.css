@@ -1,0 +1,65 @@
+/* ============================================================
+   RESPONSIVO — BUSCADOR Y LISTADO DE DOCUMENTOS
+   Lineas: < 100 | Nombres en espanol
+============================================================ */
+.file-search-bar, .stats, #content.wrap {
+  width: min(1280px, calc(100% - 32px)); max-width: 100%; margin: 12px auto; box-sizing: border-box;
+}
+.file-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 4px 14px;
+  height: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.file-search-inner:focus-within { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); }
+html:not(.modo-oscuro) .file-search-inner {
+  background: #ffffff; border-color: #cbd5e1; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.file-search-inner input[type="search"] {
+  flex: 1 1 auto; background: transparent; border: 0; outline: none; color: inherit; font-size: 13px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.stats .stat {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 6px 10px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+html:not(.modo-oscuro) .stats .stat {
+  background: #ffffff; border-color: #e2e8f0; color: #475569; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.stats .stat b { font-size: 15px; font-weight: 700; }
+.stats .legend {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  padding: 6px;
+  font-size: 11px;
+  color: #94a3b8;
+}
+#content.wrap { display: block; padding-bottom: 80px; }

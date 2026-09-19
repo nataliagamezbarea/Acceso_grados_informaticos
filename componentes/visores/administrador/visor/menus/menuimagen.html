@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-menu-imagen data-component="menu-imagen">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="floating-img-menu" id="floatingImgMenu">
+    <div class="css-inline-015a5e7fbe">
+     <b>
+      <i class="fa-solid fa-image css-inline-fd58244ac9">
+      </i>
+      Opciones de Imagen:
+     </b>
+    </div>
+    <div class="css-inline-c87525adb8">
+     <button class="css-inline-5192b201c4" data-event-click="checkSelectedImageInternet()" id="btnCheckInternet">
+      <i class="fa-solid fa-globe">
+      </i>
+      Comprobar / Borrar si no está en Internet
+     </button>
+     <label class="css-inline-1cc923efed" id="lblExcepcionInternet">
+      <input data-event-change="toggleExcepcionInternet(this.checked)" id="cbNoBorrarInternet" type="checkbox"/>
+      <i class="fa-solid fa-shield-halved">
+      </i>
+      No borrar si no está en Internet
+     </label>
+     <button class="css-inline-0e718c5572" data-event-click="handleImageAction('conservar', {global:true, no_borrar:true})" id="btnConservarImgGlobal" title="Conserva esta imagen en todos los PDFs donde aparezca igual, aunque no esté en Internet">
+      <i class="fa-solid fa-shield-halved">
+      </i>
+      Conservar aunque no esté en Internet
+     </button>
+     <button class="css-inline-82403c4a9c" data-event-click="handleImageAction('borrar')" id="btnBorrarImg">
+      <i class="fa-solid fa-trash-can">
+      </i>
+      Borrar Imagen
+     </button>
+     <button class="css-inline-f6b4cacf8e" data-event-click="handleImageAction('borrar', {global:true})" id="btnBorrarImgGlobal" title="Marca esta imagen para que se elimine POR DEFECTO en todos los PDFs donde aparezca literalmente igual">
+      <i class="fa-solid fa-trash-arrow-up">
+      </i>
+      Borrar y también en otros PDFs
+     </button>
+     <button class="css-inline-2fa08c3aa4" data-event-click="triggerUploadImage()" id="btnReemplazarImg">
+      <i class="fa-solid fa-arrow-up-from-bracket">
+      </i>
+      Reemplazar por otra Imagen...
+     </button>
+     <button class="css-inline-a68719e645" data-event-click="handleImageAction('restaurar')" id="btnRestaurarImg">
+      <i class="fa-solid fa-rotate-left">
+      </i>
+      Restaurar Original
+     </button>
+     <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeImgPopup()" data-event-click="closeImgPopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+      <i class="fa-solid fa-xmark">
+      </i>
+      Cerrar
+     </button>
+    </div>
+    <input accept="image/*" class="css-inline-6b99de8b69" data-event-change="uploadImageFile(this)" id="inputImageFile" type="file"/>
+   </div>
+  </visor-menu-imagen>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

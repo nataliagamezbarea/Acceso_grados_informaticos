@@ -1,0 +1,125 @@
+/* Acciones del selector de rama: solo los dos botones, sin listado duplicado de clases. */
+.acciones-selector-rama { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.acciones-selector-rama .btn-descarga {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+}
+.acciones-selector-rama .btn-descarga:disabled { opacity: 0.45; cursor: not-allowed; }
+@container app (max-width: 680px){
+  .selector-rama { width: min(95vw, 520px); flex-wrap: wrap; }
+  .selector-rama select { width: min(100%, 300px); flex: 1 1 220px; }
+}
+/* ESTADISTICAS_NORMAL_FLOW_SEARCH */
+#stats.stats {
+  position: relative;
+  float: none;
+  clear: both;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  order: initial;
+}
+/* Orden visual: búsqueda -> estadísticas -> contenido */
+#searchBar + #stats, .search-bar + #stats, #search + #stats {
+  position: relative;
+  display: block;
+  float: none;
+  clear: both;
+  top: auto;
+  bottom: auto;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+/* La barra de búsqueda no debe permanecer fija al desplazar */
+#fileSearchBar, .file-search-bar { position: relative; top: auto; bottom: auto; z-index: 1; }
+/* ============================================================================
+   MODO CLARO — REGLAS ESPECÍFICAS DE INICIO
+   Evita que componentes heredados de la interfaz oscura conserven fondos
+   negros/azul marino cuando el tema claro está activo.
+   ============================================================================ */
+html:not(.modo-oscuro) { color-scheme: light; }
+html:not(.modo-oscuro) body {
+  background: var(--app-background); color: var(--app-text-color);
+}
+html:not(.modo-oscuro) #barra-superior, html:not(.modo-oscuro) #barra-superior {
+  background: rgba(255,255,255,.96);
+  color: #334155;
+  border-bottom: 1px solid #dbe3ed;
+  box-shadow: 0 3px 14px rgba(15,23,42,.08);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

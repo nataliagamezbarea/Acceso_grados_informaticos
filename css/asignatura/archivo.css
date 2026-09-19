@@ -1,0 +1,152 @@
+.btn-seccion-todos {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font: 600 12px "Poppins", sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.btn-seccion-todos.btn-mostrar-todos { background: #2563eb; color: #ffffff; }
+.btn-seccion-todos.btn-mostrar-todos:hover { background: #1d4ed8; transform: translateY(-1px); }
+.btn-seccion-todos.btn-ocultar-todos { background: #dc2626; color: #ffffff; }
+.btn-seccion-todos.btn-ocultar-todos:hover { background: #b91c1c; transform: translateY(-1px); }
+.item-archivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  margin: 2px 4px 2px 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  transition: all 0.15s ease;
+}
+
+
+/* Filas compactas: nombre a la izquierda y acciones juntas a la derecha. */
+.item-archivo {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+.item-archivo > .enlace-archivo {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+}
+.item-archivo > .acciones-archivo {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.item-archivo > .acciones-archivo > .btn-descarga,
+.item-archivo > .acciones-archivo > .btn-toggle-archivo {
+  margin: 0 !important;
+}
+
+/* Modo oscuro: mismo lenguaje visual que las tarjetas del visor/asignatura. */
+html.modo-oscuro .item-archivo {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc;
+  box-shadow: none;
+}
+html.modo-oscuro .item-archivo:hover {
+  background: #243247 !important;
+  border-color: #475569 !important;
+}
+html.modo-oscuro .item-archivo .enlace-archivo {
+  color: #60a5fa !important;
+}
+html.modo-oscuro .item-archivo .btn-descarga,
+html.modo-oscuro .item-archivo .btn-visor-archivo {
+  color: #94a3b8 !important;
+}
+html.modo-oscuro .item-archivo .btn-descarga:hover,
+html.modo-oscuro .item-archivo .btn-visor-archivo:hover {
+  color: #cbd5e1 !important;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,14 @@
+/* ============================================================
+   VISOR ADMIN — FILTROS Y ACCIONES PLEGABLES (ESCRITORIO)
+   Los <details> no aportan ningún cambio visual: sus hijos se
+   colocan en línea dentro de la barra como si no existieran.
+============================================================ */
+
+@media (min-width: 901px) {
+  #ov .ov-actionbar { flex-wrap: wrap; }
+  #ov .ov-filtro-grupo { display: contents; }
+  #ov .ov-filtro-resumen { display: none; }
+  #ov .ov-filtro-contenido {
+    display: contents;
+  }
+}

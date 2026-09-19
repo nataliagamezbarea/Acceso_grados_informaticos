@@ -1,0 +1,41 @@
+/* ============================================================
+   TEMA CLARO — VISOR DE DOCUMENTOS Y MENUS FLOTANTES
+   Lineas: < 100 | Nombres en espanol
+============================================================ */
+html:not(.modo-oscuro) #ov, html:not(.modo-oscuro) #ov.on { background: #f1f5f9; color: #0f172a; }
+html:not(.modo-oscuro) #ov .ov-topbar {
+  background: #ffffff; border-bottom: 1px solid #e2e8f0; color: #0f172a;
+}
+html:not(.modo-oscuro) #ov .ov-actionbar {
+  background: #f8fafc; border-bottom: 1px solid #e2e8f0; color: #0f172a;
+}
+html:not(.modo-oscuro) #ov .apunte-bar {
+  background: #f8fafc; border-bottom: 1px solid #e2e8f0; color: #0f172a;
+}
+html:not(.modo-oscuro) #ov .apunte-bar span.css-inline-9e4071690f {
+  color: #1d4ed8;
+}
+html:not(.modo-oscuro) #ov .apunte-bar span.css-inline-0bc6ca3e5a {
+  color: #64748b;
+}
+html:not(.modo-oscuro) #ov .apunte-bar code {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+html:not(.modo-oscuro) #ov .pill-check { background: #ffffff; border: 1px solid #cbd5e1; color: #334155; }
+html:not(.modo-oscuro) #ov .btn-sm-restore { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; }
+html:not(.modo-oscuro) #ov .ovcols { background: #f1f5f9; }
+html:not(.modo-oscuro) #ov .ovcol {
+  background: #ffffff; border: 1px solid #cbd5e1; box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+html:not(.modo-oscuro) #ov .doc-viewer { background: #e2e8f0; }
+html:not(.modo-oscuro) #ov .doc-page, html:not(.modo-oscuro) #ov .pdfjs-page {
+  background: #ffffff; box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+}
+html:not(.modo-oscuro) .floating-pdf-menu, html:not(.modo-oscuro) .floating-col-menu, html:not(.modo-oscuro) .floating-name-menu, html:not(.modo-oscuro) .floating-img-menu, html:not(.modo-oscuro) .floating-add-menu {
+  background: #ffffff; color: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+html:not(.modo-oscuro) .editor-box { background: #ffffff; border: 2px solid #f59e0b; color: #0f172a; }
+html:not(.modo-oscuro) .editor-row input, html:not(.modo-oscuro) .editor-row textarea {
+  background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a;
+}

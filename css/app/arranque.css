@@ -1,0 +1,254 @@
+/*
+ * Estilos críticos de arranque y precarga (app-preboot).
+ * Controla el bloqueo del primer paint mientras se resuelve autenticación y routing.
+ */
+
+/* BLOQUEO CRÍTICO DEL PRIMER FRAME: el shell provisional NO puede pintarse
+   mientras autenticación/routing decide qué vista debe mostrarse. */
+html.app-preboot body,
+html.app-preboot body * {
+  visibility: hidden;
+}
+/* El cargador de transición SPA debe verse durante app-preboot,
+   igual que #app-preloader, para mostrar "Cargando..." en el F5. */
+html.app-preboot body > app-cargando.app-vista-cargando-transicion,
+html.app-preboot body > app-cargando.app-vista-cargando-transicion * {
+  visibility: visible !important;
+}
+html.app-preboot body {
+  overflow: hidden;
+}
+
+
+
+/* Cargador crítico del primer paint: debe ser visible aunque app-preboot oculte
+   el resto del body. Así el usuario nunca ve un frame vacío durante F5/routing. */
+html.app-preboot body #app-preloader {
+  visibility: visible !important;
+  display: grid !important;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 24px;
+  box-sizing: border-box;
+  pointer-events: none;
+  text-align: center;
+  background: var(--app-background, #0f172a);
+  color: var(--app-text-color, #e5e7eb);
+  font: 400 16px/1.4 Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html:not(.app-preboot) body #app-preloader {
+  display: none !important;
+}
+
+#app-preloader span {
+  min-height: 1.4em;
+  line-height: 1.4;
+}
+html.app-preboot:not(.visor-admin-active):not(.visor-admin-embed) #app-navbar-cargando,
+html.auth-cargando:not(.visor-admin-active):not(.visor-admin-embed) #app-navbar-cargando,
+html[data-vista="login"]:not(.visor-admin-active):not(.visor-admin-embed) #app-navbar-cargando,
+body[data-vista="login"]:not(.visor-admin-active):not(.visor-admin-embed) #app-navbar-cargando {
+  display: none;
+}
+
+/* Bloqueo de redirección directa hacia el Visor Admin */
+html.app-direct-entry-redirect,
+html.app-direct-entry-redirect body {
+  visibility: hidden;
+  overflow: hidden;
+}
+
+/* Superficie y colores base */
+html.app-preboot {
+  background: var(--app-background, #0f172a);
+}
+
+html {
+  min-height: 100%;
+  background: var(--app-background, #0f172a);
+  color: var(--app-text-color, #e5e7eb);
+}
+
+body {
+  background: var(--app-background, #0f172a);
+  color: var(--app-text-color, #e5e7eb);
+}
+
+#app-root {
+  container-type: inline-size;
+  container-name: app;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+html body #app-root[hidden],
+#app-root[hidden] {
+  display: none;
+}
+
+html body #app-navbar-cargando[hidden],
+#app-navbar-cargando[hidden] {
+  display: none;
+}
+
+/* Asegurar que la navbar esté siempre por encima del cargador de transición
+   incluso antes de que css/barranavegacion/variables.css cargue dinámicamente. */
+#app-navbar-cargando {
+  position: sticky;
+  top: 0;
+  z-index: 2147480001;
+}
+
+
+#app-root > app-cargando.app-vista-cargando {
+  min-height: calc(100vh - clamp(65px, 8vh, 85px) - clamp(24px, 4vh, 40px));
+  min-height: calc(100dvh - clamp(65px, 8vh, 85px) - clamp(24px, 4vh, 40px));
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html:not(.modo-oscuro) app-cargando.app-vista-cargando {
+  color: #334155;
+}
+
+app-cargando.app-vista-cargando {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 180px;
+  width: 100%;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  color: var(--app-text-color, #e5e7eb);
+  background: transparent;
+}
+
+app-cargando.app-vista-cargando .app-vista-cargando-text {
+  display: inline-block;
+  min-height: 1.4em;
+  line-height: 1.4;
+  color: inherit;
+  font: 400 16px/1.4 Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+
+/* Cargador de transición SPA: cubre el área de contenido (bajo la navbar)
+   con el fondo del app para eliminar el flash blanco entre vistas / F5.
+   Empieza BAJO la navbar para que ésta nunca quede tapada. */
+body > app-cargando.app-vista-cargando-transicion {
+  position: fixed !important;
+  inset: var(--navbar-height, 64px) 0 0 0 !important;
+  z-index: 2147480000 !important;
+  display: grid !important;
+  place-items: center !important;
+  align-content: center !important;
+  width: 100vw !important;
+  height: calc(100dvh - var(--navbar-height, 64px)) !important;
+  min-height: 0 !important;
+  padding: 0 20px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  /* Fondo real del app — igual que el body — tapa cualquier flash blanco */
+  background: var(--app-background, radial-gradient(circle at 50% 10%, #ffffff 0%, #f1f5f9 60%, #e2e8f0 100%)) !important;
+  color: var(--app-text-color, #334155) !important;
+  pointer-events: none !important;
+  text-align: center !important;
+}
+html.modo-oscuro body > app-cargando.app-vista-cargando-transicion,
+body.modo-oscuro > app-cargando.app-vista-cargando-transicion {
+  background: var(--app-background, radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 50%, #090d16 100%) fixed) !important;
+  color: #e5e7eb !important;
+}
+body > app-cargando.app-vista-cargando-transicion .app-vista-cargando-text {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,62 @@
+/* El visor y el estado de carga deben respetar el responsive desde el primer frame.
+   No esperamos a que termine de cargar el PDF ni a que JS cambie el layout. */
+html.visor-preboot.visor-document-open #ov.on { display: flex; visibility: visible; }
+html.visor-preboot.visor-document-open body { visibility: visible; }
+/* El host del componente tambien participa en el layout: si no lo dimensionamos,
+   el .ovcol interno puede no ocupar el alto disponible mientras esta cargando. */
+html.visor-preboot.visor-document-open #ov.on .ovcols > visor-columna {
+  min-width: 0; min-height: 0; width: 100%; height: 100%; box-sizing: border-box;
+}
+/* El estado inicial mantiene las dos implementaciones preparadas en segundo plano,
+   pero en pantallas estrechas solo participa visualmente la columna activa. */
+@container app (max-width:1100px){
+  html.visor-preboot.visor-document-open #ov.on .ovcols {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    flex: 1 1 auto;
+    overflow: hidden;
+    padding: 6px 8px 8px 8px;
+  }
+  html.visor-preboot.visor-document-open #ov.on .ovcols > visor-columna {
+    display: none; flex: 0 0 auto; width: 100%; height: auto; min-height: 0; overflow: hidden;
+  }
+  /* La primera columna es la vista inicial (Original). */
+  html.visor-preboot.visor-document-open #ov.on .ovcols > visor-columna:first-child {
+    display: flex; flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; flex-direction: column;
+  }
+  /* Pero si la columna activa es otra (p. ej. "Cómo quedaría"), la primera
+     no puede reservar su espacio: ese hueco del Original oculto empujaba
+     el visor activo hacia abajo mientras se cargaba. */
+  html.visor-preboot.visor-document-open #ov.on .ovcols > visor-columna:first-child:not(:has(.ovcol.is-responsive-active)) {
+    display: none;
+  }
+  html.visor-preboot.visor-document-open #ov.on .ovcols > visor-columna:has(.ovcol.is-responsive-active) {
+    display: flex; flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; flex-direction: column;
+  }
+  html.visor-preboot.visor-document-open #ov.on .ovcol {
+    width: 100%; min-width: 0; min-height: 0; height: 100%;
+  }
+  html.visor-preboot.visor-document-open #ov.on .ovcol:not(.is-responsive-active) { display: none; }
+  html.visor-preboot.visor-document-open #ov.on .ovcol.is-responsive-active {
+    display: flex; flex: 1 1 auto; flex-direction: column; width: 100%; height: 100%; min-height: 0;
+  }
+  /* El propio cargador ocupa exactamente el visor activo. */
+  html.visor-preboot.visor-document-open #ov.on .doc-viewer, html.visor-preboot.visor-document-open #ov.on .doc-viewer > .doc-viewer-loading {
+    width: 100%; min-width: 0; min-height: 0; box-sizing: border-box;
+  }
+  html.visor-preboot.visor-document-open #ov.on .doc-viewer {
+    flex: 1 1 auto; height: 100%; overflow: auto; padding: 8px;
+  }
+  html.visor-preboot.visor-document-open #ov.on .doc-viewer > .doc-viewer-loading {
+    position: absolute; inset: 0; height: 100%;
+  }
+}
+@container app (max-width:600px){
+  html.visor-preboot.visor-document-open #ov.on .ovcols { padding: 4px; }
+  html.visor-preboot.visor-document-open #ov.on .doc-viewer { padding: 5px; }
+}

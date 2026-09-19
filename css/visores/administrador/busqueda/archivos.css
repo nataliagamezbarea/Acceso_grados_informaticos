@@ -1,0 +1,38 @@
+/* Búsqueda de archivos en la pantalla inicial */
+.file-search-bar { width: min(1100px,calc(100% - 32px)); margin: 16px auto 0; }
+.file-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0d1829;
+  border: 1px solid #263b5a;
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(0,0,0,.18);
+}
+.file-search-inner>i { color: #60a5fa; font-size: 15px; }
+#inputBuscarArchivo {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: #f8fafc;
+  font-size: 13px;
+  padding: 7px 4px;
+}
+#inputBuscarArchivo::placeholder { color: #94a3b8; }
+.file-search-count { font-size: 11px; color: #94a3b8; white-space: nowrap; }
+#btnLimpiarBusqueda {
+  border: 0;
+  background: #1e293b;
+  color: #cbd5e1;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#btnLimpiarBusqueda:hover { background: #334155; color: #fff; }

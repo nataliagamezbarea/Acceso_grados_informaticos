@@ -1,0 +1,116 @@
+html:not(.modo-oscuro) #barra-superior button, html:not(.modo-oscuro) #barra-superior a {
+  background: #ffffff; color: #475569; border-color: #d7e0ea; box-shadow: 0 1px 4px rgba(15,23,42,.06);
+}
+html:not(.modo-oscuro) #barra-superior button:hover, html:not(.modo-oscuro) #barra-superior a:hover, html:not(.modo-oscuro) #barra-superior button:hover, html:not(.modo-oscuro) #barra-superior a:hover {
+  background: #f1f5f9; color: #2563eb; border-color: #bfdbfe;
+}
+html:not(.modo-oscuro) .selector-rama, html:not(.modo-oscuro) .selector-rama {
+  background: rgba(255,255,255,.97);
+  color: #475569;
+  border-color: #dbe3ed;
+  box-shadow: 0 5px 18px rgba(15,23,42,.07);
+}
+html:not(.modo-oscuro) .selector-rama select, html:not(.modo-oscuro) .selector-rama select {
+  background: #ffffff; color: #1e293b; border-color: #cbd5e1;
+}
+html:not(.modo-oscuro) .selector-rama select option, html:not(.modo-oscuro) .selector-rama select option {
+  background: #ffffff; color: #1e293b;
+}
+html:not(.modo-oscuro) .flex, html:not(.modo-oscuro) .card, html:not(.modo-oscuro) .rama-accion-fila, html:not(.modo-oscuro) .flex, html:not(.modo-oscuro) .card, html:not(.modo-oscuro) .rama-accion-fila {
+  background: #ffffff; color: #334155; border-color: #dbe3ed; box-shadow: 0 4px 12px rgba(15,23,42,.06);
+}
+html:not(.modo-oscuro) .flex a, html:not(.modo-oscuro) .flex span, html:not(.modo-oscuro) .rama-accion-nombre, html:not(.modo-oscuro) .flex a, html:not(.modo-oscuro) .flex span, html:not(.modo-oscuro) .rama-accion-nombre {
+  color: #334155;
+}
+html:not(.modo-oscuro) .flex:hover, html:not(.modo-oscuro) .card:hover, html:not(.modo-oscuro) .rama-accion-fila:hover, html:not(.modo-oscuro) .flex:hover, html:not(.modo-oscuro) .card:hover, html:not(.modo-oscuro) .rama-accion-fila:hover {
+  background: #f8fafc; border-color: #bfdbfe; box-shadow: 0 8px 20px rgba(37,99,235,.08);
+}
+html:not(.modo-oscuro) #sin-rama, html:not(.modo-oscuro) .sin-datos, html:not(.modo-oscuro) .mensaje-cargando, html:not(.modo-oscuro) #sin-rama, html:not(.modo-oscuro) .sin-datos, html:not(.modo-oscuro) .mensaje-cargando {
+  background: #ffffff; color: #64748b; border-color: #cbd5e1;
+}
+/* Componentes de carga/estado que puedan venir con estilos oscuros. */
+html:not(.modo-oscuro) .mensaje-cargando, html:not(.modo-oscuro) .mensaje-cargando {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 8px 0;
+  border-radius: 12px;
+}
+html:not(.modo-oscuro) #global-navbar-loading, html:not(.modo-oscuro) #global-navbar-loading {
+  background: rgba(255,255,255,.98);
+  color: #475569;
+  border-color: #dbe3ed;
+  box-shadow: 0 6px 18px rgba(15,23,42,.10);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-menu-colegio data-component="menu-colegio">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="floating-col-menu" id="floatingColMenu">
+    <div class="css-inline-015a5e7fbe">
+     <b>
+      <i class="fa-solid fa-school css-inline-20679505b4">
+      </i>
+      Opciones del Colegio:
+     </b>
+     <span class="badge v" id="floatColBadge">
+      Colegio detectado
+     </span>
+    </div>
+    <div class="css-inline-c87525adb8">
+     <button class="css-inline-a68719e645" data-event-click="handleColegioAction(true)" id="btnEliminarCol">
+      <i class="fa-solid fa-school">
+      </i>
+      Eliminar Colegio/Logo
+     </button>
+     <button class="css-inline-e962673576" data-event-click="handleColegioAction(false)" id="btnConservarCol">
+      <i class="fa-solid fa-eye">
+      </i>
+      Conservar Colegio
+     </button>
+     <button class="css-inline-e8f96255f1" data-event-click="handleColegioAction('eliminar_recuadro')" id="btnBorrarRecuadroCol">
+      <i class="fa-solid fa-trash">
+      </i>
+      Eliminar Recuadro
+     </button>
+      <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeColegioPopup()" data-event-click="closeColegioPopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+       <i class="fa-solid fa-xmark">
+       </i>
+       Cerrar
+      </button>
+    </div>
+   </div>
+  </visor-menu-colegio>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

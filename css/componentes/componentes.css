@@ -1,0 +1,87 @@
+/* Componentes DSD transparentes: el contenido visible conserva el layout existente. */
+app-view-login, app-view-inicio, app-view-clase, app-view-asignaturas, app-view-asignatura, app-view-apuntes, login-form, selector-clase, cabecera-grado, lista-asignaturas, vista-trimestre, vista-asignatura, vista-apuntes, login-page, visor-navbar, visor-navbar-izquierda, visor-navbar-derecha, navbar-rama, visor-cargando, visor-busqueda, visor-estadisticas, visor-listado, visor-overlay, visor-bloqueo, visor-modal-confirmacion, visor-modal-resumen, visor-modal-crear-enunciado, visor-modal-editar-enunciado, visor-modal-limpiar-datos, visor-overlay-topbar, visor-overlay-acciones, visor-apunte-barra, visor-editor, visor-visores, visor-columna, visor-menu-anadir, visor-menu-enunciado, visor-menu-colegio, visor-menu-nombre, visor-menu-imagen, visor-documento-original, visor-documento-limpio, modal-caja, boton-descarga-rama, boton-visor-rama, boton-invitado, [data-component^="navbar-boton:"] {
+  display: contents;
+}
+/* Puente de layout DSD: los hosts no pueden reducir el ancho de las vistas. */
+html, body, #app-root { width: 100%; max-width: 100%; box-sizing: border-box; }
+app-view-asignaturas, app-view-asignatura, app-view-clase, app-view-inicio, app-view-apuntes {
+  width: 100%; max-width: 100%; box-sizing: border-box;
+}
+app-view-asignaturas > .app-vista, app-view-asignatura > .app-vista, app-view-clase > .app-vista, app-view-inicio > .app-vista, app-view-apuntes > .app-vista {
+  width: 100%; max-width: 100%; box-sizing: border-box;
+}
+/* La portada ocupa todo el ancho disponible, pero nunca fuerza overflow. */
+.portada_emoji_contenedor { width: 100%; max-width: 1200px; min-width: 0; box-sizing: border-box; }
+@container app (max-width: 600px){
+  .portada_emoji_contenedor { width: 100%; max-width: 100%; min-width: 0; }
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

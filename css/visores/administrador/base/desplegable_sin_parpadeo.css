@@ -1,0 +1,1 @@
+#navbar-menu-panel:not(:popover-open){display:none;visibility:hidden;opacity:0;pointer-events:none;}#navbar-menu-panel:popover-open{visibility:visible;opacity:1;pointer-events:auto;}

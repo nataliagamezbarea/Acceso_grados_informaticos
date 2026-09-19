@@ -1,0 +1,68 @@
+/* ADAPTACIÓN RESPONSIVA DEL DOCUMENTO — VISOR ADMIN */
+#ov, #ov.on {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+#ov .ov-topbar,
+#ov .ov-actionbar,
+#ov .apunte-bar {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#ov .ov-topbar {
+  overflow: visible;
+}
+
+#ov .ov-nav-group,
+#ov .ov-right,
+#ov .ov-files {
+  min-width: 0;
+}
+
+#ov .ov-files {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#ov .ovcols {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+#ov .ovcol {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#ov .doc-viewer {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+#ov .pdfjs-page,
+#ov .doc-page {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+#ov .pdfjs-page canvas,
+#ov .doc-page canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-documento-limpio data-component="documento-limpio">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="doc-viewer" id="viewerNew">
+    <div aria-live="polite" class="doc-viewer-loading" role="status">
+     <i class="fa-solid fa-circle-notch fa-spin">
+     </i>
+     <strong>
+      Cargando documento limpio...
+     </strong>
+    </div>
+   </div>
+  </visor-documento-limpio>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

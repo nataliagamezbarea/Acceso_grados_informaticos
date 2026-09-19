@@ -1,0 +1,84 @@
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  order:initial !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-visor-group{
+  display:flex !important;
+  order:2 !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general-group{
+  display:flex !important;
+  order:3 !important;
+}
+
+/* Los controles del visor solo se esconden del popup cuando todavía están
+   visibles arriba. Cuando la izquierda colapsa (<470px), pasan al popup. */
+@container navbar-general (min-width:471px){
+  navbar-general[data-navbar-context="visor-admin"]
+  #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector{
+    display:none !important;
+  }
+}
+
+/* A 470px o menos la izquierda de Visor-Admin ya está colapsada:
+   Inicio, Volver atrás, Rama y Trimestre deben estar en el popup. */
+@container navbar-general (max-width:470px){
+  navbar-general[data-navbar-context="visor-admin"]
+  #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group{
+    display:flex !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"]
+  #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-nav{
+    display:flex !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"]
+  #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector{
+    display:flex !important;
+  }
+}
+
+/* En Inicio, Lectura/Edición aparece al colapsar el centro. */
+@container navbar-general (min-width:651px){
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+  #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+    display:none !important;
+  }
+}
+
+/* La hamburguesa de Visor-Admin es independiente de nav-general-actions. */
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > #btn-hamburguesa{
+  flex:0 0 var(--navbar-btn-size) !important;
+  min-width:var(--navbar-btn-size) !important;
+  width:var(--navbar-btn-size) !important;
+}
+
+/* V — ÚLTIMA REGLA: el popup respeta el orden visual real.
+   No se permite que reglas históricas de grupos cambien el orden.
+   INICIO: Inicio > Volver atrás > Lectura/Edición > generales.
+   VISOR: Inicio > Volver atrás > Rama > Trimestre > extras > generales. */
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:8px !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group{
+  display:flex !important;
+  flex-direction:column !important;
+  order:1 !important;
+  width:100% !important;
+  gap:8px !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-nav{
+  display:flex !important;
+  order:1 !important;
+  width:100% !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-nav + .popup-left-nav{
+  order:2 !important;
+}

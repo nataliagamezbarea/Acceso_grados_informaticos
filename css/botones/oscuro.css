@@ -1,0 +1,90 @@
+html.modo-oscuro .btn-descarga, html.modo-oscuro .btn-descarga-trimestre, html.modo-oscuro .btn-descarga-curso-h1, html.modo-oscuro .btn-descarga-masiva, html.modo-oscuro .btn-seccion-todos, html.modo-oscuro .btn-descarga-asignatura-trimestre, html.modo-oscuro .btn-descarga-asignatura-todos, html.modo-oscuro #btn-descargar-curso-h1, html.modo-oscuro .btn-descarga, html.modo-oscuro .btn-descarga-trimestre, html.modo-oscuro .btn-descarga-curso-h1, html.modo-oscuro .btn-descarga-masiva, html.modo-oscuro .btn-seccion-todos, html.modo-oscuro .btn-descarga-asignatura-trimestre, html.modo-oscuro .btn-descarga-asignatura-todos, html.modo-oscuro #btn-descargar-curso-h1 {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f8fafc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+}
+html.modo-oscuro .btn-descarga i, html.modo-oscuro .btn-descarga-trimestre i, html.modo-oscuro .btn-descarga-curso-h1 i, html.modo-oscuro .btn-descarga-masiva i, html.modo-oscuro .btn-seccion-todos i, html.modo-oscuro .btn-descarga-asignatura-trimestre i, html.modo-oscuro .btn-descarga-asignatura-todos i, html.modo-oscuro #btn-descargar-curso-h1 i, html.modo-oscuro .btn-descarga i, html.modo-oscuro .btn-descarga-trimestre i, html.modo-oscuro .btn-descarga-curso-h1 i, html.modo-oscuro .btn-descarga-masiva i, html.modo-oscuro .btn-seccion-todos i, html.modo-oscuro .btn-descarga-asignatura-trimestre i, html.modo-oscuro .btn-descarga-asignatura-todos i, html.modo-oscuro #btn-descargar-curso-h1 i {
+  color: #a5b4fc;
+}
+html.modo-oscuro .btn-descarga:hover, html.modo-oscuro .btn-descarga-trimestre:hover, html.modo-oscuro .btn-descarga-curso-h1:hover, html.modo-oscuro .btn-descarga-masiva:hover, html.modo-oscuro .btn-seccion-todos:hover, html.modo-oscuro .btn-descarga-asignatura-trimestre:hover, html.modo-oscuro .btn-descarga-asignatura-todos:hover, html.modo-oscuro #btn-descargar-curso-h1:hover, html.modo-oscuro .btn-descarga:hover, html.modo-oscuro .btn-descarga-trimestre:hover, html.modo-oscuro .btn-descarga-curso-h1:hover, html.modo-oscuro .btn-descarga-masiva:hover, html.modo-oscuro .btn-seccion-todos:hover, html.modo-oscuro .btn-descarga-asignatura-trimestre:hover, html.modo-oscuro .btn-descarga-asignatura-todos:hover, html.modo-oscuro #btn-descargar-curso-h1:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border-color: transparent;
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+}
+html.modo-oscuro .btn-descarga:hover i, html.modo-oscuro .btn-descarga-trimestre:hover i, html.modo-oscuro .btn-descarga-curso-h1:hover i, html.modo-oscuro .btn-descarga-masiva:hover i, html.modo-oscuro .btn-seccion-todos:hover i, html.modo-oscuro .btn-descarga-asignatura-trimestre:hover i, html.modo-oscuro .btn-descarga-asignatura-todos:hover i, html.modo-oscuro #btn-descargar-curso-h1:hover i, html.modo-oscuro .btn-descarga:hover i, html.modo-oscuro .btn-descarga-trimestre:hover i, html.modo-oscuro .btn-descarga-curso-h1:hover i, html.modo-oscuro .btn-descarga-masiva:hover i, html.modo-oscuro .btn-seccion-todos:hover i, html.modo-oscuro .btn-descarga-asignatura-trimestre:hover i, html.modo-oscuro .btn-descarga-asignatura-todos:hover i, html.modo-oscuro #btn-descargar-curso-h1:hover i {
+  color: #ffffff;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,79 @@
+#barra-superior > .nav-center-actions{
+  order:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:var(--navbar-gap);
+  flex:0 0 auto;
+  min-width:0;
+  margin-inline:8px;
+  overflow:visible;
+}
+#barra-superior > .nav-right{
+  order:3;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:var(--navbar-gap);
+  flex:0 0 auto;
+  min-width:0;
+  width:max-content;
+  max-width:max-content;
+  margin-left:auto;
+  overflow:visible;
+}
+
+#barra-superior .nav-left > *,
+#barra-superior .nav-center-actions > *,
+#barra-superior .nav-right > *,
+#barra-superior .nav-page-actions > *,
+#barra-superior .nav-general-actions > *{
+  flex:0 0 auto;
+  min-width:0;
+}
+
+.nav-page-actions,
+.nav-general-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:var(--navbar-gap);
+  min-width:0;
+  flex:0 0 auto;
+  overflow:visible;
+}
+
+/* =========================
+   BOTONES
+   ========================= */
+.navbar-boton,
+.navbar-page-extra,
+#btn-inicio,
+#volver-atras,
+#boton-ajustes,
+#btn-modo-oscuro,
+#btn-cerrar-sesion,
+#btn-hamburguesa{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:var(--navbar-btn-size);
+  min-width:var(--navbar-btn-size);
+  height:var(--navbar-btn-size);
+  min-height:var(--navbar-btn-size);
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+  border:1px solid var(--navbar-btn-border,#d7e1ec);
+  border-radius:12px;
+  background:var(--navbar-btn-bg,#fff);
+  color:var(--navbar-btn-color,#475569);
+  box-shadow:var(--navbar-btn-shadow,0 2px 8px rgba(15,23,42,.04));
+  text-decoration:none;
+  cursor:pointer;
+  white-space:nowrap;
+  font:inherit;
+}
+#btn-inicio,#volver-atras{cursor:pointer;}
+.navbar-page-extra span,
+#barra-superior .nav-label{display:none;}

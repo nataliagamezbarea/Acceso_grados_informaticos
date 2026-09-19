@@ -1,0 +1,99 @@
+/* Modal Limpiar Datos: contenedor interior de opciones y labels */
+html:not(.modo-oscuro) .css-inline-91da941fd3,
+html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-91da941fd3 {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+  padding: 14px !important;
+  margin-bottom: 20px !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+html:not(.modo-oscuro) .css-inline-12bf8bc54f,
+html:not(.modo-oscuro) .css-inline-e4887c6585,
+html:not(.modo-oscuro) .css-inline-09d05bc230,
+html:not(.modo-oscuro) .css-inline-39805bee3a,
+html:not(.modo-oscuro) #modalLimpiarDatos label {
+  color: #1e293b !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+}
+
+html:not(.modo-oscuro) .css-inline-a1b7c13de2,
+html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-a1b7c13de2 {
+  color: #dc2626 !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+}
+
+html:not(.modo-oscuro) .css-inline-f8290b94e3,
+html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-f8290b94e3 {
+  color: #334155 !important;
+  font-weight: 600 !important;
+  font-size: 12.5px !important;
+  cursor: pointer !important;
+}
+
+html:not(.modo-oscuro) #modalLimpiarDatos input[type="checkbox"] {
+  accent-color: #dc2626 !important;
+  cursor: pointer !important;
+}
+
+/* Botones de acción en modales */
+html:not(.modo-oscuro) .btn-act.accept,
+html:not(.modo-oscuro) #customModalOkBtn,
+html:not(.modo-oscuro) .css-inline-90b7755797,
+html:not(.modo-oscuro) .css-inline-75d36b272c {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.28) !important;
+  cursor: pointer !important;
+}
+html:not(.modo-oscuro) .btn-act.accept:hover,
+html:not(.modo-oscuro) #customModalOkBtn:hover,
+html:not(.modo-oscuro) .css-inline-90b7755797:hover,
+html:not(.modo-oscuro) .css-inline-75d36b272c:hover {
+  background: #059669 !important;
+}
+
+html:not(.modo-oscuro) .css-inline-f24f90f9ee,
+html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-f24f90f9ee {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  padding: 9px 18px !important;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.28) !important;
+  cursor: pointer !important;
+}
+html:not(.modo-oscuro) .css-inline-f24f90f9ee:hover,
+html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-f24f90f9ee:hover {
+  background: #b91c1c !important;
+}
+
+html:not(.modo-oscuro) .modal-input,
+html:not(.modo-oscuro) .modal-textarea,
+html:not(.modo-oscuro) .display-old-text,
+html:not(.modo-oscuro) .confirm-input-si,
+html:not(.modo-oscuro) .apunte-name-input,
+html:not(.modo-oscuro) #crearStart,
+html:not(.modo-oscuro) #crearNew,
+html:not(.modo-oscuro) #editarOldText,
+html:not(.modo-oscuro) #editarNewText,
+html:not(.modo-oscuro) .css-inline-2a73309298,
+html:not(.modo-oscuro) .css-inline-ac88edfb58,
+html:not(.modo-oscuro) .css-inline-3f6bc2e52d,
+html:not(.modo-oscuro) .css-inline-faf3deaa8e {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+}

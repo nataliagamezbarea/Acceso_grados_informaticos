@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-menu-enunciado data-component="menu-enunciado">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="floating-pdf-menu" id="floatingPdfMenu">
+    <div class="css-inline-015a5e7fbe">
+     <b>
+      <i class="fa-solid fa-gear">
+      </i>
+      Opciones del Enunciado:
+     </b>
+     <span class="badge v" id="floatStatusBadge">
+      Opciones de Enunciado
+     </span>
+    </div>
+    <div class="css-inline-c87525adb8">
+     <button class="css-inline-4d1462c150" data-event-click="editarEnunciadoDesdePopup()">
+      <i class="fa-solid fa-pen-to-square">
+      </i>
+      Editar Enunciado
+     </button>
+     <button class="css-inline-82403c4a9c" data-event-click="eliminarEnunciadoDesdePopup()" id="btnEliminarEnunciado">
+      <i class="fa-solid fa-trash-can">
+      </i>
+      Eliminar Enunciado
+     </button>
+     <button class="css-inline-a68719e645" data-event-click="restoreInitialSuggestion();closeEnunciadoPopup()" id="btnRestaurarEnunciado">
+      <i class="fa-solid fa-rotate-left">
+      </i>
+      Volver al de Antes
+     </button>
+      <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeEnunciadoPopup()" data-event-click="closeEnunciadoPopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+       <i class="fa-solid fa-xmark">
+       </i>
+       Cerrar
+      </button>
+     </div>
+    </div>
+  </visor-menu-enunciado>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

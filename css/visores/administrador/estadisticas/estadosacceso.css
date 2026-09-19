@@ -1,0 +1,48 @@
+.visor-acceso-denegado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 55vh;
+  padding: 40px 20px;
+  text-align: center;
+  color: #94a3b8;
+}
+.visor-acceso-denegado i { font-size: 46px; color: #f87171; margin-bottom: 16px; }
+.visor-acceso-denegado h2 { color: #f8fafc; font-size: 20px; margin-bottom: 8px; }
+/* Una sola zona de herramientas cuando el documento está abierto. */
+/* El visor de documentos ocupa una ventana propia: nunca debe crear un
+   segundo scroll en html/body. Solo los paneles PDF tienen scroll interno. */
+html.visor-document-open, body.visor-document-open {
+  overflow: hidden; height: 100%; overscroll-behavior: none;
+}
+.ov {
+  inset: 64px 0 0 0;
+  z-index: 90000;
+  overflow: hidden;
+  max-height: calc(100dvh - 64px);
+  overscroll-behavior: none;
+}
+.ov-topbar { border-bottom: 1px solid #263653; }
+.ov-actionbar { border-top: 0; }
+.ovcols { min-height: 0; overflow: hidden; flex: 1 1 auto; }
+.ovcol { min-height: 0; }
+.doc-viewer { min-height: 0; overscroll-behavior: contain; }
+@container app (max-width: 1100px){
+}
+@container app (max-width: 760px){
+  #app-root { padding-top: 68px; }
+  .file-search-bar { position: relative; top: auto; width: calc(100% - 20px); }
+  #visor-navbar-loading { top: 58px; height: 32px; }
+  .ov { inset: 58px 0 0 0; }
+  .visor-cache-inline { display: none; }
+}
+
+/* Mientras un documento está abierto, solo permanecen la navbar y el visor. */
+html.visor-document-open visor-busqueda,
+html.visor-document-open visor-estadisticas,
+html.visor-document-open visor-listado {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

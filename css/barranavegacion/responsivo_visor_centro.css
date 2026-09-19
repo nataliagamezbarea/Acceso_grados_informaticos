@@ -1,0 +1,35 @@
+@container navbar-general (max-width: 650px){
+  /* Si Lectura/Edición sale de la navbar, su copia del popup vive en el
+     mismo grupo que Inicio/Volver para poder quedar justo debajo de Volver. */
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-left-group,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group{
+    display:flex;
+    flex-direction:column;
+    order:40;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-edit,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-edit{
+    display:flex;
+    order:3;
+  }
+
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-center-actions > #boton-modo-edicion{
+    display:none;
+    width:0;min-width:0;max-width:0;
+    height:0;min-height:0;max-height:0;
+    margin:0;padding:0;flex:0 0 0;overflow:hidden;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)[data-rol="admin"] #navbar-menu-panel:popover-open .popup-edit-group,
+  html[data-rol="admin"] body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-edit-group,
+  #navbar-menu-panel:popover-open .popup-edit-group{
+    display:flex;
+    order:30;
+  }
+  #navbar-menu-panel:popover-open .popup-edit-group .popup-edit{
+    display:flex;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   NIVEL 3 — IZQUIERDA
+   -------------------------------------------------------------------------- */

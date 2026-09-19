@@ -1,0 +1,88 @@
+.file-search-bar {
+  position: relative; top: auto; z-index: 10; padding: 8px 20px 4px; background: transparent;
+}
+.file-search-inner { max-width: 1100px; margin: auto; }
+.stats { max-width: 1280px; margin: 0 auto; padding: 4px 20px 12px; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px 28px; }
+/* Acciones principales: prioridades claras */
+#app-root header .header-right > button { min-height: 34px; white-space: nowrap; }
+#app-root header .summary-btn { order: 1; }
+#app-root header .github-pull-btn { order: 2; }
+#app-root header .apunte-head-btn { order: 3; }
+#app-root header .term-btn { order: 4; }
+#app-root header .btn-logout { order: 5; }
+/* Cuando se abre un documento, ocupa toda la ventana: no iframe ni modal anidado */
+.ov { z-index: 100; }
+.ov-topbar {
+  display: grid;
+  grid-template-columns: minmax(300px,1.2fr) minmax(220px,1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  background: #0f172a;
+  border-bottom: 1px solid var(--va-border);
+}
+.ov-nav-group { flex-wrap: wrap; }
+.ov-files { justify-content: center; min-width: 0; }
+.ov-right { justify-content: flex-end; flex-wrap: wrap; }
+.ov-actionbar {
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  white-space: normal;
+  overflow: visible;
+  padding: 8px 14px;
+  background: #0d1425;
+  gap: 7px;
+}
+.pill-check, .btn-sm-restore, .btn-act { min-height: 32px; }
+/* Agrupación visual sin alterar la lógica existente */
+.ov-actionbar .v-divider { margin: 0 3px; }
+.ov-actionbar .btn-restore-all, .ov-actionbar .btn-restore-manual, .ov-actionbar .btn-restore-text, .ov-actionbar .btn-restore-name {
+  opacity: .95;
+}
+/* En móvil las barras se convierten en filas cómodas */
+@container app (max-width: 1100px){
+  #app-root header { grid-template-columns: 1fr; gap: 10px; }
+  .header-left { flex-wrap: wrap; }
+  .header-right { justify-content: flex-start; }
+  .file-search-bar { position: relative; top: auto; }
+  .ov-topbar { grid-template-columns: 1fr; }
+  .ov-files { justify-content: flex-start; }
+  .ov-right { justify-content: flex-start; }
+}
+@container app (max-width: 760px){
+  #app-root header { position: relative; padding: 10px 12px; }
+  .header-left { flex-direction: column; align-items: stretch; }
+  .header-title { white-space: normal; font-size: 15px; }
+  .header-rama-box { width: 100%; }
+  .header-rama-select { min-width: 0; width: 100%; }
+  .header-right { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .header-right > button { width: 100%; justify-content: center; }
+  .file-search-bar { position: relative; top: auto; padding: 10px 12px 6px; }
+  .stats, .wrap { padding-left: 12px; padding-right: 12px; }
+  .ov-topbar { padding: 4px 8px; flex-wrap: wrap; overflow: visible; }
+  .ov-nav-group, .ov-right { width: 100%; max-width: 100%; min-width: 0; flex: 1 1 100%; flex-wrap: wrap; }
+  .ov-nav-group button, .ov-right .btn-act { flex: 0 1 auto; min-width: 0; }
+  .ov-files { width: 100%; max-width: 100%; min-width: 0; font-size: 11px; flex: 1 1 100%; }
+  .ov-actionbar { padding: 4px 8px; flex-wrap: wrap; overflow: visible; }
+  .ov-actionbar .v-divider { display: none; }
+  .pill-check, .btn-sm-restore, .ov-actionbar > .btn-act { flex: 0 1 auto; min-width: 0; }
+}
+@container app (max-width: 480px){
+  .header-right { grid-template-columns: 1fr; }
+  .dev-navbar { flex-direction: column; align-items: flex-start; gap: 6px; height: auto; padding: 7px 10px; }
+  .ov-nav-group button, .ov-right .btn-act, .pill-check, .btn-sm-restore { flex-basis: auto; }
+  .ov-counter, .ov-changes-counter { margin: auto; }
+  .ov-files { flex-direction: row; align-items: center; gap: 3px; }
+}
+/* Botón volver de página completa */
+.page-return-bar {
+  display: flex; align-items: center; gap: 10px; max-width: 1280px; margin: 10px auto 0; padding: 0 20px;
+}
+.page-return-bar .page-context {
+  color: var(--va-muted); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+@container app (max-width:760px){
+  .page-return-bar { padding: 0 12px; }
+}

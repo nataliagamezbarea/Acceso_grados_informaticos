@@ -1,0 +1,47 @@
+html:not(.modo-oscuro) .ov-nav-group button, html:not(.modo-oscuro) .back-btn {
+  background: #fff; color: #334155; border: 1px solid #d3dce8; box-shadow: 0 1px 4px rgba(15,23,42,.05);
+}
+html:not(.modo-oscuro) .ov-nav-group button:hover, html:not(.modo-oscuro) .back-btn:hover {
+  background: #eff6ff; color: #1d4ed8; border-color: #93c5fd;
+}
+html:not(.modo-oscuro) .ov-counter { background: #f1f5f9; color: #475569; border: 1px solid #dbe3ed; }
+html:not(.modo-oscuro) .ov-files { color: #334155; }
+html:not(.modo-oscuro) .ov-file-orig { color: #dc2626; }
+html:not(.modo-oscuro) .ov-file-clean { color: #059669; }
+html:not(.modo-oscuro) .ov-arrow { color: #6366f1; }
+html:not(.modo-oscuro) .orig-name-text { color: #b45309; }
+html:not(.modo-oscuro) .clean-name-text { color: #047857; }
+html:not(.modo-oscuro) .ov-close { color: #64748b; }
+html:not(.modo-oscuro) .ov-close:hover { color: #dc2626; }
+html:not(.modo-oscuro) .ov-actionbar {
+  background: #fff; border-bottom: 1px solid #dbe3ed; box-shadow: 0 2px 8px rgba(15,23,42,.04);
+}
+html:not(.modo-oscuro) .pill-check { background: #f8fafc; color: #334155; border: 1px solid #d3dce8; }
+html:not(.modo-oscuro) .pill-check:hover { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
+html:not(.modo-oscuro) .v-divider { background: #dbe3ed; }
+html:not(.modo-oscuro) .ovcols { background: #eef2f7; }
+html:not(.modo-oscuro) .ovcol {
+  background: #fff; border: 1px solid #d5deea; box-shadow: 0 4px 16px rgba(15,23,42,.06);
+}
+html:not(.modo-oscuro) .col-header.orig {
+  background: #fff1f2; color: #be123c; border-bottom: 1px solid #fecdd3;
+}
+html:not(.modo-oscuro) .col-header.clean {
+  background: #ecfdf5; color: #047857; border-bottom: 1px solid #a7f3d0;
+}
+html:not(.modo-oscuro) .doc-viewer { background: #f8fafc; color: #1e293b; }
+/* Editor */
+html:not(.modo-oscuro) .editor-box {
+  background: #fffbeb; border-color: #f59e0b; box-shadow: 0 3px 12px rgba(15,23,42,.06);
+}
+html:not(.modo-oscuro) .editor-row input, html:not(.modo-oscuro) .editor-row textarea {
+  background: #fff; color: #1e293b; border-color: #cbd5e1;
+}
+html:not(.modo-oscuro) .editor-row label { color: #b45309; }
+/* Menus flotantes */
+html:not(.modo-oscuro) .floating-pdf-menu, html:not(.modo-oscuro) .floating-img-menu, html:not(.modo-oscuro) .floating-col-menu, html:not(.modo-oscuro) .floating-name-menu, html:not(.modo-oscuro) .floating-add-menu {
+  background: #fff; color: #1e293b; border: 1px solid #d5deea; box-shadow: 0 12px 30px rgba(15,23,42,.14);
+}
+
+/* VISOR ADMIN — no mostrar ningún cargador en la barra superior. */
+#visor-navbar-loading, visor-cargando, .visor-navbar-loading { display: none; visibility: hidden; }

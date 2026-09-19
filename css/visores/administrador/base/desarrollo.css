@@ -1,0 +1,52 @@
+/* ===== dev_navbar.css ===== */
+/* ==============================================================================
+   BARRA DE DESARROLLO (Panel superior con "Reiniciar Servidor")
+   ============================================================================== */
+.dev-navbar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #1c1330;
+  border-bottom: 2px solid #f59e0b;
+  padding: 6px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fbbf24;
+}
+.dev-navbar-label { display: flex; align-items: center; gap: 6px; color: #c4b5fd; }
+.dev-navbar-info { display: flex; align-items: center; gap: 6px; color: #9ca3af; font-weight: 600; }
+.dev-cache-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #9ca3af;
+  font-weight: 700;
+  user-select: none;
+}
+.dev-cache-toggle input[type="checkbox"] {
+  width: 15px; height: 15px; cursor: pointer; accent-color: #f59e0b;
+}
+.dev-cache-toggle:has(input:checked) span { color: #fbbf24; }
+.dev-cache-toggle span { display: flex; align-items: center; gap: 6px; color: #6ee7b7; }
+.dev-restart-btn {
+  margin-left: auto;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1c1330;
+  border: 0;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: filter .15s;
+}
+.dev-restart-btn:hover { filter: brightness(1.12); }
+/* RESPONSIVE */
+@container app (max-width: 720px){
+  .dev-navbar { flex-wrap: wrap; gap: 8px; padding: 6px 12px; font-size: 11px; }
+  .dev-restart-btn { margin-left: 0; width: 100%; justify-content: center; }
+}

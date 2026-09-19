@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-busqueda data-component="busqueda-archivos">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="file-search-bar" id="fileSearchBar">
+    <div class="file-search-inner">
+     <i class="fa-solid fa-magnifying-glass">
+     </i>
+     <input aria-label="Buscar archivo" autocomplete="off" data-event-input="filtrarArchivos(this.value)" id="inputBuscarArchivo" placeholder="Buscar archivo..." type="search"/>
+     <span class="file-search-count" id="fileSearchCount">
+     </span>
+     <button class="css-inline-6b99de8b69" data-event-click="limpiarBusquedaArchivos()" id="btnLimpiarBusqueda" title="Borrar búsqueda" type="button">
+      <i class="fa-solid fa-xmark">
+      </i>
+     </button>
+     <label class="visor-cache-inline" title="Desactiva la caché durante el desarrollo">
+      <input data-event-change="toggleCache(this.checked)" id="cbCacheDesactivada" type="checkbox"/>
+      <span id="dev-cache-toggle-text">
+       <i class="fa-solid fa-ban">
+       </i>
+       Caché desactivada
+      </span>
+     </label>
+    </div>
+   </div>
+  </visor-busqueda>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

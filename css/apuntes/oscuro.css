@@ -1,0 +1,95 @@
+html.modo-oscuro .contenedor-tablas, html.modo-oscuro .contenedor-tablas, html.modo-oscuro #contenedor-apuntes, html.modo-oscuro #contenedor-apuntes, html.modo-oscuro #contenedor-practicas, html.modo-oscuro #contenedor-practicas {
+  background: #111827; color: #e5e7eb; border-color: #374151;
+}
+html.modo-oscuro .detalle-seccion, html.modo-oscuro .detalle-seccion, html.modo-oscuro .detalle-apuntes, html.modo-oscuro .detalle-apuntes {
+  background: #111827; border-color: #374151; color: #f9fafb; box-shadow: 0 10px 28px rgba(0, 0, 0, .35);
+}
+html.modo-oscuro .detalle-seccion summary, html.modo-oscuro .detalle-seccion summary {
+  background: #1f2937; color: #f9fafb; border-color: #374151;
+}
+html.modo-oscuro .contenedor-tablas table, html.modo-oscuro .contenedor-tablas table {
+  background: #111827; color: #e5e7eb; border-color: #374151;
+}
+html.modo-oscuro .contenedor-tablas th, html.modo-oscuro .contenedor-tablas th {
+  background: #1f2937; color: #f9fafb; border-color: #4b5563;
+}
+html.modo-oscuro .contenedor-tablas td, html.modo-oscuro .contenedor-tablas td {
+  background: #172033; color: #e5e7eb; border-color: #374151;
+}
+html.modo-oscuro .contenedor-tablas tr:nth-child(even) td, html.modo-oscuro .contenedor-tablas tr:nth-child(even) td {
+  background: #1b2638;
+}
+html.modo-oscuro .contenedor-tablas a, html.modo-oscuro .contenedor-tablas a { color: #c4b5fd; }
+html.modo-oscuro .mensaje-cargando, html.modo-oscuro .mensaje-cargando, html.modo-oscuro .cargando, html.modo-oscuro .cargando {
+  color: #9ca3af;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

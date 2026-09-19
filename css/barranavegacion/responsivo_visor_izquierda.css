@@ -1,0 +1,89 @@
+@container navbar-general (max-width: 470px){
+  #barra-superior > .nav-left{
+    display:none;
+    width:0;min-width:0;max-width:0;
+    height:0;min-height:0;max-height:0;
+    margin:0;padding:0;flex:0 0 0;overflow:hidden;
+  }
+  #barra-superior > .nav-left > *{
+    width:0;min-width:0;max-width:0;
+    height:0;min-height:0;max-height:0;
+    margin:0;padding:0;flex:0 0 0;overflow:hidden;
+  }
+
+  /* En Inicio: Inicio y Volver arriba; después EDITAR. */
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-left-group{
+    display:flex;
+    flex-direction:column;
+    order:1;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-left-nav{
+    display:flex;
+    order:1;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-left-nav + .popup-left-nav{
+    display:flex;
+    order:2;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-edit{
+    display:flex;
+    order:3;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-left-selector{
+    display:none;
+  }
+
+  /* En Visor-Admin: derecha -> general -> Inicio/Volver -> Rama/Trimestre. */
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group{
+    display:flex;
+    flex-direction:column;
+    order:30;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-nav{
+    display:flex;
+    order:1;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-nav + .popup-left-nav{
+    display:flex;
+    order:2;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-selector{
+    display:flex;
+    order:3;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-selector + .popup-left-selector{
+    display:flex;
+    order:4;
+  }
+}
+
+/* Cuando hay varios niveles colapsados, CSS conserva el orden de aparición. */
+#navbar-menu-panel:popover-open .popup-visor-group{order:10;}
+#navbar-menu-panel:popover-open .popup-general-group{order:20;}
+#navbar-menu-panel:popover-open .popup-edit-group{order:30;}
+#navbar-menu-panel:popover-open .popup-left-group{order:40;}
+
+/* En Visor, el bloque izquierdo ya lleva su propio orden interno. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group{order:40;}
+
+/* El grupo de Lectura/Edición es un nivel propio del popup. */
+#navbar-menu-panel .popup-edit-group{
+  display:none;
+  flex-direction:column;
+  gap:8px;
+  width:100%;
+}
+html[data-rol="admin"] #navbar-menu-panel .popup-edit-group .navbar-admin-only,
+body[data-rol="admin"] #navbar-menu-panel .popup-edit-group .navbar-admin-only{
+  display:flex;
+  width:100%;
+  min-width:0;
+  max-width:none;
+  height:42px;
+  min-height:42px;
+  max-height:none;
+  flex:0 0 42px;
+  margin:0;
+  padding:0 12px;
+  overflow:visible;
+}

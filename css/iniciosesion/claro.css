@@ -1,0 +1,46 @@
+/* Modo claro para la vista de inicio de sesión */
+html:has([data-app-view="login"]:not([hidden])),
+html:has([data-app-view="login"]:not([hidden])) body,
+html:has([data-app-view="login"]:not([hidden])) #app-root {
+  color-scheme: light;
+  background: #ffffff;
+  color: #172033;
+}
+
+html:has([data-app-view="login"]:not([hidden])) .login-contenedor {
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  color-scheme: light;
+}
+
+html:has([data-app-view="login"]:not([hidden])) .login-tarjeta {
+  background: #ffffff;
+  color: #172033;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+html:has([data-app-view="login"]:not([hidden])) .login-tarjeta h1 { color: #2b2b2b; }
+html:has([data-app-view="login"]:not([hidden])) .login-sub { color: #888; }
+html:has([data-app-view="login"]:not([hidden])) #form-login label { color: #555; }
+html:has([data-app-view="login"]:not([hidden])) #form-login input {
+  background: #ffffff;
+  color: #172033;
+  border-color: #d1d5db;
+}
+html:has([data-app-view="login"]:not([hidden])) #form-login input::placeholder { color: #9ca3af; }
+html:has([data-app-view="login"]:not([hidden])) .login-error { color: #d32f2f; }
+html:has([data-app-view="login"]:not([hidden])) .login-divisor { color: #aaa; }
+html:has([data-app-view="login"]:not([hidden])) .login-divisor::before,
+html:has([data-app-view="login"]:not([hidden])) .login-divisor::after { background: #eee; }
+html:has([data-app-view="login"]:not([hidden])) .btn-google {
+  background: #ffffff;
+  color: #444;
+  border-color: #ddd;
+}
+html:has([data-app-view="login"]:not([hidden])) .login-aviso {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  border-left-color: #6366f1;
+  color: #475569;
+}
+html:has([data-app-view="login"]:not([hidden])) .login-aviso strong { color: #4f46e5; }

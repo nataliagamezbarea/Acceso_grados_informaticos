@@ -1,0 +1,70 @@
+    html.modo-oscuro #customModalCancelBtn,
+    html[data-theme="dark"] #customModalCancelBtn,
+    html.modo-oscuro .btn-act.skip,
+    html[data-theme="dark"] .btn-act.skip,
+    html.modo-oscuro .css-inline-a0fd43aec1,
+    html.modo-oscuro .css-inline-af9b0a4d92,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-af9b0a4d92 {
+      background: #334155 !important;
+      color: #e2e8f0 !important;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+      border-radius: 8px !important;
+      border: 1px solid #475569 !important;
+      padding: 9px 18px !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro #customModalCancelBtn:hover,
+    html.modo-oscuro .btn-act.skip:hover,
+    html.modo-oscuro .css-inline-a0fd43aec1:hover,
+    html.modo-oscuro .css-inline-af9b0a4d92:hover,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-af9b0a4d92:hover {
+      background: #475569 !important;
+      color: #ffffff !important;
+    }
+    html.modo-oscuro #customModalCloseBtn,
+    html[data-theme="dark"] #customModalCloseBtn,
+    html.modo-oscuro .custom-modal-close-x,
+    html.modo-oscuro .modal-close-btn,
+    html.modo-oscuro .css-inline-5592c5dc14,
+    html.modo-oscuro .css-inline-6fec57c101,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-6fec57c101 {
+      background: #334155 !important;
+      color: #cbd5e1 !important;
+      border: 1px solid #475569 !important;
+      border-radius: 6px !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro #customModalCloseBtn:hover,
+    html[data-theme="dark"] #customModalCloseBtn:hover,
+    html.modo-oscuro .custom-modal-close-x:hover,
+    html.modo-oscuro .modal-close-btn:hover,
+    html.modo-oscuro .css-inline-5592c5dc14:hover,
+    html.modo-oscuro .css-inline-6fec57c101:hover,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-6fec57c101:hover {
+      background: #fee2e2 !important;
+      color: #dc2626 !important;
+      border-color: #fecaca !important;
+    }
+    html.modo-oscuro .css-inline-5e325d435e,
+    html.modo-oscuro .blocker-box hr,
+    html.modo-oscuro #modalLimpiarDatos hr {
+      border: 0 !important;
+      border-top: 1px solid #334155 !important;
+      margin: 8px 0 !important;
+    }
+    html.modo-oscuro .modal-input,
+    html.modo-oscuro .modal-textarea,
+    html.modo-oscuro #crearStart,
+    html.modo-oscuro #crearNew,
+    html.modo-oscuro #editarOldText,
+    html.modo-oscuro #editarNewText,
+    html.modo-oscuro .css-inline-2a73309298,
+    html.modo-oscuro .css-inline-ac88edfb58,
+    html.modo-oscuro .css-inline-3f6bc2e52d,
+    html.modo-oscuro .css-inline-faf3deaa8e {
+      background: #1e1b4b !important;
+      color: #f8fafc !important;
+      border: 1px solid #4338ca !important;
+      border-radius: 8px !important;
+    }

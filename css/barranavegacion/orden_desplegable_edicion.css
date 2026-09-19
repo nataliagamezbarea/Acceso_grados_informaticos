@@ -1,0 +1,88 @@
+/* V — FIX DEFINITIVO POPUP LECTURA/EDICIÓN
+   La copia del popup no debe depender de popup.hidden ni de grupos antiguos.
+   En INICIO, cuando EDITAR colapsa, el orden es siempre: Inicio -> Volver atrás -> Lectura/Edición.
+*/
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group{
+  display:flex !important;
+  flex-direction:column !important;
+  width:100% !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group .popup-left-nav{
+  order:1 !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group .popup-left-nav + .popup-left-nav{
+  order:2 !important;
+}
+html[data-rol="admin"] body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit,
+body[data-rol="admin"] #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit,
+#app-navbar-cargando.navbar-role-admin #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit,
+navbar-general[data-role-admin="true"] body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:flex !important;
+  order:3 !important;
+  width:100% !important;
+  min-width:0 !important;
+  max-width:none !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  flex:0 0 42px !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+/* En Inicio, Rama/Trimestre nunca se meten entre los tres primeros. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector{
+  display:none !important;
+}
+/* En Visor-Admin no existe Lectura/Edición. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:none !important;
+}
+/* A 269px y similares, el grupo izquierdo sigue siendo el primero. */
+@container navbar-general (max-width:470px){
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group{
+    display:flex !important;
+    order:1 !important;
+  }
+}
+
+/* V — popup EDITAR robusto: el rol puede llegar después de montar la navbar. */
+navbar-general[data-role-admin="true"] #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:flex !important;
+  order:3 !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:42px !important;
+  min-height:42px !important;
+  flex:0 0 42px !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:none !important;
+}
+
+
+/* ==========================================================================
+   V — POPUP: ORDEN VISUAL DEFINITIVO
+   Regla de oro en INICIO:
+       Inicio
+       Volver atrás
+       Lectura / Edición
+       resto
+   El orden NO depende del orden histórico de los grupos.
+   ========================================================================== */
+
+/* Al abrir el popup, los grupos son transparentes al layout.
+   Así FLEX ordena los botones reales, no los contenedores antiguos. */
+#navbar-menu-panel.navbar-popup-ordered:popover-open .navbar-popup-list{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:8px !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group,
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general-group,
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-visor-group{
+  display:contents !important;
+}

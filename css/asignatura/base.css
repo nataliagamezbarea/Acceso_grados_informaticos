@@ -1,0 +1,148 @@
+#app-root:not([hidden]) {
+  padding-top: clamp(65px, 8vh, 85px);
+  padding-bottom: clamp(24px, 4vh, 40px);
+  padding-left: clamp(10px, 2.5vw, 20px);
+  padding-right: clamp(10px, 2.5vw, 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+main.contenido {
+  width: 100%;
+  max-width: 100%;
+  margin: clamp(16px, 4vh, 40px) auto clamp(30px, 6vh, 60px);
+  padding: 0;
+  box-sizing: border-box;
+}
+.aviso-material-protegido {
+  text-align: center; padding: 28px 16px; color: #475569; font-size: 14px; line-height: 1.6;
+}
+.texto-material-protegido { color: #334155; }
+main.contenido h2 {
+  font-family: var(--font-heading, "Poppins", sans-serif);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 700;
+  color: #c14c8a;
+  margin-top: 36px;
+  margin-bottom: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
+  hyphens: none;
+  text-align: left;
+}
+.barra-edicion-seccion {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(8px, 2vw, 12px);
+}
+.barra-edicion-seccion > div { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.barra-edicion-seccion .btn-seccion-todos {
+  display: inline-flex; align-items: center; justify-content: center;
+}
+details {
+  margin-bottom: 36px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

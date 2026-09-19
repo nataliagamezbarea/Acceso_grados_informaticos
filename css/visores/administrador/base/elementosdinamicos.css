@@ -1,0 +1,100 @@
+/* ==========================================================================
+   ESTILOS DE ELEMENTOS DINÁMICOS DEL VISOR (CLASES EN ESPAÑOL, SIN STYLE="")
+   ========================================================================== */
+/* Spinner en el visor de documentos */
+.visor-spinner-documento {
+  width: 28px; height: 28px; margin: 0; border-width: 2.5px; border-top-color: #3b82f6;
+}
+/* Mensajes de error en la carga de documentos */
+.visor-error-carga-documento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  color: #ef4444;
+  font-size: 13px;
+  gap: 10px;
+  text-align: center;
+  padding: 20px;
+}
+.visor-error-icono { font-size: 32px; }
+.visor-error-titulo { font-weight: 700; color: inherit; }
+.visor-error-detalle { color: #94a3b8; font-size: 12px; }
+.visor-boton-reintentar {
+  background: #3b82f6;
+  color: #ffffff;
+  border: 0;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.visor-boton-reintentar:hover { opacity: 0.9; }
+/* Estado de error al cargar datos de configuración */
+.visor-estado-error-datos { grid-column: 1 / -1; text-align: center; padding: 90px 20px; color: #94a3b8; }
+.visor-estado-error-icono { font-size: 44px; color: #f59e0b; margin-bottom: 16px; display: block; }
+.visor-estado-error-titulo { font-size: 18px; color: #f1f5f9; margin-bottom: 6px; }
+.visor-estado-error-descripcion { font-size: 14px; color: #94a3b8; }
+/* Sección vacía sin documentos */
+.visor-seccion-vacia { text-align: center; padding: 50px 20px; }
+.visor-seccion-vacia-icono { font-size: 36px; color: #94a3b8; margin-bottom: 12px; }
+.visor-seccion-vacia-titulo { font-size: 16px; color: inherit; margin-bottom: 8px; }
+.visor-seccion-vacia-descripcion { font-size: 13px; color: #64748b; margin-bottom: 16px; }
+/* Iconos de cabecera de secciones de documentos */
+.icono-seccion-latex { color: #34d399; }
+.icono-seccion-enunciado { color: #f87171; }
+.icono-seccion-limpieza { color: #3b82f6; }
+/* Iconos de filtros de estadísticas */
+.icono-filtro-procesados { color: #34d399; }
+.icono-filtro-no-procesados { color: #fbbf24; }
+.icono-filtro-nuevos { color: #f59e0b; }
+/* Números y badges de estadísticas */
+.estadistica-total { color: #ffd166; }
+.estadistica-enunciados { color: #ef4444; }
+.estadistica-renombres { color: #8b5cf6; }
+.estadistica-limpiezas { color: #3b82f6; }
+.estadistica-apuntes { color: #10b981; }
+/* Puntos de colores en la leyenda */
+.punto-enunciado { background: #ef4444; }
+.punto-creado-app { background: #f97316; }
+.punto-nombres { background: #3b82f6; }
+.punto-colegios { background: #f59e0b; }
+/* Badges en las tarjetas de archivos */
+.badge-procesado { background: #065f46; color: #34d399; font-weight: 700; }
+.badge-original { background: #78350f; color: #fbbf24; font-weight: 700; }
+.badge-no-procesado { background: #334155; color: #cbd5e1; font-weight: 600; }
+.badge-nuevo-app { background: #b45309; color: #fef3c7; font-weight: 700; margin-left: 2px; }
+.tarjeta-renombre-limpio { font-size: 11px; color: #c084fc; margin-top: 4px; }
+.badge-apunte-tarjeta { background: #065f46; color: #34d399; font-size: 10px; margin-left: 4px; }
+.tarjeta-titulo { font-weight: 700; font-size: 14px; word-break: break-all; color: #f3f4f6; }
+html:not(.modo-oscuro) .tarjeta-titulo { color: #1e293b; }
+.tarjeta-etiquetas { margin-top: 6px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+/* Botón confirmar e iconos de acción */
+.icono-boton-confirmar { margin-left: 4px; }
+.apunte-nombre-resaltado { color: #34d399; }
+.enlace-fuente-internet { color: #38bdf8; text-decoration: underline; word-break: break-all; }
+/* Filtros en el menú hamburguesa móvil */
+.hm-visor-filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  background: rgba(128, 128, 128, 0.08);
+  border-radius: 10px;
+  margin-top: 6px;
+}
+.hm-fila-filtro { display: flex; align-items: center; gap: 6px; }
+.hm-etiqueta-filtro { font-size: 12px; font-weight: 600; min-width: 65px; }
+.hm-selector-filtro {
+  flex: 1;
+  min-width: 0;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  background: inherit;
+  color: inherit;
+  font-size: 12px;
+}

@@ -1,0 +1,88 @@
+/* ============================================================================
+   VISOR ADMIN — MODO CLARO
+   Este archivo se carga el último para que ningún CSS histórico oscuro pueda
+   volver a pintar inputs, encabezados, estadísticas o barras en negro.
+   No modifica reglas del modo oscuro.
+   ============================================================================ */
+html.visor-embebido #app-navbar-cargando,
+html.visor-embebido .app-navbar-host,
+html.visor-embebido navbar-general,
+html.visor-embebido visor-navbar,
+html.visor-embebido #barra-superior,
+html.visor-embebido .barra-superior,
+html.visor-embebido header,
+html.visor-embebido #navbar-menu-panel,
+html.visor-embebido [data-component="navbar-general"],
+html.visor-embebido [data-navbar-context="visor-admin"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+html:not(.modo-oscuro) #app-root,
+html:not(.modo-oscuro) #app-root > *,
+html:not(.modo-oscuro) #fileSearchBar,
+html:not(.modo-oscuro) .file-search-bar,
+html:not(.modo-oscuro) .stats,
+html:not(.modo-oscuro) .wrap {
+  color: #172033;
+}
+
+/* Barra de búsqueda e input visible */
+html:not(.modo-oscuro) .file-search-inner {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #334155 !important;
+  box-shadow: 0 4px 18px rgba(15,23,42,.08) !important;
+}
+html:not(.modo-oscuro) #inputBuscarArchivo {
+  background: #ffffff !important;
+  color: #172033 !important;
+  caret-color: #2563eb;
+}
+html:not(.modo-oscuro) #inputBuscarArchivo::placeholder { color: #94a3b8 !important; }
+html:not(.modo-oscuro) #btnLimpiarBusqueda {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+}
+html:not(.modo-oscuro) #btnLimpiarBusqueda:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Selectores del visor */
+html:not(.modo-oscuro) .header-rama-select,
+html:not(.modo-oscuro) .visor-navbar-selector select,
+html:not(.modo-oscuro) #selectRamaGithub,
+html:not(.modo-oscuro) #selectTrimestreVisor,
+html:not(.modo-oscuro) #navbar-rama-popup,
+html:not(.modo-oscuro) #navbar-trimestre-popup {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #94a3b8 !important;
+}
+
+/* Todos los campos de escritura del panel: blanco en Light, oscuro solo en Dark. */
+html:not(.modo-oscuro) #app-root input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+html:not(.modo-oscuro) #app-root select,
+html:not(.modo-oscuro) #app-root textarea {
+  background: #ffffff !important;
+  color: #172033 !important;
+  color-scheme: light;
+}
+html:not(.modo-oscuro) #app-root input::placeholder,
+html:not(.modo-oscuro) #app-root textarea::placeholder { color: #94a3b8 !important; }
+html:not(.modo-oscuro) #app-root input[type="search"] { background: #ffffff !important; }
+html:not(.modo-oscuro) #app-root input[type="checkbox"],
+html:not(.modo-oscuro) #app-root input[type="radio"] { accent-color: #2563eb; }

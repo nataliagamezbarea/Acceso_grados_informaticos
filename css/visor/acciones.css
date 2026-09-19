@@ -1,0 +1,100 @@
+/* Corrección: botones de acciones de cada archivo juntos */
+.file-actions, .archivo-actions, .file-row .actions, .archivo .acciones, .download-actions, .file-buttons, .archivo-botones {
+  gap: 4px; margin-left: 6px;
+}
+.file-actions > *, .archivo-actions > *, .file-row .actions > *, .archivo .acciones > *, .download-actions > *, .file-buttons > *, .archivo-botones > * {
+  margin-left: 0; margin-right: 0;
+}
+/* Si las acciones se generan como inline/flex, mantenerlas agrupadas */
+.file-row, .archivo, .file-item { position: relative; }
+/* ESTADISTICAS_NORMAL_FLOW_SEARCH */
+#stats.stats {
+  position: relative;
+  float: none;
+  clear: both;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  order: initial;
+}
+/* Orden visual: búsqueda -> estadísticas -> contenido */
+#searchBar + #stats, .search-bar + #stats, #search + #stats {
+  position: relative;
+  display: block;
+  float: none;
+  clear: both;
+  top: auto;
+  bottom: auto;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

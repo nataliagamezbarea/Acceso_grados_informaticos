@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-overlay data-component="overlay-revision">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="ov" id="ov">
+    <!-- 1. BARRA SUPERIOR: NAVEGACI&Oacute;N Y BOTONES PRINCIPALES -->
+    <visor-overlay-topbar data-component="topbar">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="ov-topbar">
+      <div class="ov-nav-group">
+       <button class="back-btn" data-event-click="closeOv()" title="Volver a la lista general">
+        <i class="fa-solid fa-arrow-left">
+        </i>
+        Lista
+       </button>
+       <button data-event-click="nav(-1)" id="btnNavPrev" title="Anterior (Tecla ←)">
+        <i class="fa-solid fa-chevron-left">
+        </i>
+       </button>
+       <span class="ov-counter" id="ovPosText">
+        1 / 1
+       </span>
+       <button class="nav-filter-btn active" data-event-click="toggleNavSeleccionados()" id="btnNavFiltro" title="Navegar solo entre archivos seleccionados por los checks activos">
+        <i class="fa-solid fa-filter">
+        </i>
+        Seleccionados
+       </button>
+       <button class="nav-change-btn" data-event-click="navCambio(-1)" id="btnCambioPrev" title="Ir al cambio anterior de este PDF">
+        <i class="fa-solid fa-arrow-left">
+        </i>
+       </button>
+       <button class="nav-change-btn" data-event-click="irAlPrimerCambio()" id="btnCambios" title="Ir directamente al primer texto sustituido o eliminado de este PDF">
+        <i class="fa-solid fa-location-crosshairs">
+        </i>
+        Cambios
+       </button>
+       <span class="ov-changes-counter" id="ovCambiosText">
+        0 / 0
+       </span>
+       <button class="nav-change-btn" data-event-click="navCambio(1)" id="btnCambioNext" title="Ir al siguiente cambio de este PDF">
+        <i class="fa-solid fa-arrow-right">
+        </i>
+       </button>
+       <button data-event-click="nav(1)" id="btnNavNext" title="Siguiente (Tecla →)">
+        <i class="fa-solid fa-chevron-right">
+        </i>
+       </button>
+      </div>
+      <div class="ov-files">
+       <span>
+        <i class="fa-solid fa-file-pdf ov-file-orig">
+        </i>
+        <b class="orig-name-text" id="spanOrigName">
+        </b>
+       </span>
+       <span class="ov-arrow" id="spanRenameArrow">
+        ➔
+       </span>
+       <span>
+        <i class="fa-solid fa-file-circle-check ov-file-clean">
+        </i>
+        <b class="clean-name-text" id="spanCleanName">
+        </b>
+       </span>
+      </div>
+      <div class="ov-right">
+       <button class="btn-act accept-github" data-event-click="confirmItem(true, true)" title="Aceptar y Subir cambios directamente a GitHub">
+        <i class="fa-brands fa-github">
+        </i>
+        Subir GitHub
+       </button>
+       <button class="btn-act download-pdf-btn btn-download-pdf" data-event-click="descargarPDFActual()" title="Descargar este archivo PDF procesado">
+        <i class="fa-solid fa-download">
+        </i>
+        Descargar
+       </button>
+       <button class="btn-act skip" data-event-click="confirmItem(false)" id="btnDejarOriginal" title="Mantener archivo original sin modificar">
+        <i class="fa-solid fa-rotate-left">
+        </i>
+        <span id="btnDejarOriginalTexto">
+         Dejar Original
+        </span>
+       </button>
+       <div class="ov-close" data-event-click="closeOv()" title="Cerrar (Esc)">
+        ×
+       </div>
+      </div>
+     </div>
+    </visor-overlay-topbar>
+    <!-- Controles responsive puros CSS: no necesitan JavaScript para plegarse. -->
+    <input class="visor-mobile-tools-check" id="visorMobileToolsCheck" type="checkbox" autocomplete="off">
+    <label class="visor-mobile-tools-toggle" for="visorMobileToolsCheck">
+     <i class="fa-solid fa-sliders"></i>
+     <span>Herramientas</span>
+     <i class="fa-solid fa-chevron-down visor-mobile-tools-chevron"></i>
+    </label>
+    <!-- 2. BARRA DE HERRAMIENTAS CENTRADA (1 SOLA L&Iacute;NEA DEDICADA Y CENTRADA) -->
+    <visor-overlay-acciones data-component="acciones">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="ov-actionbar">
+      <button class="btn-act btn-add-action" data-event-click="abrirSelectorAnadir()" title="Añadir: sustituir un enunciado, o marcar un nombre/colegio para borrar">
+       <i class="fa-solid fa-pen-to-square">
+       </i>
+       Añadir
+      </button>
+      <div class="v-divider">
+      </div>
+      <details class="ov-filtro-grupo" data-ov-grupo="filtros" open>
+       <summary class="ov-filtro-resumen">
+        <i class="fa-solid fa-sliders"></i>
+        <span class="ov-filtro-resumen-texto">Filtros y marcado</span>
+        <span class="ov-filtro-resumen-activos" id="ovFiltrosActivosCount" aria-hidden="true"></span>
+        <i class="fa-solid fa-chevron-down ov-filtro-chevron"></i>
+       </summary>
+       <div class="ov-filtro-contenido">
+        <label class="pill-check" id="lblInc">
+         <input data-event-change="setInc(this.checked)" id="cbInc" type="checkbox"/>
+         <i class="fa-solid fa-pen-fancy pill-icon-enc">
+         </i>
+         Enunciados
+        </label>
+        <label class="pill-check" id="lblInt">
+         <input data-event-change="setInt(this.checked)" id="cbInt" type="checkbox"/>
+         <i class="fa-solid fa-user-slash pill-icon-nom">
+         </i>
+         Nombres
+        </label>
+        <label class="pill-check" id="lblCol">
+         <input data-event-change="setCol(this.checked)" id="cbCol" type="checkbox"/>
+         <i class="fa-solid fa-school pill-icon-col">
+         </i>
+         Colegio
+        </label>
+        <label class="pill-check" id="lblImg">
+         <input data-event-change="setImg(this.checked)" id="cbImg" type="checkbox"/>
+         <i class="fa-solid fa-image pill-icon-img">
+         </i>
+         Imágenes
+        </label>
+        <label class="pill-check" id="lblRen">
+         <input data-event-change="setRen(this.checked)" id="cbRen" type="checkbox"/>
+         <i class="fa-solid fa-folder-tree pill-icon-ren">
+         </i>
+         Nombre PDF
+        </label>
+        <label class="pill-check" id="lblApunte">
+         <input data-event-change="setApunte(this.checked)" id="cbApunte" type="checkbox"/>
+         <i class="fa-solid fa-book-open pill-icon-apu">
+         </i>
+         Apunte
+        </label>
+        <label class="pill-check" id="lblAutoDelInternet" title="Si se detecta que una imagen NO existe en Internet, se borra automáticamente">
+         <input data-event-change="setInternet(this.checked)" id="cbBorrarImgInternet" type="checkbox"/>
+         <i class="fa-solid fa-globe pill-icon-net">
+         </i>
+         Internet
+        </label>
+       </div>
+      </details>
+      <div class="v-divider">
+      </div>
+      <details class="ov-filtro-grupo" data-ov-grupo="restaurar" open>
+       <summary class="ov-filtro-resumen">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span class="ov-filtro-resumen-texto">Restaurar / deshacer</span>
+        <i class="fa-solid fa-chevron-down ov-filtro-chevron"></i>
+       </summary>
+       <div class="ov-filtro-contenido">
+        <button class="btn-sm-restore btn-restore-all" data-event-click="restoreInitialSuggestion()" title="Eliminar de inicio todo el historial (nombres, centro, enunciados, checks)">
+         <i class="fa-solid fa-trash-can-arrow-up">
+         </i>
+         Eliminar de Inicio
+        </button>
+        <button class="btn-sm-restore btn-restore-manual" data-event-click="quitarAñadidoManual()" title="Quita SOLO lo que has añadido a mano con 'Añadir' (recuadros y enunciados creados por ti). No toca lo que ya venía detectado por defecto.">
+         <i class="fa-solid fa-eraser">
+         </i>
+         Quitar lo Añadido Manual
+        </button>
+        <button class="btn-sm-restore btn-restore-text" data-event-click="restoreContentOnly()" title="Restaurar texto original del PDF">
+         <i class="fa-solid fa-arrow-rotate-left">
+         </i>
+         Texto
+        </button>
+        <button class="btn-sm-restore btn-restore-name" data-event-click="restoreNameOnly()" title="Restaurar nombre original">
+         <i class="fa-solid fa-signature">
+         </i>
+         Nombre
+        </button>
+       </div>
+      </details>
+     </div>
+    </visor-overlay-acciones>
+    <!-- BARRA DE CONFIGURACI&Oacute;N Y COMPILACI&Oacute;N DE APUNTE -->
+    <visor-apunte-barra data-component="apunte">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="apunte-bar css-inline-3f42941089" id="apunteBar">
+      <div class="css-inline-aaec585398">
+       <i class="fa-solid fa-book-bookmark css-inline-345565bae7">
+       </i>
+       <span class="css-inline-9e4071690f">
+        Nombre del Apunte:
+       </span>
+       <input class="css-inline-565f82f7db" data-event-change="updateApunteName(this.value)" id="inputApunteName" placeholder="APUNTE_TEMA_..." type="text"/>
+       <span class="css-inline-0bc6ca3e5a">
+        (Guardado en
+        <code>
+         NUEVOS_APUNTES/
+        </code>
+        y CSV)
+       </span>
+      </div>
+      <div class="css-inline-a76d597a07">
+       <button class="css-inline-e4627f80c3" data-event-click="verApunteActual()" id="btnVerApunte" title="Abrir el PDF del apunte ya compilado (NUEVOS_APUNTES)">
+        <i class="fa-solid fa-book-open">
+        </i>
+        VER APUNTE (PDF)
+       </button>
+       <button class="css-inline-76ba0b08aa" data-event-click="compileCurrentApunte()" id="btnCompilarApunte">
+        <i class="fa-solid fa-file-pdf">
+        </i>
+        HACER / COMPILAR APUNTE (LaTeX)
+       </button>
+      </div>
+     </div>
+    </visor-apunte-barra>
+    <!-- 3. AVISO DE MODO DIBUJO (se muestra tras elegir en "A&ntilde;adir" QU&Eacute; marcar, mientras se espera a que el usuario dibuje el recuadro sobre el PDF) -->
+    <visor-editor data-component="editor">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="editor-box" id="editorBox">
+      <div class="editor-tools css-inline-2be897b184">
+       <span class="css-inline-1ed25d1f77">
+        <i class="fa-solid fa-crop-simple css-inline-68d9815d1e">
+        </i>
+        <span id="editorBoxTexto">
+         Selecciona la zona dibujando un recuadro sobre el PDF de la izquierda.
+        </span>
+       </span>
+       <div class="css-inline-c87525adb8">
+        <button class="css-inline-8dfaf8b3d3" data-event-click="elegirTipoAnadir('enunciado')">
+         <i class="fa-solid fa-pen-fancy">
+         </i>
+         Enunciado
+        </button>
+        <button class="css-inline-f4e119ccb0" data-event-click="elegirTipoAnadir('nombre')">
+         <i class="fa-solid fa-user-slash">
+         </i>
+         Nombre
+        </button>
+        <button class="css-inline-e9fc4d0243" data-event-click="elegirTipoAnadir('colegio')">
+         <i class="fa-solid fa-school">
+         </i>
+         Colegio
+        </button>
+        <button class="css-inline-89b06e028c" data-event-click="elegirTipoAnadir('reflujo')">
+         <i class="fa-solid fa-arrows-up-to-line">
+         </i>
+         Subir si hay Imágenes
+        </button>
+        <button class="css-inline-63ffcf769e" data-event-click="toggleEditor(false)">
+         ✕ Cancelar
+        </button>
+       </div>
+      </div>
+     </div>
+    </visor-editor>
+    <!-- Selector responsive: en móvil/tablet permite elegir una vista grande a la vez. -->
+    <div aria-label="Vista del documento" class="visor-responsive-switch" id="visorResponsiveSwitch" role="tablist">
+     <input class="visor-view-check" id="visorMobileOldView" name="visorMobileView" type="radio" checked autocomplete="off">
+     <label class="visor-view-choice" for="visorMobileOldView">
+      <i class="fa-solid fa-file-lines"></i> Original (seleccionable)
+     </label>
+     <input class="visor-view-check" id="visorMobileNewView" name="visorMobileView" type="radio" autocomplete="off">
+     <label class="visor-view-choice" for="visorMobileNewView">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Cómo quedaría
+     </label>
+     <div class="visor-view-js-buttons">
+     <button aria-selected="true" class="active" data-view="old" role="tab" type="button">
+      <i class="fa-solid fa-file-lines">
+      </i>
+      Original
+     </button>
+     <button aria-selected="false" data-view="new" role="tab" type="button">
+      <i class="fa-solid fa-wand-magic-sparkles">
+      </i>
+      Cómo quedaría
+     </button>
+     </div>
+    </div>
+    <!-- 4. CONTENEDOR PRINCIPAL: VISOR IZQUIERDO Y DERECHO -->
+    <visor-visores data-component="visores">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="ovcols">
+      <!-- VISOR IZQUIERDO (DOCUMENTO ORIGINAL) -->
+      <visor-columna data-component="columna-visor">
+       <template shadowrootmode="open">
+        <slot>
+        </slot>
+       </template>
+       <div class="ovcol is-responsive-active">
+        <div class="col-header orig" id="headerViewerOld">
+         <span class="col-header-titulo">
+          <i class="fa-solid fa-file-lines">
+          </i>
+          1. ORIGINAL
+         </span>
+         <div aria-label="Controles de zoom del documento" class="mupdf-zoom-controls">
+          <button aria-label="Alejar" class="mupdf-zoom-minus" title="Alejar" type="button">
+           <i class="fa-solid fa-minus">
+           </i>
+          </button>
+          <button aria-label="Ajustar página completa" class="mupdf-zoom-fit" title="Ajustar página completa" type="button">
+           <i class="fa-solid fa-expand">
+           </i>
+          </button>
+          <button aria-label="Acercar" class="mupdf-zoom-plus" title="Acercar" type="button">
+           <i class="fa-solid fa-plus">
+           </i>
+          </button>
+          <span aria-live="polite" class="mupdf-zoom-value">
+           Página entera
+          </span>
+         </div>
+        </div>
+        <!-- MEN&Uacute; FLOTANTE: ELEGIR QU&Eacute; SE VA A A&Ntilde;ADIR (mismo aspecto que enunciados) -->
+        <visor-menu-anadir data-component="menu-anadir">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-add-menu" id="modalAnadirTipo">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-square-plus css-inline-befda3886d">
+            </i>
+            ¿Qué quieres añadir?
+           </b>
+           <span class="badge v css-inline-5dbc6fa9a9">
+            Zona personalizada
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-82403c4a9c" data-event-click="elegirTipoAnadir('enunciado')">
+            <i class="fa-solid fa-pen-fancy">
+            </i>
+            Sustituir Enunciado
+           </button>
+           <button class="css-inline-4d1462c150" data-event-click="elegirTipoAnadir('nombre')">
+            <i class="fa-solid fa-user-slash">
+            </i>
+            Borrar Nombre
+           </button>
+           <button class="css-inline-070db0b6c3" data-event-click="elegirTipoAnadir('colegio')">
+            <i class="fa-solid fa-school">
+            </i>
+            Borrar Colegio/Logo
+           </button>
+           <button class="css-inline-82b57a9ceb" data-event-click="elegirTipoAnadir('reflujo')" id="btnAnadirReflujo">
+            <i class="fa-solid fa-arrows-up-to-line">
+            </i>
+            Subir si hay Imágenes
+           </button>
+           <button class="css-inline-78843b00be" data-event-click="cerrarSelectorAnadir()">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-anadir>
+        <!-- MEN&Uacute; FLOTANTE SOBRE EL DOCUMENTO (ENUNCIADOS) -->
+        <visor-menu-enunciado data-component="menu-enunciado">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-pdf-menu" id="floatingPdfMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-gear">
+            </i>
+            Opciones del Enunciado:
+           </b>
+           <span class="badge v" id="floatStatusBadge">
+            Opciones de Enunciado
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-4d1462c150" data-event-click="editarEnunciadoDesdePopup()">
+            <i class="fa-solid fa-pen-to-square">
+            </i>
+            Editar Enunciado
+           </button>
+           <button class="css-inline-82403c4a9c" data-event-click="eliminarEnunciadoDesdePopup()" id="btnEliminarEnunciado">
+            <i class="fa-solid fa-trash-can">
+            </i>
+            Eliminar Enunciado
+           </button>
+           <button class="css-inline-a68719e645" data-event-click="restoreInitialSuggestion();closeEnunciadoPopup()" id="btnRestaurarEnunciado">
+            <i class="fa-solid fa-rotate-left">
+            </i>
+            Volver al de Antes
+           </button>
+           <button class="css-inline-78843b00be" data-event-click="closeEnunciadoPopup()">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-enunciado>
+        <!-- MEN&Uacute; FLOTANTE SOBRE RECUADROS DE COLEGIO/LOGO -->
+        <visor-menu-colegio data-component="menu-colegio">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-col-menu" id="floatingColMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-school css-inline-20679505b4">
+            </i>
+            Opciones del Colegio:
+           </b>
+           <span class="badge v" id="floatColBadge">
+            Colegio detectado
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-a68719e645" data-event-click="handleColegioAction(true)" id="btnEliminarCol">
+            <i class="fa-solid fa-school">
+            </i>
+            Eliminar Colegio/Logo
+           </button>
+           <button class="css-inline-e962673576" data-event-click="handleColegioAction(false)" id="btnConservarCol">
+            <i class="fa-solid fa-eye">
+            </i>
+            Conservar Colegio
+           </button>
+           <button class="css-inline-e8f96255f1" data-event-click="handleColegioAction('eliminar_recuadro')" id="btnBorrarRecuadroCol">
+            <i class="fa-solid fa-trash">
+            </i>
+            Eliminar Recuadro
+           </button>
+           <button class="css-inline-78843b00be" data-event-click="closeColegioPopup()">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-colegio>
+        <!-- MEN&Uacute; FLOTANTE SOBRE RECUADROS DE NOMBRE (igual que el de enunciados) -->
+        <visor-menu-nombre data-component="menu-nombre">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-name-menu" id="floatingNameMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-user-slash css-inline-c73cb88578">
+            </i>
+            Opciones del Nombre:
+           </b>
+           <span class="badge v" id="floatNameBadge">
+            Nombre detectado
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-4d1462c150" data-event-click="handleNombreAction(true)" id="btnEliminarNombre">
+            <i class="fa-solid fa-user-slash">
+            </i>
+            Eliminar Nombre
+           </button>
+           <button class="css-inline-a68719e645" data-event-click="handleNombreAction(false)" id="btnConservarNombre">
+            <i class="fa-solid fa-user-check">
+            </i>
+            Conservar Nombre
+           </button>
+           <button class="css-inline-e8f96255f1" data-event-click="handleNombreAction('eliminar_recuadro')" id="btnBorrarRecuadroNombre">
+            <i class="fa-solid fa-trash">
+            </i>
+            Eliminar Recuadro
+           </button>
+           <button class="css-inline-78843b00be" data-event-click="closeNombrePopup()">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-nombre>
+        <!-- MEN&Uacute; FLOTANTE SOBRE IM&Aacute;GENES -->
+        <visor-menu-imagen data-component="menu-imagen">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-img-menu" id="floatingImgMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-image css-inline-fd58244ac9">
+            </i>
+            Opciones de Imagen:
+           </b>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-5192b201c4" data-event-click="checkSelectedImageInternet()" id="btnCheckInternet">
+            <i class="fa-solid fa-globe">
+            </i>
+            Comprobar / Borrar si no está en Internet
+           </button>
+           <label class="css-inline-1cc923efed" id="lblExcepcionInternet">
+            <input data-event-change="toggleExcepcionInternet(this.checked)" id="cbNoBorrarInternet" type="checkbox"/>
+            <i class="fa-solid fa-shield-halved">
+            </i>
+            No borrar si no está en Internet
+           </label>
+           <button class="css-inline-0e718c5572" data-event-click="handleImageAction('conservar', {global:true, no_borrar:true})" id="btnConservarImgGlobal" title="Conserva esta imagen en todos los PDFs donde aparezca igual, aunque no esté en Internet">
+            <i class="fa-solid fa-shield-halved">
+            </i>
+            Conservar aunque no esté en Internet
+           </button>
+           <button class="css-inline-82403c4a9c" data-event-click="handleImageAction('borrar')" id="btnBorrarImg">
+            <i class="fa-solid fa-trash-can">
+            </i>
+            Borrar Imagen
+           </button>
+           <button class="css-inline-f6b4cacf8e" data-event-click="handleImageAction('borrar', {global:true})" id="btnBorrarImgGlobal" title="Marca esta imagen para que se elimine POR DEFECTO en todos los PDFs donde aparezca literalmente igual">
+            <i class="fa-solid fa-trash-arrow-up">
+            </i>
+            Borrar y también en otros PDFs
+           </button>
+           <button class="css-inline-2fa08c3aa4" data-event-click="triggerUploadImage()" id="btnReemplazarImg">
+            <i class="fa-solid fa-arrow-up-from-bracket">
+            </i>
+            Reemplazar por otra Imagen...
+           </button>
+           <button class="css-inline-a68719e645" data-event-click="handleImageAction('restaurar')" id="btnRestaurarImg">
+            <i class="fa-solid fa-rotate-left">
+            </i>
+            Restaurar Original
+           </button>
+           <button class="css-inline-78843b00be" data-event-click="closeImgPopup()">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+          <input accept="image/*" class="css-inline-6b99de8b69" data-event-change="uploadImageFile(this)" id="inputImageFile" type="file"/>
+         </div>
+        </visor-menu-imagen>
+        <visor-documento-original data-component="documento-original">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="doc-viewer" id="viewerOld">
+          <div aria-live="polite" class="doc-viewer-loading" role="status">
+           <div class="doc-viewer-loading-mark">
+            <div class="visor-spinner-anillo visor-spinner-documento">
+            </div>
+           </div>
+           <div class="doc-viewer-loading-text">
+            <strong>
+             Cargando documento original...
+            </strong>
+           </div>
+          </div>
+         </div>
+        </visor-documento-original>
+       </div>
+      </visor-columna>
+      <!-- VISOR DERECHO (DOCUMENTO LIMPIO) -->
+      <visor-columna data-component="columna-visor">
+       <template shadowrootmode="open">
+        <slot>
+        </slot>
+       </template>
+       <div class="ovcol">
+        <div class="col-header clean" id="headerViewerNew">
+         <span class="col-header-titulo">
+          <i class="fa-solid fa-wand-magic-sparkles">
+          </i>
+          2. CÓMO QUEDARÍA
+         </span>
+         <div aria-label="Controles de zoom del documento" class="mupdf-zoom-controls">
+          <button aria-label="Alejar" class="mupdf-zoom-minus" title="Alejar" type="button">
+           <i class="fa-solid fa-minus">
+           </i>
+          </button>
+          <button aria-label="Ajustar página completa" class="mupdf-zoom-fit" title="Ajustar página completa" type="button">
+           <i class="fa-solid fa-expand">
+           </i>
+          </button>
+          <button aria-label="Acercar" class="mupdf-zoom-plus" title="Acercar" type="button">
+           <i class="fa-solid fa-plus">
+           </i>
+          </button>
+          <span aria-live="polite" class="mupdf-zoom-value">
+           Página entera
+          </span>
+         </div>
+        </div>
+        <visor-documento-limpio data-component="documento-limpio">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="doc-viewer" id="viewerNew">
+          <div aria-live="polite" class="doc-viewer-loading" role="status">
+           <div class="doc-viewer-loading-mark">
+            <div class="visor-spinner-anillo visor-spinner-documento">
+            </div>
+           </div>
+           <div class="doc-viewer-loading-text">
+            <strong>
+             Cargando documento limpio...
+            </strong>
+           </div>
+          </div>
+         </div>
+        </visor-documento-limpio>
+       </div>
+      </visor-columna>
+     </div>
+    </visor-visores>
+   </div>
+  </visor-overlay>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

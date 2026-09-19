@@ -1,0 +1,92 @@
+.btn-descarga-trimestre, .btn-descarga-asignatura-trimestre, .btn-descarga-asignatura-todos {
+  margin-left: 10px;
+}
+/* Iconos FontAwesome dentro de los botones */
+.btn-descarga i, .btn-descarga-trimestre i, .btn-descarga-curso-h1 i, .btn-descarga-masiva i, .btn-seccion-todos i, .btn-descarga-asignatura-trimestre i, .btn-descarga-asignatura-todos i, #btn-descargar-curso-h1 i {
+  font-size: 0.95em; color: #475569; transition: all 0.2s ease;
+}
+/* Hover & Active States (Light Mode - Coherentes con Navbar) */
+.btn-descarga:hover, .btn-descarga-trimestre:hover, .btn-descarga-curso-h1:hover, .btn-descarga-masiva:hover, .btn-seccion-todos:hover, .btn-descarga-asignatura-trimestre:hover, .btn-descarga-asignatura-todos:hover, #btn-descargar-curso-h1:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+}
+.btn-descarga:hover i, .btn-descarga-trimestre:hover i, .btn-descarga-curso-h1:hover i, .btn-descarga-masiva:hover i, .btn-seccion-todos:hover i, .btn-descarga-asignatura-trimestre:hover i, .btn-descarga-asignatura-todos:hover i, #btn-descargar-curso-h1:hover i {
+  color: #0f172a; transform: scale(1.12);
+}
+.btn-descarga:active, .btn-descarga-trimestre:active, .btn-descarga-curso-h1:active, .btn-descarga-masiva:active, .btn-seccion-todos:active, .btn-descarga-asignatura-trimestre:active, .btn-descarga-asignatura-todos:active, #btn-descargar-curso-h1:active {
+  transform: translateY(0) scale(0.96); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

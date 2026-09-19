@@ -1,0 +1,89 @@
+@container navbar-general (max-width:1000px){
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-page-actions{
+    display:none !important;
+    width:0 !important; min-width:0 !important; max-width:0 !important;
+    height:0 !important; min-height:0 !important; max-height:0 !important;
+    margin:0 !important; padding:0 !important; flex:0 0 0 !important;
+    overflow:hidden !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .btn-hamburguesa{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-visor-group{
+    display:flex !important;
+    order:10 !important;
+  }
+}
+
+/* VISOR-ADMIN — 2º DERECHA (generales). */
+@container navbar-general (max-width:800px){
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions > #btn-modo-oscuro,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions > #boton-ajustes,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions > #btn-cerrar-sesion{
+    display:none !important;
+    width:0 !important; min-width:0 !important; max-width:0 !important;
+    height:0 !important; min-height:0 !important; max-height:0 !important;
+    margin:0 !important; padding:0 !important; flex:0 0 0 !important;
+    overflow:hidden !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .btn-hamburguesa{
+    display:inline-flex !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-general-group{
+    display:flex !important;
+    order:20 !important;
+  }
+}
+
+/* VISOR-ADMIN — 3º IZQUIERDA (Rama/Trimestre). El centro está vacío, por
+   tanto no existe un nivel de centro que ocultar: el siguiente bloque es la
+   izquierda real. */
+@container navbar-general (max-width:620px){
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > .nav-left-selectors{
+    display:none !important;
+    width:0 !important; min-width:0 !important; max-width:0 !important;
+    height:0 !important; min-height:0 !important; max-height:0 !important;
+    margin:0 !important; padding:0 !important; flex:0 0 0 !important;
+    overflow:hidden !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group{
+    display:flex !important;
+    flex-direction:column !important;
+    order:30 !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-selector{
+    display:flex !important;
+    order:3 !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-selector + .popup-left-selector{
+    order:4 !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-nav{
+    display:none !important;
+  }
+}
+
+/* VISOR-ADMIN — 4º IZQUIERDA (Inicio/Volver). */
+@container navbar-general (max-width:430px){
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left{
+    display:none !important;
+    width:0 !important; min-width:0 !important; max-width:0 !important;
+    height:0 !important; min-height:0 !important; max-height:0 !important;
+    margin:0 !important; padding:0 !important; flex:0 0 0 !important;
+    overflow:hidden !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group{
+    display:flex !important;
+    flex-direction:column !important;
+    order:30 !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-nav{
+    display:flex !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-nav:nth-of-type(1){order:1 !important;}
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-nav:nth-of-type(2){order:2 !important;}
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-selector{order:3 !important;}
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group .popup-left-selector + .popup-left-selector{order:4 !important;}
+}

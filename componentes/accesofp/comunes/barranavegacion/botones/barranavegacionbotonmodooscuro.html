@@ -1,0 +1,22 @@
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!DOCTYPE html>
+<html lang="es">
+ <body>
+  <navbar-boton-modo-oscuro data-component="navbar-boton-modo-oscuro">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <button aria-label="Cambiar tema" class="btn-modo-oscuro" id="btn-modo-oscuro" title="Modo oscuro" type="button">
+    <i aria-hidden="true" class="fa-solid fa-moon">
+    </i>
+    <span class="nav-label">Modo oscuro</span>
+   </button>
+  </navbar-boton-modo-oscuro>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

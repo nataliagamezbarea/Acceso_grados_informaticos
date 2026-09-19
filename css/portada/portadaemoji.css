@@ -1,0 +1,158 @@
+.portada_emoji_contenedor {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: clamp(140px, 20vw, 220px);
+  min-height: clamp(140px, 20vw, 220px);
+  max-height: clamp(140px, 20vw, 220px);
+  margin: clamp(12px, 3vh, 20px) auto clamp(16px, 4vh, 28px);
+  border-radius: clamp(12px, 2.5vw, 20px);
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: clamp(14px, 3vw, 28px) clamp(16px, 4vw, 36px);
+  box-sizing: border-box;
+  color: #ffffff;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed, #db2777);
+}
+#portada {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) saturate(1.2);
+  z-index: 1;
+}
+#emoji-trimestre, .portada_emoji_contenedor #titulo, .portada_emoji_contenedor #titulo-grado, .portada_emoji_contenedor h1 {
+  position: relative; z-index: 2; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+#emoji-trimestre, #emoji-trimestre img.emoji {
+  display: inline-block;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  animation: flotar 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+#titulo, h1, .portada_emoji_contenedor #titulo-grado {
+  font-family: var(--font-heading, "Poppins", sans-serif);
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  line-height: 1.25;
+  text-align: right;
+  letter-spacing: -0.02em;
+}
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+/* Títulos dentro de la portada sin fondo ni recuadro */
+.portada_emoji_contenedor #titulo, .portada_emoji_contenedor h1, .portada_emoji_contenedor #titulo-grado {
+  background: transparent; border: none; border-radius: 0; box-shadow: none; padding: 0;
+}
+/* Portada fluida en móviles y tablets. */
+.portada_emoji_contenedor { width: min(100%,1200px); max-width: 100%; min-width: 0; }
+#portada { max-width: 100%; }
+@container app (max-width:600px){
+  .portada_emoji_contenedor {
+    height: clamp(150px,42vw,210px);
+    min-height: clamp(150px,42vw,210px);
+    max-height: none;
+    padding: 14px 16px;
+    gap: 8px;
+  }
+  .portada_emoji_contenedor #titulo {
+    max-width: 100%;
+    font-size: clamp(1rem,5vw,1.45rem);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

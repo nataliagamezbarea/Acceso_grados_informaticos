@@ -1,0 +1,86 @@
+/* ============================================================================
+   RESPONSIVE — SOLO CSS
+   El JS NO calcula ni aplica niveles de colapso.
+
+   Orden físico:
+      1. DERECHA
+      2. CENTRO (EDITAR en Inicio)
+      3. IZQUIERDA
+
+   Los cortes son container queries sobre el ancho REAL de la navbar.
+   Se han separado Inicio y Visor-Admin porque sus bloques tienen anchos
+   intrínsecos distintos. Cada nivel se activa sin modificar los anteriores.
+   ============================================================================ */
+
+#barra-superior{position:relative;}
+#barra-superior .nav-left,#barra-superior .nav-right{position:relative;z-index:3;}
+
+/* EDITAR queda centrado de verdad y no ocupa el flujo lateral. */
+#barra-superior > .nav-center-actions > #boton-modo-edicion{
+  display:inline-flex;
+  position:static;
+  transform:none;
+  margin:0 auto;
+  z-index:4;
+}
+
+/* En Visor-Admin no existe el centro EDITAR. */
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-center-actions > #boton-modo-edicion,
+html.visor-admin-active #barra-superior > .nav-center-actions > #boton-modo-edicion,
+html.visor-admin-embed #barra-superior > .nav-center-actions > #boton-modo-edicion,
+body.visor-admin-active #barra-superior > .nav-center-actions > #boton-modo-edicion,
+body.visor-admin-embed #barra-superior > .nav-center-actions > #boton-modo-edicion{
+  display:none;
+}
+
+/* Todos los bloques del popup empiezan fuera de layout. */
+#navbar-menu-panel .popup-colapsable-left-nav,
+#navbar-menu-panel .popup-colapsable-left-selectors,
+#navbar-menu-panel .popup-colapsable-extra,
+#navbar-menu-panel .popup-colapsable-general,
+#navbar-menu-panel .popup-edit-group{
+  display:none;
+}
+
+/* --------------------------------------------------------------------------
+   AISLAMIENTO DE CONTEXTO
+   -------------------------------------------------------------------------- */
+navbar-general:not([data-navbar-context="visor-admin"]) .visor-admin-only,
+navbar-general:not([data-navbar-context="visor-admin"]) .visor-admin-spa-only{
+  display:none;
+  width:0;min-width:0;max-width:0;
+  height:0;min-height:0;max-height:0;
+  margin:0;padding:0;flex:0 0 0;overflow:hidden;
+}
+
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior .nav-page-actions,
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior .navbar-visor-left,
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-visor-group,
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel .popup-left-selector{
+  display:none;
+  width:0;min-width:0;max-width:0;
+  height:0;min-height:0;max-height:0;
+  margin:0;padding:0;flex:0 0 0;overflow:hidden;
+}
+
+/* --------------------------------------------------------------------------
+   HAMBURGUESA
+   -------------------------------------------------------------------------- */
+#barra-superior > .nav-right > .btn-hamburguesa,
+#barra-superior .nav-general-actions > .btn-hamburguesa{
+  display:none;
+  width:var(--navbar-btn-size);
+  min-width:var(--navbar-btn-size);
+  height:var(--navbar-btn-size);
+  min-height:var(--navbar-btn-size);
+  flex:0 0 var(--navbar-btn-size);
+  flex-shrink:0;
+  visibility:visible;
+  opacity:1;
+}
+
+/* --------------------------------------------------------------------------
+   NIVEL 1 — DERECHA
+   -------------------------------------------------------------------------- */
+
+/* VISOR-ADMIN: su derecha es mucho más ancha, por eso su corte es distinto. */

@@ -1,0 +1,136 @@
+/* La navbar permanece siempre visible durante la carga. */
+#barra-superior a#volver-atras.cargando, #barra-superior #btn-inicio.cargando, a#volver-atras.cargando, #btn-inicio.cargando {
+  opacity: 1; visibility: visible; pointer-events: auto;
+}
+#global-navbar-loading {
+  position: fixed;
+  top: 64px;
+  right: 16px;
+  left: auto;
+  width: auto;
+  height: auto;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 4px 8px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  pointer-events: none;
+}
+#global-navbar-loading.on { display: flex; }
+#global-navbar-loading i { color: #6366f1; }
+/* Control de tema: contraste estable también sobre la navbar oscura. */
+html.modo-oscuro #barra-superior #btn-modo-oscuro:hover, html.modo-oscuro #barra-superior #btn-modo-oscuro:hover {
+  background: #fbbf24; color: #422006; border-color: #fcd34d; box-shadow: 0 6px 16px rgba(251, 191, 36, 0.28);
+}
+html.modo-oscuro #barra-superior #btn-inicio:hover, html.modo-oscuro #barra-superior #btn-inicio:hover, html.modo-oscuro #btn-inicio:hover, html.modo-oscuro #btn-inicio:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+  border-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
+}
+html.modo-oscuro #barra-superior a#volver-atras:hover, html.modo-oscuro #barra-superior a#volver-atras:hover, html.modo-oscuro a#volver-atras:hover, html.modo-oscuro a#volver-atras:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  color: #ffffff;
+  border-color: #7e22ce;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(147, 51, 234, 0.35);
+}
+#barra-superior #boton-modo-edicion, #boton-modo-edicion {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c14c8a;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(193, 76, 138, 0.2);
+  transition: background 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

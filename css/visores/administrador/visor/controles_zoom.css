@@ -1,0 +1,61 @@
+/* Controles de zoom: integrados en el encabezado de cada columna (col-header) */
+.col-header {
+  display: flex; align-items: center; justify-content: space-between; padding: 4px 12px; gap: 8px;
+}
+.col-header .col-header-titulo {
+  display: inline-flex; align-items: center; gap: 6px; font-weight: 800; white-space: nowrap; font-size: 13px;
+}
+.mupdf-zoom-controls {
+  position: static;
+  bottom: auto;
+  right: auto;
+  left: auto;
+  top: auto;
+  transform: none;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  width: max-content;
+  margin: 0;
+  padding: 2px 4px;
+  border: 1px solid rgba(148,163,184,.25);
+  border-radius: 8px;
+  background: rgba(15,23,42,.65);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.mupdf-zoom-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 24px;
+  border: 0;
+  border-radius: 6px;
+  background: #334155;
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+.mupdf-zoom-controls button:hover:not(:disabled) { filter: brightness(1.2); transform: translateY(-1px); }
+.mupdf-zoom-controls button:active { transform: scale(.92); }
+.mupdf-zoom-controls .mupdf-zoom-fit { background: #475569; font-size: 11px; }
+.mupdf-zoom-controls .mupdf-zoom-value {
+  min-width: 68px;
+  padding: 0 5px;
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 24px;
+}
+html:not(.modo-oscuro) .mupdf-zoom-controls { background: rgba(241,245,249,.85); border-color: #cbd5e1; }
+html:not(.modo-oscuro) .mupdf-zoom-controls button { background: #e2e8f0; color: #1e293b; }
+html:not(.modo-oscuro) .mupdf-zoom-controls .mupdf-zoom-fit { background: #cbd5e1; }
+html:not(.modo-oscuro) .mupdf-zoom-controls .mupdf-zoom-value { color: #1e293b; }
+.doc-viewer .mupdf-zoom-controls { display: none; }

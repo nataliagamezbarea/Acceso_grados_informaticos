@@ -1,0 +1,169 @@
+html.visor-preboot, html.visor-preboot body { background: var(--app-background); color: var(--app-text-color); }
+html.visor-preboot.modo-oscuro, html.visor-preboot.modo-oscuro body { background: var(--app-background); color: var(--app-text-color); }
+html.visor-preboot body { visibility: visible; overflow: hidden; }
+/* PRIMER PAINT: si ya se está abriendo un documento, la interfaz de gestión
+   (buscador/estadísticas/listado) no debe aparecer ni un solo frame. La navbar sí. */
+html.visor-preboot.visor-document-open visor-busqueda,
+html.visor-preboot.visor-document-open visor-estadisticas,
+html.visor-preboot.visor-document-open visor-listado {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* El visor completo debe ser visible desde el primer paint. El cargador se limita al area de las cajas de documentos. */
+html.visor-preboot.visor-document-open #ov {
+  visibility: visible; display: flex; position: fixed; inset: 0; z-index: 100; flex-direction: column;
+}
+html.visor-preboot.visor-document-open #ov .ovcols {
+  flex: 1 1 0; display: flex; width: 100%; height: 100%; min-height: 0;
+}
+html.visor-preboot.visor-document-open #ov .ovcol {
+  flex: 1 1 0; display: flex; flex-direction: column; height: 100%; min-height: 0; position: relative;
+}
+html.visor-preboot.visor-document-open #ov .doc-viewer {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+/* En pantallas estrechas, el preboot debe respetar la misma vista exclusiva que el responsive final. */
+@container app (max-width:1100px){
+  html.visor-preboot.visor-document-open #ov .ovcols { display: flex; flex-direction: column; }
+  html.visor-preboot.visor-document-open #ov .ovcol {
+    display: none; width: 100%; flex: 1 1 0; height: 100%; min-height: 0;
+  }
+  html.visor-preboot.visor-document-open #ov .ovcol.is-responsive-active {
+    display: flex; flex-direction: column;
+  }
+}
+/* === ADAPTACIÓN RESPONSIVA INICIAL === */
+html.visor-preboot.visor-document-open #ov .visor-responsive-switch {
+  display: flex;
+  width: 100%;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px;
+  overflow: hidden;
+}
+html.visor-preboot.visor-document-open #ov .visor-responsive-switch button {
+  box-sizing: border-box;
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  max-width: 280px;
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #334155;
+  font: 700 12px/1.15 system-ui,sans-serif;
+  white-space: normal;
+}
+html.visor-preboot.visor-document-open #ov .visor-responsive-switch button.active {
+  background: #2563eb; color: #fff; border-color: #2563eb;
+}
+@container app (max-width:1100px){
+  html.visor-preboot.visor-document-open #ov .visor-responsive-switch { padding: 6px 5px; gap: 5px; }
+  html.visor-preboot.visor-document-open #ov .visor-responsive-switch button {
+    max-width: none; min-height: 34px; padding: 8px 7px; font-size: 11px;
+  }
+  html.visor-preboot.visor-document-open #ov .ovcols {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 4px;
+    gap: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  html.visor-preboot.visor-document-open #ov .ovcol {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    flex: 1 1 0;
+    display: none;
+    box-sizing: border-box;
+  }
+  html.visor-preboot.visor-document-open #ov .ovcol.is-responsive-active {
+    display: flex; flex-direction: column;
+  }
+  html.visor-preboot.visor-document-open #ov .doc-viewer {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    flex: 1 1 0;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+}
+@container app (max-width:380px){
+  html.visor-preboot.visor-document-open #ov .visor-responsive-switch button {
+    padding: 8px 4px; font-size: 10.5px;
+  }
+}
+visor-listado { display: block; width: 100%; }
+.visor-cargando-documentos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  padding: 60px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.visor-spinner-anillo {
+  width: 42px;
+  height: 42px;
+  border: 3.5px solid rgba(99, 102, 241, 0.2);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: visor-spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+.visor-cargando-texto {
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+html.modo-oscuro .visor-cargando-texto { color: #94a3b8; }
+.visor-spinner-documento {
+  width: 28px; height: 28px; margin: 0; border-width: 2.5px; border-top-color: #3b82f6;
+}
+@keyframes visor-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   VISTA EMBEBIDA — AJUSTE DE POSICIÓN BAJO LA BARRA SUPERIOR
+   El panel se carga dentro de #visor-admin-spa-frame, cuyo top ya está
+   situado debajo de la navbar global. Por tanto #ov no debe volver a
+   descontar --navbar-height dentro del iframe.
+============================================================ */
+html.visor-embebido.visor-document-open #ov,
+html.visor-embebido.visor-document-open #ov.on {
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  margin: 0 !important;
+}

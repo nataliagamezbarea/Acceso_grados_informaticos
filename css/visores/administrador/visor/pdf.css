@@ -1,0 +1,401 @@
+@container app (max-width: 800px){
+  header { flex-direction: column; align-items: stretch; gap: 8px; }
+  .ovcols { flex-direction: column; height: auto; }
+  .ovcol { min-height: 450px; }
+  .ov-files { display: none; }
+  .ov-actionbar, .apunte-bar { flex-wrap: wrap; justify-content: center; }
+}
+@container app (max-width: 600px){
+  .ov-topbar { flex-direction: column; align-items: stretch; padding: 6px 8px; }
+  .ov-nav-group { flex-wrap: wrap; justify-content: center; }
+  .ov-right { flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .ov-right .btn-act { flex: 1 1 auto; min-width: 0; text-align: center; justify-content: center; }
+  .ov-actionbar { justify-content: flex-start; }
+  .ov-actionbar .pill-check { flex: 1 1 auto; justify-content: center; }
+  .editor-tools { flex-direction: column; align-items: flex-start; }
+  .col-header { font-size: 10.5px; }
+}
+/* ===== interactivo_pdf.css ===== */
+/* NAVEGACIÓN DEL VISOR: permite recorrer solo los archivos que coinciden
+   con los checks activos o, pulsando el filtro, todos los archivos. */
+.nav-filter-btn {
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #cbd5e1;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.nav-filter-btn.active { background: #14532d; border-color: #34d399; color: #bbf7d0; }
+.nav-filter-btn:hover { filter: brightness(1.15); }
+.ov-nav-group > button:disabled { opacity: .35; cursor: not-allowed; }
+/* CONTENEDOR DE PÁGINAS Y VISOR */
+.doc-viewer {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  background: #110d21;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  scroll-behavior: auto;
+}
+/* DDDDD/PDF.js: nunca deformar el raster transformado. Se escala de forma
+   uniforme con su proporción real y la página derecha conserva exactamente
+   la misma geometría que la izquierda. */
+#ov .pdfjs-page { max-width: 100%; flex: 0 0 auto; }
+#ov .pdfjs-page > canvas { max-width: 100%; height: auto; object-fit: contain; }
+
+/* ===== GEOMETRÍA PDF ESTABLE =====
+   La nitidez se obtiene renderizando el canvas a 3x, pero su tamaño CSS
+   debe ser el tamaño lógico de la página. Nunca se debe reducir el wrapper
+   con zoom: eso encoge el PDF y deja demasiado espacio vacío. */
+#ov .doc-viewer > .doc-page,
+#ov .doc-viewer > .pdfjs-page,
+#ov .doc-viewer > .ddd-continuacion {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  transform: none;
+}
+#ov .doc-viewer > .doc-page > canvas,
+#ov .doc-viewer > .pdfjs-page > canvas,
+#ov .doc-viewer > .ddd-continuacion canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none;
+  max-height: none;
+  object-fit: fill;
+}
+
+/* ============================================================
+   VISOR DOCUMENTO — RESPONSIVE NATIVO CON CHECK/RADIO (SIN JS)
+   En móvil el PDF es la prioridad: una sola vista ocupa todo el espacio.
+   Original = PDF con capa de texto seleccionable.
+   Cómo quedaría = PDF limpio/reconstruido.
+
+   Especificidad en vez de !important: las reglas de aquí repiten el
+   selector "#ov" (p.ej. "#ov#ov ...") para garantizar SIEMPRE más
+   especificidad que cualquier otro archivo que solo use "#ov ..." una
+   vez —ninguno de los demás CSS del proyecto usa un ID doble—, así
+   se gana el cascade sin necesitar !important y sin depender del
+   orden de los <link>.
+============================================================ */
+.visor-mobile-tools-check,
+.visor-view-check { position:absolute; opacity:0; pointer-events:none; width:1px; height:1px; }
+
+.visor-mobile-tools-toggle { display:none; }
+.visor-view-js-buttons { display:block; }
+.visor-view-choice { display:none; }
+
+@media (max-width: 700px) {
+  /* Fondo idéntico al de la aplicación principal para evitar el cambio de color. */
+  #ov#ov { background: var(--app-background); color: var(--app-text-color); }
+  #ov#ov .doc-viewer { background: var(--app-background); gap: 14px; }
+
+  /* El overlay ocupa todo el viewport disponible y no añade
+     una segunda barra vertical de controles. */
+  #ov#ov.on {
+    top: var(--navbar-height, 64px);
+    height: calc(100dvh - var(--navbar-height, 64px));
+    max-height: calc(100dvh - var(--navbar-height, 64px));
+  }
+
+  /* Cabecera del documento: crece en altura y los controles pasan a
+     nuevas filas. Nunca se convierte en una barra horizontal desplazable. */
+  #ov#ov .ov-topbar {
+    height: auto;
+    min-height: 40px;
+    max-height: none;
+    padding: 5px;
+    gap: 5px;
+    overflow: visible;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  #ov#ov .ov-topbar .ov-nav-group,
+  #ov#ov .ov-topbar .ov-right {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+  #ov#ov .ov-topbar .ov-files {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+    white-space: normal;
+  }
+  #ov#ov .ov-topbar button,
+  #ov#ov .ov-topbar .btn-act,
+  #ov#ov .ov-topbar .back-btn,
+  #ov#ov .ov-topbar .ov-close {
+    min-height: 29px;
+    height: 29px;
+    padding: 0 7px;
+    font-size: 10px;
+  }
+
+  /* Herramientas plegables: cerrado por defecto, sin ocupar espacio.
+     El botón de herramientas siempre queda justo antes del visor. */
+  #ov#ov .visor-mobile-tools-check { position:absolute; }
+  #ov#ov .visor-mobile-tools-toggle {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    min-height:34px;
+    margin:4px 6px;
+    padding:6px 10px;
+    border:1px solid var(--surface-border, #cbd5e1);
+    border-radius:9px;
+    background:var(--surface-bg, #fff);
+    color:var(--surface-text, #334155);
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    box-sizing:border-box;
+    position:relative;
+    z-index:20;
+  }
+  #ov#ov .visor-mobile-tools-toggle .visor-mobile-tools-chevron { margin-left:auto; transition:transform .18s ease; }
+  #visorMobileToolsCheck:checked + .visor-mobile-tools-toggle .visor-mobile-tools-chevron { transform:rotate(180deg); }
+
+  #visorMobileToolsCheck:not(:checked) ~ #visorMobileTools,
+  #visorMobileToolsCheck:not(:checked) ~ .visor-mobile-tools { display:none; }
+
+  #visorMobileToolsCheck:checked ~ #visorMobileTools,
+  #visorMobileToolsCheck:checked ~ .visor-mobile-tools { display:block; }
+
+  /* Selector de visor basado en radio: no depende de JS para el layout. */
+  #ov#ov .visor-responsive-switch {
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:4px 5px;
+    min-height:38px;
+    box-sizing:border-box;
+    background:var(--surface-bg, #fff);
+    flex: 0 0 auto;
+    max-height: 36px;
+  }
+  #ov#ov .visor-responsive-switch .visor-view-js-buttons { display:none; }
+  #ov#ov .visor-responsive-switch .visor-view-choice {
+    display:flex;
+    flex:1 1 0;
+    min-width:0;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    min-height:30px;
+    padding:5px 7px;
+    border:1px solid var(--surface-border, #cbd5e1);
+    border-radius:7px;
+    font-size:10px;
+    font-weight:800;
+    cursor:pointer;
+    color:var(--surface-text, #475569);
+    background:var(--surface-subtle, #f8fafc);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  #visorMobileOldView:checked + .visor-view-choice,
+  #visorMobileNewView:checked + .visor-view-choice { background:var(--navbar-menu-active-bg, #7e22ce); color:#fff; border-color:var(--navbar-menu-active-border, #6b21a8); }
+
+  /* Una sola columna visible y a pantalla completa. */
+  #ov#ov .ovcols { display:flex; flex:1 1 auto; min-height:0; height:auto; overflow:hidden; padding:4px; }
+  #ov#ov .ovcols > visor-columna { display:none; width:100%; min-width:0; min-height:0; height:100%; flex:1 1 auto; }
+  #ov#ov .ovcols > visor-columna:first-child { display:flex; }
+  #ov#ov .ovcols > visor-columna:has(#viewerNew) { display:none; }
+
+  /* :has permite cambiar la columna sin tocar JavaScript. */
+  #ov#ov:has(#visorMobileNewView:checked) .ovcols > visor-columna:first-child { display:none; }
+  #ov#ov:has(#visorMobileNewView:checked) .ovcols > visor-columna:nth-child(2) { display:flex; }
+
+  #ov#ov .ovcol { width:100%; height:100%; min-height:0; display:flex; flex-direction:column; }
+  #ov#ov .ovcol .col-header { flex:0 0 auto; min-height:32px; max-height:32px; padding:5px 7px; font-size:10px; }
+  #ov#ov .doc-viewer { flex:1 1 0; min-height:0; height:auto; width:100%; max-width:100%; overflow:auto; padding:5px; box-sizing:border-box; }
+  #ov#ov .pdfjs-page { max-width:none; }
+}
+
+@media (max-width: 430px) {
+  #ov#ov .visor-mobile-tools-toggle {
+    min-height: 32px;
+    margin: 3px 5px;
+    width: calc(100% - 10px);
+  }
+  #ov#ov .visor-responsive-switch { min-height:34px; }
+  #ov#ov .visor-responsive-switch .visor-view-choice { font-size:9px; min-height:28px; padding:4px 5px; }
+  #ov#ov .ovcol .col-header { font-size:9.5px; }
+}
+
+/* ============================================================
+   VISOR v22 — HERRAMIENTAS DE DOCUMENTO Y APUNTE
+   Los filtros/acciones (Enunciados, Nombres, Colegio...) ya se
+   gestionan por completo en filtros_visor_responsivo.css.
+============================================================ */
+#ov .visor-mobile-tools-toggle {
+  box-sizing:border-box;
+  border:1px solid var(--surface-border, #cbd5e1);
+  border-radius:12px;
+  background:var(--surface-bg, #fff);
+  color:var(--surface-text, #334155);
+  box-shadow:0 2px 8px rgba(15,23,42,.08);
+  transition:background .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+#ov .visor-mobile-tools-toggle:hover {
+  border-color:#94a3b8;
+  box-shadow:0 4px 14px rgba(15,23,42,.12);
+}
+#ov .visor-mobile-tools-status { opacity:.62; font-weight:600; margin-left:4px; }
+#ov .visor-mobile-tools-check:checked + .visor-mobile-tools-toggle {
+  border-color:#818cf8;
+  box-shadow:0 4px 16px rgba(79,70,229,.16);
+}
+#ov .visor-mobile-tools-check:checked + .visor-mobile-tools-toggle .visor-mobile-tools-chevron { transform:rotate(180deg); }
+
+#ov visor-overlay-acciones,
+#ov visor-apunte-barra,
+#ov visor-editor,
+#ov #visorMobileTools {
+  display: block;
+}
+
+#ov visor-apunte-barra {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+#ov .apunte-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  padding: 6px 16px;
+  background: #140e28;
+  border-bottom: 1px solid var(--border-color, #2a204d);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+}
+#ov .apunte-bar > div { min-width: 0; }
+#ov .apunte-bar > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+#ov .apunte-bar > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+#ov .apunte-bar .fa-book-bookmark {
+  color: #34d399;
+  font-size: 15px;
+}
+#ov .apunte-bar span.css-inline-9e4071690f {
+  font-size: 12px;
+  font-weight: 700;
+  color: #93c5fd;
+  white-space: nowrap;
+}
+#ov #inputApunteName {
+  min-width: 160px;
+  max-width: 440px;
+  flex: 1 1 260px;
+  height: 32px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+#ov .apunte-bar span.css-inline-0bc6ca3e5a {
+  font-size: 11px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+#ov .apunte-bar code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: #cbd5e1;
+}
+#ov .apunte-bar button {
+  min-height: 32px;
+  height: 32px;
+  padding: 0 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  #ov#ov .apunte-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+  #ov#ov .apunte-bar > div { width: 100%; }
+  #ov#ov .apunte-bar > div:first-child { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 8px; align-items: center; }
+  #ov#ov .apunte-bar > div:first-child > .css-inline-0bc6ca3e5a { grid-column: 1 / -1; }
+  #ov#ov .apunte-bar > div:last-child { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  #ov#ov .apunte-bar button { width: 100%; min-width: 0; min-height: 36px; height: auto; justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  #ov#ov .visor-mobile-tools-toggle {
+    min-height: 42px;
+    margin: 5px 6px;
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+  #ov .visor-mobile-tools-status { display: none; }
+  #ov#ov .apunte-bar > div:first-child { grid-template-columns: 1fr; }
+  #ov#ov .apunte-bar > div:first-child > .css-inline-0bc6ca3e5a { grid-column: auto; }
+  #ov#ov .apunte-bar > div:last-child { grid-template-columns: 1fr; }
+  #ov#ov #inputApunteName { width: 100%; height: 36px; box-sizing: border-box; max-width: 100%; }
+
+  /* Selector Original / Cómo quedaría: botones iguales, grandes y táctiles. */
+  #ov#ov .visor-responsive-switch {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    padding:6px;
+  }
+  #ov#ov .visor-responsive-switch button,
+  #ov#ov .visor-responsive-switch .visor-view-choice {
+    min-width:0;
+    width:100%;
+    min-height:38px;
+    padding:7px 8px;
+    border-radius:10px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+}

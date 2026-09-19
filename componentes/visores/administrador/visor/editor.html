@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-editor data-component="editor">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="editor-box" id="editorBox">
+    <div class="editor-tools css-inline-2be897b184">
+     <span class="css-inline-1ed25d1f77">
+      <i class="fa-solid fa-crop-simple css-inline-68d9815d1e">
+      </i>
+      <span id="editorBoxTexto">
+       Selecciona la zona dibujando un recuadro sobre el PDF de la izquierda.
+      </span>
+     </span>
+     <div class="css-inline-c87525adb8">
+      <button class="css-inline-8dfaf8b3d3" data-event-click="elegirTipoAnadir('enunciado')">
+       <i class="fa-solid fa-pen-fancy">
+       </i>
+       Enunciado
+      </button>
+      <button class="css-inline-f4e119ccb0" data-event-click="elegirTipoAnadir('nombre')">
+       <i class="fa-solid fa-user-slash">
+       </i>
+       Nombre
+      </button>
+      <button class="css-inline-e9fc4d0243" data-event-click="elegirTipoAnadir('colegio')">
+       <i class="fa-solid fa-school">
+       </i>
+       Colegio
+      </button>
+      <button class="css-inline-89b06e028c" data-event-click="elegirTipoAnadir('reflujo')">
+       <i class="fa-solid fa-arrows-up-to-line">
+       </i>
+       Subir si hay Imágenes
+      </button>
+      <button class="modal-close-btn custom-modal-close-x css-inline-63ffcf769e" onclick="toggleEditor(false)" data-event-click="toggleEditor(false)" type="button" aria-label="Cancelar" title="Cancelar (Esc)">
+       ✕ Cancelar
+      </button>
+     </div>
+    </div>
+   </div>
+  </visor-editor>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

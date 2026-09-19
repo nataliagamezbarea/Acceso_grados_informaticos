@@ -1,0 +1,65 @@
+<template id="navbar-general-template">
+    <header aria-label="Navegación principal" class="barra-superior navbar-flex-layout" id="barra-superior">
+      <div class="nav-left" aria-label="Navegación izquierda">
+        <navbar-boton-inicio data-component="navbar-boton:inicio">
+          <template shadowrootmode="open"><slot></slot></template>
+          <a aria-label="Inicio" href="/" id="btn-inicio" title="Inicio">
+            <i aria-hidden="true" class="fa-solid fa-house"></i><span class="nav-label">Inicio</span>
+          </a>
+        </navbar-boton-inicio>
+        <navbar-boton-volver data-component="navbar-boton:volver">
+          <template shadowrootmode="open"><slot></slot></template>
+          <a aria-label="Volver atrás" class="btn-volver" href="/" id="volver-atras" title="Volver atrás">
+            <i aria-hidden="true" class="fa-solid fa-arrow-left"></i><span class="nav-label">Volver atrás</span>
+          </a>
+        </navbar-boton-volver>
+        <div class="nav-left-selectors" data-navbar-slot="left-selectors" aria-label="Rama y trimestre"></div>
+      </div>
+
+      <div class="nav-center-actions" aria-label="Acciones centrales de navegación" data-navbar-slot="center"></div>
+
+      <div class="nav-right" aria-label="Acciones de usuario">
+        <div class="nav-page-actions" aria-label="Acciones de la vista" data-navbar-slot="page-right"></div>
+        <div class="nav-general-actions" aria-label="Acciones generales">
+        <navbar-boton-modo-oscuro data-component="navbar-boton:modo-oscuro">
+          <template shadowrootmode="open"><slot></slot></template>
+          <button aria-label="Cambiar tema" class="btn-modo-oscuro" id="btn-modo-oscuro" title="Modo oscuro" type="button">
+            <i aria-hidden="true" class="fa-solid fa-moon"></i><span class="nav-label">Modo oscuro</span>
+          </button>
+        </navbar-boton-modo-oscuro>
+        <navbar-boton-ajustes data-component="navbar-boton:ajustes" hidden>
+          <template shadowrootmode="open"><slot></slot></template>
+          <button aria-label="Ajustes" class="btn-ajustes" id="boton-ajustes" title="Ajustes" type="button">
+            <i aria-hidden="true" class="fa-solid fa-gear"></i><span class="nav-label">Ajustes</span>
+          </button>
+        </navbar-boton-ajustes>
+        <navbar-boton-cerrar-sesion data-component="navbar-boton:cerrar-sesion">
+          <template shadowrootmode="open"><slot></slot></template>
+          <button aria-label="Cerrar sesión" class="btn-cerrar-sesion" id="btn-cerrar-sesion" title="Cerrar sesión" type="button">
+            <i aria-hidden="true" class="fa-solid fa-right-from-bracket"></i><span class="nav-label">Cerrar sesión</span>
+          </button>
+        </navbar-boton-cerrar-sesion>
+        </div>
+        <button class="btn-hamburguesa navbar-boton" id="btn-hamburguesa" type="button" popovertarget="navbar-menu-panel" popovertargetaction="toggle" aria-label="Abrir menú de navegación" title="Menú">
+          <i aria-hidden="true" class="fa-solid fa-bars hamburguesa-icono"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="navbar-menu-panel" id="navbar-menu-panel" popover="auto" aria-label="Menú de navegación">
+      <div class="navbar-popup-list" role="menu">
+        <a class="navbar-popup-item popup-home" href="/" title="Inicio"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+        <a class="navbar-popup-item popup-back" href="/" title="Volver atrás"><i class="fa-solid fa-arrow-left"></i><span>Volver atrás</span></a>
+        <button class="navbar-popup-item popup-edit navbar-admin-only" type="button" data-navbar-popup-edit="true" title="Lectura / Edición"><i class="fa-solid fa-pen-to-square"></i><span>Lectura / Edición</span></button>
+        <div class="navbar-popup-item popup-selector popup-rama visor-admin-only" data-visor-popup="rama"><span>Rama</span><select id="navbar-rama-popup" aria-label="Rama"></select></div>
+        <div class="navbar-popup-item popup-selector popup-trimestre visor-admin-only" data-visor-popup="trimestre"><span>Trimestre</span><select id="navbar-trimestre-popup" aria-label="Trimestre"><option value="">Todos los trimestres</option><option value="1">1º Trimestre</option><option value="2">2º Trimestre</option><option value="3">3º Trimestre</option></select></div>
+        <button class="navbar-popup-item popup-theme" type="button" data-navbar-action="theme"><i class="fa-solid fa-moon"></i><span>Modo oscuro</span></button>
+        <button class="navbar-popup-item popup-settings navbar-admin-only" type="button" data-navbar-action="settings"><i class="fa-solid fa-gear"></i><span>Ajustes</span></button>
+        <button class="navbar-popup-item popup-logout" type="button" data-navbar-action="logout"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="openSummaryModal" title="Resumen"><i class="fa-solid fa-chart-pie"></i><span>Resumen</span></button>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="sincronizarGitHub" title="Sincronizar GitHub"><i class="fa-brands fa-github"></i><span>Sincronizar GitHub</span></button>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="compileAllApuntes" title="Apuntes"><i class="fa-solid fa-copy"></i><span>Apuntes</span></button>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="openLimpiarDatosModal" title="Terminado"><i class="fa-solid fa-broom"></i><span>Terminado</span></button>
+      </div>
+    </div>
+</template>

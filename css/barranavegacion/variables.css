@@ -1,0 +1,94 @@
+/* NAVBAR GENERAL — FUENTE ÚNICA
+   Responsive por container queries.
+   Regla: un elemento SOLO aparece en el popup cuando su copia de la navbar
+   se ha ocultado en el mismo nivel de colapso.
+*/
+
+:root{
+  --navbar-height:64px;
+  --navbar-btn-size:42px;
+  --navbar-gap:8px;
+  --navbar-pad-x:16px;
+  --navbar-border:#dbe3ed;
+  --navbar-btn-border:#d7e1ec;
+  --navbar-btn-bg:#fff;
+  --navbar-btn-color:#475569;
+  --navbar-pink:#d65a9b;
+}
+
+/* El ancho de este host es el ancho real que gobierna el responsive. */
+#app-navbar-cargando,
+.app-navbar-host,
+navbar-general{
+  display:block;
+  width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
+#app-navbar-cargando,
+.app-navbar-host,
+navbar-general{
+  container-type:inline-size;
+  container-name:navbar-general;
+}
+#app-navbar-cargando{
+  position:sticky;
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  min-height:var(--navbar-height);
+  margin:0;
+  padding:0;
+  /* Siempre por encima del cargador de transición (z-index 2147480000) */
+  z-index:2147480001;
+}
+
+
+/* Gate DOM: los elementos exclusivos del Visor no ocupan espacio fuera del visor. */
+#app-navbar-cargando [hidden]{
+  display:none;
+  width:0;
+  min-width:0;
+  max-width:0;
+  height:0;
+  min-height:0;
+  max-height:0;
+  margin:0;
+  padding:0;
+  flex:0 0 0;
+  overflow:hidden;
+}
+
+/* =========================
+   BARRA
+   ========================= */
+#barra-superior{
+  display:flex;
+  align-items:center;
+  width:100%;
+  height:var(--navbar-height);
+  min-height:var(--navbar-height);
+  min-width:0;
+  padding:8px var(--navbar-pad-x);
+  box-sizing:border-box;
+  gap:0;
+  overflow:visible;
+  background:var(--navbar-bg,#fff);
+  color:var(--navbar-btn-color,#475569);
+  border-bottom:1px solid var(--navbar-border,#dbe3ed);
+  box-shadow:var(--navbar-shadow,0 2px 8px rgba(15,23,42,.04));
+}
+
+#barra-superior > .nav-left{
+  order:1;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:var(--navbar-gap);
+  flex:0 0 auto;
+  min-width:0;
+  width:max-content;
+  max-width:max-content;
+  overflow:visible;
+}

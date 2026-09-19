@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-bloqueo data-component="bloqueo">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+    <div class="blocker" id="blocker">
+     <div class="blocker-box css-inline-1d2beb08d3" id="blockerBox">
+      <button class="modal-close-btn custom-modal-close-x" id="blockerCloseBtn" type="button" aria-label="Cerrar" title="Cerrar / Cancelar (Esc)" onclick="hideBlocker()">✕</button>
+      <div class="css-inline-9e185d390a">
+       <i class="fa-solid fa-circle-notch fa-spin">
+       </i>
+      </div>
+      <div class="css-inline-226e9adf13" id="blockerText">
+       Procesando...
+      </div>
+      <div class="blocker-actions" id="blockerActions" style="margin-top: 18px; display: flex; justify-content: center; gap: 8px;">
+       <button type="button" class="btn-act skip blocker-cancel-btn" id="blockerCancelBtn" onclick="hideBlocker()">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+       </button>
+      </div>
+     </div>
+    </div>
+  </visor-bloqueo>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

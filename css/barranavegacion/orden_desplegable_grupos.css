@@ -1,0 +1,85 @@
+/* Orden global del popup: derecha -> centro -> izquierda. */
+#navbar-menu-panel:popover-open .popup-visor-group{order:10 !important;}
+#navbar-menu-panel:popover-open .popup-general-group{order:20 !important;}
+#navbar-menu-panel:popover-open .popup-left-group{order:30 !important;}
+
+/* El botón de edición nunca aparece en Visor-Admin. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-admin-edit{
+  display:none !important;
+}
+
+
+/* V — ORDEN DEL POPUP: exactamente como la referencia visual.
+   Cuando el menú está abierto, la navegación principal siempre va primero:
+   Inicio → Volver atrás → Lectura / Edición.
+   Después van las acciones generales y, en Visor-Admin, las acciones extra.
+   Rama/Trimestre quedan al final del bloque izquierdo cuando deben ir al popup.
+*/
+#navbar-menu-panel.navbar-popup-ordered:popover-open .navbar-popup-list{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group{
+  order:1 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  width:100% !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group .popup-left-nav:nth-of-type(1){
+  order:1 !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group .popup-left-nav:nth-of-type(2){
+  order:2 !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group  .popup-admin-edit{
+  display:flex !important;
+  order:3 !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:42px !important;
+  min-height:42px !important;
+  flex:0 0 42px !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group .popup-left-selector{
+  order:4 !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group .popup-left-selector + .popup-left-selector{
+  order:5 !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general-group{
+  order:2 !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-visor-group{
+  order:3 !important;
+}
+
+/* En Inicio, Lectura/Edición es la tercera opción del popup y no se manda
+   al final aunque haya reglas antiguas de colapso cargadas después. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group{
+  order:1 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group  .popup-admin-edit{
+  display:flex !important;
+  order:3 !important;
+}
+
+/* En Visor-Admin no se muestra Lectura/Edición: el popup del visor conserva
+   únicamente Inicio, Volver atrás, Rama/Trimestre y las acciones del visor. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:none !important;
+}
+
+/* Si el popup está abierto a 269px o menos, conservar el orden y no permitir
+   que reglas anteriores separen EDITAR del bloque Inicio/Volver. */
+@container navbar-general (max-width:430px){
+  #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group .popup-left-nav{
+    display:flex !important;
+  }
+  #navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-group  .popup-admin-edit{
+    display:flex !important;
+    order:3 !important;
+  }
+}

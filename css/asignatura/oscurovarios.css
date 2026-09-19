@@ -1,0 +1,107 @@
+html.modo-oscuro .bloque-profesor tr:hover td { background-color: rgba(99, 102, 241, 0.18); }
+html.modo-oscuro .bloque-profesor a, html.modo-oscuro .bloque-profesor a { color: #818cf8; }
+html.modo-oscuro .bloque-profesor a:hover, html.modo-oscuro .bloque-profesor a:hover { color: #a5b4fc; }
+html.modo-oscuro .tarjeta, html.modo-oscuro .tarjeta {
+  background: rgba(30, 41, 59, 0.75); backdrop-filter: blur(14px); border-color: rgba(255, 255, 255, 0.12);
+}
+html.modo-oscuro .tarjeta h4, html.modo-oscuro .tarjeta h4 { color: #f8fafc; }
+html.modo-oscuro .tarjeta a, html.modo-oscuro .tarjeta a { color: #60a5fa; }
+html.modo-oscuro .fila-oculta-invitado, html.modo-oscuro .fila-oculta-invitado {
+  background: rgba(239, 68, 68, 0.15); border-left: 4px solid #ef4444;
+}
+html.modo-oscuro .fila-oculta-invitado td, html.modo-oscuro .fila-oculta-invitado td {
+  border-bottom: 2px solid #7f1d1d; border-top: 1px solid rgba(127, 29, 29, 0.4); color: #fca5a5;
+}
+html.modo-oscuro .fila-oculta-invitado a, html.modo-oscuro .fila-oculta-invitado a { color: #fca5a5; }
+html.modo-oscuro .fila-oculta-invitado a:hover, html.modo-oscuro .fila-oculta-invitado a:hover {
+  color: #fecaca;
+}
+html.modo-oscuro .permiso-switch, html.modo-oscuro .permiso-switch {
+  background: #0f172a; border-color: #334155; color: #cbd5e1;
+}
+html.modo-oscuro .permiso-switch:hover, html.modo-oscuro .permiso-switch:hover {
+  background: #1e293b; border-color: #475569;
+}
+html.modo-oscuro .contenedor-tablas, html.modo-oscuro .contenedor-tablas {
+  background: #111827; border-top: 1px solid #334155; border-radius: 0 0 14px 14px; color: #e5e7eb;
+}
+html.modo-oscuro .detalle-apuntes, html.modo-oscuro .detalle-apuntes { background: #111827; }
+html.modo-oscuro .detalle-apuntes .bloque-profesor, html.modo-oscuro .detalle-apuntes .bloque-profesor {
+  background: #1f2937; border-color: #374151;
+}
+html.modo-oscuro .detalle-apuntes .bloque-profesor td, html.modo-oscuro .detalle-apuntes .bloque-profesor td {
+  background: transparent; color: #e5e7eb;
+}
+html.modo-oscuro .detalle-apuntes .bloque-profesor tr:hover td, html.modo-oscuro .detalle-apuntes .bloque-profesor tr:hover td {
+  background: #273449;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

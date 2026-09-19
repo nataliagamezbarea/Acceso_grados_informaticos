@@ -1,0 +1,85 @@
+@container navbar-general (max-width:1000px){
+  /* Derecha completa: extras del visor + acciones generales. */
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .nav-page-actions,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .nav-general-actions,
+  html.visor-admin-active #barra-superior > .nav-right > .nav-page-actions,
+  html.visor-admin-active #barra-superior > .nav-right > .nav-general-actions,
+  html.visor-admin-embed #barra-superior > .nav-right > .nav-page-actions,
+  html.visor-admin-embed #barra-superior > .nav-right > .nav-general-actions,
+  body.visor-admin-active #barra-superior > .nav-right > .nav-page-actions,
+  body.visor-admin-active #barra-superior > .nav-right > .nav-general-actions,
+  body.visor-admin-embed #barra-superior > .nav-right > .nav-page-actions,
+  body.visor-admin-embed #barra-superior > .nav-right > .nav-general-actions{
+    display:none !important;
+    width:0 !important;
+    min-width:0 !important;
+    max-width:0 !important;
+    height:0 !important;
+    min-height:0 !important;
+    max-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    flex:0 0 0 !important;
+    overflow:hidden !important;
+  }
+
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > #btn-hamburguesa,
+  html.visor-admin-active #barra-superior > .nav-right > #btn-hamburguesa,
+  html.visor-admin-embed #barra-superior > .nav-right > #btn-hamburguesa,
+  body.visor-admin-active #barra-superior > .nav-right > #btn-hamburguesa,
+  body.visor-admin-embed #barra-superior > .nav-right > #btn-hamburguesa{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    flex:0 0 var(--navbar-btn-size) !important;
+    width:var(--navbar-btn-size) !important;
+    min-width:var(--navbar-btn-size) !important;
+    height:var(--navbar-btn-size) !important;
+    min-height:var(--navbar-btn-size) !important;
+  }
+
+  /* Popup: entran los dos bloques de la derecha juntos. */
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-extra,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-theme,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-settings,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-logout,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-extra,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-theme,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-settings,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-logout,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-extra,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-theme,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-settings,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-logout,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-extra,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-theme,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-settings,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-logout,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-extra,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-theme,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-settings,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-logout{
+    display:flex !important;
+  }
+}
+
+/* Por encima del corte, ningún elemento de la derecha está colapsado. */
+@container navbar-general (min-width:1001px){
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .nav-page-actions,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .nav-general-actions,
+  html.visor-admin-active #barra-superior > .nav-right > .nav-page-actions,
+  html.visor-admin-active #barra-superior > .nav-right > .nav-general-actions,
+  html.visor-admin-embed #barra-superior > .nav-right > .nav-page-actions,
+  html.visor-admin-embed #barra-superior > .nav-right > .nav-general-actions,
+  body.visor-admin-active #barra-superior > .nav-right > .nav-page-actions,
+  body.visor-admin-active #barra-superior > .nav-right > .nav-general-actions,
+  body.visor-admin-embed #barra-superior > .nav-right > .nav-general-actions,
+  body.visor-admin-embed #barra-superior > .nav-right > .nav-page-actions{
+    display:flex !important;
+  }
+}
+
+/* RESPONSIVE CSS: los grupos mantienen su ancho intrínseco (max-content) y el
+   container-query gobierna el primer nivel de colapso. No hay medición JS.
+   Cuantos más controles tenga un grupo, mayor es su ancho intrínseco y antes
+   alcanzará el umbral del contenedor. */

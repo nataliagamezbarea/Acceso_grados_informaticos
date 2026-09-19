@@ -1,0 +1,46 @@
+/* ESTILOS ESPECÍFICOS DEL COMPONENTE — PARTE 5 (<= 100 lineas) */
+.css-inline-89b06e028c { background: #d946ef; padding: 4px 8px; font-size: 11px; }
+.css-inline-8d132760b3 { border: 2px solid #ef4444; max-width: 580px; text-align: left; }
+.css-inline-8dfaf8b3d3 { background: #ef4444; padding: 4px 8px; font-size: 11px; }
+.css-inline-90b7755797 { background: #10b981; }
+.css-inline-91da941fd3 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: #0c0917;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #2e264d;
+}
+.css-inline-9e185d390a { font-size: 34px; color: #38bdf8; margin-bottom: 10px; }
+.css-inline-9e4071690f { font-size: 12px; font-weight: 700; color: #93c5fd; }
+.css-inline-a0fd43aec1 { background: #4b5563; padding: 8px 18px; font-size: 13px; display: none; }
+.css-inline-a1b7c13de2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #ef4444;
+  font-weight: 700;
+}
+.css-inline-a25ba2b8d1 { border: 2px solid #3b82f6; max-width: 500px; }
+.css-inline-a68719e645 { background: #d97706; }
+.css-inline-a76d597a07 { display: flex; gap: 8px; }
+.css-inline-aaec585398 { display: flex; align-items: center; gap: 10px; flex: 1; }
+.css-inline-ac88edfb58 {
+  width: 100%;
+  box-sizing: border-box;
+  background: #0c1322;
+  border: 1px solid #3b82f6;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  outline: none;
+}
+.css-inline-ac88edfb58:focus { border-color: #38bdf8; box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25); }

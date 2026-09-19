@@ -1,0 +1,57 @@
+.github-pull-btn {
+  background: #2563eb;
+  color: #fff;
+  border: 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.summary-btn {
+  background: #8b5cf6;
+  color: #fff;
+  border: 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.apunte-head-btn {
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #fff;
+  border: 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.term-btn {
+  background: #dc2626;
+  color: #fff;
+  border: 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-logout {
+  background: #374151;
+  color: #fca5a5;
+  border: 1px solid #6b7280;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pill-icon-enc { color: #f87171; }
+.pill-icon-nom { color: #60a5fa; }
+.pill-icon-col { color: #fbbf24; }
+.pill-icon-apu { color: #34d399; }
+.pill-icon-ren { color: #c084fc; }
+.pill-icon-net { color: #38bdf8; }
+.header-icon { color: #a78bfa; }

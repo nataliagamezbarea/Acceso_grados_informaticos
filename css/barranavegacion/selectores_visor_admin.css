@@ -1,0 +1,86 @@
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  height:auto !important;
+  min-height:42px !important;
+  max-height:none !important;
+  flex:0 1 auto !important;
+  overflow:visible !important;
+}
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > #btn-inicio,
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > #volver-atras,
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > .nav-left-selectors,
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > .nav-left-selectors > .visor-navbar-selector{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > .nav-left-selectors{
+  flex:0 1 auto !important;
+  min-width:0 !important;
+  width:auto !important;
+  overflow:visible !important;
+}
+
+/* Lectura / Edición: en Visor-Admin siempre está debajo de Volver atrás
+   cuando se abre el popup. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-group{
+  display:flex !important;
+  flex-direction:column !important;
+}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-nav:nth-of-type(1){order:1;}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-nav:nth-of-type(2){order:2;}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-edit{display:flex !important;order:3 !important;}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-selector{order:4 !important;}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-left-selector + .popup-left-selector{order:5 !important;}
+
+/* Incluso en anchos muy pequeños no se ocultan los cuatro controles del
+   Visor-Admin; se permite desplazamiento horizontal para no perderlos. */
+@container navbar-general (max-width:470px){
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left{
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scrollbar-width:none;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left::-webkit-scrollbar{display:none;}
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > .nav-left-selectors{
+    display:flex !important;
+    flex-wrap:nowrap !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > .nav-left-selectors > .visor-navbar-selector{
+    display:flex !important;
+    flex:0 0 auto !important;
+  }
+}
+
+/* ============================================================================
+   V — RESPONSIVE REAL POR FLEX + NIVELES DE COLAPSO
+   --------------------------------------------------------------------------
+   Orden estricto cuando falta espacio:
+     1) DERECHA
+     2) CENTRO (Inicio: Lectura/Edición)
+     3) IZQUIERDA
+
+   La decisión se hace sobre el ancho REAL del contenedor @container
+   "navbar-general", no sobre el viewport. Flex mantiene los bloques en su
+   flujo natural y las container queries solo activan el siguiente nivel
+   cuando el bloque anterior ya debe salir.
+
+   IMPORTANTE: CSS no dispone de una condición "si flex overflow" para ocultar
+   un hermano automáticamente. Por eso los umbrales se basan en el ancho
+   intrínseco de los bloques y el flex se encarga del reparto del espacio.
+   ============================================================================ */
+
+/* Base: el flex decide el reparto; ningún bloque se fija a un ancho de página. */
+#barra-superior > .nav-left,
+#barra-superior > .nav-center-actions,
+#barra-superior > .nav-right{
+  box-sizing:border-box;
+  min-width:0;
+}

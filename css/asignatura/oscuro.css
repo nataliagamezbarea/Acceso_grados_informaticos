@@ -1,0 +1,119 @@
+/* Modo oscuro — asignatura */
+html.modo-oscuro details, html.modo-oscuro details {
+  background: #0f172a; border: 1px solid #1e293b; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+html.modo-oscuro summary, html.modo-oscuro summary {
+  background: #1e1b4b; color: #c084fc; border-bottom: 1px solid #312e81;
+}
+html.modo-oscuro summary:hover, html.modo-oscuro summary:hover { background: #2e1065; }
+html.modo-oscuro .barra-edicion-seccion, html.modo-oscuro .barra-edicion-seccion {
+  background: #1e1e38; border: 1px solid #3b3a61; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+html.modo-oscuro .barra-edicion-seccion span, html.modo-oscuro .barra-edicion-seccion span { color: #f472b6; }
+html.modo-oscuro .btn-edicion-seccion, html.modo-oscuro .btn-edicion-seccion {
+  background: #334155; color: #f8fafc; border: 1px solid #475569;
+}
+html.modo-oscuro .btn-edicion-seccion:hover, html.modo-oscuro .btn-edicion-seccion:hover {
+  background: #475569; color: #ffffff;
+}
+html.modo-oscuro .bloque-profesor, html.modo-oscuro .bloque-profesor {
+  background: #1e293b; border: 1px solid #334155; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+/* En oscuro, solo se aclara la línea izquierda para mantener el contraste. */
+html.modo-oscuro .bloque-profesor.bloque-apuntes, html.modo-oscuro .bloque-profesor.bloque-apuntes {
+  border-left: 5px solid #fbbf24;
+}
+html.modo-oscuro .bloque-profesor.bloque-ejercicios, html.modo-oscuro .bloque-profesor.bloque-ejercicios {
+  border-left: 5px solid #60a5fa;
+}
+html.modo-oscuro .bloque-profesor {
+  background: rgba(30, 41, 59, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+html.modo-oscuro .bloque-profesor.bloque-apuntes, html.modo-oscuro .bloque-profesor.bloque-apuntes {
+  border-left-color: #fbbf24;
+}
+html.modo-oscuro .bloque-profesor.bloque-ejercicios, html.modo-oscuro .bloque-profesor.bloque-ejercicios {
+  border-left-color: #60a5fa;
+}
+html.modo-oscuro .bloque-profesor h3, html.modo-oscuro .bloque-profesor h3 {
+  color: #ffffff; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+html.modo-oscuro .bloque-profesor th, html.modo-oscuro .bloque-profesor th {
+  background: #0f172a; color: #cbd5e1; border-bottom: 2px solid #334155;
+}
+html.modo-oscuro .bloque-profesor td, html.modo-oscuro .bloque-profesor td {
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.08); color: #f8fafc;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

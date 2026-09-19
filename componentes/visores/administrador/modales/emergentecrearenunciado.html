@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-modal-crear-enunciado data-component="modal-crear-enunciado">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="modalCrearEnunciado">
+    <modal-caja data-component="modal-caja">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="blocker-box css-inline-4ce6b84a35">
+      <div class="css-inline-10828d56e5">
+       <h3 class="css-inline-e7e8278b59">
+        <i class="fa-solid fa-pen-to-square">
+        </i>
+        Crear Nuevo Enunciado
+       </h3>
+       <button class="modal-close-btn custom-modal-close-x css-inline-5592c5dc14" id="modalCrearEnunciadoCloseBtn" onclick="closeCrearEnunciadoModal()" data-event-click="closeCrearEnunciadoModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+        ✕
+       </button>
+      </div>
+      <div class="css-inline-78ff47a551">
+       <div>
+        <label class="css-inline-1a1d3cb220">
+         Texto o Ubicación a sustituir en el PDF:
+        </label>
+        <input class="css-inline-2a73309298" id="crearStart" placeholder="Arrastra un recuadro sobre el PDF o escribe la frase a buscar..." type="text"/>
+       </div>
+       <div>
+        <label class="css-inline-1a1d3cb220">
+         Nuevo Texto de Enunciado a escribir:
+        </label>
+        <textarea class="css-inline-ac88edfb58" id="crearNew" placeholder="Escribe aquí el nuevo enunciado sustituto..."></textarea>
+       </div>
+      </div>
+      <div class="css-inline-5fd3120e31">
+       <button class="btn-act accept css-inline-90b7755797" data-event-click="guardarNuevoEnunciado()" type="button">
+        <i class="fa-solid fa-floppy-disk">
+        </i>
+        Guardar y Previsualizar
+       </button>
+       <button class="btn-act skip" onclick="closeCrearEnunciadoModal()" data-event-click="closeCrearEnunciadoModal()" type="button">
+        Cancelar
+       </button>
+      </div>
+     </div>
+    </modal-caja>
+   </div>
+  </visor-modal-crear-enunciado>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+#app-root { margin: 0; padding: 0; }
+
+/* La pantalla de acceso es una vista cerrada: no debe crear scroll en la página. */
+html:has(.login-contenedor) {
+  height: 100%;
+  overflow: hidden;
+  scrollbar-gutter: auto;
+}
+html:has(.login-contenedor) body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+html:has(.login-contenedor) #app-root {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.login-contenedor {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  padding: clamp(10px, 2vh, 16px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.login-tarjeta {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+.login-emoji { font-size: 56px; animation: bounce 1.5s infinite; }
+.login-tarjeta h1 { font-size: 2rem; font-weight: 800; color: #2b2b2b; margin: 12px 0 6px; }
+.login-sub { color: #888; font-size: 0.85rem; margin: 0 0 24px; }
+#form-login { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+
+
+@media (max-height: 760px) {
+  .login-contenedor { padding: 8px; }
+  .login-tarjeta { padding: 24px 24px; border-radius: 14px; }
+  .login-emoji { font-size: 46px; }
+  .login-tarjeta h1 { font-size: 1.65rem; margin: 8px 0 4px; }
+  .login-sub { margin-bottom: 16px; }
+  .login-aviso { margin-top: 14px; padding: 9px 11px; line-height: 1.4; }
+}
+
+@media (max-height: 620px) {
+  .login-tarjeta { padding: 16px 20px; }
+  .login-emoji { font-size: 38px; }
+  .login-tarjeta h1 { font-size: 1.4rem; }
+  .login-sub { margin-bottom: 10px; }
+  .login-aviso { display: none; }
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <app-view-clase data-app-component="clase">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+<section class="app-vista vista-estabilizada" data-app-view="clase" hidden="">
+    <template shadowrootmode="open">
+     <link data-dsd-shell-css="1" href="/css/componentes/carcasasombra.css" rel="stylesheet">
+      <slot>
+      </slot>
+     </link>
+    </template>
+    <cabecera-grado data-component="cabecera-grado">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="column cabecera">
+      <span id="emoji-grado">
+      </span>
+      <div class="titulo-con-boton">
+       <h1 id="titulo-grado">
+       </h1>
+      </div>
+     </div>
+    </cabecera-grado>
+    <lista-asignaturas data-component="lista-asignaturas">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="column" id="lista-asignaturas">
+      <p id="sin-rama" aria-hidden="true"></p>
+     </div>
+    </lista-asignaturas>
+   </section>
+  </app-view-clase>
+ <script src="../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

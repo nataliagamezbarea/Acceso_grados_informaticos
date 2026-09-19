@@ -1,0 +1,296 @@
+/* ============================================================
+   RESPONSIVO — COLUMNAS Y CABECERAS PDF
+   Lineas: < 100 | Nombres en espanol
+============================================================ */
+#ov .ovcols {
+  flex: 1 1 0;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+#ov .ovcol {
+  flex: 1 1 0;
+  width: 50%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #0f172a;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+html:not(.modo-oscuro) #ov .ovcol {
+  background: #ffffff; border-color: #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+#ov .col-header {
+  flex: 0 0 auto;
+  height: 42px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  font-weight: 700;
+  font-size: 13px;
+  border-bottom: 1px solid #1e293b;
+  background: #131d31;
+  color: #e2e8f0;
+}
+html:not(.modo-oscuro) #ov .col-header { background: #f1f5f9; border-bottom-color: #e2e8f0; color: #1e293b; }
+#ov .visor-responsive-switch { display: none; }
+#ov .col-header.orig { background: #26131c; color: #fca5a5; border-bottom: 1px solid #3f1d24; }
+#ov .col-header.clean { background: #0f291e; color: #86efac; border-bottom: 1px solid #144230; }
+html:not(.modo-oscuro) #ov .col-header.orig {
+  background: #fee2e2; color: #991b1b; border-bottom-color: #fecaca;
+}
+html:not(.modo-oscuro) #ov .col-header.clean {
+  background: #dcfce7; color: #166534; border-bottom-color: #bbf7d0;
+}
+/* V — Selector Original / Cómo quedaría en tablet y móvil.
+   El HTML ya lo contiene; estas reglas hacen que no quede oculto por
+   la regla base de escritorio y permiten alternar una sola vista. */
+@container app (max-width: 1100px){
+  #ov .visor-responsive-switch {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 7px;
+    background: var(--panel-bg, #f8fafc);
+    border-bottom: 1px solid var(--border-color, #cbd5e1);
+    box-sizing: border-box;
+  }
+  #ov .visor-responsive-switch button {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 280px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    border-radius: 9px;
+    padding: 8px 12px;
+    font: 700 12px/1.15 system-ui, sans-serif;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  #ov .visor-responsive-switch button:active { transform: scale(.98); }
+  #ov .visor-responsive-switch button.active {
+    background: #2563eb; color: #ffffff; border-color: #2563eb; box-shadow: 0 2px 8px rgba(37,99,235,.22);
+  }
+  html.modo-oscuro #ov .visor-responsive-switch { background: #0f172a; border-bottom-color: #1e293b; }
+  html.modo-oscuro #ov .visor-responsive-switch button {
+    background: #172033; color: #cbd5e1; border-color: #334155;
+  }
+  html.modo-oscuro #ov .visor-responsive-switch button.active {
+    background: #2563eb; color: #ffffff; border-color: #2563eb;
+  }
+  #ov .ovcols { display: block; width: 100%; min-width: 0; padding: 6px; overflow: hidden; }
+  #ov .ovcol {
+    display: none; width: 100%; max-width: 100%; flex: none; min-width: 0; height: 100%; min-height: 0;
+  }
+  #ov .ovcol.is-responsive-active { display: flex; flex-direction: column; }
+  #ov .doc-viewer { width: 100%; min-width: 0; height: 100%; min-height: 0; overflow: auto; padding: 8px; }
+  #ov .doc-page, #ov .pdfjs-page { width: auto; max-width: 100%; margin-inline: auto; }
+}
+@container app (max-width: 600px){
+  #ov .visor-responsive-switch { gap: 5px; padding: 6px; }
+  #ov .visor-responsive-switch button { padding: 8px 7px; font-size: 11px; }
+  #ov .visor-responsive-switch button i { margin-right: 3px; }
+  #ov .ovcols { padding: 4px; }
+  #ov .doc-viewer { padding: 5px; }
+}
+/* V — Selector Original / Cómo quedaría: visible también en tablets y
+   en dispositivos táctiles aunque el viewport CSS sea algo mayor. */
+
+/* ============================================================
+   CONTROL DE VISTA DEL VISOR
+   IMPORTANTE: aquí se usa @media (viewport real), no @container.
+   El selector SOLO existe cuando hay una única vista visible.
+   En escritorio (dos visores) desaparece por completo.
+============================================================ */
+
+/* ESCRITORIO / DOS VISORES */
+@media (min-width: 1101px) {
+  #ov .visor-responsive-switch {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+  }
+
+  #ov .ovcols {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+
+  #ov .ovcols > visor-columna {
+    display: contents !important;
+  }
+
+  #ov .ovcols .ovcol,
+  #ov .ovcols .ovcol.is-responsive-active {
+    display: flex !important;
+    width: 50% !important;
+    max-width: none !important;
+    flex: 1 1 0 !important;
+  }
+}
+
+/* TABLET / MÓVIL — una sola vista */
+@media (max-width: 1100px) {
+  #ov .visor-responsive-switch {
+    display: flex !important;
+    visibility: visible !important;
+    width: min(100% - 16px, 520px) !important;
+    height: auto !important;
+    min-height: 44px !important;
+    max-height: none !important;
+    margin: 8px auto 6px !important;
+    padding: 4px !important;
+    gap: 4px !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    background: rgba(248, 250, 252, .96) !important;
+    border: 1px solid #dbe3ee !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .06) !important;
+    box-sizing: border-box !important;
+  }
+
+  #ov .visor-responsive-switch button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    flex: 1 1 0 !important;
+    width: 50% !important;
+    min-width: 0 !important;
+    min-height: 34px !important;
+    margin: 0 !important;
+    padding: 6px 12px !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    color: #64748b !important;
+    font: 700 12px/1.15 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    transition: background .16s ease, color .16s ease, box-shadow .16s ease, transform .12s ease !important;
+  }
+
+  #ov .visor-responsive-switch button i {
+    margin-right: 6px !important;
+    opacity: .8 !important;
+  }
+
+  #ov .visor-responsive-switch button:hover:not(.active) {
+    background: #eef2f7 !important;
+    color: #334155 !important;
+  }
+
+  #ov .visor-responsive-switch button:active {
+    transform: scale(.985) !important;
+  }
+
+  #ov .visor-responsive-switch button.active {
+    background: #ffffff !important;
+    color: #2563eb !important;
+    box-shadow: 0 1px 5px rgba(15, 23, 42, .12) !important;
+  }
+
+  #ov .ovcols {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #ov .ovcols > visor-columna {
+    display: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    flex: 1 1 auto !important;
+  }
+
+  #ov .ovcols > visor-columna:has(.ovcol.is-responsive-active) {
+    display: flex !important;
+  }
+
+  #ov .ovcols .ovcol {
+    display: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+  }
+
+  #ov .ovcols .ovcol.is-responsive-active {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+  }
+}
+
+/* MÓVIL PEQUEÑO */
+@media (max-width: 600px) {
+  #ov .visor-responsive-switch {
+    width: calc(100% - 10px) !important;
+    min-height: 40px !important;
+    margin: 5px auto !important;
+    padding: 3px !important;
+    border-radius: 10px !important;
+  }
+
+  #ov .visor-responsive-switch button {
+    min-height: 32px !important;
+    padding: 5px 7px !important;
+    font-size: 11px !important;
+  }
+
+  #ov .visor-responsive-switch button i {
+    margin-right: 4px !important;
+  }
+}
+
+/* MODO OSCURO */
+@media (max-width: 1100px) {
+  html.modo-oscuro #ov .visor-responsive-switch {
+    background: rgba(15, 23, 42, .96) !important;
+    border-color: #263449 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .22) !important;
+  }
+
+  html.modo-oscuro #ov .visor-responsive-switch button {
+    color: #94a3b8 !important;
+  }
+
+  html.modo-oscuro #ov .visor-responsive-switch button:hover:not(.active) {
+    background: #172033 !important;
+    color: #e2e8f0 !important;
+  }
+
+  html.modo-oscuro #ov .visor-responsive-switch button.active {
+    background: #1e293b !important;
+    color: #60a5fa !important;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .28) !important;
+  }
+}

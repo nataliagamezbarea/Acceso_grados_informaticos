@@ -1,0 +1,39 @@
+/* Estructura de la lista de archivos y conmutador de visibilidad para invitados */
+.contenedor-archivos-lista {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.contenedor-archivos-lista .item-archivo {
+  display: flex;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.caja-permiso-invitado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  clear: both;
+  box-sizing: border-box;
+  margin-top: 16px;
+}
+
+.caja-permiso-invitado .permiso-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}

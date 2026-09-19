@@ -1,0 +1,53 @@
+/* ===== visor_modal.css ===== */
+/* OVERLAY DE COMPARACIÓN Y REVISIÓN */
+.ov {
+  position: fixed; inset: 0; background: var(--bg-main); z-index: 100; display: none; flex-direction: column;
+}
+.ov.on { display: flex; }
+.ov-topbar {
+  background: var(--bg-bar);
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.ov-nav-group { display: flex; align-items: center; gap: 6px; }
+.ov-nav-group button, .back-btn {
+  background: #2b2247;
+  color: #fff;
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s;
+}
+.ov-nav-group button:hover, .back-btn:hover { background: #3c3063; }
+.ov-counter {
+  font-size: 11.5px; font-weight: 700; background: #1a142e; padding: 5px 10px; border-radius: 5px;
+}
+.ov-files {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ov-right { display: flex; align-items: center; gap: 12px; }
+.ov-close {
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: 700;
+  padding: 0 4px;
+}
+.ov-close:hover { color: #fff; }

@@ -1,0 +1,85 @@
+/* Único recuadro visible de esta vista. */
+body:has(app-view-apuntes) .detalle-apunte {
+  display: block !important;
+  width: 100% !important;
+  max-width: 820px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-left: 1px solid #334155 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .22) !important;
+  backdrop-filter: none !important;
+  text-align: left !important;
+}
+
+/* El fondo azul/morado secundario no existe dentro de la tarjeta. */
+html.modo-oscuro body:has(app-view-apuntes) .detalle-apunte,
+body:has(app-view-apuntes) .detalle-apunte {
+  background-color: #1e293b !important;
+}
+
+html.modo-oscuro body:has(app-view-apuntes) .flex.center,
+html.modo-oscuro body:has(app-view-apuntes) #contenido {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Si el contenido supera el alto disponible, permitimos desplazamiento sin romper el centro. */
+@media (max-height: 720px) {
+  body:has(app-view-apuntes) #app-root {
+    height: auto !important;
+    min-height: 100dvh !important;
+    display: grid !important;
+    place-items: start center !important;
+    padding-top: 76px !important;
+    padding-bottom: 16px !important;
+  }
+}
+
+/* ============================================================================
+   V — CENTRADO HORIZONTAL REAL
+   Mantiene exactamente el centrado vertical conseguido en V y fuerza que
+   toda la cadena de contenedores de la vista se centre de izquierda a derecha.
+   No cambia colores, tamaños verticales ni la lógica de carga.
+   ============================================================================ */
+body:has(app-view-apuntes) #app-root {
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+  align-items: center !important;
+}
+
+body:has(app-view-apuntes) app-view-apuntes,
+body:has(app-view-apuntes) app-view-apuntes > .app-vista,
+body:has(app-view-apuntes) vista-apuntes,
+body:has(app-view-apuntes) vista-apuntes > .flex.center {
+  justify-self: center !important;
+  align-self: center !important;
+}
+
+body:has(app-view-apuntes) .flex.center {
+  width: min(100%, 860px) !important;
+  max-width: 860px !important;
+  margin-inline: auto !important;
+  padding-inline: 0 !important;
+  align-items: center !important;
+}
+
+body:has(app-view-apuntes) #contenido {
+  width: min(100%, 820px) !important;
+  max-width: 820px !important;
+  margin-inline: auto !important;
+  align-self: center !important;
+  justify-self: center !important;
+}
+
+body:has(app-view-apuntes) .detalle-apunte {
+  width: min(100%, 820px) !important;
+  max-width: 820px !important;
+  margin-inline: auto !important;
+  align-self: center !important;
+  justify-self: center !important;
+}

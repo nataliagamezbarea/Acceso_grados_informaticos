@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-apunte-barra data-component="apunte">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="apunte-bar css-inline-3f42941089" id="apunteBar">
+    <div class="css-inline-aaec585398">
+     <i class="fa-solid fa-book-bookmark css-inline-345565bae7">
+     </i>
+     <span class="css-inline-9e4071690f">
+      Nombre del Apunte:
+     </span>
+     <input class="css-inline-565f82f7db" data-event-change="updateApunteName(this.value)" id="inputApunteName" placeholder="APUNTE_TEMA_..." type="text"/>
+     <span class="css-inline-0bc6ca3e5a">
+      (Guardado en
+      <code>
+       NUEVOS_APUNTES/
+      </code>
+      y CSV)
+     </span>
+    </div>
+    <div class="css-inline-a76d597a07">
+     <button class="css-inline-e4627f80c3" data-event-click="verApunteActual()" id="btnVerApunte" title="Abrir el PDF del apunte ya compilado (NUEVOS_APUNTES)">
+      <i class="fa-solid fa-book-open">
+      </i>
+      VER APUNTE (PDF)
+     </button>
+     <button class="css-inline-76ba0b08aa" data-event-click="compileCurrentApunte()" id="btnCompilarApunte">
+      <i class="fa-solid fa-file-pdf">
+      </i>
+      HACER / COMPILAR APUNTE (LaTeX)
+     </button>
+    </div>
+   </div>
+  </visor-apunte-barra>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

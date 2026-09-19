@@ -1,0 +1,76 @@
+@container navbar-general (max-width:500px) {
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > #btn-inicio,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > #volver-atras,
+  html.visor-admin-active #barra-superior > .nav-left > #btn-inicio,
+  html.visor-admin-active #barra-superior > .nav-left > #volver-atras,
+  html.visor-admin-embed #barra-superior > .nav-left > #btn-inicio,
+  html.visor-admin-embed #barra-superior > .nav-left > #volver-atras,
+  body.visor-admin-active #barra-superior > .nav-left > #btn-inicio,
+  body.visor-admin-active #barra-superior > .nav-left > #volver-atras,
+  body.visor-admin-embed #barra-superior > .nav-left > #btn-inicio,
+  body.visor-admin-embed #barra-superior > .nav-left > #volver-atras {
+    display:none !important;
+  }
+
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-home,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-back,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-home,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-back,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-home,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-back,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-home,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-back,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-home,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-back {
+    display:flex !important;
+  }
+}
+
+/* ---- Orden VISOR-ADMIN: siempre Home, Back, Rama, Trimestre, extras... ---- */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .navbar-popup-item,
+html.visor-admin-active #navbar-menu-panel .navbar-popup-item,
+html.visor-admin-embed #navbar-menu-panel .navbar-popup-item,
+body.visor-admin-active #navbar-menu-panel .navbar-popup-item,
+body.visor-admin-embed #navbar-menu-panel .navbar-popup-item {
+  order:initial !important;
+}
+
+/* ---- Rama/Trimestre nunca se convierten en una fila conjunta ---- */
+#navbar-menu-panel .popup-rama,
+#navbar-menu-panel .popup-trimestre {
+  display:none !important;
+  flex-direction:row !important;
+  justify-content:flex-start !important;
+}
+#navbar-menu-panel .popup-rama > span,
+#navbar-menu-panel .popup-trimestre > span {
+  flex:0 0 70px !important;
+  min-width:70px !important;
+}
+#navbar-menu-panel .popup-rama > select,
+#navbar-menu-panel .popup-trimestre > select {
+  flex:1 1 auto !important;
+  min-width:0 !important;
+  width:auto !important;
+}
+
+/* ---- No mostrar hamburguesa mientras todo cabe ---- */
+@container navbar-general (min-width:761px) {
+  #barra-superior > .nav-right > .btn-hamburguesa {
+    display:none !important;
+  }
+}
+
+/* VISOR-ADMIN: la hamburguesa pertenece al bloque derecho de la navbar.
+   El marcado standalone del visor queda alineado con el template general. */
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > #btn-hamburguesa {
+  position:relative;
+  z-index:5;
+}
+
+/* ============================================================================
+   FIX FINAL — VISOR-ADMIN: EL BLOQUE DERECHO COLAPSA TODO JUNTO
+   Cuando los extras del Visor-Admin ya no caben, también colapsan al mismo
+   tiempo los 3 controles generales (Modo oscuro, Ajustes y Cerrar sesión).
+   La hamburguesa queda visible y el popup recibe las copias de ambos bloques.
+   ============================================================================ */

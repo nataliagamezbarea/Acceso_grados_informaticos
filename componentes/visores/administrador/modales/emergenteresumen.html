@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-modal-resumen data-component="modal-resumen">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="summaryModal">
+    <modal-caja data-component="modal-caja">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="blocker-box css-inline-5dc4a242f4">
+      <div class="css-inline-42a734a9dd">
+       <h3 class="css-inline-b44a765b41">
+        <i class="fa-solid fa-chart-pie">
+        </i>
+        Resumen General de Cambios (
+        <span id="sumDegreeTitle">
+        </span>
+        )
+       </h3>
+        <button class="modal-close-btn custom-modal-close-x css-inline-5592c5dc14" id="summaryModalCloseBtn" onclick="closeSummaryModal()" data-event-click="closeSummaryModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+         ✕ Cerrar
+        </button>
+      </div>
+      <div class="css-inline-009ec4c69c" id="summaryBody">
+       <!-- Se rellenará dinámicamente con JS -->
+      </div>
+     </div>
+    </modal-caja>
+   </div>
+  </visor-modal-resumen>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

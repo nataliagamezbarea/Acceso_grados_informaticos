@@ -1,0 +1,123 @@
+#emoji-grado, #emoji-grado img.emoji {
+  display: inline-block; font-size: 72px; animation: bounce 2.5s ease-in-out infinite;
+}
+h1 {
+  font-family: var(--font-heading, "Poppins", sans-serif);
+  font-size: clamp(0.9rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  color: #1e1b4b;
+  margin: 0 0 6px;
+  letter-spacing: -0.03em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: auto;
+  text-align: center;
+}
+.selector-rama {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #475569;
+  width: 520px;
+  max-width: 95vw;
+  box-sizing: border-box;
+}
+.selector-rama label { white-space: nowrap; flex-shrink: 0; }
+.selector-rama select {
+  max-width: 50%;
+  padding: 10px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9999px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  background: #ffffff;
+  color: #0f172a;
+}
+main.contenido { text-align: start; }
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

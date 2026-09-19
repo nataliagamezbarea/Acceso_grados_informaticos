@@ -1,0 +1,52 @@
+html:not(.modo-oscuro) #customModalCloseBtn:hover,
+html:not(.modo-oscuro) .custom-modal-close-x:hover,
+html:not(.modo-oscuro) .modal-close-btn:hover,
+html:not(.modo-oscuro) .css-inline-5592c5dc14:hover,
+html:not(.modo-oscuro) .css-inline-6fec57c101:hover,
+html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-6fec57c101:hover {
+  background: #fee2e2 !important;
+  color: #dc2626 !important;
+  border-color: #fecaca !important;
+}
+
+html:not(.modo-oscuro) .css-inline-5e325d435e,
+html:not(.modo-oscuro) .blocker-box hr,
+html:not(.modo-oscuro) #modalLimpiarDatos hr {
+  border: 0 !important;
+  border-top: 1px solid #e2e8f0 !important;
+  margin: 8px 0 !important;
+}
+
+html:not(.modo-oscuro) #summaryBody,
+html:not(.modo-oscuro) .summary-grid .summary-card {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+html:not(.modo-oscuro) .summary-stat-val,
+html:not(.modo-oscuro) .summary-title,
+html:not(.modo-oscuro) #sumDegreeTitle {
+  color: #0f172a !important;
+}
+
+html:not(.modo-oscuro) .summary-stat-lbl {
+  color: #64748b !important;
+}
+
+html:not(.modo-oscuro) .blocker-cancel-btn {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+  padding: 6px 18px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.15s !important;
+}
+
+html:not(.modo-oscuro) .blocker-cancel-btn:hover {
+  background: #fee2e2 !important;
+  color: #dc2626 !important;
+  border-color: #fca5a5 !important;
+}

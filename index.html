@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="app-preboot" lang="es">
+ <head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <base href="/"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="css/app/arranque.css" rel="stylesheet"/>
+  <script src="js/app/tema_precarga.js">
+  </script>
+  <link href="css/app/tema_base.css" rel="stylesheet"/>
+  <title>
+   Grados Informáticos
+  </title>
+  <link href="css/global/base.css" rel="stylesheet"/>
+  <link href="css/componentes/componentes.css" rel="stylesheet"/>
+  <link href="css/componentes/carcasasombra.css" rel="stylesheet"/>
+  <link href="css/global/iconos.css" rel="stylesheet"/>
+  <link href="css/botones/animaciones.css" rel="stylesheet"/>
+  <link href="css/botones/claro.css" rel="stylesheet"/>
+  <link href="css/botones/oscuro.css" rel="stylesheet"/>
+  <link href="css/login.css" rel="stylesheet"/>
+  <link href="css/inicio/base.css" rel="stylesheet"/>
+  <link href="css/inicio/base2.css" rel="stylesheet"/>
+  <link href="css/inicio/selector.css" rel="stylesheet"/>
+  <link href="css/inicio/flexion.css" rel="stylesheet"/>
+  <link href="css/inicio/claro.css" rel="stylesheet"/>
+  <link href="css/inicio/clarovarios.css" rel="stylesheet"/>
+  <link href="css/inicio/oscuro.css" rel="stylesheet"/>
+  <link href="css/inicio/oscurovarios.css" rel="stylesheet"/>
+  <link href="css/notificador/emergente.css" rel="stylesheet"/>
+  <link href="css/notificador/notificacion.css" rel="stylesheet"/>
+  <link href="css/notificador/progreso.css" rel="stylesheet"/>
+  <link href="css/notificador/insignias.css" rel="stylesheet"/>
+  <link href="css/archivos/archivos.css" rel="stylesheet"/>
+  <link href="css/archivos/archivosvarios.css" rel="stylesheet"/>
+  <link href="css/ajustes/boton.css" rel="stylesheet"/>
+  <link href="css/ajustes/panel.css" rel="stylesheet"/>
+  <link href="css/ajustes/panelvarios.css" rel="stylesheet"/>
+  <link href="css/ajustes/paneloscuro.css" rel="stylesheet"/>
+  <link href="css/ajustes/paneloscurovarios.css" rel="stylesheet"/>
+  <link href="css/ajustes/oscuro.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <script src="js/app/arranque.js">
+  </script>
+  <link href="css/app/utilidades.css" rel="stylesheet"/>
+  <script src="js/app/visoradmin_embed.js">
+  </script>
+  <script src="js/app/reabrir_visor.js">
+  </script>
+  <script src="js/base/iniciotema.js">
+  </script>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+
+
+
+
+</head>
+ <body class="app-booting pagina-index">
+  <div id="app-preloader" role="status" aria-live="polite" aria-label="Cargando aplicación">
+   <span>Cargando...</span>
+  </div>
+
+  <div class="app-navbar-host" id="app-navbar-cargando"></div>
+
+  <template id="navbar-template">
+   <navbar-general data-component="navbar-general">
+    <header aria-label="Navegación principal" class="barra-superior navbar-template" id="barra-superior">
+      <div class="nav-left" aria-label="Navegación izquierda">
+        <a aria-label="Inicio" href="/" id="btn-inicio" title="Inicio">
+          <i aria-hidden="true" class="fa-solid fa-house"></i><span class="nav-label">Inicio</span>
+        </a>
+        <a aria-label="Volver atrás" class="btn-volver navbar-boton" href="/" id="volver-atras" title="Volver atrás">
+          <i aria-hidden="true" class="fa-solid fa-arrow-left"></i><span class="nav-label">Volver atrás</span>
+        </a>
+
+        <!-- SOLO VISOR-ADMIN: izquierda -->
+        <div class="nav-left-selectors" aria-label="Rama y trimestre">
+          <div class="visor-admin-spa-only navbar-visor-left visor-navbar-selector" data-visor-navbar="rama">
+            <label for="navbar-rama-select">Rama</label>
+            <select id="navbar-rama-select" aria-label="Rama"></select>
+          </div>
+          <div class="visor-admin-spa-only navbar-visor-left visor-navbar-selector" data-visor-navbar="trimestre">
+            <label for="navbar-trimestre-select">Trimestre</label>
+            <select id="navbar-trimestre-select" aria-label="Trimestre">
+              <option value="">Todos los trimestres</option>
+              <option value="1">1º Trimestre</option>
+              <option value="2">2º Trimestre</option>
+              <option value="3">3º Trimestre</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-center-actions" aria-label="Acciones centrales">
+        <!-- EDITAR es el único elemento del CENTRO en Inicio. -->
+        <button aria-label="Modo lectura/edición" class="btn-modo-edicion navbar-admin-only" id="boton-modo-edicion" title="Lectura / Edición" type="button" data-navbar-admin-only="true">
+          <span class="btn-icon">📖</span><span class="btn-text">EDITAR</span>
+        </button>
+      </div>
+
+      <div class="nav-right" aria-label="Acciones de usuario">
+        <!-- SOLO VISOR-ADMIN: derecha -->
+        <div class="nav-page-actions visor-admin-spa-only" aria-label="Acciones del Visor-Admin">
+          <button class="navbar-page-extra" type="button" data-navbar-action="openSummaryModal" title="Resumen">
+            <i aria-hidden="true" class="fa-solid fa-chart-pie"></i><span>Resumen</span>
+          </button>
+          <button class="navbar-page-extra" type="button" data-navbar-action="sincronizarGitHub" title="Sincronizar GitHub">
+            <i aria-hidden="true" class="fa-brands fa-github"></i><span>Sincronizar GitHub</span>
+          </button>
+          <button class="navbar-page-extra" type="button" data-navbar-action="compileAllApuntes" title="Apuntes">
+            <i aria-hidden="true" class="fa-solid fa-copy"></i><span>Apuntes</span>
+          </button>
+          <button class="navbar-page-extra" type="button" data-navbar-action="openLimpiarDatosModal" title="Terminado">
+            <i aria-hidden="true" class="fa-solid fa-broom"></i><span>Terminado</span>
+          </button>
+        </div>
+
+        <div class="nav-general-actions" aria-label="Acciones generales">
+          <button aria-label="Cambiar tema" class="btn-modo-oscuro navbar-boton" id="btn-modo-oscuro" title="Modo oscuro" type="button">
+            <i aria-hidden="true" class="fa-solid fa-moon"></i><span class="nav-label">Modo oscuro</span>
+          </button>
+          <button aria-label="Ajustes" class="btn-ajustes navbar-boton navbar-admin-only" id="boton-ajustes" title="Ajustes" type="button" data-navbar-admin-only="true">
+            <i aria-hidden="true" class="fa-solid fa-gear"></i><span class="nav-label">Ajustes</span>
+          </button>
+          <button aria-label="Cerrar sesión" class="btn-cerrar-sesion navbar-boton" id="btn-cerrar-sesion" title="Cerrar sesión" type="button">
+            <i aria-hidden="true" class="fa-solid fa-right-from-bracket"></i><span class="nav-label">Cerrar sesión</span>
+          </button>
+        </div>
+
+        <!-- HAMBURGUESA: queda fuera del grupo general para que nunca desaparezca cuando colapsa la navbar. -->
+        <button class="btn-hamburguesa navbar-boton" id="btn-hamburguesa" type="button" popovertarget="navbar-menu-panel" popovertargetaction="toggle" aria-label="Abrir menú de navegación" title="Menú">
+          <i aria-hidden="true" class="fa-solid fa-bars hamburguesa-icono"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="navbar-menu-panel" id="navbar-menu-panel" popover="auto" aria-label="Menú de navegación">
+      <div class="navbar-popup-list" role="menu">
+        <a class="navbar-popup-item popup-home" href="/" title="Inicio">
+          <i class="fa-solid fa-house"></i><span>Inicio</span>
+        </a>
+        <a class="navbar-popup-item popup-back" href="/" title="Volver atrás">
+          <i class="fa-solid fa-arrow-left"></i><span>Volver atrás</span>
+        </a>
+        <button class="navbar-popup-item popup-edit navbar-admin-only" type="button" data-navbar-popup-edit="true" title="Lectura / Edición">
+          <i class="fa-solid fa-pen-to-square"></i><span>Lectura / Edición</span>
+        </button>
+        <div class="navbar-popup-item popup-selector popup-rama visor-admin-only" data-visor-popup="rama">
+          <span>Rama</span><select id="navbar-rama-popup" aria-label="Rama"></select>
+        </div>
+        <div class="navbar-popup-item popup-selector popup-trimestre visor-admin-only" data-visor-popup="trimestre">
+          <span>Trimestre</span><select id="navbar-trimestre-popup" aria-label="Trimestre">
+            <option value="">Todos los trimestres</option>
+            <option value="1">1º Trimestre</option><option value="2">2º Trimestre</option><option value="3">3º Trimestre</option>
+          </select>
+        </div>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="openSummaryModal" title="Resumen">
+          <i class="fa-solid fa-chart-pie"></i><span>Resumen</span>
+        </button>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="sincronizarGitHub" title="Sincronizar GitHub">
+          <i class="fa-brands fa-github"></i><span>Sincronizar GitHub</span>
+        </button>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="compileAllApuntes" title="Apuntes">
+          <i class="fa-solid fa-copy"></i><span>Apuntes</span>
+        </button>
+        <button class="navbar-popup-item popup-extra visor-admin-only" type="button" data-navbar-action="openLimpiarDatosModal" title="Terminado">
+          <i class="fa-solid fa-broom"></i><span>Terminado</span>
+        </button>
+        <button class="navbar-popup-item popup-theme" type="button" data-navbar-action="theme">
+          <i class="fa-solid fa-moon"></i><span>Modo oscuro</span>
+        </button>
+        <button class="navbar-popup-item popup-settings navbar-admin-only" type="button" data-navbar-action="settings">
+          <i class="fa-solid fa-gear"></i><span>Ajustes</span>
+        </button>
+        <button class="navbar-popup-item popup-logout" type="button" data-navbar-action="logout">
+          <i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span>
+        </button>
+      </div>
+    </div>
+   </navbar-general>
+  </div>
+
+  </template>
+  <script src="js/componentes/navbar-template.js" defer></script>
+
+  <template id="template-cargando-vista">
+   <app-cargando class="app-vista-cargando" aria-live="polite" role="status">
+    <span class="app-vista-cargando-text">Cargando...</span>
+   </app-cargando>
+  </template>
+  <main aria-live="polite" id="app-root" hidden></main>
+  <!-- Navbar global: registra la API que usan las extensiones del Visor-Admin. -->
+  <script src="js/componentes/cargando.js">
+  </script>
+  <script src="js/carcasaaplicacion.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="js/servicios/estado.js">
+  </script>
+  <script src="js/permisos/cifrado.js">
+  </script>
+  <script src="js/permisos/supabase.js">
+  </script>
+  <script src="js/permisos/github.js">
+  </script>
+  <script src="js/permisos/visibilidad/configuracion/constantes.js"></script>
+  <script src="js/permisos/visibilidad/configuracion/normalizacion.js"></script>
+  <script src="js/permisos/visibilidad/configuracion/repositorios.js"></script>
+  <script src="js/permisos/visibilidad/red/http/peticiones.js"></script>
+  <script src="js/permisos/visibilidad/red/github/api-github.js"></script>
+  <script src="js/permisos/visibilidad/red/github/historial.js"></script>
+  <script src="js/permisos/visibilidad/archivos/csv/procesador-csv.js"></script>
+  <script src="js/permisos/visibilidad/archivos/rutas/analizador-rutas.js"></script>
+  <script src="js/permisos/visibilidad/operaciones/consulta/consulta-visibilidad.js"></script>
+  <script src="js/permisos/visibilidad/operaciones/publicacion/constructor-publico.js"></script>
+  <script src="js/permisos/visibilidad/operaciones/publicacion/gestor-movimiento.js"></script>
+  <script src="js/permisos/visibilidad/index.js"></script>
+  <link rel="stylesheet" href="css/modales/popupreutilizable.css">
+  <link rel="stylesheet" href="css/notificador/posicion_notificaciones.css">
+  <link rel="stylesheet" href="css/archivos/permisos_invitado.css">
+  <link rel="stylesheet" href="css/visor/documento_movil.css">
+  <link href="css/barranavegacion/navbar.css" rel="stylesheet" data-navbar-template="1">
+  <script src="js/modales/popupreutilizable.js"></script>
+  <script src="js/permisos/visibilidad.js"></script>
+  <script src="js/base/permisos.js">
+  </script>
+  <script src="js/base/autenticacion.js">
+  </script>
+  <script src="js/base/navbar_acciones.js"></script>
+ <script src="js/descargas/notificador-spa.js"></script>
+<script src="js/descargas/estado-cargando-real.js"></script>
+<script src="js/permisos/permiso-switch-componente.js"></script>
+</body>
+</html>
+

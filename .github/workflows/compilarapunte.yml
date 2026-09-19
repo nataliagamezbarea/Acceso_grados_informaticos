@@ -1,0 +1,551 @@
+name: Compilar Apuntes LaTeX
+
+on:
+  workflow_dispatch:
+    inputs:
+      grado:
+        description: 'Nombre del grado o rama'
+        required: false
+        default: ''
+      archivo:
+        description: 'Nombre del archivo original'
+        required: false
+        default: ''
+      nombre_apunte:
+        description: 'Nombre del apunte compilado'
+        required: false
+        default: ''
+      repo_general:
+        description: 'Repositorio general (owner/repo)'
+        required: false
+        default: ''
+      gh_token:
+        description: 'Token de acceso al repositorio privado'
+        required: false
+        default: ''
+      accion:
+        description: 'Accion a ejecutar (compile_apunte / compile_all_apuntes)'
+        required: false
+        default: 'compile_apunte'
+      payload:
+        description: 'Payload JSON adicional'
+        required: false
+        default: '{}'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+        continue-on-error: true
+
+      - name: Instalar xelatex y dependencias
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex texlive-fonts-recommended texlive-fonts-extra \
+            texlive-latex-extra texlive-lang-spanish fontconfig 2>&1 | tail -3
+          pip install pymupdf --quiet
+          fc-cache -f
+
+      - name: Compilar apunte LaTeX con titulos y estilo de bibliotecas_latex
+        env:
+          GH_TOKEN_GENERAL: ${{ github.event.inputs.gh_token || secrets.GH_TOKEN_GENERAL || secrets.GITHUB_TOKEN }}
+          GH_REPO_GENERAL: ${{ github.event.inputs.repo_general }}
+          INPUT_GRADO: ${{ github.event.inputs.grado }}
+          INPUT_ARCHIVO: ${{ github.event.inputs.archivo }}
+          INPUT_NOMBRE_APUNTE: ${{ github.event.inputs.nombre_apunte }}
+          INPUT_ACCION: ${{ github.event.inputs.accion || 'compile_apunte' }}
+          INPUT_PAYLOAD: ${{ github.event.inputs.payload || '{}' }}
+        run: |
+          python3 - << 'PYEOF'
+          import base64, hashlib, json, os, re, shutil, subprocess, sys, tempfile
+          import urllib.error, urllib.request
+          from pathlib import Path
+
+          TOKEN   = os.environ.get("GH_TOKEN_GENERAL") or ""
+          REPO    = os.environ.get("GH_REPO_GENERAL") or ""
+          GRADO   = os.environ.get("INPUT_GRADO") or ""
+          ARCHIVO = os.environ.get("INPUT_ARCHIVO") or ""
+          NOMBRE  = os.environ.get("INPUT_NOMBRE_APUNTE") or Path(ARCHIVO).stem
+          WORKSPACE = Path(os.environ.get("GITHUB_WORKSPACE", os.getcwd()))
+
+          print(f"[START] Compilando apunte: nombre='{NOMBRE}' archivo='{ARCHIVO}' grado='{GRADO}' repo='{REPO}'")
+
+          # ── Helpers GitHub API ────────────────────────────────────────────────
+          def gh_api(path, method="GET", data=None, repo=None):
+              target_repo = repo or REPO
+              if not target_repo:
+                  return {"ok": False, "error": "No target repository specified"}
+              url = f"https://api.github.com/repos/{target_repo}/{path}"
+              hdrs = {
+                  "Accept": "application/vnd.github.v3+json",
+                  "User-Agent": "LaTeX-Worker"
+              }
+              if TOKEN:
+                  hdrs["Authorization"] = f"Bearer {TOKEN}"
+              body = None
+              if data is not None:
+                  body = json.dumps(data).encode("utf-8")
+                  hdrs["Content-Type"] = "application/json"
+              req = urllib.request.Request(url, data=body, headers=hdrs, method=method)
+              try:
+                  with urllib.request.urlopen(req) as r:
+                      raw = r.read()
+                      return {"ok": True} if r.status == 204 else json.loads(raw)
+              except urllib.error.HTTPError as e:
+                  return {"ok": False, "status": e.code, "error": e.read().decode(errors="ignore")}
+              except Exception as e:
+                  return {"ok": False, "error": str(e)}
+
+          def download_bytes(repo_path, ref):
+              res = gh_api(f"contents/{repo_path}?ref={ref}")
+              if "content" in res:
+                  return base64.b64decode(res["content"])
+              dl = res.get("download_url")
+              if dl:
+                  req = urllib.request.Request(
+                      dl, headers={"Authorization": f"Bearer {TOKEN}"} if TOKEN else {})
+                  try:
+                      with urllib.request.urlopen(req) as r:
+                          return r.read()
+                  except Exception:
+                      pass
+              return None
+
+          def find_file(branch, filename):
+              base = Path(filename).name.lower()
+              tree = gh_api(f"git/trees/{branch}?recursive=1")
+              if "tree" not in tree:
+                  return filename
+              for item in tree["tree"]:
+                  p = item.get("path", "")
+                  if p.lower() == filename.lower() or p.lower().endswith("/" + filename.lower()):
+                      return p
+              for item in tree["tree"]:
+                  p = item.get("path", "")
+                  if Path(p).name.lower() == base:
+                      return p
+              return filename
+
+          def upload_file(path, content_bytes, branch):
+              data = {
+                  "message": f"Compilar apunte LaTeX: {Path(path).name}",
+                  "content": base64.b64encode(content_bytes).decode("utf-8"),
+                  "branch": branch
+              }
+              check = gh_api(f"contents/{path}?ref={branch}")
+              if "sha" in check:
+                  data["sha"] = check["sha"]
+              return gh_api(f"contents/{path}", method="PUT", data=data)
+
+          def update_revision(nombre_limpio):
+              try:
+                  res = gh_api("contents/almacen/datos/revision.json?ref=master")
+                  rev, sha = {}, None
+                  if "content" in res:
+                      sha = res.get("sha")
+                      rev = json.loads(base64.b64decode(res["content"]))
+                  k = f"{GRADO}::{ARCHIVO}"
+                  rev.setdefault(k, {})
+                  rev[k]["inc_apunte"] = True
+                  rev[k]["nombre_apunte"] = nombre_limpio
+                  rev[k]["latex_compilado"] = True
+                  d = {
+                      "message": f"revision.json: compilado {nombre_limpio}",
+                      "content": base64.b64encode(
+                          json.dumps(rev, indent=2, ensure_ascii=False).encode("utf-8")
+                      ).decode("utf-8"),
+                      "branch": "master"
+                  }
+                  if sha:
+                      d["sha"] = sha
+                  gh_api("contents/almacen/datos/revision.json", method="PUT", data=d)
+                  print(f"[OK] revision.json actualizado para {k}")
+              except Exception as e:
+                  print(f"[WARN] Error actualizando revision.json: {e}")
+
+          # ── Preparar directorio de trabajo y biblioteca LaTeX ─────────────────
+          workdir = Path(tempfile.mkdtemp())
+          bib_dst = workdir / "bibliotecas_latex"
+          fonts_dst = bib_dst / "fonts"
+
+          # 1) Buscar si bibliotecas_latex ya existe en el workspace del checkout
+          candidatos_local = [
+              WORKSPACE / "bibliotecas_latex",
+              WORKSPACE / "almacen" / "bibliotecas_latex",
+              Path("/tmp/repo_co/bibliotecas_latex")
+          ]
+          copiada = False
+          for c in candidatos_local:
+              if c.exists() and (c / "estilo.tex").exists():
+                  shutil.copytree(str(c), str(bib_dst))
+                  print(f"[OK] bibliotecas_latex copiada localmente desde {c}")
+                  copiada = True
+                  break
+
+          # 2) Si no existe localmente, descargar vía API desde el repo general
+          if not copiada:
+              print("[INFO] bibliotecas_latex no encontrada localmente, descargando vía API...")
+              bib_dst.mkdir(parents=True, exist_ok=True)
+              fonts_dst.mkdir(parents=True, exist_ok=True)
+
+              estilo_bytes = download_bytes("bibliotecas_latex/estilo.tex", ref="master")
+              if not estilo_bytes:
+                  estilo_bytes = download_bytes("almacen/bibliotecas_latex/estilo.tex", ref="master")
+              if estilo_bytes:
+                  (bib_dst / "estilo.tex").write_bytes(estilo_bytes)
+                  print("[OK] estilo.tex descargado vía API")
+              else:
+                  print("[WARN] No se pudo descargar estilo.tex")
+
+              FUENTES = [
+                  "Baloo2-Bold.ttf", "Baloo2-ExtraBold.ttf", "Fredoka-Bold.ttf",
+                  "Kalam-Bold.ttf", "Kalam-Regular.ttf", "Lobster.ttf",
+                  "Nunito-Bold.ttf", "Nunito-ExtraBold.ttf", "Nunito-Regular.ttf",
+                  "Pacifico.ttf", "PermanentMarker.ttf",
+              ]
+              f_ok = 0
+              for f in FUENTES:
+                  fb = download_bytes(f"bibliotecas_latex/fonts/{f}", ref="master")
+                  if not fb:
+                      fb = download_bytes(f"almacen/bibliotecas_latex/fonts/{f}", ref="master")
+                  if fb:
+                      (fonts_dst / f).write_bytes(fb)
+                      f_ok += 1
+              print(f"[OK] {f_ok}/{len(FUENTES)} fuentes descargadas")
+
+          # ── Descargar documento original y extraer texto ─────────────────────
+          nombre_limpio = NOMBRE or Path(ARCHIVO).stem
+          ruta_original = find_file(GRADO, ARCHIVO) if ARCHIVO else ""
+          texto = ""
+
+          if ruta_original:
+              orig_bytes = download_bytes(ruta_original, ref=GRADO)
+              if orig_bytes:
+                  if ruta_original.lower().endswith(".pdf"):
+                      try:
+                          import pymupdf
+                          doc = pymupdf.open(stream=orig_bytes, filetype="pdf")
+                          texto = "\n".join(p.get_text("text") for p in doc).strip()
+                          doc.close()
+                          print(f"[OK] Texto extraido del PDF ({len(texto)} caracteres)")
+                      except Exception as e:
+                          print(f"[WARN] No se pudo leer PDF con PyMuPDF: {e}")
+                  else:
+                      try:
+                          texto = orig_bytes.decode("utf-8")
+                      except UnicodeDecodeError:
+                          texto = orig_bytes.decode("latin-1", errors="replace")
+                      print(f"[OK] Texto leido de archivo fuente ({len(texto)} caracteres)")
+
+          if not texto.strip():
+              texto = f"1. Introduccion a {nombre_limpio.replace('_', ' ')}\n" \
+                      f"- Conceptos y fundamentos de la materia.\n" \
+                      f"- Procedimientos de configuracion y resolucion tecnica.\n" \
+                      f"- Buenas practicas y recomendaciones de seguridad.\n\n" \
+                      f"IMPORTANTE: Revisar la documentacion y esquemas de trabajo antes de las practicas."
+
+          # ── Funciones de estilo y estructura de TXT para LaTeX ────────────────
+          TITULOS_LETRAS = ["A", "B", "C", "D", "F", "G", "H", "I", "K", "L", "M", "N", "Q"]
+          TITULOS_SOLO = ["C", "D", "F", "H", "I", "K", "L", "M", "N", "Q"]
+          TITULOS_CON_SUB = ["A", "B", "G"]
+          PALETAS_MAP = {
+              "OCEANO": r"\paletaOceano",
+              "BOSQUE": r"\paletaBosque",
+              "CORAL": r"\paletaCoral",
+              "LAVANDA": r"\paletaLavanda"
+          }
+          PALETAS = [r"\paletaOceano", r"\paletaBosque", r"\paletaCoral", r"\paletaLavanda"]
+          VINETAS = ["estrellalist", "bulletlist", "flechalist", "marcalist", "tarealist", "alertalist", "preguntalist"]
+
+          def escape_latex(s):
+              reps = [
+                  ('\\', r'\textbackslash{}'), ('&', r'\&'), ('%', r'\%'), ('$', r'\$'),
+                  ('#', r'\#'), ('_', r'\_'), ('{', r'\{'), ('}', r'\}'),
+                  ('~', r'\textasciitilde{}'), ('^', r'\^{}')
+              ]
+              for old, new in reps:
+                  s = s.replace(old, new)
+              return s
+
+          def format_inline(s):
+              s = escape_latex(s)
+              s = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", s)
+              s = re.sub(r"\*(.+?)\*", r"\\textit{\1}", s)
+              return s
+
+          # ── Parsear metadatos opcionales del TXT ──────────────────────────────
+          raw_lines = [l.rstrip() for l in texto.splitlines()]
+          titulo_txt = nombre_limpio.replace("APUNTE_", "").replace("_", " ").strip()
+          subtitulo_txt = ""
+          paleta_txt = None
+          estilo_txt = None
+
+          body_lines = []
+          in_meta = True
+
+          for l in raw_lines:
+              l_s = l.strip()
+              if in_meta:
+                  if not l_s:
+                      continue
+                  m = re.match(r"^TITULO:\s*(.+)$", l_s, re.IGNORECASE)
+                  if m:
+                      titulo_txt = m.group(1).strip()
+                      continue
+                  m = re.match(r"^SUBTITULO:\s*(.+)$", l_s, re.IGNORECASE)
+                  if m:
+                      subtitulo_txt = m.group(1).strip()
+                      continue
+                  m = re.match(r"^PALETA:\s*(.+)$", l_s, re.IGNORECASE)
+                  if m:
+                      paleta_txt = m.group(1).strip().upper()
+                      continue
+                  m = re.match(r"^(?:ESTILO|ESTILO_TITULO):\s*([A-Za-z])$", l_s, re.IGNORECASE)
+                  if m:
+                      estilo_txt = m.group(1).upper()
+                      continue
+                  in_meta = False
+              body_lines.append(l_s)
+
+          # Paleta aleatoria o personalizada
+          if paleta_txt and paleta_txt in PALETAS_MAP:
+              paleta_cmd = PALETAS_MAP[paleta_txt]
+          else:
+              paleta_cmd = random.choice(PALETAS)
+
+          # Estilo de título aleatorio o personalizado
+          if estilo_txt and estilo_txt in TITULOS_LETRAS:
+              letra = estilo_txt
+          elif subtitulo_txt:
+              letra = random.choice(TITULOS_CON_SUB + TITULOS_SOLO)
+          else:
+              letra = random.choice(TITULOS_SOLO)
+
+          tit_esc = escape_latex(titulo_txt)
+          sub_esc = escape_latex(subtitulo_txt)
+
+          if letra in TITULOS_CON_SUB:
+              comando_titulo = f"\\titulo{letra}{{{tit_esc}}}{{{sub_esc or 'Guía de Estudio'}}}"
+              bloque_subtitulo = ""
+          else:
+              comando_titulo = f"\\titulo{letra}{{{tit_esc}}}"
+              if subtitulo_txt:
+                  # Estilo de subtítulo aleatorio
+                  estilos_sub = [
+                      f"\n\\vspace{{1mm}}\n\\begin{{center}}\\large\\textcolor{{gray}}{{{sub_esc}}}\\end{{center}}\n\\vspace{{4mm}}\n",
+                      f"\n\\vspace{{1mm}}\n\\begin{{center}}\\textcolor{{primary}}{{\\rule{{2.2cm}}{{0.8pt}}}}\\hspace{{4mm}}{{\\large\\headingfont\\color{{ink}} {sub_esc}}}\\hspace{{4mm}}\\textcolor{{primary}}{{\\rule{{2.2cm}}{{0.8pt}}}}\\end{{center}}\n\\vspace{{4mm}}\n",
+                      f"\n\\vspace{{1mm}}\n\\begin{{center}}\\pill[secondary]{{{sub_esc}}}\\end{{center}}\n\\vspace{{4mm}}\n",
+                      f"\n\\vspace{{1mm}}\n\\begin{{center}}\\large\\itshape\\textcolor{{primary}}{{---~{sub_esc}~---}}\\end{{center}}\n\\vspace{{4mm}}\n"
+                  ]
+                  bloque_subtitulo = random.choice(estilos_sub)
+              else:
+                  bloque_subtitulo = ""
+
+          # ── Procesar líneas de contenido ─────────────────────────────────────
+          cuerpo = []
+          en_lista = False
+          vineta_actual = "estrellalist"
+          en_codigo = False
+
+          for l_str in body_lines[:350]:
+              if not l_str:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  continue
+
+              if l_str.startswith("```"):
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  if en_codigo:
+                      cuerpo.append(r"\end{verbatim}")
+                      en_codigo = False
+                  else:
+                      cuerpo.append(r"\begin{verbatim}")
+                      en_codigo = True
+                  continue
+
+              if en_codigo:
+                  cuerpo.append(l_str)
+                  continue
+
+              # Sección principal con anchura de barra aleatoria
+              sec_m = re.match(r"^(?:SECCION:|TEMA\s+\d+:?|UNIDAD\s+\d+:?|\d+\.\s+)(.+)$", l_str, re.IGNORECASE)
+              if sec_m:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  tit_sec = format_inline(sec_m.group(1).strip())
+                  bar_w = random.choice(["2.0cm", "2.6cm", "3.2cm"])
+                  cuerpo.append(f"\n\\vspace{{4mm}}\n\\sectionheader{{{bar_w}}}{{{tit_sec}}}\n\\vspace{{4mm}}\n")
+                  continue
+
+              # Subsección
+              subsec_m = re.match(r"^(?:SUBSECCION:|\d+\.\d+\.?\s+)(.+)$", l_str, re.IGNORECASE)
+              if subsec_m:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  tit_sub = format_inline(subsec_m.group(1).strip())
+                  cuerpo.append(f"\n\\vspace{{3mm}}\n\\noindent{{\\headingfontxb\\fontsize{{13}}{{16}}\\selectfont\\color{{primary}} {tit_sub}}}\\par\\vspace{{2mm}}\n")
+                  continue
+
+              # Callouts y cajas temáticas con estilo aleatorio
+              imp_m = re.match(r"^(?:IMPORTANTE|AVISO|ALERTA):\s*(.+)$", l_str, re.IGNORECASE)
+              if imp_m:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  col_imp = random.choice(["accent", "primary", "secondary"])
+                  cuerpo.append(f"\n\\begin{{tipbox}}[{col_imp}]{{Importante}}{{{format_inline(imp_m.group(1).strip())}}}\n\\end{{tipbox}}\n")
+                  continue
+
+              con_m = re.match(r"^(?:CONSEJO|TIP|RECUERDA):\s*(.+)$", l_str, re.IGNORECASE)
+              if con_m:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  cuerpo.append(f"\n\\begin{{tipbox}}[primary]{{Consejo}}{{{format_inline(con_m.group(1).strip())}}}\n\\end{{tipbox}}\n")
+                  continue
+
+              nota_m = re.match(r"^NOTA:\s*(.+)$", l_str, re.IGNORECASE)
+              if nota_m:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  caja_nota = random.choice(["infobox", "highlightpar"])
+                  if caja_nota == "infobox":
+                      cuerpo.append(f"\n\\infobox{{\\textbf{{Nota: }} {format_inline(nota_m.group(1).strip())}}}\n")
+                  else:
+                      cuerpo.append(f"\n\\begin{{highlightpar}}[pale]{{\\textbf{{Nota: }} {format_inline(nota_m.group(1).strip())}}}\\end{{highlightpar}}\n")
+                  continue
+
+              ejem_m = re.match(r"^(?:EJEMPLO|CASO):\s*(.+)$", l_str, re.IGNORECASE)
+              if ejem_m:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  cuerpo.append(f"\n\\begin{{infobox}}[tertiary]{{\\textbf{{Ejemplo: }} {format_inline(ejem_m.group(1).strip())}}}\\end{{infobox}}\n")
+                  continue
+
+              res_m = re.match(r"^(?:RESUMEN|CONCLUSION):\s*(.+)$", l_str, re.IGNORECASE)
+              if res_m:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+                  cuerpo.append(f"\n\\begin{{highlightpar}}[pale]{{\\textbf{{Resumen: }} {format_inline(res_m.group(1).strip())}}}\\end{{highlightpar}}\n")
+                  continue
+
+              # Elementos de lista (viñeta aleatoria por cada lista)
+              list_m = re.match(r"^[-*•]\s*(.+)$", l_str)
+              if list_m:
+                  if not en_lista:
+                      vineta_actual = random.choice(VINETAS)
+                      cuerpo.append(rf"\begin{{{vineta_actual}}}")
+                      en_lista = True
+                  cuerpo.append(f"  \\item {format_inline(list_m.group(1).strip())}")
+                  continue
+              else:
+                  if en_lista:
+                      cuerpo.append(rf"\end{{{vineta_actual}}}")
+                      en_lista = False
+
+              cuerpo.append(f"{format_inline(l_str)}\\par\n")
+
+          if en_lista:
+              cuerpo.append(rf"\end{{{vineta_actual}}}")
+          if en_codigo:
+              cuerpo.append(r"\end{verbatim}")
+
+          cuerpo_tex = "\n".join(cuerpo)
+
+          # Verificar disponibilidad de estilo.tex
+          estilo_file = bib_dst / "estilo.tex"
+          if estilo_file.exists():
+              encabezado_estilo = r"""\input{bibliotecas_latex/estilo.tex}
+          \usarfondo"""
+          else:
+              encabezado_estilo = r"""\usepackage[utf8]{inputenc}
+          \usepackage[T1]{fontenc}
+          \usepackage[spanish]{babel}
+          \usepackage[a4paper,margin=2cm]{geometry}
+          \usepackage{xcolor,parskip}
+          \definecolor{primary}{HTML}{2563EB}
+          \definecolor{ink}{HTML}{1F2937}"""
+              paleta_cmd = ""
+              comando_titulo = rf"\begin{{center}}{{\huge\bfseries\color{{primary}} {escape_latex(titulo_txt)}}}\end{{center}}"
+              bloque_subtitulo = ""
+
+          tex_documento = rf"""\documentclass[12pt,a4paper]{{article}}
+          {encabezado_estilo}
+
+          \begin{{document}}
+          {paleta_cmd}
+          {comando_titulo}
+          {bloque_subtitulo}
+          {cuerpo_tex}
+
+          \end{{document}}
+          """
+
+          tex_path = workdir / f"{nombre_limpio}.tex"
+          tex_path.write_text(tex_documento, encoding="utf-8")
+          print(f"[OK] Archivo .tex generado: {tex_path} ({tex_path.stat().st_size} bytes)")
+
+          # ── Compilación xelatex ──────────────────────────────────────────────
+          def ejecutar_xelatex():
+              return subprocess.run(
+                  ["xelatex", "-interaction=nonstopmode",
+                   "-output-directory", str(workdir), str(tex_path)],
+                  capture_output=True, cwd=str(workdir), timeout=120
+              )
+
+          r1 = ejecutar_xelatex()
+          pdf_path = workdir / f"{nombre_limpio}.pdf"
+          if pdf_path.exists():
+              ejecutar_xelatex()  # Segunda pasada para resolver fondos y referencias
+
+          if not pdf_path.exists():
+              log = (r1.stdout + r1.stderr).decode(errors="ignore")[-3000:]
+              print(f"[ERROR] xelatex falló:\n{log}")
+              out = {
+                  "ok": False, "total": 1, "compilados": 0, "exitosos": [],
+                  "fallidos": [{"nombre": nombre_limpio, "grado": GRADO,
+                                "archivo": ARCHIVO, "error": "xelatex: " + log[-400:]}]
+              }
+              print(json.dumps(out, ensure_ascii=False))
+              sys.exit(1)
+
+          print(f"[OK] PDF compilado con éxito: {pdf_path.stat().st_size} bytes")
+
+          # ── Subir PDF compilado a apuntes/{nombre_limpio}.pdf ────────────────
+          dest_path = f"apuntes/{nombre_limpio}.pdf"
+          put_res = upload_file(dest_path, pdf_path.read_bytes(), branch=GRADO)
+          if "content" not in put_res and put_res.get("status") not in (200, 201):
+              out = {
+                  "ok": False, "total": 1, "compilados": 0, "exitosos": [],
+                  "fallidos": [{"nombre": nombre_limpio, "grado": GRADO,
+                                "archivo": ARCHIVO, "error": f"Error subiendo PDF a GitHub: {put_res}"}]
+              }
+              print(json.dumps(out, ensure_ascii=False))
+              sys.exit(1)
+
+          print(f"[OK] PDF subido a {dest_path} en rama {GRADO}")
+          update_revision(nombre_limpio)
+
+          out = {
+              "ok": True, "total": 1, "compilados": 1,
+              "exitosos": [{"nombre": nombre_limpio, "grado": GRADO,
+                            "archivo": ARCHIVO, "ruta": dest_path}],
+              "fallidos": []
+          }
+          print(json.dumps(out, ensure_ascii=False))
+          PYEOF

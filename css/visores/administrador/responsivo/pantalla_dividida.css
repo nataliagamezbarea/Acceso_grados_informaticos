@@ -1,0 +1,92 @@
+/* ============================================================
+   ADAPTACIÓN RESPONSIVA EN PANTALLA DIVIDIDA
+   La anchura del contenedor "app" no debe decidir si estamos en
+   una o dos columnas: el visor ocupa el viewport/iframe completo.
+   En escritorio se muestran SIEMPRE las dos vistas y NO aparece
+   el selector "Original / Cómo quedaría".
+============================================================ */
+
+/* ESCRITORIO: dos visores, sin selector responsive. */
+@media (min-width: 1101px) {
+  #ov .visor-responsive-switch {
+    display: none !important;
+  }
+
+  #ov .ovcols {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  #ov .ovcols > visor-columna {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  #ov .ovcols .ovcol,
+  #ov .ovcols .ovcol.is-responsive-active {
+    display: flex !important;
+    flex: 1 1 0 !important;
+    width: 50% !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    flex-direction: column !important;
+  }
+}
+
+/* TABLET/MÓVIL: un solo visor y selector para cambiar entre ambos. */
+@media (max-width: 1100px) {
+  #ov .visor-responsive-switch {
+    display: flex !important;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  #ov .ovcols {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #ov .ovcols > visor-columna {
+    display: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    flex: 1 1 auto !important;
+  }
+
+  #ov .ovcols > visor-columna:has(.ovcol.is-responsive-active) {
+    display: flex !important;
+  }
+
+  #ov .ovcol {
+    display: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: 100% !important;
+  }
+
+  #ov .ovcol.is-responsive-active {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+  }
+}
+
+/* El desplegable de herramientas es exclusivamente para móvil. */
+@media (min-width: 701px) {
+  #ov .visor-mobile-tools-toggle {
+    display: none !important;
+  }
+}

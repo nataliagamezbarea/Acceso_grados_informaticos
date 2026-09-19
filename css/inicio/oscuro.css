@@ -1,0 +1,124 @@
+Estilos de Modo Oscuro para Index y Grados
+   ========================================== */
+
+/* ==========================================
+   Estilos de Modo Oscuro para Index y Grados
+   ========================================== */
+
+html.modo-oscuro {
+  background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 50%, #090d16 100%) fixed; color: #f8fafc;
+}
+html.modo-oscuro h1, html.modo-oscuro h1, html.modo-oscuro #titulo-grado, html.modo-oscuro #titulo-grado, html.modo-oscuro .titulo-texto, html.modo-oscuro .titulo-texto {
+  color: #ffffff; text-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+html.modo-oscuro .selector-rama, html.modo-oscuro .selector-rama {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f8fafc;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+html.modo-oscuro .selector-rama label, html.modo-oscuro .selector-rama label { color: #e2e8f0; }
+html.modo-oscuro .selector-rama select, html.modo-oscuro .selector-rama select {
+  background: #1e293b; border-color: #475569; color: #ffffff;
+}
+html.modo-oscuro .selector-rama select option, html.modo-oscuro .selector-rama select option {
+  background: #1e293b; color: #ffffff;
+}
+html.modo-oscuro #sin-rama, html.modo-oscuro #sin-rama, html.modo-oscuro .sin-datos, html.modo-oscuro .sin-datos {
+  background: rgba(30, 41, 59, 0.75);
+  backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+}
+html.modo-oscuro .flex, html.modo-oscuro .flex, html.modo-oscuro .card, html.modo-oscuro .card {
+  background: rgba(30, 41, 59, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+html.modo-oscuro .flex a, html.modo-oscuro .flex a, html.modo-oscuro .flex span, html.modo-oscuro .flex span {
+  color: #ffffff; font-weight: 600;
+}
+html.modo-oscuro .flex:hover, html.modo-oscuro .flex:hover, html.modo-oscuro .card:hover, html.modo-oscuro .card:hover {
+  background: rgba(51, 65, 85, 0.85);
+  border-color: #818cf8;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -5px rgba(99, 102, 241, 0.35), 0 0 15px rgba(129, 140, 248, 0.2);
+}
+/* Nombre del grado como texto limpio, sin cuadro ni borde extra */
+#titulo-grado, .cabecera #titulo-grado, html.modo-oscuro #titulo-grado, html.modo-oscuro #titulo-grado {
+  background: transparent; border: none; border-radius: 0; box-shadow: none;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

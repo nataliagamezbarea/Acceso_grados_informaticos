@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-estadisticas data-component="estadisticas">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div aria-live="polite" class="stats stats-loading" id="stats">
+    <div class="stats-loading-inner">
+     <i class="fa-solid fa-circle-notch fa-spin">
+     </i>
+     <span>
+      CARGANDO...
+     </span>
+    </div>
+   </div>
+  </visor-estadisticas>
+ <script src="../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

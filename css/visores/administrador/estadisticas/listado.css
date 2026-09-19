@@ -1,0 +1,60 @@
+/* ===== AJUSTE VISUAL: LISTADO DEL VISOR =====
+   Mantiene todas las funciones, pero evita que los contadores y las secciones
+   queden con tamaños/espaciados distintos. */
+.stats {
+  width: min(1440px, calc(100% - 48px));
+  margin: 16px auto 0;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+}
+.stats .stat {
+  min-width: 0;
+  min-height: 52px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+  background: #1e293b;
+  border: 1px solid #334155;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+.stats .stat b { font-size: 16px; line-height: 1; margin-right: 1px; }
+.stats .legend {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  min-height: 34px;
+  padding: 7px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  border-radius: 8px;
+}
+.wrap { width: min(1440px, calc(100% - 48px)); max-width: none; padding: 8px 0 24px; }
+.sec { width: 100%; margin-bottom: 22px; }
+.sec h3, .sec h2 {
+  width: 100%;
+  min-height: 42px;
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #e5e7eb;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.subfolder-header { min-height: 38px; display: flex; align-items: center; gap: 6px; box-sizing: border-box; }

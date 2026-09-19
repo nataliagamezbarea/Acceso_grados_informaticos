@@ -1,0 +1,17 @@
+/* ============================================================================
+   RESPONSIVE DEL LISTADO / GRID DE TARJETAS
+   ============================================================================ */
+@container app (max-width: 720px){
+  .wrap { padding: 12px 12px; }
+  .tabs { padding: 0 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab { padding: 10px 14px; white-space: nowrap; }
+  .stats { padding: 8px 12px; gap: 10px; }
+  .legend { margin-left: 0; flex-wrap: wrap; width: 100%; }
+  .card { padding: 10px 12px; gap: 10px; }
+}
+@container app (max-width: 560px){
+  .card-content-layout { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .card-thumb-box { width: 84px; height: 118px; margin: 0 auto; }
+  .card-info-box { width: 100%; }
+  .card .row { gap: 6px; }
+}

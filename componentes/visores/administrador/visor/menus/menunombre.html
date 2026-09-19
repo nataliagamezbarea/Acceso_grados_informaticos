@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-menu-nombre data-component="menu-nombre">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="floating-name-menu" id="floatingNameMenu">
+    <div class="css-inline-015a5e7fbe">
+     <b>
+      <i class="fa-solid fa-user-slash css-inline-c73cb88578">
+      </i>
+      Opciones del Nombre:
+     </b>
+     <span class="badge v" id="floatNameBadge">
+      Nombre detectado
+     </span>
+    </div>
+    <div class="css-inline-c87525adb8">
+     <button class="css-inline-4d1462c150" data-event-click="handleNombreAction(true)" id="btnEliminarNombre">
+      <i class="fa-solid fa-user-slash">
+      </i>
+      Eliminar Nombre
+     </button>
+     <button class="css-inline-a68719e645" data-event-click="handleNombreAction(false)" id="btnConservarNombre">
+      <i class="fa-solid fa-user-check">
+      </i>
+      Conservar Nombre
+     </button>
+     <button class="css-inline-e8f96255f1" data-event-click="handleNombreAction('eliminar_recuadro')" id="btnBorrarRecuadroNombre">
+      <i class="fa-solid fa-trash">
+      </i>
+      Eliminar Recuadro
+     </button>
+      <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeNombrePopup()" data-event-click="closeNombrePopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+       <i class="fa-solid fa-xmark">
+       </i>
+       Cerrar
+      </button>
+    </div>
+   </div>
+  </visor-menu-nombre>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

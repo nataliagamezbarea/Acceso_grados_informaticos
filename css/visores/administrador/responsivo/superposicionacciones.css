@@ -1,0 +1,71 @@
+/* ============================================================
+   RESPONSIVO — BARRA DE ACCIONES Y CASILLAS DEL VISOR
+   Lineas: < 100 | Nombres en espanol
+============================================================ */
+#ov .ov-actionbar {
+  flex: 0 0 auto;
+  min-height: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #131d31;
+  border-bottom: 1px solid #1e293b;
+}
+html:not(.modo-oscuro) #ov .ov-actionbar { background: #f1f5f9; border-bottom-color: #e2e8f0; }
+#ov .pill-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  width: auto;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+html:not(.modo-oscuro) #ov .pill-check { background: #ffffff; border-color: #cbd5e1; color: #334155; }
+#ov .pill-check:hover { border-color: #38bdf8; background: #1e3a8a; color: #ffffff; }
+#ov .pill-check input[type="checkbox"] {
+  accent-color: #38bdf8; width: 13px; height: 13px; cursor: pointer; margin: 0;
+}
+#ov .btn-add-action {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 4px 10px;
+  height: 26px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+#ov .btn-add-action:hover { filter: brightness(1.15); transform: translateY(-1px); }
+#ov .btn-sm-restore {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  border-radius: 6px;
+  padding: 3px 8px;
+  height: 24px;
+  font-size: 10.5px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+#ov .btn-sm-restore:hover { background: #334155; color: #f1f5f9; }
+#ov .v-divider { width: 1px; height: 18px; background: #334155; margin: 0 2px; }

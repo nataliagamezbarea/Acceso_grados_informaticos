@@ -1,0 +1,80 @@
+/* Popup admin: solo el admin puede ver EDITAR/Ajustes. */
+.navbar-admin-only{
+  display:none;
+  width:0;min-width:0;max-width:0;
+  height:0;min-height:0;max-height:0;
+  margin:0;padding:0;flex:0 0 0;overflow:hidden;
+}
+html[data-rol="admin"] .navbar-admin-only,
+body[data-rol="admin"] .navbar-admin-only{
+  display:inline-flex;
+  width:auto;min-width:0;max-width:none;
+  height:auto;min-height:0;max-height:none;
+  margin:0;padding:0;flex:0 0 auto;overflow:visible;
+}
+html:not([data-rol="admin"]) #navbar-menu-panel .navbar-admin-only,
+body:not([data-rol="admin"]) #navbar-menu-panel .navbar-admin-only{
+  display:none;
+  width:0;min-width:0;max-width:0;
+  height:0;min-height:0;max-height:0;
+  margin:0;padding:0;flex:0 0 0;overflow:hidden;
+}
+
+/* EDITAR rosa. */
+#barra-superior > .nav-center-actions > #boton-modo-edicion{
+  min-width:116px;width:auto;height:42px;min-height:42px;
+  padding:0 16px;box-sizing:border-box;
+  border:1px solid #c94a8d;border-radius:999px;
+  background:var(--navbar-pink,#d65a9b);color:#fff;
+  font:600 14px/1 "Poppins","Segoe UI",sans-serif;
+  white-space:nowrap;box-shadow:0 3px 10px rgba(214,90,155,.22);
+}
+
+/* Tema */
+html.modo-oscuro #barra-superior,body.modo-oscuro #barra-superior,
+html.modo-oscuro #navbar-menu-panel,body.modo-oscuro #navbar-menu-panel{
+  --navbar-bg:#0f172a;--navbar-btn-bg:#111827;
+  --navbar-btn-color:#cbd5e1;--navbar-btn-border:#334155;
+}
+
+/* V20: el centro real es nav-center-actions; nunca se calcula como parte de la izquierda. */
+#barra-superior > .nav-center-actions{
+  flex:1 1 auto;
+  min-width:0;
+  text-align:center;
+}
+#barra-superior > .nav-center-actions > #boton-modo-edicion{
+  position:static;
+  transform:none;
+  margin-inline:auto;
+}
+@container navbar-general (max-width:600px){
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-center-actions > #boton-modo-edicion{
+    display:none;
+    width:0;min-width:0;max-width:0;height:0;min-height:0;max-height:0;
+    margin:0;padding:0;flex:0 0 0;overflow:hidden;
+  }
+}
+
+
+/* V23 FIX: fallback por viewport para el Visor-Admin. La hamburguesa debe
+   seguir visible aunque el host/container query quede con un ancho incorrecto
+   durante el montaje embebido. */
+@media (max-width: 820px){
+  html.visor-admin-active navbar-general #barra-superior > .nav-right > .btn-hamburguesa,
+  html.visor-admin-embed navbar-general #barra-superior > .nav-right > .btn-hamburguesa,
+  body.visor-admin-active navbar-general #barra-superior > .nav-right > .btn-hamburguesa,
+  body.visor-admin-embed navbar-general #barra-superior > .nav-right > .btn-hamburguesa,
+  html.visor-admin-active navbar-general #barra-superior .nav-general-actions > .btn-hamburguesa,
+  html.visor-admin-embed navbar-general #barra-superior .nav-general-actions > .btn-hamburguesa,
+  body.visor-admin-active navbar-general #barra-superior .nav-general-actions > .btn-hamburguesa,
+  body.visor-admin-embed navbar-general #barra-superior .nav-general-actions > .btn-hamburguesa{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+}
+
+/* V24 FIX — VISOR-ADMIN: Inicio, Volver atrás, Rama y Trimestre SIEMPRE
+   permanecen en la barra superior. El menú hamburguesa queda como acceso
+   adicional a las demás acciones, no sustituye estos cuatro controles. */

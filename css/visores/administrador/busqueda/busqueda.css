@@ -1,0 +1,46 @@
+/* ============================================================
+   ESTILOS ESPECÍFICOS DEL COMPONENTE — PARTE 4
+   Lineas: <= 100 | Nombres en espanol
+============================================================ */
+.css-inline-5e325d435e { border: 0; border-top: 1px solid #374151; margin: 4px 0; }
+.css-inline-5fd3120e31 { display: flex; gap: 10px; justify-content: flex-end; }
+.css-inline-63ffcf769e { background: #4b5563; padding: 4px 8px; font-size: 11px; }
+.css-inline-68d9815d1e { color: #38bdf8; }
+.css-inline-6b99de8b69 { display: none; }
+.css-inline-6fec57c101 {
+  background: #374151;
+  color: #fff;
+  border: 0;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.css-inline-746d2e5408 {
+  background: #130f24;
+  border: 1px solid #dc2626;
+  border-radius: 10px;
+  padding: 24px;
+  width: 460px;
+  max-width: 92vw;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  color: #fff;
+}
+.css-inline-75d36b272c { background: #3b82f6; padding: 8px 18px; font-size: 13px; }
+.css-inline-76ba0b08aa {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: 0;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.css-inline-78843b00be { background: #6b7280; }
+.css-inline-78ff47a551 { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.css-inline-82403c4a9c { background: #ef4444; }
+.css-inline-82b57a9ceb { background: #d946ef; }

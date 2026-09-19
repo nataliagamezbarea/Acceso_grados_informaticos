@@ -1,0 +1,151 @@
+/* ============================================================================
+   ASIGNATURA — MODO CLARO
+   Corrección específica para APUNTES / PRÁCTICAS / EJERCICIOS / TAREAS.
+   Estas reglas solo actúan cuando NO está activo el modo oscuro.
+   ============================================================================ */
+html:not(.modo-oscuro) details.detalle-seccion {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06) !important;
+}
+
+html:not(.modo-oscuro) details.detalle-seccion > summary {
+  background: #faf5ff !important;
+  color: #7e22ce !important;
+  border-bottom: 1px solid #f3e8ff !important;
+}
+
+html:not(.modo-oscuro) details.detalle-seccion > summary:hover {
+  background: #f3e8ff !important;
+  color: #6b21a8 !important;
+}
+
+html:not(.modo-oscuro) .contenedor-tablas,
+html:not(.modo-oscuro) #contenedor-apuntes,
+html:not(.modo-oscuro) #contenedor-practicas {
+  background: transparent !important;
+  color: #172033 !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: none !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor.bloque-apuntes {
+  border-left: 5px solid #f59e0b !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor.bloque-ejercicios {
+  border-left: 5px solid #3b82f6 !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor h3 {
+  color: #1e293b !important;
+  text-shadow: none !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor table {
+  background: #ffffff !important;
+  color: #334155 !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor th {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor td {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor tr:hover td {
+  background: #faf5ff !important;
+}
+
+html:not(.modo-oscuro) .bloque-profesor a {
+  color: #2563eb !important;
+}
+
+html:not(.modo-oscuro) .btn-ver-mas-archivos {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border-color: #cbd5e1 !important;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

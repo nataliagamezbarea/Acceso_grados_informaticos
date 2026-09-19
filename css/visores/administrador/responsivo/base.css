@@ -1,0 +1,21 @@
+/* ============================================================
+   RESPONSIVO — CONFIGURACION BASE Y FONDO GLOBAL
+   Lineas: < 100 | Nombres en espanol
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #0f172a;
+  color: #e2e8f0;
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+}
+#app-root { padding-top: 64px; }
+#app-root { background: var(--app-background); color: var(--app-text-color); }
+/* El preboot ya NO oculta la interfaz: el usuario debe ver CARGANDO...
+   mientras GitHub/Supabase recupera ramas y el documento. */
+html.visor-preboot body { visibility: visible; overflow: hidden; }
+#visor-navbar-loading.on { display: flex; visibility: visible; }

@@ -1,0 +1,73 @@
+    html.modo-oscuro .css-inline-91da941fd3,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-91da941fd3 {
+      background: #0f172a !important;
+      border: 1px solid #334155 !important;
+      border-radius: 10px !important;
+      padding: 14px !important;
+      margin-bottom: 20px !important;
+    }
+    html.modo-oscuro .css-inline-12bf8bc54f,
+    html.modo-oscuro .css-inline-e4887c6585,
+    html.modo-oscuro .css-inline-09d05bc230,
+    html.modo-oscuro .css-inline-39805bee3a,
+    html.modo-oscuro #modalLimpiarDatos label {
+      color: #e2e8f0 !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro .css-inline-a1b7c13de2,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-a1b7c13de2 {
+      color: #f87171 !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro .css-inline-f8290b94e3,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-f8290b94e3 {
+      color: #c4b5fd !important;
+      font-weight: 600 !important;
+      font-size: 12.5px !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro #modalLimpiarDatos input[type="checkbox"] {
+      accent-color: #dc2626 !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro #customModalOkBtn,
+    html[data-theme="dark"] #customModalOkBtn,
+    html.modo-oscuro .btn-act.accept,
+    html[data-theme="dark"] .btn-act.accept,
+    html.modo-oscuro .css-inline-90b7755797,
+    html.modo-oscuro .css-inline-75d36b272c {
+      background: #10b981 !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      border-radius: 8px !important;
+      border: none !important;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro #customModalOkBtn:hover,
+    html.modo-oscuro .btn-act.accept:hover,
+    html.modo-oscuro .css-inline-90b7755797:hover,
+    html.modo-oscuro .css-inline-75d36b272c:hover {
+      background: #059669 !important;
+    }
+    html.modo-oscuro .css-inline-f24f90f9ee,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-f24f90f9ee {
+      background: #dc2626 !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      border-radius: 8px !important;
+      border: none !important;
+      padding: 9px 18px !important;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4) !important;
+      cursor: pointer !important;
+    }
+    html.modo-oscuro .css-inline-f24f90f9ee:hover,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-f24f90f9ee:hover {
+      background: #b91c1c !important;
+    }

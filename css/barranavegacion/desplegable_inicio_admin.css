@@ -1,0 +1,89 @@
+/* ---------------- INICIO / ADMIN ----------------
+   Inicio > Volver atrás > Lectura/Edición > derecha */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-nav{
+  display:flex !important;
+  width:100% !important;
+  order:1 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-nav + .popup-left-nav{
+  order:2 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:flex !important;
+  order:3 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  width:100% !important;
+  min-width:0 !important;
+  max-width:none !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  flex:0 0 42px !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general{
+  order:4 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general:nth-child(2){
+  order:5 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-right-logout{
+  order:6 !important;
+}
+
+/* Ajustes: también después de Lectura/Edición si es visible. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general{
+  order:4 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general-group > .popup-general:nth-of-type(2){
+  order:5 !important;
+}
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-general-group > .popup-right-logout{
+  order:6 !important;
+}
+
+/* Nunca introducir Rama/Trimestre en el popup de Inicio. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector{
+  display:none !important;
+}
+
+/* ---------------- VISOR-ADMIN ----------------
+   Inicio > Volver atrás > Rama > Trimestre > extras */
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-nav{
+  display:flex !important;
+  width:100% !important;
+  order:1 !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-nav + .popup-left-nav{
+  order:2 !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector{
+  display:flex !important;
+  order:3 !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-left-selector + .popup-left-selector{
+  order:4 !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-admin-edit{
+  display:none !important;
+}
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open .popup-visor-group > .navbar-popup-item{
+  display:flex !important;
+  order:5 !important;
+}

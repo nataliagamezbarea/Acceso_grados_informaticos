@@ -1,0 +1,49 @@
+/* PRIMER PAINT: nunca mostrar buscador/estadísticas/listado si el documento ya estaba abierto. */
+    html.visor-preboot.visor-document-open visor-busqueda,
+    html.visor-preboot.visor-document-open visor-estadisticas,
+    html.visor-preboot.visor-document-open visor-listado {
+      display:none !important; visibility:hidden !important; pointer-events:none !important;
+    }
+    /* En embebido la navbar ya está fuera del iframe: el overlay empieza en 0. */
+    html.visor-preboot.visor-document-open.visor-embebido #ov {
+      position:fixed !important; inset:0 !important;
+      width:100% !important; height:100dvh !important; max-height:100dvh !important;
+      margin:0 !important;
+    }
+    /* Desktop: dos documentos desde el primer paint; selector completamente fuera. */
+    @media (min-width:1101px) {
+      html.visor-preboot.visor-document-open #ov .visor-responsive-switch { display:none !important; }
+      html.visor-preboot.visor-document-open #ov .ovcols {
+        display:flex !important; flex-direction:row !important; width:100% !important;
+        flex:1 1 0 !important; min-height:0 !important; margin:0 !important;
+      }
+      html.visor-preboot.visor-document-open #ov .ovcols > visor-columna {
+        display:contents !important;
+      }
+      html.visor-preboot.visor-document-open #ov .ovcols .ovcol,
+      html.visor-preboot.visor-document-open #ov .ovcols .ovcol.is-responsive-active {
+        display:flex !important; flex:1 1 0 !important; width:50% !important;
+        max-width:none !important; min-height:0 !important; height:100% !important;
+        flex-direction:column !important;
+      }
+    }
+    /* Responsive: solo una columna desde el primer paint. */
+    @media (max-width:1100px) {
+      html.visor-preboot.visor-document-open #ov .visor-responsive-switch { display:flex !important; }
+      html.visor-preboot.visor-document-open #ov .ovcols {
+        display:flex !important; flex-direction:column !important; flex:1 1 0 !important;
+        min-height:0 !important; overflow:hidden !important;
+      }
+      html.visor-preboot.visor-document-open #ov .ovcols > visor-columna {
+        display:none !important; width:100% !important; min-height:0 !important; height:100% !important;
+      }
+      html.visor-preboot.visor-document-open #ov .ovcols > visor-columna:has(.ovcol.is-responsive-active) {
+        display:flex !important;
+      }
+      html.visor-preboot.visor-document-open #ov .ovcol {
+        display:none !important; width:100% !important; height:100% !important; min-height:0 !important;
+      }
+      html.visor-preboot.visor-document-open #ov .ovcol.is-responsive-active {
+        display:flex !important; flex-direction:column !important; flex:1 1 auto !important;
+      }
+    }

@@ -1,0 +1,85 @@
+.reflow-hotspot {
+  position: absolute;
+  border: 2.5px dashed #d946ef;
+  background: rgba(217, 70, 239, 0.22);
+  box-shadow: 0 0 12px rgba(217, 70, 239, 0.55);
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 25;
+}
+/* ENUNCIADO CREADO MANUALMENTE POR EL USUARIO (NARANJA) */
+.orange-hotspot {
+  position: absolute;
+  cursor: pointer;
+  z-index: 25;
+  border-radius: 3px;
+  border: 2.5px dashed #f97316;
+  background: rgba(249, 115, 22, 0.22);
+  transition: all .15s;
+  pointer-events: auto;
+}
+.orange-hotspot:hover {
+  background: rgba(249, 115, 22, 0.45); box-shadow: 0 0 16px rgba(249, 115, 22, 0.85); border-color: #fb923c;
+}
+/* HOTSPOTS INTERACTIVOS DE ENUNCIADOS */
+.red-hotspot {
+  position: absolute;
+  cursor: pointer;
+  z-index: 25;
+  border-radius: 3px;
+  border: 2px dashed #ef4444;
+  background: rgba(239, 68, 68, 0.18);
+  transition: all .15s;
+  pointer-events: auto;
+}
+.red-hotspot:hover {
+  background: rgba(239, 68, 68, 0.38); box-shadow: 0 0 12px rgba(239, 68, 68, 0.75); border-color: #ff6b6b;
+}
+.green-hotspot {
+  position: absolute;
+  cursor: pointer;
+  z-index: 25;
+  border-radius: 3px;
+  border: 2px dashed #34d399;
+  background: rgba(16, 185, 129, 0.22);
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.35);
+  transition: all .15s;
+  pointer-events: auto;
+}
+.green-hotspot:hover {
+  background: rgba(16, 185, 129, 0.45); box-shadow: 0 0 16px rgba(16, 185, 129, 0.85); border-color: #34d399;
+}
+.gray-hotspot {
+  position: absolute;
+  cursor: pointer;
+  z-index: 25;
+  border-radius: 3px;
+  border: 2.5px dashed #9ca3af;
+  background: rgba(156, 163, 175, 0.18);
+  transition: all .15s;
+  pointer-events: auto;
+}
+.gray-hotspot:hover {
+  background: rgba(156, 163, 175, 0.45);
+  box-shadow: 0 0 16px rgba(156, 163, 175, 0.85);
+  border-color: #e5e7eb;
+}
+/* INDICADORES DE CAMBIOS EN EL PDF RESULTANTE (PANEL DERECHO) */
+.right-green-change-hotspot, .right-gray-change-hotspot {
+  position: absolute;
+  z-index: 10;
+  box-sizing: border-box;
+  border-radius: 4px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+.right-green-change-hotspot {
+  border: 1.5px solid #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.2);
+}
+.right-gray-change-hotspot {
+  border: 1px dashed rgba(100, 116, 139, 0.45); background: rgba(148, 163, 184, 0.07); box-shadow: none;
+}
+/* Panel "2. CÓMO QUEDARÍA": hotspots interactivos visibles con estilos estándar */
+

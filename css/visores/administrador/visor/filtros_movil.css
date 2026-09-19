@@ -1,0 +1,99 @@
+/* ============================================================
+   VISOR ADMIN — FILTROS Y ACCIONES PLEGABLES (MÓVIL / TABLET)
+============================================================ */
+@media (max-width: 900px) {
+  #ov .ov-actionbar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px;
+    padding: 8px;
+  }
+  #ov .ov-actionbar > .v-divider { display: none; }
+  #ov .ov-actionbar > .btn-add-action {
+    width: 100% !important;
+    justify-content: center;
+    min-height: 40px;
+  }
+  #ov .ov-filtro-grupo {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100%;
+    border: 1px solid var(--surface-border, #334155);
+    border-radius: 10px;
+    background: var(--surface-bg, #1e293b);
+    overflow: hidden;
+  }
+  html:not(.modo-oscuro) #ov .ov-filtro-grupo { background: #ffffff; border-color: #e2e8f0; }
+  #ov .ov-filtro-resumen {
+    display: flex !important;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    cursor: pointer;
+    padding: 10px 12px;
+    min-height: 40px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--surface-text, #e2e8f0);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  html:not(.modo-oscuro) #ov .ov-filtro-resumen { color: #334155; }
+  #ov .ov-filtro-resumen::-webkit-details-marker { display: none; }
+  #ov .ov-filtro-resumen::marker { content: ""; }
+  #ov .ov-filtro-resumen-texto { flex: 1 1 auto; min-width: 0; }
+  #ov .ov-filtro-resumen-activos {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #fff;
+    background: #2563eb;
+    border-radius: 9999px;
+    padding: 1px 7px;
+    display: none;
+  }
+  #ov .ov-filtro-resumen-activos:not(:empty) { display: inline-flex; }
+  #ov .ov-filtro-chevron {
+    flex: 0 0 auto;
+    font-size: 11px;
+    opacity: .7;
+    transition: transform .18s ease;
+  }
+  #ov .ov-filtro-grupo[open] > .ov-filtro-resumen .ov-filtro-chevron { transform: rotate(180deg); }
+  #ov .ov-filtro-contenido {
+    display: grid !important;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)) !important;
+    gap: 7px;
+    padding: 4px 10px 12px 10px;
+    border-top: 1px solid var(--surface-border, #334155);
+  }
+  #ov .ov-filtro-grupo[data-ov-grupo="restaurar"] .ov-filtro-contenido {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  }
+  html:not(.modo-oscuro) #ov .ov-filtro-contenido { border-top-color: #e2e8f0; }
+  #ov .ov-filtro-contenido .pill-check,
+  #ov .ov-filtro-contenido .btn-sm-restore {
+    width: 100% !important;
+    min-height: 40px;
+    justify-content: center;
+    font-size: 11px;
+    box-sizing: border-box;
+  }
+  #ov .ov-filtro-contenido .pill-check#lblAutoDelInternet { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  #ov .ov-filtro-contenido,
+  #ov .ov-filtro-grupo[data-ov-grupo="restaurar"] .ov-filtro-contenido {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #ov .ov-filtro-contenido,
+  #ov .ov-filtro-grupo[data-ov-grupo="restaurar"] .ov-filtro-contenido {
+    grid-template-columns: 1fr !important;
+  }
+}

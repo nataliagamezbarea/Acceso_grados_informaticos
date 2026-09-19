@@ -1,0 +1,53 @@
+/* ===== style.css ===== */
+/* ==============================================================================
+   HOJA DE ESTILOS MAESTRA - MODULARIZADA EN ESPAÑOL
+   ============================================================================== */
+/* NAVEGACIÓN DIRECTA ENTRE CAMBIOS DEL PDF (AZUL ELÉCTRICO / CIAN) */
+.nav-change-btn {
+  border: 1px solid #38bdf8;
+  background: #082f49;
+  color: #7dd3fc;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+.nav-change-btn:hover:not(:disabled) {
+  background: #0369a1; color: #fff; box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+.nav-change-btn:disabled { opacity: .35; cursor: not-allowed; }
+.ov-changes-counter {
+  min-width: 44px;
+  text-align: center;
+  color: #bae6fd;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: 1px solid #0369a1;
+}
+.change-nav-active {
+  outline: none;
+  border-width: 2.5px;
+  filter: brightness(1.2);
+  animation: pulseNavHotspot 1.2s infinite ease-in-out;
+}
+.red-hotspot.change-nav-active { border-color: #ef4444; box-shadow: 0 0 18px rgba(239, 68, 68, 0.9); }
+.orange-hotspot.change-nav-active { border-color: #f97316; box-shadow: 0 0 18px rgba(249, 115, 22, 0.9); }
+.blue-name-hotspot.change-nav-active, .right-blue-change-hotspot.change-nav-active {
+  border-color: #3b82f6; box-shadow: 0 0 18px rgba(59, 130, 246, 0.9);
+}
+.school-hotspot.change-nav-active, .right-yellow-change-hotspot.change-nav-active {
+  border-color: #eab308; box-shadow: 0 0 18px rgba(234, 179, 8, 0.9);
+}
+.right-green-change-hotspot.change-nav-active, .green-hotspot.change-nav-active {
+  border-color: #10b981; box-shadow: 0 0 18px rgba(16, 185, 129, 0.9);
+}
+@keyframes pulseNavHotspot {
+  0%, 100% { filter: brightness(1.05); }
+  50% { filter: brightness(1.35); }
+}

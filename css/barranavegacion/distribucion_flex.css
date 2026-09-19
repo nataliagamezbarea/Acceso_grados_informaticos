@@ -1,0 +1,74 @@
+#barra-superior > .nav-left{
+  flex:0 1 auto !important;
+  width:auto !important;
+  max-width:100%;
+}
+#barra-superior > .nav-center-actions{
+  flex:1 1 120px !important;
+  min-width:0 !important;
+  width:auto !important;
+  max-width:none !important;
+  margin-inline:8px;
+}
+#barra-superior > .nav-right{
+  flex:0 1 auto !important;
+  width:auto !important;
+  max-width:100%;
+  margin-left:auto;
+}
+#barra-superior .nav-page-actions,
+#barra-superior .nav-general-actions{
+  flex:0 1 auto !important;
+  min-width:0;
+  flex-wrap:nowrap;
+}
+#barra-superior .nav-left-selectors{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex:0 1 auto;
+  min-width:0;
+  max-width:100%;
+}
+#barra-superior .nav-left-selectors > .navbar-visor-left,
+#barra-superior .nav-left-selectors > .visor-navbar-selector{
+  flex:0 1 auto;
+  min-width:0;
+}
+
+/* El wrapper de Rama/Trimestre del template de Inicio solo existe en visor. */
+navbar-general:not([data-navbar-context="visor-admin"]) #barra-superior .nav-left-selectors{
+  display:none;
+}
+navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-left-selectors{
+  display:flex !important;
+}
+
+/* El popup de edición tiene su propia puerta de admin. El controlador lo
+   muestra/oculta según el rol; aquí no se le aplica .navbar-admin-only, porque
+   ese atributo se marca hidden durante el arranque y puede ganar al CSS. */
+/* Copia de Lectura/Edición del popup: nunca se oculta por defecto con !important.
+   El rol decide si existe y las container queries deciden cuándo se muestra. */
+#navbar-menu-panel .popup-admin-edit{
+  display:none;
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  height:42px;
+  min-height:42px;
+  flex:0 0 42px;
+}
+html[data-rol="admin"] #navbar-menu-panel .popup-admin-edit,
+body[data-rol="admin"] #navbar-menu-panel .popup-admin-edit,
+#app-navbar-cargando.navbar-role-admin #navbar-menu-panel .popup-admin-edit,
+navbar-general[data-role-admin="true"] #navbar-menu-panel .popup-admin-edit{
+  display:flex;
+}
+/* En Visor-Admin esta copia no se muestra: allí no hay modo edición. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-admin-edit{
+  display:none !important;
+}
+
+/* --------------------------------------------------------------------------
+   INICIO — 1º DERECHA
+   -------------------------------------------------------------------------- */

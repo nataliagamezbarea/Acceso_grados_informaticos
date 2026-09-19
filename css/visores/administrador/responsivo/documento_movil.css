@@ -1,0 +1,98 @@
+@media (max-width: 700px) {
+  #ov .ov-topbar {
+    height: auto;
+    min-height: 40px;
+    max-height: none;
+    padding: 3px 5px;
+  }
+
+  #ov .ov-topbar button,
+  #ov .ov-topbar .btn-act,
+  #ov .ov-topbar .back-btn,
+  #ov .ov-topbar .ov-close {
+    min-height: 29px;
+    height: 29px;
+    padding: 0 7px;
+    font-size: 10px;
+  }
+
+  #ov .ov-files {
+    flex: 0 1 140px;
+    font-size: 10px;
+  }
+
+  #ov .visor-mobile-tools-toggle {
+    width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
+    margin: 5px 6px;
+  }
+
+  #ov .visor-responsive-switch {
+    flex: 0 0 auto;
+    min-height: 36px;
+    max-height: 38px;
+    padding: 4px 5px;
+  }
+
+  #ov .ovcols {
+    padding: 4px;
+  }
+
+  #ov .ovcol .col-header {
+    min-height: 32px;
+    max-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #ov .doc-viewer {
+    padding: 4px;
+    overflow: auto;
+    align-items: center;
+  }
+
+  #ov .pdfjs-page,
+  #ov .doc-page {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #ov .ov-topbar {
+    gap: 3px;
+  }
+
+  #ov .ov-nav-group,
+  #ov .ov-right {
+    gap: 3px;
+  }
+
+  #ov .ov-files {
+    display: none;
+  }
+
+  #ov .ov-topbar button,
+  #ov .ov-right .btn-act {
+    min-width: 32px;
+    padding: 0 6px;
+    font-size: 9.5px;
+  }
+
+  #ov .ovcols {
+    padding: 3px;
+  }
+
+  #ov .doc-viewer {
+    padding: 3px;
+  }
+
+  #ov .visor-responsive-switch .visor-view-choice {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 4px 5px;
+    font-size: 9px;
+  }
+}

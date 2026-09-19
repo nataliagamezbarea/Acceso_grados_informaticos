@@ -1,0 +1,138 @@
+/* Animaciones de aparición y desaparición de botones */
+@keyframes animAparecerDescarga {
+  0% { opacity: 0; transform: scale(0.65) translateY(4px); }
+  70% { opacity: 1; transform: scale(1.08) translateY(-1px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes animDesaparecerDescarga {
+  0% { opacity: 1; transform: scale(1); }
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+    margin-left: 0;
+    margin-right: 0;
+    width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-width: 0;
+  }
+}
+.anim-desaparecer-descarga {
+  animation: animDesaparecerDescarga 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+  overflow: hidden;
+}
+.btn-descarga, .btn-descarga-trimestre, .btn-descarga-curso-h1, .btn-descarga-masiva, .btn-seccion-todos, .btn-descarga-asignatura-trimestre, .btn-descarga-asignatura-todos, #btn-descargar-curso-h1 {
+  animation: animAparecerDescarga 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: "Poppins", -apple-system, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.btn-descarga span, .btn-descarga-trimestre span, .btn-descarga-masiva span {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* Span-botón de descarga: se alinea al lado de la última palabra del título sin romper a nueva línea */
+#btn-descargar-curso-h1, .btn-descarga-curso-h1 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(26px, 3.5vw, 30px);
+  height: clamp(26px, 3.5vw, 30px);
+  min-width: 26px;
+  min-height: 26px;
+  padding: 0;
+  margin: 0 0 0 8px;
+  font-size: clamp(11px, 1.6vw, 13px);
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+  border-radius: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

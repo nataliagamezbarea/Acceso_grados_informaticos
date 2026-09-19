@@ -1,0 +1,13 @@
+/* ============================================================
+   TEMA CLARO — ELEMENTOS COMPLEMENTARIOS Y MODALES
+   Lineas: < 100 | Nombres en espanol
+============================================================ */
+html:not(.modo-oscuro) .blocker { background: rgba(15, 23, 42, 0.4); }
+html:not(.modo-oscuro) .blocker-box, html:not(.modo-oscuro) .modal-box {
+  background: #ffffff; color: #0f172a; border: 1px solid #cbd5e1; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+html:not(.modo-oscuro) .summary-grid .summary-card {
+  background: #f8fafc; border: 1px solid #e2e8f0; color: #0f172a;
+}
+html:not(.modo-oscuro) .card { background: #ffffff; border-color: #e2e8f0; color: #0f172a; }
+html:not(.modo-oscuro) .card:hover { background: #f8fafc; border-color: #38bdf8; }

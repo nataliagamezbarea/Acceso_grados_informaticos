@@ -1,0 +1,476 @@
+/* ==========================================================================
+   VISTA DE ACCESO / LOGIN
+   Completamente autocontenida, sin dependencias externas y sin !important
+   ========================================================================== */
+
+html:has(.login-contenedor),
+html:has([data-app-view="login"]:not([hidden])) {
+  height: 100%;
+  overflow: hidden;
+  scrollbar-gutter: auto;
+  color-scheme: light;
+}
+
+html:has(.login-contenedor) body,
+html:has([data-app-view="login"]:not([hidden])) body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color-scheme: light;
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html:has(.login-contenedor) #app-root,
+html:has([data-app-view="login"]:not([hidden])) #app-root,
+body[data-vista="login"] #app-root {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.login-pagina {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Contenedor principal */
+.login-contenedor {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 3vh, 24px);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, #ffffff 0%, #f1f5f9 100%);
+}
+
+/* Tarjeta de login */
+.login-tarjeta {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Emoji / Icono */
+.login-emoji {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 8px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.login-emoji img.emoji {
+  height: 48px;
+  width: 48px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+/* Títulos */
+.login-tarjeta h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 4px 0 2px;
+  letter-spacing: -0.02em;
+}
+
+.login-sub {
+  color: #64748b;
+  font-size: 0.84rem;
+  font-weight: 400;
+  margin: 0 0 18px;
+}
+
+/* Formulario */
+#form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+
+#form-login label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #334155;
+  margin-top: 4px;
+  letter-spacing: 0.01em;
+}
+
+#form-login input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+#form-login input::placeholder {
+  color: #94a3b8;
+}
+
+#form-login input:focus {
+  background: #ffffff;
+  border-color: var(--primary-color, #c14c8a);
+  box-shadow: 0 0 0 3px rgba(193, 76, 138, 0.12);
+}
+
+.login-error {
+  color: #ef4444;
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin: 4px 0 0;
+}
+
+/* Botones genéricos */
+.btn {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botón primario (Iniciar sesión) */
+.btn-primario {
+  margin-top: 12px;
+  background: var(--primary-color, #c14c8a);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(193, 76, 138, 0.25);
+}
+
+.btn-primario:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 5px 14px rgba(193, 76, 138, 0.35);
+}
+
+.btn-primario:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Separador "o" */
+.login-divisor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  color: #94a3b8;
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+.login-divisor::before,
+.login-divisor::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+/* Botón Google */
+.btn-google {
+  background: #ffffff;
+  color: #334155;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.btn-google:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Botón GitHub */
+.btn-github {
+  margin-top: 8px;
+  background: #1e293b;
+  color: #ffffff;
+  border: 1.5px solid #1e293b;
+  box-shadow: 0 2px 6px rgba(30, 41, 59, 0.2);
+}
+
+.btn-github:hover:not(:disabled) {
+  background: #0f172a;
+  border-color: #0f172a;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.3);
+}
+
+/* Botón Invitado */
+boton-invitado {
+  display: block;
+  width: 100%;
+}
+
+#btn-invitado,
+.login-tarjeta #btn-invitado {
+  margin-top: 0;
+  background: #475569;
+  color: #ffffff;
+  border: none;
+  font-size: 0.88rem;
+  box-shadow: 0 2px 8px rgba(71, 85, 105, 0.2);
+}
+
+#btn-invitado:hover:not(:disabled),
+.login-tarjeta #btn-invitado:hover:not(:disabled) {
+  background: #334155;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(51, 65, 85, 0.3);
+}
+
+/* Nota / Aviso informativa sutil y moderna */
+.login-aviso {
+  margin-top: 10px;
+  padding: 6px 10px;
+  background: #f8fafc;
+  border: 1px solid #e9eef4;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 0.68rem;
+  line-height: 1.4;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.login-aviso-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #ede9fe;
+  color: #7c3aed;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.login-aviso strong {
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Estilos adicionales para páginas administrativas */
+.login-botones {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-botones .btn {
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: center;
+  padding: 11px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.login-aviso-institucional {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 16px;
+  text-align: center;
+  line-height: 1.45;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Adaptabilidad vertical */
+@media (max-height: 760px) {
+  .login-tarjeta {
+    padding: 22px 22px;
+    border-radius: 16px;
+  }
+  .login-emoji {
+    font-size: 40px;
+    margin-bottom: 4px;
+  }
+  .login-tarjeta h1 {
+    font-size: 1.45rem;
+  }
+  .login-sub {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+  }
+  .login-divisor {
+    margin: 8px 0;
+  }
+  .btn {
+    padding: 9px 12px;
+    font-size: 0.84rem;
+  }
+  #form-login input {
+    padding: 8px 12px;
+  }
+  .login-aviso {
+    margin-top: 10px;
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-height: 620px) {
+  .login-tarjeta {
+    padding: 14px 18px;
+    border-radius: 14px;
+  }
+  .login-emoji {
+    font-size: 32px;
+    margin-bottom: 2px;
+  }
+  .login-tarjeta h1 {
+    font-size: 1.3rem;
+  }
+  .login-sub {
+    display: none;
+  }
+  .login-divisor {
+    margin: 6px 0;
+  }
+  .btn {
+    padding: 7px 10px;
+    font-size: 0.8rem;
+  }
+  #form-login input {
+    padding: 7px 10px;
+    font-size: 0.82rem;
+  }
+  .login-aviso {
+    display: none;
+  }
+}
+
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

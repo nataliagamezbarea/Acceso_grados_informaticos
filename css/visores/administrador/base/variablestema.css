@@ -1,0 +1,58 @@
+/* Variables del visor administrativo: derivadas del sistema de tema global. */
+:root {
+  --va-bg: var(--app-background);
+  --va-panel: var(--surface-bg);
+  --va-panel-2: var(--surface-subtle);
+  --va-border: var(--surface-border);
+  --va-text: var(--app-text-color);
+  --va-muted: #91a0ba;
+  --va-accent: #60a5fa;
+}
+
+html,
+#app-root { min-height: calc(100dvh - 64px); }
+
+#app-root {
+  background: var(--app-background);
+  color: var(--app-text-color);
+}
+
+#app-root header {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto minmax(360px, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 10px 18px;
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--va-border);
+  box-shadow: var(--navbar-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.header-left { min-width: 0; display: flex; align-items: center; gap: 14px; }
+.header-title { min-width: 0; font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.header-rama-box { flex: 0 0 auto; }
+.header-right { justify-content: flex-end; flex-wrap: wrap; }
+
+.va-back-platform {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 7px 11px;
+  border-radius: 8px;
+  border: 1px solid var(--va-border);
+  background: #172238;
+  color: #dbeafe;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s, border-color .15s, transform .15s;
+}
+
+.va-back-platform:hover { background: #1d2b46; border-color: #3b82f6; transform: translateY(-1px); }

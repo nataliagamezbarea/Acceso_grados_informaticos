@@ -1,0 +1,83 @@
+/* ==========================================================================
+       MODALES Y ALERTAS: CONTRASTE Y COLORES (MODO CLARO Y OSCURO)
+       ========================================================================== */
+    html:not(.modo-oscuro) .blocker,
+    html[data-theme="light"] .blocker,
+    html:not(.modo-oscuro) #customModal,
+    html:not(.modo-oscuro) #summaryModal,
+    html:not(.modo-oscuro) #modalCrearEnunciado,
+    html:not(.modo-oscuro) #modalEditarEnunciado,
+    html:not(.modo-oscuro) #modalLimpiarDatos,
+    html:not(.modo-oscuro) .css-inline-02ecaefe68,
+    html:not(.modo-oscuro) #blocker {
+      background: rgba(15, 23, 42, 0.45) !important;
+      backdrop-filter: blur(4px) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
+    }
+    html:not(.modo-oscuro) .blocker-box,
+    html[data-theme="light"] .blocker-box,
+    html:not(.modo-oscuro) #customModalBox,
+    html[data-theme="light"] #customModalBox,
+    html:not(.modo-oscuro) .modal-box,
+    html:not(.modo-oscuro) .css-inline-1d2beb08d3,
+    html:not(.modo-oscuro) .css-inline-a25ba2b8d1,
+    html:not(.modo-oscuro) .css-inline-5dc4a242f4,
+    html:not(.modo-oscuro) .css-inline-4ce6b84a35,
+    html:not(.modo-oscuro) .css-inline-8d132760b3,
+    html:not(.modo-oscuro) .css-inline-746d2e5408,
+    html:not(.modo-oscuro) #modalLimpiarDatos > div,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-746d2e5408 {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 14px !important;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16) !important;
+    }
+    html:not(.modo-oscuro) #customModalTitle,
+    html[data-theme="light"] #customModalTitle,
+    html:not(.modo-oscuro) .css-inline-e4638fa873,
+    html:not(.modo-oscuro) .modal-title,
+    html:not(.modo-oscuro) .css-inline-b44a765b41,
+    html:not(.modo-oscuro) .css-inline-e7e8278b59,
+    html:not(.modo-oscuro) .css-inline-c47521e0ab,
+    html:not(.modo-oscuro) .css-inline-cb7427136f,
+    html:not(.modo-oscuro) #modalLimpiarDatos h3,
+    html:not(.modo-oscuro) .modal-header h3,
+    html:not(.modo-oscuro) .blocker-box h3 {
+      color: #0f172a !important;
+      font-size: 17px !important;
+      font-weight: 700 !important;
+    }
+    html:not(.modo-oscuro) #customModalText,
+    html[data-theme="light"] #customModalText,
+    html:not(.modo-oscuro) .css-inline-1356299a78,
+    html:not(.modo-oscuro) #blockerText,
+    html:not(.modo-oscuro) .css-inline-226e9adf13,
+    html:not(.modo-oscuro) .css-inline-037aa495e4,
+    html:not(.modo-oscuro) #modalLimpiarDatos p,
+    html:not(.modo-oscuro) .css-inline-1a1d3cb220,
+    html:not(.modo-oscuro) .css-inline-e93923cab2,
+    html:not(.modo-oscuro) .css-inline-4049faa557,
+    html:not(.modo-oscuro) .modal-desc,
+    html:not(.modo-oscuro) .modal-label,
+    html:not(.modo-oscuro) .blocker-box p,
+    html:not(.modo-oscuro) .blocker-box label {
+      color: #334155 !important;
+      font-size: 13.5px !important;
+      font-weight: 500 !important;
+      line-height: 1.55 !important;
+    }
+    html:not(.modo-oscuro) .css-inline-68d9815d1e,
+    html:not(.modo-oscuro) #modalLimpiarDatos #lblRamaLimpiar {
+      color: #2563eb !important;
+      font-weight: 700 !important;
+    }
+    html:not(.modo-oscuro) .css-inline-91da941fd3,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-91da941fd3 {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 10px !important;
+      padding: 14px !important;
+      margin-bottom: 20px !important;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+    }

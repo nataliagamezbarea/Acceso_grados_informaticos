@@ -1,0 +1,100 @@
+/* Modo Oscuro para Ajustes */
+html.modo-oscuro #panel-ajustes {
+  border: none;
+  box-shadow: var(--ajustes-panel-shadow);
+}
+html.modo-oscuro #panel-ajustes .cabecera-ajustes {
+  background: transparent; border: none; color: #f8fafc;
+}
+html.modo-oscuro #panel-ajustes .texto-ajuste strong {
+  color: #f8fafc;
+}
+html.modo-oscuro #panel-ajustes .seccion-ajustes-titulo {
+  color: #818cf8; border-top-color: rgba(51, 65, 85, 0.8);
+}
+html.modo-oscuro #panel-ajustes .btn-cerrar-ajustes:hover {
+  background: #ef4444; color: #ffffff;
+}
+html.modo-oscuro #barra-superior #boton-ajustes,
+html.modo-oscuro #boton-ajustes,
+html.modo-oscuro .btn-ajustes {
+  background: var(--ajustes-btn-bg);
+  border-color: var(--navbar-btn-border);
+  color: var(--navbar-btn-color);
+  box-shadow: var(--navbar-btn-shadow);
+}
+html.modo-oscuro #barra-superior #boton-ajustes:hover, html.modo-oscuro #boton-ajustes:hover, html.modo-oscuro .btn-ajustes:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 22px rgba(99, 102, 241, 0.6);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

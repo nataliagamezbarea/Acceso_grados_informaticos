@@ -1,0 +1,89 @@
+/* La copia de Editar conserva el aspecto compacto de los demás botones. */
+#navbar-menu-panel.navbar-popup-ordered .popup-admin-edit{
+  background:var(--navbar-btn-bg,#fff) !important;
+  color:var(--navbar-btn-color,#475569) !important;
+  border:1px solid var(--navbar-btn-border,#d7e1ec) !important;
+  border-radius:11px !important;
+  box-shadow:none !important;
+}
+#navbar-menu-panel.navbar-popup-ordered .popup-admin-edit:hover{
+  background:var(--navbar-btn-bg,#f8fafc) !important;
+}
+
+
+/* ============================================================================
+   POPUP CANÓNICO BASADO EN TEMPLATE
+   El orden depende exclusivamente del DOM del <template> y de flex.
+   No existen grupos ni order para el popup.
+   ============================================================================ */
+#navbar-menu-panel .navbar-popup-list{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  justify-content:flex-start !important;
+  gap:8px !important;
+  width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+#navbar-menu-panel .navbar-popup-list > .navbar-popup-item{
+  order:initial !important;
+  display:flex !important;
+  flex:0 0 42px !important;
+  width:100% !important;
+  min-width:0 !important;
+  max-width:none !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  margin:0 !important;
+  padding:0 12px !important;
+  box-sizing:border-box !important;
+  align-items:center !important;
+}
+#navbar-menu-panel .navbar-popup-list > .popup-selector{
+  justify-content:flex-start !important;
+}
+#navbar-menu-panel .navbar-popup-list > .popup-selector > span{
+  flex:0 0 70px !important;
+  min-width:70px !important;
+}
+#navbar-menu-panel .navbar-popup-list > .popup-selector > select{
+  flex:1 1 auto !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+}
+#navbar-menu-panel .navbar-popup-list > .popup-edit{
+  background:var(--navbar-btn-bg,#fff) !important;
+  color:var(--navbar-btn-color,#475569) !important;
+  border:1px solid var(--navbar-btn-border,#d7e1ec) !important;
+  border-radius:11px !important;
+  box-shadow:var(--navbar-btn-shadow,0 2px 8px rgba(15,23,42,.04)) !important;
+}
+#navbar-menu-panel .navbar-popup-list > .popup-edit:hover{
+  background:#f8fafc !important;
+}
+/* Inicio: solo Inicio, Volver, Lectura/Edición y generales. */
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-rama,
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-trimestre,
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-extra{
+  display:none !important;
+}
+/* Visor-Admin: justo debajo de Volver van Rama y Trimestre; después las extras. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-edit,
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-settings{
+  display:none !important;
+}
+/* En Visor-Admin no queremos Modo oscuro/Cerrar antes que Rama/Trimestre. */
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-theme,
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-logout{
+  order:20 !important;
+}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-rama{order:3 !important;}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-trimestre{order:4 !important;}
+navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel .popup-extra{order:5 !important;}
+/* En Inicio la Lectura/Edición es inmediatamente la tercera fila. */
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-home{order:1 !important;}
+navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel .popup-back{order:2 !important;}

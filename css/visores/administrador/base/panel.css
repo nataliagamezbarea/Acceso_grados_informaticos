@@ -1,0 +1,48 @@
+/* ============================================================
+   ESTILOS ESPECÍFICOS DEL COMPONENTE — PARTE 1
+   Lineas: <= 100 | Nombres en espanol
+============================================================ */
+/* Estilos específicos de este componente para mantener su presentación. */
+.css-inline-009ec4c69c { max-height: 420px; overflow-y: auto; padding-right: 6px; }
+.css-inline-015a5e7fbe { display: flex; align-items: center; gap: 8px; }
+.css-inline-02ecaefe68 {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+#modalLimpiarDatos.on,
+.css-inline-02ecaefe68.on {
+  display: flex !important;
+}
+.css-inline-037aa495e4 { font-size: 12px; color: #94a3b8; margin-bottom: 16px; }
+.css-inline-070db0b6c3 { background: #f59e0b; }
+.css-inline-09d05bc230 {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; color: #fde047;
+}
+.css-inline-0bc6ca3e5a { font-size: 11px; color: #9ca3af; }
+.css-inline-0e626981d0 { font-size: 38px; color: #34d399; margin-bottom: 10px; }
+.css-inline-0e718c5572 { background: #059669; border: 1px solid #34d399; }
+.css-inline-10828d56e5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #374151;
+  padding-bottom: 8px;
+}
+.css-inline-12bf8bc54f {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; color: #fca5a5;
+}
+.css-inline-1356299a78 {
+  font-size: 13px;
+  color: var(--app-text-muted, #cbd5e1);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  text-align: center;
+}

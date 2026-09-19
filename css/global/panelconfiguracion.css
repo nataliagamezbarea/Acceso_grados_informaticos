@@ -1,0 +1,138 @@
+#panel-ajustes {
+  position: fixed;
+  top: 78px;
+  right: 16px;
+  width: min(360px, calc(100vw - 32px));
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  z-index: 100010;
+  display: none;
+  overflow: hidden;
+  text-align: left;
+  font-family: "Poppins", -apple-system, sans-serif;
+}
+#panel-ajustes span { margin: 0; filter: none; }
+#panel-ajustes.abierto, #panel-ajustes.visible { display: block; }
+#panel-ajustes .cabecera-ajustes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #334155;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+#panel-ajustes .btn-cerrar-ajustes {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  color: #64748b;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+#panel-ajustes .cuerpo-ajustes { padding: 8px 0; max-height: 70vh; overflow-y: auto; }
+#panel-ajustes .fila-ajuste {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 16px;
+  box-sizing: border-box;
+  width: 100%;
+  cursor: pointer;
+}
+#panel-ajustes .fila-ajuste:hover { background: #f8fafc; }
+#panel-ajustes .texto-ajuste {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+#panel-ajustes .texto-ajuste strong {
+  font-size: 13px; color: #1e293b; line-height: 1.25; white-space: normal;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

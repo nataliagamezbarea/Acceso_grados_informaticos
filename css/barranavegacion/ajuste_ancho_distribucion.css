@@ -1,0 +1,89 @@
+#barra-superior > .nav-left,
+#barra-superior > .nav-center-actions,
+#barra-superior > .nav-right {
+  min-width: max-content;
+}
+#barra-superior > .nav-center-actions {
+  flex: 0 0 auto;
+}
+
+/* Corrección puntual: en Visor-Admin no existe contenido central; el espacio
+   flexible vacío no debe empujar el bloque derecho demasiado lejos de la izquierda. */
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-center-actions,
+html.visor-admin-active #barra-superior > .nav-center-actions,
+html.visor-admin-embed #barra-superior > .nav-center-actions,
+body.visor-admin-active #barra-superior > .nav-center-actions,
+body.visor-admin-embed #barra-superior > .nav-center-actions {
+  flex:0 0 0 !important;
+  width:0 !important;
+  min-width:0 !important;
+  max-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}
+
+navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right,
+html.visor-admin-active #barra-superior > .nav-right,
+html.visor-admin-embed #barra-superior > .nav-right,
+body.visor-admin-active #barra-superior > .nav-right,
+body.visor-admin-embed #barra-superior > .nav-right {
+  margin-left:var(--navbar-gap) !important;
+}
+
+/* CORRECCIÓN: no reservar espacio fantasma en INICIO cuando el centro está vacío.
+   Si Lectura/Edición no existe o está oculto (invitado / vista invitado),
+   el bloque central deja de ocupar el flex restante y la derecha se aproxima
+   al contenido real. Con EDITAR visible, se conserva el centrado normal. */
+body.pagina-index #barra-superior > .nav-center-actions:not(:has(> #boton-modo-edicion:not([hidden]))) {
+  flex:0 0 0 !important;
+  width:0 !important;
+  min-width:0 !important;
+  max-width:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}
+
+/* En Inicio, cuando el centro está vacío, la derecha no debe heredar el
+   margin-left:auto que creaba una separación artificial. */
+body.pagina-index #barra-superior > .nav-center-actions:not(:has(> #boton-modo-edicion:not([hidden]))) ~ .nav-right {
+  margin-left:var(--navbar-gap) !important;
+}
+
+/* AJUSTE FINAL: las tres zonas conservan sus extremos reales.
+   Izquierda pegada a la izquierda, centro centrado, derecha pegada a la derecha.
+   No se crea hueco artificial dentro de los extremos. */
+#barra-superior{
+  display:grid !important;
+  grid-template-columns:max-content minmax(0,1fr) max-content !important;
+  grid-template-areas:"left center right" !important;
+  align-items:center !important;
+  column-gap:0 !important;
+}
+#barra-superior > .nav-left{
+  grid-area:left !important;
+  justify-self:start !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 !important;
+}
+#barra-superior > .nav-center-actions{
+  grid-area:center !important;
+  justify-self:center !important;
+  width:max-content !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+}
+#barra-superior > .nav-right{
+  grid-area:right !important;
+  justify-self:end !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 !important;
+}
+/* Cuando el centro no existe/está oculto, no reserva ninguna columna visual. */
+#barra-superior > .nav-center-actions:empty{
+  display:none !important;
+}

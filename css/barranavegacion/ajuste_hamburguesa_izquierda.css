@@ -1,0 +1,84 @@
+/* ===== FINAL OVERRIDE: hamburger + left cluster =====
+   navbar-general NO tiene Shadow DOM en este proyecto: los selectores de
+   abajo son DOM ligero normal (sin :host). */
+
+/* IZQUIERDA: Inicio + Volver son hosts de componentes, no hijos directos
+   con #id. Se controlan por su host para que Flex los mida correctamente. */
+#barra-superior > .nav-left > navbar-boton-inicio,
+#barra-superior > .nav-left > navbar-boton-volver {
+  display:inline-flex !important;
+  flex:0 0 auto !important;
+  min-width:42px !important;
+  width:42px !important;
+  height:42px !important;
+  min-height:42px !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+#barra-superior > .nav-left > navbar-boton-inicio > a,
+#barra-superior > .nav-left > navbar-boton-volver > a,
+#barra-superior > .nav-left > navbar-boton-inicio a,
+#barra-superior > .nav-left > navbar-boton-volver a {
+  width:42px !important;
+  min-width:42px !important;
+  height:42px !important;
+  min-height:42px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box !important;
+}
+
+/* En el nivel final de colapso, ambos desaparecen juntos del header. */
+@container navbar-general (max-width:500px) {
+  #barra-superior > .nav-left > navbar-boton-inicio,
+  #barra-superior > .nav-left > navbar-boton-volver {
+    display:none !important;
+  }
+
+  #navbar-menu-panel:popover-open .popup-home,
+  #navbar-menu-panel:popover-open .popup-back {
+    display:flex !important;
+  }
+}
+
+/* (Bloque histórico eliminado: duplicaba, con selectores ":host(...)" que
+   nunca coincidían con nada -navbar-general no vive en Shadow DOM-, la
+   visibilidad de la hamburguesa y el colapso de Rama/Trimestre/Inicio/Volver
+   de Visor-Admin. Esa lógica ya la cubren, con selectores reales, las reglas
+   "navbar-general[data-navbar-context=\"visor-admin\"] ..." de más arriba. */
+
+/* CIERRE VISUAL DEL POPOVER CUANDO DESAPARECE LA HAMBURGUESA.
+   Sin JavaScript: cuando el mismo container-query oculta la hamburguesa,
+   el popover abierto queda visualmente y funcionalmente cerrado.
+   NOTA: <navbar-general> no tiene Shadow DOM en este proyecto (no hay
+   attachShadow ni customElements.define en el código), así que ":host()"
+   nunca coincidía con nada y esta regla no llegaba a aplicarse nunca.
+   Se sustituye por el mismo patrón de selector "navbar-general[...] ..."
+   que usa el resto del fichero para DOM ligero. */
+@container navbar-general (min-width:761px) {
+  navbar-general:not([data-navbar-context="visor-admin"]) #navbar-menu-panel:popover-open {
+    display:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+    position:fixed !important;
+    width:0 !important;
+    height:0 !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    max-width:0 !important;
+    max-height:0 !important;
+    overflow:hidden !important;
+    padding:0 !important;
+    border:0 !important;
+  }
+}
+
+/* VISOR-ADMIN: el popover se oculta EXACTAMENTE cuando desaparece
+   la hamburguesa. La hamburguesa de Visor-Admin solo se fuerza visible
+   hasta max-width:1000px (ver reglas de arriba); a partir de 1001px no hay
+   ningún override que la muestre, así que la regla genérica de la línea
+   ~2070 la oculta. El cierre del popover usa por tanto el mismo corte
+   (1001px), no el de la izquierda/derecha (que es otro nivel de colapso). */

@@ -1,0 +1,136 @@
+#barra-superior {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 64px;
+  background: var(--navbar-bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  box-sizing: border-box;
+  z-index: 100000;
+}
+#barra-superior #boton-modo-edicion, #boton-modo-edicion {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  height: 40px;
+  padding: 0 16px;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 9999px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+#barra-superior .nav-left { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+#barra-superior .nav-right {
+  display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0;
+}
+#barra-superior #btn-modo-oscuro, #btn-modo-oscuro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 12px;
+  background: var(--navbar-btn-bg);
+  border: 1px solid var(--navbar-btn-border);
+  color: var(--navbar-btn-color);
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--navbar-btn-shadow);
+}
+#barra-superior #btn-modo-oscuro:hover, #btn-modo-oscuro:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+}
+html.modo-oscuro #barra-superior #btn-modo-oscuro, html.modo-oscuro #btn-modo-oscuro, html.modo-oscuro #barra-superior #btn-modo-oscuro, html.modo-oscuro #btn-modo-oscuro {
+  background: #1e293b; border-color: #334155; color: #fbbf24;
+}
+html.modo-oscuro #barra-superior #btn-modo-oscuro:hover, html.modo-oscuro #btn-modo-oscuro:hover, html.modo-oscuro #barra-superior #btn-modo-oscuro:hover, html.modo-oscuro #btn-modo-oscuro:hover {
+  background: #fbbf24; color: #0f172a; border-color: #fbbf24; box-shadow: 0 6px 16px rgba(251, 191, 36, 0.45);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

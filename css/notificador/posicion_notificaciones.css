@@ -1,0 +1,35 @@
+/* Posicionamiento apilado de las notificaciones flotantes de descargas */
+#contenedor-toasts-descarga {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  top: auto;
+  width: min(380px, calc(100vw - 40px));
+  max-width: calc(100vw - 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 10px;
+  z-index: 2147483000;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+#contenedor-toasts-descarga > .toast-descarga-card {
+  display: flex;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+  pointer-events: auto;
+}
+
+#contenedor-toasts-descarga > .toast-descarga-card + .toast-descarga-card {
+  margin-top: 0;
+}

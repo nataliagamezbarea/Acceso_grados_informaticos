@@ -1,0 +1,74 @@
+@container navbar-general (max-width:760px) {
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .nav-page-actions,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .nav-general-actions,
+  html.visor-admin-active #barra-superior > .nav-right > .nav-page-actions,
+  html.visor-admin-active #barra-superior > .nav-right > .nav-general-actions,
+  html.visor-admin-embed #barra-superior > .nav-right > .nav-page-actions,
+  html.visor-admin-embed #barra-superior > .nav-right > .nav-general-actions,
+  body.visor-admin-active #barra-superior > .nav-right > .nav-page-actions,
+  body.visor-admin-active #barra-superior > .nav-right > .nav-general-actions,
+  body.visor-admin-embed #barra-superior > .nav-right > .nav-page-actions,
+  body.visor-admin-embed #barra-superior > .nav-right > .nav-general-actions {
+    display:none !important;
+    width:0 !important;
+    min-width:0 !important;
+    flex:0 0 0 !important;
+    margin:0 !important;
+  }
+
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .btn-hamburguesa,
+  html.visor-admin-active #barra-superior > .nav-right > .btn-hamburguesa,
+  html.visor-admin-embed #barra-superior > .nav-right > .btn-hamburguesa,
+  body.visor-admin-active #barra-superior > .nav-right > .btn-hamburguesa,
+  body.visor-admin-embed #barra-superior > .nav-right > .btn-hamburguesa {
+    display:inline-flex !important;
+  }
+
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-extra,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-theme,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-logout,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-extra,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-theme,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-logout,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-extra,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-theme,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-logout,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-extra,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-theme,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-logout,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-extra,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-theme,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-logout {
+    display:flex !important;
+  }
+}
+
+/* ---- Visor-Admin: después colapsa los SELECTORES de la izquierda ---- */
+@container navbar-general (max-width:580px) {
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-left > .nav-left-selectors,
+  html.visor-admin-active #barra-superior > .nav-left > .nav-left-selectors,
+  html.visor-admin-embed #barra-superior > .nav-left > .nav-left-selectors,
+  body.visor-admin-active #barra-superior > .nav-left > .nav-left-selectors,
+  body.visor-admin-embed #barra-superior > .nav-left > .nav-left-selectors {
+    display:none !important;
+    width:0 !important;
+    min-width:0 !important;
+    flex:0 0 0 !important;
+    margin:0 !important;
+  }
+
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-rama,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-trimestre,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-rama,
+  html.visor-admin-active #navbar-menu-panel:popover-open .popup-trimestre,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-rama,
+  html.visor-admin-embed #navbar-menu-panel:popover-open .popup-trimestre,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-rama,
+  body.visor-admin-active #navbar-menu-panel:popover-open .popup-trimestre,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-rama,
+  body.visor-admin-embed #navbar-menu-panel:popover-open .popup-trimestre {
+    display:flex !important;
+  }
+}
+
+/* ---- Visor-Admin: por último colapsa Inicio + Volver atrás ---- */

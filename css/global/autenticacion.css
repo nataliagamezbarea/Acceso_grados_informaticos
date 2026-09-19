@@ -1,0 +1,103 @@
+.switch-clasico input:checked + .slider-clasico::before { transform: translateX(20px); }
+.btn-descarga-masiva {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #2e7d32;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 18px;
+  font: 600 13px "Poppins", -apple-system, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+  transition: background 0.2s ease, filter 0.2s ease;
+}
+.btn-descarga-masiva:hover { background: #1f6233; }
+.nombre-material {
+  display: inline-block;
+  font-size: clamp(0.8125rem, 1.5vw, 0.9rem);
+  line-height: 1.3;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+/* La autenticación carga en segundo plano: nunca ocultar la navbar ni reservar
+   espacio adicional. El contenido que dependa de Supabase muestra su propio
+   estado "Cargando...". */
+/* La navbar no se muestra hasta que autenticación, rol y tema están listos.
+   Así una recarga de index.html no enseña primero el estado de invitado y después admin. */
+html.auth-cargando:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior,
+html.auth-cargando:not(.visor-admin-active):not(.visor-admin-embed) #app-navbar-cargando {
+  display: none;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

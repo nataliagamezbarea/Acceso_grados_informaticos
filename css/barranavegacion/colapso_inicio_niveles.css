@@ -1,0 +1,69 @@
+#navbar-menu-panel .popup-home,
+#navbar-menu-panel .popup-back,
+#navbar-menu-panel .popup-edit,
+#navbar-menu-panel .popup-rama,
+#navbar-menu-panel .popup-trimestre,
+#navbar-menu-panel .popup-extra,
+#navbar-menu-panel .popup-theme,
+#navbar-menu-panel .popup-settings,
+#navbar-menu-panel .popup-logout {
+  pointer-events:auto !important;
+}
+
+/* ---- Inicio: primero colapsa el bloque DERECHO completo ---- */
+@container navbar-general (max-width:760px) {
+  #barra-superior:not(.visor-admin) > .nav-right > .nav-general-actions {
+    display:none !important;
+    width:0 !important;
+    min-width:0 !important;
+    flex:0 0 0 !important;
+    margin:0 !important;
+  }
+
+  #barra-superior > .nav-right > .btn-hamburguesa {
+    display:inline-flex !important;
+  }
+
+  html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-theme,
+  body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-theme,
+  html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-settings,
+  body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-settings,
+  html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-logout,
+  body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-logout {
+    display:flex !important;
+  }
+}
+
+/* ---- Inicio: después colapsa CENTRO (Lectura/Edición) ---- */
+@container navbar-general (max-width:620px) {
+  html:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-center-actions {
+    display:none !important;
+    width:0 !important;
+    min-width:0 !important;
+    flex:0 0 0 !important;
+    margin:0 !important;
+  }
+
+  html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-edit {
+    display:flex !important;
+  }
+}
+
+/* ---- Inicio: finalmente colapsa IZQUIERDA ---- */
+@container navbar-general (max-width:500px) {
+  html:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-left > #btn-inicio,
+  html:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-left > #volver-atras,
+  body:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-left > #btn-inicio,
+  body:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-left > #volver-atras {
+    display:none !important;
+  }
+
+  html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-home,
+  body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-home,
+  html:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-back,
+  body:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-back {
+    display:flex !important;
+  }
+}
+
+/* ---- Visor-Admin: PRIMERO colapsa TODO EL BLOQUE DERECHO ---- */

@@ -1,0 +1,266 @@
+#app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: clamp(60px, 8vh, 80px);
+  padding-bottom: clamp(20px, 4vh, 40px);
+  margin: 0;
+  overflow-x: hidden;
+}
+.flex.center, div.flex.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: min(1240px, 96vw);
+  margin: 0 auto;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 20px clamp(12px, 3vw, 28px);
+  box-sizing: border-box;
+}
+/* La clase .flex general tiene una decoración lateral púrpura; aquí no corresponde. */
+.flex.center::before, div.flex.center::before,
+.flex.center::after, div.flex.center::after {
+  display: none !important;
+  content: none !important;
+}
+#contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+  gap: 18px;
+}
+.detalle-apunte {
+  display: block;
+  width: min(100%, 820px);
+  max-width: 820px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: #ffffff;
+  padding: clamp(22px, 3.5vw, 36px) clamp(20px, 3.5vw, 36px);
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03);
+  color: #1e293b;
+  text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.detalle-apunte.tema-oculto-invitado {
+  background: #fff5f5; border-color: #fecaca; border-left: 5px solid #ef4444;
+}
+.campo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 12px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+.campo:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+.clave {
+  flex: 1 0 140px;
+  max-width: 100%;
+  font-family: var(--font-heading, "Poppins", sans-serif);
+  font-weight: 600;
+  color: #7e22ce;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+/* Desplegables: el texto siempre queda alineado a la izquierda. */
+.detalle-seccion > summary { text-align: left; text-align-last: left; }
+.detalle-seccion > summary::marker { text-align: left; }
+
+/* Vista de detalle — sin recuadro púrpura ni efecto translúcido */
+html.modo-oscuro .flex.center,
+html.modo-oscuro div.flex.center {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+html.modo-oscuro .detalle-apunte {
+  width: min(100%, 820px) !important;
+  max-width: 820px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-left: 1px solid #334155 !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,.22) !important;
+  backdrop-filter: none !important;
+  text-align: left !important;
+}
+html.modo-oscuro .detalle-apunte .item-archivo {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+.cargando {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #64748b;
+  font-weight: 500;
+}
+html.modo-oscuro .cargando { color: #94a3b8; }
+
+/* ============================================================================
+   VISTA DE DETALLE DE APUNTES
+   El contenido se centra en el espacio REAL disponible bajo la navbar fija.
+   El contenedor de la vista no crea una segunda "caja" de color alrededor
+   del detalle: el único panel visible es .detalle-apunte.
+   ============================================================================ */
+body:has(app-view-apuntes) #app-root {
+  height: auto;
+  min-height: calc(100dvh - 64px);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: clamp(16px, 3vh, 32px) clamp(10px, 2.5vw, 20px) clamp(20px, 4vh, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  box-sizing: border-box;
+}
+
+body:has(app-view-apuntes) app-view-apuntes,
+body:has(app-view-apuntes) app-view-apuntes > .app-vista,
+body:has(app-view-apuntes) vista-apuntes,
+body:has(app-view-apuntes) vista-apuntes > .flex.center {
+  background: transparent !important;
+}
+
+body:has(app-view-apuntes) .flex.center {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 clamp(8px, 2vw, 18px);
+  align-items: center;
+  justify-content: center;
+}
+
+body:has(app-view-apuntes) #contenido {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+/* El panel oscuro es el único recuadro de la vista. */
+body:has(app-view-apuntes) .detalle-apunte {
+  width: min(100%, 820px) !important;
+  max-width: 820px !important;
+  margin: 0 auto !important;
+  text-align: left !important;
+}
+
+html.modo-oscuro body:has(app-view-apuntes) #app-root {
+  background: transparent !important;
+}
+
+/* En pantallas bajas se mantiene accesible sin forzar el contenido fuera del viewport. */
+@media (max-height: 720px) {
+  body:has(app-view-apuntes) #app-root {
+    height: auto;
+    min-height: calc(100dvh - 64px);
+    align-items: flex-start;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,76 @@
+    html:not(.modo-oscuro) #customModalCancelBtn:hover,
+    html:not(.modo-oscuro) .btn-act.skip:hover,
+    html:not(.modo-oscuro) .css-inline-a0fd43aec1:hover,
+    html:not(.modo-oscuro) .css-inline-af9b0a4d92:hover,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-af9b0a4d92:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    #customModalBox {
+      position: relative !important;
+    }
+    #customModalCloseBtn,
+    .custom-modal-close-x {
+      position: absolute !important;
+      top: 12px !important;
+      right: 12px !important;
+      width: 30px !important;
+      height: 30px !important;
+      padding: 0 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 6px !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      cursor: pointer !important;
+      line-height: 1 !important;
+      z-index: 10 !important;
+      border: 1px solid transparent !important;
+    }
+    html:not(.modo-oscuro) #customModalCloseBtn,
+    html[data-theme="light"] #customModalCloseBtn,
+    html:not(.modo-oscuro) .custom-modal-close-x,
+    html:not(.modo-oscuro) .modal-close-btn,
+    html:not(.modo-oscuro) .css-inline-5592c5dc14,
+    html:not(.modo-oscuro) .css-inline-6fec57c101,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-6fec57c101 {
+      background: #f1f5f9 !important;
+      color: #64748b !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 6px !important;
+      cursor: pointer !important;
+    }
+    html:not(.modo-oscuro) #customModalCloseBtn:hover,
+    html[data-theme="light"] #customModalCloseBtn:hover,
+    html:not(.modo-oscuro) .custom-modal-close-x:hover,
+    html:not(.modo-oscuro) .modal-close-btn:hover,
+    html:not(.modo-oscuro) .css-inline-5592c5dc14:hover,
+    html:not(.modo-oscuro) .css-inline-6fec57c101:hover,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-6fec57c101:hover {
+      background: #fee2e2 !important;
+      color: #dc2626 !important;
+      border-color: #fecaca !important;
+    }
+    html:not(.modo-oscuro) .css-inline-5e325d435e,
+    html:not(.modo-oscuro) .blocker-box hr,
+    html:not(.modo-oscuro) #modalLimpiarDatos hr {
+      border: 0 !important;
+      border-top: 1px solid #e2e8f0 !important;
+      margin: 8px 0 !important;
+    }
+    html:not(.modo-oscuro) .modal-input,
+    html:not(.modo-oscuro) .modal-textarea,
+    html:not(.modo-oscuro) #crearStart,
+    html:not(.modo-oscuro) #crearNew,
+    html:not(.modo-oscuro) #editarOldText,
+    html:not(.modo-oscuro) #editarNewText,
+    html:not(.modo-oscuro) .css-inline-2a73309298,
+    html:not(.modo-oscuro) .css-inline-ac88edfb58,
+    html:not(.modo-oscuro) .css-inline-3f6bc2e52d,
+    html:not(.modo-oscuro) .css-inline-faf3deaa8e {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 8px !important;
+    }

@@ -1,0 +1,19 @@
+/* Tablet pequeno: botones comodos y dos columnas para los controles. */
+@container app (max-width: 760px){
+  #app-root { width: 100%; overflow-x: hidden; }
+  #app-root header { width: 100%; padding: 9px 10px; }
+  #app-root header .header-left {
+    width: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 7px;
+  }
+  #app-root header .header-title {
+    width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  #app-root header .header-rama-box { width: 100%; max-width: none; display: flex; }
+  #app-root header .header-rama-label { flex: 0 0 auto; }
+  #app-root header .header-rama-select { flex: 1 1 auto; width: 100%; min-width: 0; }
+}

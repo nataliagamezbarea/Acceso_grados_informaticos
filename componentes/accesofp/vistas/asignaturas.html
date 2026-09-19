@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <app-view-asignaturas data-app-component="asignaturas">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+<section class="app-vista vista-estabilizada" data-app-view="asignaturas" hidden="">
+    <template shadowrootmode="open">
+     <link data-dsd-shell-css="1" href="/css/componentes/carcasasombra.css" rel="stylesheet">
+      <slot>
+      </slot>
+     </link>
+    </template>
+    <vista-trimestre data-component="vista-trimestre">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="container">
+      <div class="portada_emoji_contenedor">
+       <img alt="Portada" id="portada" src="img/portada.jpg"/>
+       <span id="emoji-trimestre">
+        1️⃣
+       </span>
+       <h1 id="numero-trimestre">
+        TRIMESTRE
+       </h1>
+      </div>
+      <div class="column" id="lista-asignaturas">
+      </div>
+     </div>
+    </vista-trimestre>
+   </section>
+  </app-view-asignaturas>
+ <script src="../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

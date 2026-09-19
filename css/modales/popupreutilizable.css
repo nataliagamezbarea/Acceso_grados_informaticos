@@ -1,0 +1,230 @@
+/* Popup único reutilizable: descargas, subidas, permisos, revertir y confirmaciones. */
+.popup-operacion[hidden]{display:none!important}
+.popup-operacion.visible{display:block!important}
+.popup-operacion{
+  position:fixed; right:18px; bottom:calc(18px + var(--altura-cola-descargas, 0px) + 12px); z-index:2147482000;
+  width:410px; max-width:calc(100vw - 24px); box-sizing:border-box;
+  pointer-events:none; font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.popup-operacion__panel{
+  pointer-events:auto; position:relative; width:100%; box-sizing:border-box;
+  padding:15px 15px 14px; border-radius:16px;
+  background:linear-gradient(145deg,rgba(15,23,42,.985),rgba(17,24,39,.975));
+  color:#f8fafc; border:1px solid rgba(148,163,184,.22);
+  box-shadow:0 20px 45px rgba(0,0,0,.42),0 8px 24px rgba(2,6,23,.3);
+  overflow:hidden; animation:popupOperacionEntrada .24s ease-out;
+}
+.popup-operacion__panel::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(120deg,rgba(99,102,241,.07),transparent 45%,rgba(59,130,246,.04))}
+@keyframes popupOperacionEntrada{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.popup-operacion__cabecera{display:grid;grid-template-columns:42px minmax(0,1fr) 30px;gap:11px;align-items:center;position:relative;z-index:1}
+.popup-operacion__icono{
+  width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+  flex:0 0 42px;font-size:17px;color:#93c5fd;background:rgba(59,130,246,.14);
+  border:1px solid rgba(96,165,250,.25);box-sizing:border-box;
+}
+.popup-operacion__icono i{line-height:1}
+.popup-operacion__texto{min-width:0;overflow:hidden}
+.popup-operacion__titulo{margin:0;font-size:13.5px;font-weight:750;line-height:1.25;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:2px}
+.popup-operacion__mensaje{margin:3px 0 0;color:#94a3b8;font-size:11.5px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.popup-operacion__cerrar{
+  width:30px;height:30px;border-radius:9px;border:1px solid rgba(148,163,184,.16);
+  background:rgba(255,255,255,.055);color:#94a3b8;font-size:18px;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.18s ease;z-index:2;
+}
+.popup-operacion__cerrar:hover{color:#fff;background:rgba(239,68,68,.82);border-color:rgba(248,113,113,.65);transform:scale(1.04)}
+.popup-operacion__cuerpo{position:relative;z-index:1;margin-left:53px;margin-top:11px}
+.popup-operacion__progreso{height:7px;width:100%;border-radius:999px;overflow:hidden;background:rgba(148,163,184,.18)}
+.popup-operacion__progreso>div{width:0;height:100%;border-radius:999px;transition:width .35s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,#6366f1,#3b82f6);box-shadow:0 0 10px rgba(59,130,246,.42)}
+.popup-operacion__contador{display:flex;align-items:center;gap:8px;margin-top:8px;min-height:25px}
+.popup-operacion__porcentaje{font-size:13px;font-weight:800;color:#a5b4fc;background:rgba(99,102,241,.15);border:1px solid rgba(129,140,248,.25);padding:3px 9px;border-radius:8px;line-height:1.2}
+.popup-operacion__conteo{font-size:10.5px;color:#64748b}
+.popup-operacion__actual{margin-top:6px;color:#94a3b8;font-size:10.5px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.popup-operacion__acciones{display:flex;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-top:10px}
+.popup-operacion__boton{border:0;border-radius:9px;padding:7px 12px;cursor:pointer;font-weight:650;font-size:11.5px;transition:.18s ease}
+.popup-operacion__boton.primario{background:#2563eb;color:#fff}.popup-operacion__boton.primario:hover{background:#3b82f6}
+.popup-operacion__boton.secundario{background:#334155;color:#f8fafc}.popup-operacion__boton.secundario:hover{background:#475569}
+.popup-operacion__boton:disabled{opacity:.55;cursor:wait}
+.popup-operacion__panel[data-estado="completado"] .popup-operacion__icono{color:#4ade80;background:rgba(34,197,94,.13);border-color:rgba(74,222,128,.25)}
+.popup-operacion__panel[data-estado="error"] .popup-operacion__icono{color:#f87171;background:rgba(239,68,68,.13);border-color:rgba(248,113,113,.25)}
+.popup-operacion__panel[data-tipo="progreso"][data-estado="procesando"] .popup-operacion__icono i{animation:popupPulso 1.2s ease-in-out infinite}
+@keyframes popupPulso{50%{transform:scale(1.08);opacity:.78}}
+.popup-operacion__panel[data-tipo="progreso"][data-estado="procesando"] .popup-operacion__progreso>div{background:linear-gradient(90deg,#6366f1,#3b82f6)}
+.popup-operacion__panel[data-estado="completado"] .popup-operacion__progreso>div{background:linear-gradient(90deg,#10b981,#22c55e);box-shadow:0 0 10px rgba(34,197,94,.4)}
+.popup-operacion__panel[data-estado="error"] .popup-operacion__progreso>div{background:linear-gradient(90deg,#f43f5e,#ef4444);box-shadow:0 0 10px rgba(239,68,68,.4)}
+@media(max-width:600px){
+  .popup-operacion{right:12px;bottom:calc(12px + var(--altura-cola-descargas, 0px) + 10px);width:calc(100vw - 24px);max-width:none}
+  .popup-operacion__panel{padding:13px 13px 12px;border-radius:14px}
+  .popup-operacion__cabecera{grid-template-columns:38px minmax(0,1fr) 29px;gap:9px}
+  .popup-operacion__icono{width:38px;height:38px;flex-basis:38px;border-radius:11px;font-size:16px}
+  .popup-operacion__cuerpo{margin-left:47px;margin-top:9px}
+  .popup-operacion__titulo{font-size:13px}.popup-operacion__mensaje{font-size:11px}.popup-operacion__actual{font-size:10px}
+}
+@media(max-width:360px){.popup-operacion__cuerpo{margin-left:0}.popup-operacion__mensaje,.popup-operacion__actual{white-space:normal}.popup-operacion__contador{margin-top:7px}}
+
+
+/* CAPA: el popup nunca tapa la navbar. La barra y sus iconos permanecen visibles. */
+#barra-superior, #barra-superior > .btn-hamburguesa, #navbar-menu-panel,
+.navbar-menu-backdrop, #menu-hamburguesa-desplegable, #overlay-hamburguesa {
+  /* la propia navbar define sus capas; este bloque evita que el popup la tape */
+}
+@media (max-height: 560px) {
+  .popup-operacion { bottom: 10px; max-height: calc(100dvh - 82px); }
+  .popup-operacion__panel { max-height: calc(100dvh - 82px); overflow-y: auto; }
+}
+
+/* Capas: visibilidad en primer plano y descargas en segundo plano */
+#contenedor-toasts-descarga {
+  z-index: 2147483000 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+}
+.popup-operacion {
+  z-index: 2147483010 !important;
+  bottom: calc(18px + var(--altura-cola-descargas, 0px) + 14px) !important;
+}
+@media (max-width:600px) {
+  .popup-operacion { bottom: calc(12px + var(--altura-cola-descargas, 0px) + 10px) !important; }
+}
+
+/* =========================================================
+   MODO CLARO REAL — popup común de descargas, ocultar,
+   publicar, revertir y confirmaciones.
+   El selector explícito data-theme evita depender únicamente
+   de la clase modo-oscuro durante el arranque de sesión.
+   ========================================================= */
+html[data-theme="light"] .popup-operacion,
+body[data-theme="light"] .popup-operacion,
+html:not(.modo-oscuro) .popup-operacion {
+  color: #1e293b !important;
+}
+html[data-theme="light"] .popup-operacion__panel,
+body[data-theme="light"] .popup-operacion__panel,
+html:not(.modo-oscuro) .popup-operacion__panel {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border: 1px solid #dbe2ea !important;
+  box-shadow: 0 20px 45px rgba(15,23,42,.16) !important;
+}
+html[data-theme="light"] .popup-operacion__panel::after,
+body[data-theme="light"] .popup-operacion__panel::after,
+html:not(.modo-oscuro) .popup-operacion__panel::after {
+  background: none !important;
+}
+html[data-theme="light"] .popup-operacion__titulo,
+body[data-theme="light"] .popup-operacion__titulo,
+html:not(.modo-oscuro) .popup-operacion__titulo { color: #0f172a !important; }
+html[data-theme="light"] .popup-operacion__mensaje,
+body[data-theme="light"] .popup-operacion__mensaje,
+html:not(.modo-oscuro) .popup-operacion__mensaje,
+html[data-theme="light"] .popup-operacion__actual,
+body[data-theme="light"] .popup-operacion__actual,
+html:not(.modo-oscuro) .popup-operacion__actual { color: #64748b !important; }
+html[data-theme="light"] .popup-operacion__icono,
+body[data-theme="light"] .popup-operacion__icono,
+html:not(.modo-oscuro) .popup-operacion__icono {
+  background: #eef2ff !important;
+  color: #4f46e5 !important;
+  border-color: #c7d2fe !important;
+}
+html[data-theme="light"] .popup-operacion__progreso,
+body[data-theme="light"] .popup-operacion__progreso,
+html:not(.modo-oscuro) .popup-operacion__progreso { background: #e2e8f0 !important; }
+html[data-theme="light"] .popup-operacion__porcentaje,
+body[data-theme="light"] .popup-operacion__porcentaje,
+html:not(.modo-oscuro) .popup-operacion__porcentaje {
+  color: #4338ca !important;
+  background: #eef2ff !important;
+  border-color: #c7d2fe !important;
+}
+html[data-theme="light"] .popup-operacion__cerrar,
+body[data-theme="light"] .popup-operacion__cerrar,
+html:not(.modo-oscuro) .popup-operacion__cerrar {
+  background: #f1f5f9 !important;
+  border-color: #dbe2ea !important;
+  color: #64748b !important;
+}
+html[data-theme="light"] .popup-operacion__cerrar:hover,
+body[data-theme="light"] .popup-operacion__cerrar:hover,
+html:not(.modo-oscuro) .popup-operacion__cerrar:hover {
+  color: #fff !important;
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+}
+html[data-theme="light"] .popup-operacion__boton.secundario,
+body[data-theme="light"] .popup-operacion__boton.secundario,
+html:not(.modo-oscuro) .popup-operacion__boton.secundario {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

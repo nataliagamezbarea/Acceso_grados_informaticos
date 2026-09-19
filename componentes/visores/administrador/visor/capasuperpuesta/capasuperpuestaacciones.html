@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-overlay-acciones data-component="acciones">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="ov-actionbar">
+    <button class="btn-act btn-add-action" data-event-click="abrirSelectorAnadir()" title="Añadir: sustituir un enunciado, o marcar un nombre/colegio para borrar">
+     <i class="fa-solid fa-pen-to-square">
+     </i>
+     Añadir
+    </button>
+    <div class="v-divider">
+    </div>
+    <label class="pill-check" id="lblInc">
+     <input data-event-change="setInc(this.checked)" id="cbInc" type="checkbox"/>
+     <i class="fa-solid fa-pen-fancy pill-icon-enc">
+     </i>
+     Enunciados
+    </label>
+    <label class="pill-check" id="lblInt">
+     <input data-event-change="setInt(this.checked)" id="cbInt" type="checkbox"/>
+     <i class="fa-solid fa-user-slash pill-icon-nom">
+     </i>
+     Nombres
+    </label>
+    <label class="pill-check" id="lblCol">
+     <input data-event-change="setCol(this.checked)" id="cbCol" type="checkbox"/>
+     <i class="fa-solid fa-school pill-icon-col">
+     </i>
+     Colegio
+    </label>
+    <label class="pill-check" id="lblImg">
+     <input data-event-change="setImg(this.checked)" id="cbImg" type="checkbox"/>
+     <i class="fa-solid fa-image pill-icon-img">
+     </i>
+     Imágenes
+    </label>
+    <label class="pill-check" id="lblRen">
+     <input data-event-change="setRen(this.checked)" id="cbRen" type="checkbox"/>
+     <i class="fa-solid fa-folder-tree pill-icon-ren">
+     </i>
+     Nombre PDF
+    </label>
+    <label class="pill-check" id="lblApunte">
+     <input data-event-change="setApunte(this.checked)" id="cbApunte" type="checkbox"/>
+     <i class="fa-solid fa-book-open pill-icon-apu">
+     </i>
+     Apunte
+    </label>
+    <label class="pill-check" id="lblAutoDelInternet" title="Si se detecta que una imagen NO existe en Internet, se borra automáticamente">
+     <input data-event-change="setInternet(this.checked)" id="cbBorrarImgInternet" type="checkbox"/>
+     <i class="fa-solid fa-globe pill-icon-net">
+     </i>
+     Internet
+    </label>
+    <div class="v-divider">
+    </div>
+    <button class="btn-sm-restore btn-restore-all" data-event-click="restoreInitialSuggestion()" title="Eliminar de inicio todo el historial (nombres, centro, enunciados, checks)">
+     <i class="fa-solid fa-trash-can-arrow-up">
+     </i>
+     Eliminar de Inicio
+    </button>
+    <button class="btn-sm-restore btn-restore-manual" data-event-click="quitarAñadidoManual()" title="Quita SOLO lo que has añadido a mano con 'Añadir' (recuadros y enunciados creados por ti). No toca lo que ya venía detectado por defecto.">
+     <i class="fa-solid fa-eraser">
+     </i>
+     Quitar lo Añadido Manual
+    </button>
+    <button class="btn-sm-restore btn-restore-text" data-event-click="restoreContentOnly()" title="Restaurar texto original del PDF">
+     <i class="fa-solid fa-arrow-rotate-left">
+     </i>
+     Texto
+    </button>
+    <button class="btn-sm-restore btn-restore-name" data-event-click="restoreNameOnly()" title="Restaurar nombre original">
+     <i class="fa-solid fa-signature">
+     </i>
+     Nombre
+    </button>
+   </div>
+  </visor-overlay-acciones>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+ <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+ <meta http-equiv="Pragma" content="no-cache"/>
+ <meta http-equiv="Expires" content="0"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <script src="../../../js/visores/administrador/base/deteccion_embebido.js"></script>
+  <base href="/"/>
+  <link id="visor-css-first-paint-gate" href="../../../css/visores/administrador/base/espera_estilos.css" rel="stylesheet"/>
+  <script id="visor-css-first-paint-start" src="../../../js/visores/administrador/base/inicio_espera_estilos.js"></script>
+  <script src="../../../js/visores/administrador/base/navegacion_embebida.js"></script>
+  <script src="../../../js/visores/administrador/tema/embebido.js"></script>
+  <script src="../../../js/app/tema_precarga.js">
+  </script>
+  <link id="visor-embed-navbar-guard" href="../../../css/visores/administrador/base/ocultar_barra_embebida.css" rel="stylesheet"/>
+  <link id="navbar-popup-no-flash" href="../../../css/visores/administrador/base/desplegable_sin_parpadeo.css" rel="stylesheet"/>
+  <link id="visor-modales-override" href="../../../css/visores/administrador/modales/contraste/contraste.css" rel="stylesheet"/>
+  <link id="visor-theme-first-paint" href="../../../css/visores/administrador/tema/fondo_inicial.css" rel="stylesheet"/>
+  <link href="../../../css/app/tema_base.css" rel="stylesheet"/>
+  <link href="../../../css/app/navbar_tema_estable.css" rel="stylesheet"/>
+  <link href="../../../css/barranavegacion/navbar.css" rel="stylesheet" data-navbar-global="1"/>
+  <link href="../../../css/visores/administrador/visor/estado_precarga.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/estilos_iniciales.css" rel="stylesheet"/>
+  <script src="../../../js/visores/administrador/base/estado_precarga.js">
+  </script>
+  <link id="visor-precarga-estilos" href="../../../css/visores/administrador/visor/estilos_precarga_documento.css" rel="stylesheet"/>
+  <title>
+   Visor y Gestor de Documentos · Grados
+  </title>
+  <script src="../../../js/base/iniciotema.js">
+  </script>
+  <!-- Navbar y componentes globales de la plataforma: el visor usa la MISMA navbar. -->
+  <link href="../../../css/global/base.css" rel="stylesheet"/>
+  <link href="../../../css/global/iconos.css" rel="stylesheet"/>
+  <link href="../../../css/global/tabla.css" rel="stylesheet"/>
+  <link href="../../../css/global/tablavarios.css" rel="stylesheet"/>
+  <link href="../../../css/global/panelconfiguracionvarios.css" rel="stylesheet"/>
+  <link href="../../../css/global/autenticacion.css" rel="stylesheet"/>
+  <link href="../../../css/botones/animaciones.css" rel="stylesheet"/>
+  <link href="../../../css/botones/claro.css" rel="stylesheet"/>
+  <link href="../../../css/botones/oscuro.css" rel="stylesheet"/>
+  <link href="../../../css/ajustes/boton.css" rel="stylesheet"/>
+  <link href="../../../css/ajustes/panel.css" rel="stylesheet"/>
+  <link href="../../../css/ajustes/panelvarios.css" rel="stylesheet"/>
+  <link href="../../../css/ajustes/paneloscuro.css" rel="stylesheet"/>
+  <link href="../../../css/ajustes/paneloscurovarios.css" rel="stylesheet"/>
+  <link href="../../../css/ajustes/oscuro.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/variables.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/cabecera.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/elementosdinamicos.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/acciones/botones.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/acciones/botonesprincipales.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/bloqueoemergente.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/estadisticas/panel.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tarjetas/tarjetas.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tarjetas/varios.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/superposicioncomparacion.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/superposicioncomparacionvarios.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/acciones/botonesactuacion.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/panelescomparacion.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/pdf.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/selecciontexto.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/puntoscalientesenunciados.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/puntoscalientesnombrecolegio.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/menusflotantes.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/textoseleccion.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/modales.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/formularios.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/desarrollo.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/acciones/navegacioncambios.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/busqueda/archivos.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/variablestema.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/disposicioncabecera.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/busqueda/barra.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/estadisticas/estadosacceso.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/estadisticas/listado.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/modoclaroprincipal.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/temaclarocompleto.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/temaclaromenus.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/claro_visor.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/estadisticas/carga.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/cabeceraresponsivo.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tarjetas/responsivo.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/base.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/listado.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/superposicioncabecera.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/superposicionbotones.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/superposicionacciones.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/superposicioncolumnas.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/superposicionvisordocumento.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/adaptativo.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/responsivo.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/escritorio_ajustes.css" rel="stylesheet"/>
+  <link href="../../../css/componentes/componentes.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/paneladministrador.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/busqueda/busqueda.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/acciones/controles.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/estadisticas/estadisticas.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/listado.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/modales/elementos.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/base/panel.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/controles_zoom.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/cargando_documento.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/barras_herramientas.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/controles_documento.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/columnas_documento.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/ajustes_precarga.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/geometria_precarga.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/altura_visor.css" rel="stylesheet"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+ <link href="../../../css/notificador.css" rel="stylesheet" data-shared-download-notifier="1"/>
+  <link href="../../../css/visores/administrador/responsivo/documento_base.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/documento_tableta.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/documento_movil.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/herramientas_movil.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/paneles_movil.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/pantalla_dividida.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/responsivo/adaptacion_movil.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/reinicio_embebido.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/claro_busqueda.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/claro_cabecera.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/claro_superficies.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/claro_modales.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/claro_botones_modales.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/tema/claro_elementos_cierre.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/filtros_escritorio.css" rel="stylesheet"/>
+  <link href="../../../css/visores/administrador/visor/filtros_movil.css" rel="stylesheet"/>
+  <script id="visor-css-first-paint-finish" src="../../../js/visores/administrador/base/fin_espera_estilos.js"></script>
+</head>
+ <body>
+  <!-- Navbar standalone del Visor-Admin. En modo embebido se oculta y la aporta la SPA padre. -->
+  <div class="app-navbar-host" id="app-navbar-cargando">
+   <navbar-general data-component="navbar-general" data-navbar-context="visor-admin" data-navbar-admin="true">
+    <header aria-label="Navegación principal" class="barra-superior navbar-flex-layout" id="barra-superior">
+      <div class="nav-left" aria-label="Navegación izquierda">
+        <navbar-boton-inicio data-component="navbar-boton:inicio"><a aria-label="Inicio" href="/" id="btn-inicio" title="Inicio"><i aria-hidden="true" class="fa-solid fa-house"></i><span class="nav-label">Inicio</span></a></navbar-boton-inicio>
+        <navbar-boton-volver data-component="navbar-boton:volver"><a aria-label="Volver atrás" class="btn-volver" href="/" id="volver-atras" title="Volver atrás"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i><span class="nav-label">Volver atrás</span></a></navbar-boton-volver>
+        <div class="nav-left-selectors" aria-label="Rama y trimestre">
+          <div class="visor-navbar-selector visor-admin-only" data-visor-navbar="rama">
+            <span>Rama</span><select id="selectRamaGithub" aria-label="Rama"></select>
+          </div>
+          <div class="visor-navbar-selector visor-admin-only" data-visor-navbar="trimestre">
+            <span>Trimestre</span><select id="selectTrimestreVisor" aria-label="Trimestre">
+              <option value="">Todos los trimestres</option><option value="1">1º Trimestre</option><option value="2">2º Trimestre</option><option value="3">3º Trimestre</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="nav-center-actions" aria-label="Acciones centrales de navegación" data-navbar-slot="center"></div>
+      <div class="nav-right" aria-label="Acciones de usuario">
+        <div class="nav-page-actions" aria-label="Acciones de la vista" data-navbar-slot="page-right">
+          <button class="navbar-page-extra" type="button" data-navbar-action="openSummaryModal" title="Resumen">
+            <i aria-hidden="true" class="fa-solid fa-chart-pie"></i><span>Resumen</span>
+          </button>
+          <button class="navbar-page-extra" type="button" data-navbar-action="sincronizarGitHub" title="Sincronizar GitHub">
+            <i aria-hidden="true" class="fa-brands fa-github"></i><span>Sincronizar GitHub</span>
+          </button>
+          <button class="navbar-page-extra" type="button" data-navbar-action="compileAllApuntes" title="Apuntes">
+            <i aria-hidden="true" class="fa-solid fa-copy"></i><span>Apuntes</span>
+          </button>
+          <button class="navbar-page-extra" type="button" data-navbar-action="openLimpiarDatosModal" title="Terminado">
+            <i aria-hidden="true" class="fa-solid fa-broom"></i><span>Terminado</span>
+          </button>
+        </div>
+        <div class="nav-general-actions" aria-label="Acciones generales">
+          <button aria-label="Cambiar tema" class="btn-modo-oscuro navbar-boton" id="btn-modo-oscuro" title="Modo oscuro" type="button">
+            <i aria-hidden="true" class="fa-solid fa-moon"></i><span class="nav-label">Modo oscuro</span>
+          </button>
+          <button aria-label="Ajustes" class="btn-ajustes navbar-boton navbar-admin-only" id="boton-ajustes" title="Ajustes" type="button">
+            <i aria-hidden="true" class="fa-solid fa-gear"></i><span class="nav-label">Ajustes</span>
+          </button>
+          <button aria-label="Cerrar sesión" class="btn-cerrar-sesion navbar-boton" id="btn-cerrar-sesion" title="Cerrar sesión" type="button">
+            <i aria-hidden="true" class="fa-solid fa-right-from-bracket"></i><span class="nav-label">Cerrar sesión</span>
+          </button>
+        </div>
+        <button class="btn-hamburguesa navbar-boton" id="btn-hamburguesa" type="button" popovertarget="navbar-menu-panel" popovertargetaction="toggle" aria-label="Abrir menú de navegación" title="Menú">
+          <i aria-hidden="true" class="fa-solid fa-bars hamburguesa-icono"></i>
+        </button>
+      </div>
+    </header>
+    <div class="navbar-menu-panel" id="navbar-menu-panel" popover="auto" aria-label="Menú de navegación">
+      <div class="navbar-popup-list" role="menu">
+        <a class="navbar-popup-item popup-home" aria-label="Inicio" href="/" title="Inicio"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+        <a class="navbar-popup-item popup-back" aria-label="Volver atrás" href="/" title="Volver atrás"><i class="fa-solid fa-arrow-left"></i><span>Volver atrás</span></a>
+        <div class="navbar-popup-item popup-selector popup-rama visor-admin-only" data-visor-popup="rama"><span>Rama</span><select id="navbar-rama-popup" aria-label="Rama"></select></div>
+        <div class="navbar-popup-item popup-selector popup-trimestre visor-admin-only" data-visor-popup="trimestre"><span>Trimestre</span><select id="navbar-trimestre-popup" aria-label="Trimestre"><option value="">Todos los trimestres</option><option value="1">1º Trimestre</option><option value="2">2º Trimestre</option><option value="3">3º Trimestre</option></select></div>
+        <button class="navbar-popup-item popup-extra" type="button" data-navbar-action="openSummaryModal" title="Resumen"><i class="fa-solid fa-chart-pie"></i><span>Resumen</span></button>
+        <button class="navbar-popup-item popup-extra" type="button" data-navbar-action="sincronizarGitHub" title="Sincronizar GitHub"><i class="fa-brands fa-github"></i><span>Sincronizar GitHub</span></button>
+        <button class="navbar-popup-item popup-extra" type="button" data-navbar-action="compileAllApuntes" title="Apuntes"><i class="fa-solid fa-copy"></i><span>Apuntes</span></button>
+        <button class="navbar-popup-item popup-extra" type="button" data-navbar-action="openLimpiarDatosModal" title="Terminado"><i class="fa-solid fa-broom"></i><span>Terminado</span></button>
+        <button class="navbar-popup-item popup-theme" type="button" data-navbar-action="theme"><i class="fa-solid fa-moon"></i><span>Modo oscuro</span></button>
+        <button class="navbar-popup-item popup-settings navbar-admin-only" type="button" data-navbar-action="settings" aria-label="Ajustes"><i class="fa-solid fa-gear"></i><span>Ajustes</span></button>
+        <button class="navbar-popup-item popup-logout" type="button" data-navbar-action="logout" aria-label="Cerrar sesión"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></button>
+      </div>
+    </div>
+   </navbar-general>
+  </div>
+  <!-- La navbar es propiedad única de la SPA raíz. El visor administra únicamente
+       sus extensiones/acciones y nunca monta una segunda navbar. -->
+  <template shadowrootmode="open">
+   <link data-dsd-shell-css="1" href="../../../css/componentes/carcasasombra.css" rel="stylesheet"/>
+   <slot>
+   </slot>
+  </template>
+
+  <visor-busqueda data-component="busqueda-archivos">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="file-search-bar" id="fileSearchBar">
+    <div class="file-search-inner">
+     <i class="fa-solid fa-magnifying-glass">
+     </i>
+     <input aria-label="Buscar archivo" autocomplete="off" data-event-input="filtrarArchivos(this.value)" id="inputBuscarArchivo" placeholder="Buscar archivo..." type="search"/>
+     <span class="file-search-count" id="fileSearchCount">
+     </span>
+     <button class="css-inline-6b99de8b69" data-event-click="limpiarBusquedaArchivos()" id="btnLimpiarBusqueda" title="Borrar búsqueda" type="button">
+      <i class="fa-solid fa-xmark">
+      </i>
+     </button>
+     <label class="visor-cache-inline" title="Desactiva la caché durante el desarrollo">
+      <input data-event-change="toggleCache(this.checked)" id="cbCacheDesactivada" type="checkbox"/>
+      <span id="dev-cache-toggle-text">
+       <i class="fa-solid fa-database">
+       </i>
+       Caché activa
+      </span>
+     </label>
+    </div>
+   </div>
+  </visor-busqueda>
+  <visor-estadisticas data-component="estadisticas">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div aria-live="polite" class="stats" id="stats">
+   </div>
+  </visor-estadisticas>
+  <visor-listado data-component="listado-archivos">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="wrap" id="content">
+   </div>
+  </visor-listado>
+  <!-- OVERLAY DE REVISI&Oacute;N Y COMPARACI&Oacute;N -->
+  <visor-overlay data-component="overlay-revision">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="ov" id="ov">
+    <!-- 1. BARRA SUPERIOR: NAVEGACI&Oacute;N Y BOTONES PRINCIPALES -->
+    <visor-overlay-topbar data-component="topbar">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="ov-topbar">
+      <div class="ov-nav-group">
+       <button class="back-btn" data-event-click="closeOv()" title="Volver a la lista general">
+        <i class="fa-solid fa-arrow-left">
+        </i>
+        Lista
+       </button>
+       <button data-event-click="nav(-1)" id="btnNavPrev" title="Anterior (Tecla ←)">
+        <i class="fa-solid fa-chevron-left">
+        </i>
+       </button>
+       <span class="ov-counter" id="ovPosText">
+        1 / 1
+       </span>
+       <button class="nav-filter-btn active" data-event-click="toggleNavSeleccionados()" id="btnNavFiltro" title="Navegar solo entre archivos seleccionados por los checks activos">
+        <i class="fa-solid fa-filter">
+        </i>
+        Seleccionados
+       </button>
+       <button class="nav-change-btn" data-event-click="navCambio(-1)" id="btnCambioPrev" title="Ir al cambio anterior de este PDF">
+        <i class="fa-solid fa-arrow-left">
+        </i>
+       </button>
+       <button class="nav-change-btn" data-event-click="irAlPrimerCambio()" id="btnCambios" title="Ir directamente al primer texto sustituido o eliminado de este PDF">
+        <i class="fa-solid fa-location-crosshairs">
+        </i>
+        Cambios
+       </button>
+       <span class="ov-changes-counter" id="ovCambiosText">
+        0 / 0
+       </span>
+       <button class="nav-change-btn" data-event-click="navCambio(1)" id="btnCambioNext" title="Ir al siguiente cambio de este PDF">
+        <i class="fa-solid fa-arrow-right">
+        </i>
+       </button>
+       <button data-event-click="nav(1)" id="btnNavNext" title="Siguiente (Tecla →)">
+        <i class="fa-solid fa-chevron-right">
+        </i>
+       </button>
+      </div>
+      <div class="ov-files">
+       <span>
+        <i class="fa-solid fa-file-pdf ov-file-orig">
+        </i>
+        <b class="orig-name-text" id="spanOrigName">
+        </b>
+       </span>
+       <span class="ov-arrow" id="spanRenameArrow">
+        ➔
+       </span>
+       <span>
+        <i class="fa-solid fa-file-circle-check ov-file-clean">
+        </i>
+        <b class="clean-name-text" id="spanCleanName">
+        </b>
+       </span>
+      </div>
+      <div class="ov-right">
+       <button class="btn-act accept-github" data-event-click="confirmItem(true, true)" title="Aceptar y Subir cambios directamente a GitHub">
+        <i class="fa-brands fa-github">
+        </i>
+        Subir GitHub
+       </button>
+       <button class="btn-act download-pdf-btn btn-download-pdf" data-event-click="descargarPDFActual()" title="Descargar este archivo PDF procesado">
+        <i class="fa-solid fa-download">
+        </i>
+        Descargar
+       </button>
+       <button class="btn-act skip" data-event-click="confirmItem(false)" id="btnDejarOriginal" title="Mantener archivo original sin modificar">
+        <i class="fa-solid fa-rotate-left">
+        </i>
+        <span id="btnDejarOriginalTexto">
+         Dejar Original
+        </span>
+       </button>
+       <div class="ov-close" data-event-click="closeOv()" title="Cerrar (Esc)">
+        ×
+       </div>
+      </div>
+     </div>
+    </visor-overlay-topbar>
+    <!-- 2. CONTROLES DEL DOCUMENTO: en móvil se recogen detrás de un único desplegable -->
+    <input class="visor-mobile-tools-check" id="visorMobileToolsCheck" type="checkbox" aria-controls="visorMobileTools"/>
+    <label aria-controls="visorMobileTools" class="visor-mobile-tools-toggle" for="visorMobileToolsCheck" id="visorMobileToolsToggle">
+     <i aria-hidden="true" class="fa-solid fa-sliders"></i>
+     <span>Herramientas</span>
+     <span class="visor-mobile-tools-status">Filtros y acciones</span>
+     <i aria-hidden="true" class="fa-solid fa-chevron-down visor-mobile-tools-chevron"></i>
+    </label>
+    <div class="visor-mobile-tools" id="visorMobileTools">
+     <!-- 3. BARRA DE HERRAMIENTAS CENTRADA -->
+     <visor-overlay-acciones data-component="acciones">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="ov-actionbar">
+      <button class="btn-act btn-add-action" data-event-click="abrirSelectorAnadir()" title="Añadir: sustituir un enunciado, o marcar un nombre/colegio para borrar">
+       <i class="fa-solid fa-pen-to-square">
+       </i>
+       Añadir
+      </button>
+      <div class="v-divider">
+      </div>
+      <details class="ov-filtro-grupo" data-ov-grupo="filtros" open>
+       <summary class="ov-filtro-resumen">
+        <i class="fa-solid fa-sliders"></i>
+        <span class="ov-filtro-resumen-texto">Filtros y marcado</span>
+        <span class="ov-filtro-resumen-activos" id="ovFiltrosActivosCount" aria-hidden="true"></span>
+        <i class="fa-solid fa-chevron-down ov-filtro-chevron"></i>
+       </summary>
+       <div class="ov-filtro-contenido">
+        <label class="pill-check" id="lblInc">
+         <input data-event-change="setInc(this.checked)" id="cbInc" type="checkbox"/>
+         <i class="fa-solid fa-pen-fancy pill-icon-enc">
+         </i>
+         Enunciados
+        </label>
+        <label class="pill-check" id="lblInt">
+         <input data-event-change="setInt(this.checked)" id="cbInt" type="checkbox"/>
+         <i class="fa-solid fa-user-slash pill-icon-nom">
+         </i>
+         Nombres
+        </label>
+        <label class="pill-check" id="lblCol">
+         <input data-event-change="setCol(this.checked)" id="cbCol" type="checkbox"/>
+         <i class="fa-solid fa-school pill-icon-col">
+         </i>
+         Colegio
+        </label>
+        <label class="pill-check" id="lblImg">
+         <input data-event-change="setImg(this.checked)" id="cbImg" type="checkbox"/>
+         <i class="fa-solid fa-image pill-icon-img">
+         </i>
+         Imágenes
+        </label>
+        <label class="pill-check" id="lblRen">
+         <input data-event-change="setRen(this.checked)" id="cbRen" type="checkbox"/>
+         <i class="fa-solid fa-folder-tree pill-icon-ren">
+         </i>
+         Nombre PDF
+        </label>
+        <label class="pill-check" id="lblApunte">
+         <input data-event-change="setApunte(this.checked)" id="cbApunte" type="checkbox"/>
+         <i class="fa-solid fa-book-open pill-icon-apu">
+         </i>
+         Apunte
+        </label>
+        <label class="pill-check" id="lblAutoDelInternet" title="Si se detecta que una imagen NO existe en Internet, se borra automáticamente">
+         <input data-event-change="setInternet(this.checked)" id="cbBorrarImgInternet" type="checkbox"/>
+         <i class="fa-solid fa-globe pill-icon-net">
+         </i>
+         Internet
+        </label>
+       </div>
+      </details>
+      <div class="v-divider">
+      </div>
+      <details class="ov-filtro-grupo" data-ov-grupo="restaurar" open>
+       <summary class="ov-filtro-resumen">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span class="ov-filtro-resumen-texto">Restaurar / deshacer</span>
+        <i class="fa-solid fa-chevron-down ov-filtro-chevron"></i>
+       </summary>
+       <div class="ov-filtro-contenido">
+        <button class="btn-sm-restore btn-restore-all" data-event-click="restoreInitialSuggestion()" title="Eliminar de inicio todo el historial (nombres, centro, enunciados, checks)">
+         <i class="fa-solid fa-trash-can-arrow-up">
+         </i>
+         Eliminar de Inicio
+        </button>
+        <button class="btn-sm-restore btn-restore-manual" data-event-click="quitarAñadidoManual()" title="Quita SOLO lo que has añadido a mano con 'Añadir' (recuadros y enunciados creados por ti). No toca lo que ya venía detectado por defecto.">
+         <i class="fa-solid fa-eraser">
+         </i>
+         Quitar lo Añadido Manual
+        </button>
+        <button class="btn-sm-restore btn-restore-text" data-event-click="restoreContentOnly()" title="Restaurar texto original del PDF">
+         <i class="fa-solid fa-arrow-rotate-left">
+         </i>
+         Texto
+        </button>
+        <button class="btn-sm-restore btn-restore-name" data-event-click="restoreNameOnly()" title="Restaurar nombre original">
+         <i class="fa-solid fa-signature">
+         </i>
+         Nombre
+        </button>
+       </div>
+      </details>
+     </div>
+    </visor-overlay-acciones>
+    <!-- BARRA DE CONFIGURACI&Oacute;N Y COMPILACI&Oacute;N DE APUNTE -->
+    <visor-apunte-barra data-component="apunte">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="apunte-bar css-inline-3f42941089" id="apunteBar">
+      <div class="css-inline-aaec585398">
+       <i class="fa-solid fa-book-bookmark css-inline-345565bae7">
+       </i>
+       <span class="css-inline-9e4071690f">
+        Nombre del Apunte:
+       </span>
+       <input class="css-inline-565f82f7db" data-event-change="updateApunteName(this.value)" id="inputApunteName" placeholder="APUNTE_TEMA_..." type="text"/>
+       <span class="css-inline-0bc6ca3e5a">
+        (Guardado en
+        <code>
+         NUEVOS_APUNTES/
+        </code>
+        y CSV)
+       </span>
+      </div>
+      <div class="css-inline-a76d597a07">
+       <button class="css-inline-e4627f80c3" data-event-click="verApunteActual()" id="btnVerApunte" title="Abrir el PDF del apunte ya compilado (NUEVOS_APUNTES)">
+        <i class="fa-solid fa-book-open">
+        </i>
+        VER APUNTE (PDF)
+       </button>
+       <button class="css-inline-76ba0b08aa" data-event-click="compileCurrentApunte()" id="btnCompilarApunte">
+        <i class="fa-solid fa-file-pdf">
+        </i>
+        HACER / COMPILAR APUNTE (LaTeX)
+       </button>
+      </div>
+     </div>
+    </visor-apunte-barra>
+    <!-- 3. AVISO DE MODO DIBUJO (se muestra tras elegir en "A&ntilde;adir" QU&Eacute; marcar, mientras se espera a que el usuario dibuje el recuadro sobre el PDF) -->
+    <visor-editor data-component="editor">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="editor-box" id="editorBox">
+      <div class="editor-tools css-inline-2be897b184">
+       <span class="css-inline-1ed25d1f77">
+        <i class="fa-solid fa-crop-simple css-inline-68d9815d1e">
+        </i>
+        <span id="editorBoxTexto">
+         Selecciona la zona dibujando un recuadro sobre el PDF de la izquierda.
+        </span>
+       </span>
+       <div class="css-inline-c87525adb8">
+        <button class="css-inline-8dfaf8b3d3" data-event-click="elegirTipoAnadir('enunciado')">
+         <i class="fa-solid fa-pen-fancy">
+         </i>
+         Enunciado
+        </button>
+        <button class="css-inline-f4e119ccb0" data-event-click="elegirTipoAnadir('nombre')">
+         <i class="fa-solid fa-user-slash">
+         </i>
+         Nombre
+        </button>
+        <button class="css-inline-e9fc4d0243" data-event-click="elegirTipoAnadir('colegio')">
+         <i class="fa-solid fa-school">
+         </i>
+         Colegio
+        </button>
+        <button class="css-inline-89b06e028c" data-event-click="elegirTipoAnadir('reflujo')">
+         <i class="fa-solid fa-arrows-up-to-line">
+         </i>
+         Subir si hay Imágenes
+        </button>
+        <button class="modal-close-btn custom-modal-close-x css-inline-63ffcf769e" onclick="toggleEditor(false)" data-event-click="toggleEditor(false)" type="button" aria-label="Cancelar" title="Cancelar (Esc)">
+         ✕ Cancelar
+        </button>
+       </div>
+      </div>
+     </div>
+    </visor-editor>
+    </div>
+    <!-- 4. CONTENEDOR PRINCIPAL: VISOR IZQUIERDO Y DERECHO -->
+    <visor-visores data-component="visores">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div aria-label="Seleccionar vista del documento" class="visor-responsive-switch" id="visorResponsiveSwitch">
+      <button aria-label="Mostrar documento original" class="active" data-view="old" type="button">
+       <i class="fa-solid fa-file-lines">
+       </i>
+       Original
+      </button>
+      <button aria-label="Mostrar cómo quedaría" data-view="new" type="button">
+       <i class="fa-solid fa-wand-magic-sparkles">
+       </i>
+       Cómo quedaría
+      </button>
+     </div>
+     <div class="ovcols">
+      <!-- VISOR IZQUIERDO (DOCUMENTO ORIGINAL) -->
+      <visor-columna data-component="columna-visor">
+       <template shadowrootmode="open">
+        <slot>
+        </slot>
+       </template>
+       <div class="ovcol is-responsive-active">
+        <div class="col-header orig" id="headerViewerOld">
+         <span class="col-header-titulo">
+          <i class="fa-solid fa-file-lines">
+          </i>
+          1. ORIGINAL
+         </span>
+         <div aria-label="Controles de zoom del documento" class="mupdf-zoom-controls">
+          <button aria-label="Alejar" class="mupdf-zoom-minus" title="Alejar" type="button">
+           <i class="fa-solid fa-minus">
+           </i>
+          </button>
+          <button aria-label="Ajustar página completa" class="mupdf-zoom-fit" title="Ajustar página completa" type="button">
+           <i class="fa-solid fa-expand">
+           </i>
+          </button>
+          <button aria-label="Acercar" class="mupdf-zoom-plus" title="Acercar" type="button">
+           <i class="fa-solid fa-plus">
+           </i>
+          </button>
+          <span aria-live="polite" class="mupdf-zoom-value">
+           Página entera
+          </span>
+         </div>
+        </div>
+        <!-- MEN&Uacute; FLOTANTE: ELEGIR QU&Eacute; SE VA A A&Ntilde;ADIR (mismo aspecto que enunciados) -->
+        <visor-menu-anadir data-component="menu-anadir">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-add-menu" id="modalAnadirTipo">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-square-plus css-inline-befda3886d">
+            </i>
+            ¿Qué quieres añadir?
+           </b>
+           <span class="badge v css-inline-5dbc6fa9a9">
+            Zona personalizada
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-82403c4a9c" data-event-click="elegirTipoAnadir('enunciado')">
+            <i class="fa-solid fa-pen-fancy">
+            </i>
+            Sustituir Enunciado
+           </button>
+           <button class="css-inline-4d1462c150" data-event-click="elegirTipoAnadir('nombre')">
+            <i class="fa-solid fa-user-slash">
+            </i>
+            Borrar Nombre
+           </button>
+           <button class="css-inline-070db0b6c3" data-event-click="elegirTipoAnadir('colegio')">
+            <i class="fa-solid fa-school">
+            </i>
+            Borrar Colegio/Logo
+           </button>
+           <button class="css-inline-82b57a9ceb" data-event-click="elegirTipoAnadir('reflujo')" id="btnAnadirReflujo">
+            <i class="fa-solid fa-arrows-up-to-line">
+            </i>
+            Subir si hay Imágenes
+           </button>
+           <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="cerrarSelectorAnadir()" data-event-click="cerrarSelectorAnadir()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-anadir>
+        <!-- MEN&Uacute; FLOTANTE SOBRE EL DOCUMENTO (ENUNCIADOS) -->
+        <visor-menu-enunciado data-component="menu-enunciado">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-pdf-menu" id="floatingPdfMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-gear">
+            </i>
+            Opciones del Enunciado:
+           </b>
+           <span class="badge v" id="floatStatusBadge">
+            Opciones de Enunciado
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-4d1462c150" data-event-click="editarEnunciadoDesdePopup()" type="button">
+            <i class="fa-solid fa-pen-to-square">
+            </i>
+            Editar Enunciado
+           </button>
+           <button class="css-inline-82403c4a9c" data-event-click="eliminarEnunciadoDesdePopup()" id="btnEliminarEnunciado" type="button">
+            <i class="fa-solid fa-trash-can">
+            </i>
+            Eliminar Enunciado
+           </button>
+           <button class="css-inline-a68719e645" data-event-click="restoreInitialSuggestion();closeEnunciadoPopup()" id="btnRestaurarEnunciado" type="button">
+            <i class="fa-solid fa-rotate-left">
+            </i>
+            Volver al de Antes
+           </button>
+           <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeEnunciadoPopup()" data-event-click="closeEnunciadoPopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-enunciado>
+        <!-- MEN&Uacute; FLOTANTE SOBRE RECUADROS DE COLEGIO/LOGO -->
+        <visor-menu-colegio data-component="menu-colegio">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-col-menu" id="floatingColMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-school css-inline-20679505b4">
+            </i>
+            Opciones del Colegio:
+           </b>
+           <span class="badge v" id="floatColBadge">
+            Colegio detectado
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-a68719e645" data-event-click="handleColegioAction(true)" id="btnEliminarCol" type="button">
+            <i class="fa-solid fa-school">
+            </i>
+            Eliminar Colegio/Logo
+           </button>
+           <button class="css-inline-e962673576" data-event-click="handleColegioAction(false)" id="btnConservarCol" type="button">
+            <i class="fa-solid fa-eye">
+            </i>
+            Conservar Colegio
+           </button>
+           <button class="css-inline-e8f96255f1" data-event-click="handleColegioAction('eliminar_recuadro')" id="btnBorrarRecuadroCol" type="button">
+            <i class="fa-solid fa-trash">
+            </i>
+            Eliminar Recuadro
+           </button>
+           <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeColegioPopup()" data-event-click="closeColegioPopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-colegio>
+        <!-- MEN&Uacute; FLOTANTE SOBRE RECUADROS DE NOMBRE (igual que el de enunciados) -->
+        <visor-menu-nombre data-component="menu-nombre">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-name-menu" id="floatingNameMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-user-slash css-inline-c73cb88578">
+            </i>
+            Opciones del Nombre:
+           </b>
+           <span class="badge v" id="floatNameBadge">
+            Nombre detectado
+           </span>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-4d1462c150" data-event-click="handleNombreAction(true)" id="btnEliminarNombre" type="button">
+            <i class="fa-solid fa-user-slash">
+            </i>
+            Eliminar Nombre
+           </button>
+           <button class="css-inline-a68719e645" data-event-click="handleNombreAction(false)" id="btnConservarNombre" type="button">
+            <i class="fa-solid fa-user-check">
+            </i>
+            Conservar Nombre
+           </button>
+           <button class="css-inline-e8f96255f1" data-event-click="handleNombreAction('eliminar_recuadro')" id="btnBorrarRecuadroNombre" type="button">
+            <i class="fa-solid fa-trash">
+            </i>
+            Eliminar Recuadro
+           </button>
+           <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeNombrePopup()" data-event-click="closeNombrePopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+         </div>
+        </visor-menu-nombre>
+        <!-- MEN&Uacute; FLOTANTE SOBRE IM&Aacute;GENES -->
+        <visor-menu-imagen data-component="menu-imagen">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="floating-img-menu" id="floatingImgMenu">
+          <div class="css-inline-015a5e7fbe">
+           <b>
+            <i class="fa-solid fa-image css-inline-fd58244ac9">
+            </i>
+            Opciones de Imagen:
+           </b>
+          </div>
+          <div class="css-inline-c87525adb8">
+           <button class="css-inline-5192b201c4" data-event-click="checkSelectedImageInternet()" id="btnCheckInternet" type="button">
+            <i class="fa-solid fa-globe">
+            </i>
+            Comprobar / Borrar si no está en Internet
+           </button>
+           <label class="css-inline-1cc923efed" id="lblExcepcionInternet">
+            <input data-event-change="toggleExcepcionInternet(this.checked)" id="cbNoBorrarInternet" type="checkbox"/>
+            <i class="fa-solid fa-shield-halved">
+            </i>
+            No borrar si no está en Internet
+           </label>
+           <button class="css-inline-0e718c5572" data-event-click="handleImageAction('conservar', {global:true, no_borrar:true})" id="btnConservarImgGlobal" title="Conserva esta imagen en todos los PDFs donde aparezca igual, aunque no esté en Internet" type="button">
+            <i class="fa-solid fa-shield-halved">
+            </i>
+            Conservar aunque no esté en Internet
+           </button>
+           <button class="css-inline-82403c4a9c" data-event-click="handleImageAction('borrar')" id="btnBorrarImg" type="button">
+            <i class="fa-solid fa-trash-can">
+            </i>
+            Borrar Imagen
+           </button>
+           <button class="css-inline-f6b4cacf8e" data-event-click="handleImageAction('borrar', {global:true})" id="btnBorrarImgGlobal" title="Marca esta imagen para que se elimine POR DEFECTO en todos los PDFs donde aparezca literalmente igual" type="button">
+            <i class="fa-solid fa-trash-arrow-up">
+            </i>
+            Borrar y también en otros PDFs
+           </button>
+           <button class="css-inline-2fa08c3aa4" data-event-click="triggerUploadImage()" id="btnReemplazarImg" type="button">
+            <i class="fa-solid fa-arrow-up-from-bracket">
+            </i>
+            Reemplazar por otra Imagen...
+           </button>
+           <button class="css-inline-a68719e645" data-event-click="handleImageAction('restaurar')" id="btnRestaurarImg" type="button">
+            <i class="fa-solid fa-rotate-left">
+            </i>
+            Restaurar Original
+           </button>
+           <button class="modal-close-btn custom-modal-close-x css-inline-78843b00be" onclick="closeImgPopup()" data-event-click="closeImgPopup()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+            <i class="fa-solid fa-xmark">
+            </i>
+            Cerrar
+           </button>
+          </div>
+          <input accept="image/*" class="css-inline-6b99de8b69" data-event-change="uploadImageFile(this)" id="inputImageFile" type="file"/>
+         </div>
+        </visor-menu-imagen>
+        <visor-documento-original data-component="documento-original">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="doc-viewer" id="viewerOld">
+          <div aria-live="polite" class="doc-viewer-loading" role="status">
+           <div class="doc-viewer-loading-mark">
+            <div class="visor-spinner-anillo visor-spinner-documento">
+            </div>
+           </div>
+           <div class="doc-viewer-loading-text">
+            <strong>
+             Cargando documento original...
+            </strong>
+           </div>
+          </div>
+         </div>
+        </visor-documento-original>
+       </div>
+      </visor-columna>
+      <!-- VISOR DERECHO (DOCUMENTO LIMPIO) -->
+      <visor-columna data-component="columna-visor">
+       <template shadowrootmode="open">
+        <slot>
+        </slot>
+       </template>
+       <div class="ovcol">
+        <div class="col-header clean" id="headerViewerNew">
+         <span class="col-header-titulo">
+          <i class="fa-solid fa-wand-magic-sparkles">
+          </i>
+          2. CÓMO QUEDARÍA
+         </span>
+         <div aria-label="Controles de zoom del documento" class="mupdf-zoom-controls">
+          <button aria-label="Alejar" class="mupdf-zoom-minus" title="Alejar" type="button">
+           <i class="fa-solid fa-minus">
+           </i>
+          </button>
+          <button aria-label="Ajustar página completa" class="mupdf-zoom-fit" title="Ajustar página completa" type="button">
+           <i class="fa-solid fa-expand">
+           </i>
+          </button>
+          <button aria-label="Acercar" class="mupdf-zoom-plus" title="Acercar" type="button">
+           <i class="fa-solid fa-plus">
+           </i>
+          </button>
+          <span aria-live="polite" class="mupdf-zoom-value">
+           Página entera
+          </span>
+         </div>
+        </div>
+        <visor-documento-limpio data-component="documento-limpio">
+         <template shadowrootmode="open">
+          <slot>
+          </slot>
+         </template>
+         <div class="doc-viewer" id="viewerNew">
+          <div aria-live="polite" class="doc-viewer-loading" role="status">
+           <div class="doc-viewer-loading-mark">
+            <div class="visor-spinner-anillo visor-spinner-documento">
+            </div>
+           </div>
+           <div class="doc-viewer-loading-text">
+            <strong>
+             Cargando documento limpio...
+            </strong>
+           </div>
+          </div>
+         </div>
+        </visor-documento-limpio>
+       </div>
+      </visor-columna>
+     </div>
+    </visor-visores>
+   </div>
+  </visor-overlay>
+  <!-- OVERLAY DE BLOQUEO TIPO "PROCESANDO..." -->
+  <visor-bloqueo data-component="bloqueo">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="blocker">
+    <div class="blocker-box css-inline-1d2beb08d3" id="blockerBox">
+     <button class="modal-close-btn custom-modal-close-x" id="blockerCloseBtn" type="button" aria-label="Cerrar" title="Cerrar / Cancelar (Esc)" onclick="hideBlocker()">✕</button>
+     <div class="css-inline-9e185d390a">
+      <i class="fa-solid fa-circle-notch fa-spin">
+      </i>
+     </div>
+     <div class="css-inline-226e9adf13" id="blockerText">
+      Procesando...
+     </div>
+     <div class="blocker-actions" id="blockerActions" style="margin-top: 18px; display: flex; justify-content: center; gap: 8px;">
+      <button type="button" class="btn-act skip blocker-cancel-btn" id="blockerCancelBtn" onclick="hideBlocker()">
+       <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+     </div>
+    </div>
+   </div>
+  </visor-bloqueo>
+  <!-- MODAL PERSONALIZADO NO-JS DE NOTIFICACI&Oacute;N Y CONFIRMACI&Oacute;N -->
+  <visor-modal-confirmacion data-component="modal-confirmacion">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="customModal">
+    <modal-caja data-component="modal-caja">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="blocker-box css-inline-a25ba2b8d1" id="customModalBox">
+      <button class="modal-close-btn custom-modal-close-x" id="customModalCloseBtn" type="button" aria-label="Cerrar" title="Cerrar (Esc)">✕</button>
+      <div class="css-inline-0e626981d0" id="customModalIcon">
+       <i class="fa-solid fa-circle-check">
+       </i>
+      </div>
+      <div class="css-inline-e4638fa873" id="customModalTitle">
+       Título
+      </div>
+      <div class="css-inline-1356299a78" id="customModalText">
+       Detalles...
+      </div>
+      <div class="css-inline-be5eaac538" id="customModalBtns">
+       <button class="btn-act accept css-inline-75d36b272c" id="customModalOkBtn">
+        <i class="fa-solid fa-check">
+        </i>
+        ACEPTAR
+       </button>
+       <button class="btn-act skip css-inline-a0fd43aec1" id="customModalCancelBtn">
+        CANCELAR
+       </button>
+      </div>
+     </div>
+    </modal-caja>
+   </div>
+  </visor-modal-confirmacion>
+  <!-- MODAL DE RESUMEN COMPLETO DE CAMBIOS -->
+  <visor-modal-resumen data-component="modal-resumen">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="summaryModal">
+    <modal-caja data-component="modal-caja">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="blocker-box css-inline-5dc4a242f4">
+      <div class="css-inline-42a734a9dd">
+       <h3 class="css-inline-b44a765b41">
+        <i class="fa-solid fa-chart-pie">
+        </i>
+        Resumen General de Cambios (
+        <span id="sumDegreeTitle">
+        </span>
+        )
+       </h3>
+       <button class="modal-close-btn custom-modal-close-x css-inline-5592c5dc14" id="summaryModalCloseBtn" onclick="closeSummaryModal()" data-event-click="closeSummaryModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+        ✕ Cerrar
+       </button>
+      </div>
+      <div class="css-inline-009ec4c69c" id="summaryBody">
+       <!-- Se rellenará dinámicamente con JS -->
+      </div>
+     </div>
+    </modal-caja>
+   </div>
+  </visor-modal-resumen>
+  <!-- MODAL 1: CREAR NUEVO ENUNCIADO -->
+  <visor-modal-crear-enunciado data-component="modal-crear-enunciado">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="modalCrearEnunciado">
+    <modal-caja data-component="modal-caja">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="blocker-box css-inline-4ce6b84a35">
+      <div class="css-inline-10828d56e5">
+       <h3 class="css-inline-e7e8278b59">
+        <i class="fa-solid fa-pen-to-square">
+        </i>
+        Crear Nuevo Enunciado
+       </h3>
+       <button class="modal-close-btn custom-modal-close-x css-inline-5592c5dc14" id="modalCrearEnunciadoCloseBtn" onclick="closeCrearEnunciadoModal()" data-event-click="closeCrearEnunciadoModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+        ✕
+       </button>
+      </div>
+      <div class="css-inline-78ff47a551">
+       <div>
+        <label class="css-inline-1a1d3cb220">
+         Texto o Ubicación a sustituir en el PDF:
+        </label>
+        <input class="css-inline-2a73309298" id="crearStart" placeholder="Arrastra un recuadro sobre el PDF o escribe la frase a buscar..." type="text"/>
+       </div>
+       <div>
+        <label class="css-inline-1a1d3cb220">
+         Nuevo Texto de Enunciado a escribir:
+        </label>
+        <textarea class="css-inline-ac88edfb58" id="crearNew" placeholder="Escribe aquí el nuevo enunciado sustituto..."></textarea>
+       </div>
+      </div>
+      <div class="css-inline-5fd3120e31">
+       <button class="btn-act accept css-inline-90b7755797" data-event-click="guardarNuevoEnunciado()" type="button">
+        <i class="fa-solid fa-floppy-disk">
+        </i>
+        Guardar y Previsualizar
+       </button>
+       <button class="btn-act skip" onclick="closeCrearEnunciadoModal()" data-event-click="closeCrearEnunciadoModal()" type="button">
+        Cancelar
+       </button>
+      </div>
+     </div>
+    </modal-caja>
+   </div>
+  </visor-modal-crear-enunciado>
+  <!-- MODAL 2: EDITAR / SUSTITUIR ENUNCIADO DETECTADO -->
+  <visor-modal-editar-enunciado data-component="modal-editar-enunciado">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker" id="modalEditarEnunciado">
+    <modal-caja data-component="modal-caja">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="blocker-box css-inline-8d132760b3">
+      <div class="css-inline-10828d56e5">
+       <h3 class="css-inline-c47521e0ab">
+        <i class="fa-solid fa-pen-fancy">
+        </i>
+        Sustituir Enunciado Detectado
+       </h3>
+       <button class="modal-close-btn custom-modal-close-x css-inline-5592c5dc14" id="modalEditarEnunciadoCloseBtn" onclick="closeEditarEnunciadoModal()" data-event-click="closeEditarEnunciadoModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+        ✕
+       </button>
+      </div>
+      <div class="css-inline-78ff47a551">
+       <div>
+        <label class="css-inline-e93923cab2">
+         Texto que quieres cambiar:
+        </label>
+        <textarea class="css-inline-3f6bc2e52d" id="editarOldText" placeholder="Escribe o modifica exactamente el texto que quieres sustituir..."></textarea>
+       </div>
+       <div>
+        <label class="css-inline-4049faa557">
+         Nuevo Texto de Enunciado Sustituto:
+        </label>
+        <textarea class="css-inline-faf3deaa8e" id="editarNewText" placeholder="Escribe el texto con el que deseas reemplazar el enunciado original..."></textarea>
+       </div>
+      </div>
+      <div class="css-inline-5fd3120e31">
+       <button class="btn-act accept css-inline-90b7755797" data-event-click="guardarEditarEnunciado()" type="button">
+        <i class="fa-solid fa-floppy-disk">
+        </i>
+        Guardar y Previsualizar
+       </button>
+       <button class="btn-act skip" onclick="closeEditarEnunciadoModal()" data-event-click="closeEditarEnunciadoModal()" type="button">
+        Cancelar
+       </button>
+      </div>
+     </div>
+    </modal-caja>
+   </div>
+  </visor-modal-editar-enunciado>
+  <!-- MODAL TERMINADO / LIMPIAR DATOS JSON -->
+  <visor-modal-limpiar-datos data-component="modal-limpiar-datos">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="blocker css-inline-02ecaefe68" id="modalLimpiarDatos">
+    <div class="blocker-box css-inline-746d2e5408">
+     <div class="css-inline-42a734a9dd">
+      <h3 class="css-inline-cb7427136f">
+       <i class="fa-solid fa-broom">
+       </i>
+       Limpiar Datos de Revisión (JSON)
+      </h3>
+      <button class="modal-close-btn custom-modal-close-x css-inline-6fec57c101" id="modalLimpiarDatosCloseBtn" onclick="closeLimpiarDatosModal()" data-event-click="closeLimpiarDatosModal()" type="button" aria-label="Cerrar" title="Cerrar (Esc)">
+       ✕
+      </button>
+     </div>
+     <p class="css-inline-037aa495e4">
+      Selecciona qué datos del JSON de revisión deseas eliminar para la rama actual (
+      <b class="css-inline-68d9815d1e" id="lblRamaLimpiar">
+      </b>
+      ) o si deseas limpiar todo:
+     </p>
+     <div class="css-inline-91da941fd3">
+      <label class="css-inline-12bf8bc54f">
+       <input checked="" id="chkLimpiarEnunciados" type="checkbox"/>
+       <i class="fa-solid fa-pen-fancy">
+       </i>
+       Enunciados sustituidos
+      </label>
+      <label class="css-inline-e4887c6585">
+       <input checked="" id="chkLimpiarNombres" type="checkbox"/>
+       <i class="fa-solid fa-user-slash">
+       </i>
+       Nombres de autores
+      </label>
+      <label class="css-inline-09d05bc230">
+       <input checked="" id="chkLimpiarColegios" type="checkbox"/>
+       <i class="fa-solid fa-school">
+       </i>
+       Colegios y Logos
+      </label>
+      <label class="css-inline-39805bee3a">
+       <input checked="" id="chkLimpiarImagenes" type="checkbox"/>
+       <i class="fa-solid fa-image">
+       </i>
+       Acciones de Imágenes
+      </label>
+      <hr class="css-inline-5e325d435e"/>
+      <label class="css-inline-a1b7c13de2">
+       <input data-event-change="toggleCheckTodo(this.checked)" id="chkLimpiarTodo" type="checkbox"/>
+       <i class="fa-solid fa-triangle-exclamation">
+       </i>
+       ELIMINAR TODO (Limpiar JSON por completo)
+      </label>
+      <hr class="css-inline-5e325d435e"/>
+      <label class="css-inline-f8290b94e3">
+       <input checked="" id="chkSubirGithubLimpieza" type="checkbox"/>
+       <i class="fa-brands fa-github">
+       </i>
+       Actualizar JSON en GitHub
+      </label>
+     </div>
+     <div class="css-inline-5fd3120e31">
+      <button class="css-inline-f24f90f9ee" data-event-click="ejecutarLimpiarDatos()" type="button">
+       <i class="fa-solid fa-check">
+       </i>
+       Confirmar y Limpiar
+      </button>
+      <button class="btn-act skip css-inline-af9b0a4d92" onclick="closeLimpiarDatosModal()" data-event-click="closeLimpiarDatosModal()" type="button">
+       Cancelar
+      </button>
+     </div>
+    </div>
+   </div>
+  </visor-modal-limpiar-datos>
+  <!-- MÓDULOS Y BIBLIOTECAS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
+  <script src="../../../js/permisos/cifrado.js">
+  </script>
+  <script src="../../../js/permisos/supabase.js">
+  </script>
+  <script src="../../../js/permisos/github.js">
+  </script>
+  <script src="../../../js/permisos/visibilidad/configuracion/constantes.js"></script>
+  <script src="../../../js/permisos/visibilidad/configuracion/normalizacion.js"></script>
+  <script src="../../../js/permisos/visibilidad/configuracion/repositorios.js"></script>
+  <script src="../../../js/permisos/visibilidad/red/http/peticiones.js"></script>
+  <script src="../../../js/permisos/visibilidad/red/github/api-github.js"></script>
+  <script src="../../../js/permisos/visibilidad/red/github/historial.js"></script>
+  <script src="../../../js/permisos/visibilidad/archivos/csv/procesador-csv.js"></script>
+  <script src="../../../js/permisos/visibilidad/archivos/rutas/analizador-rutas.js"></script>
+  <script src="../../../js/permisos/visibilidad/operaciones/consulta/consulta-visibilidad.js"></script>
+  <script src="../../../js/permisos/visibilidad/operaciones/publicacion/constructor-publico.js"></script>
+  <script src="../../../js/permisos/visibilidad/operaciones/publicacion/gestor-movimiento.js"></script>
+  <script src="../../../js/permisos/visibilidad/index.js"></script>
+  <script src="../../../js/permisos/visibilidad.js"></script>
+  <script src="../../../js/base/permisos.js">
+  </script>
+  <script src="../../../js/visores/administrador/base/cache-control.js?v=20260917-delapunte6">
+  </script>
+  <script src="../../../js/visores/administrador/base/sesioncompartida.js">
+  </script>
+  <script src="../../../js/servicios/ramaapi.js">
+  </script>
+  <script src="../../../js/componentes/barranavegacion/modoedicion.js">
+  </script>
+<script src="../../../js/componentes/ajustes.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/motormupdf.js">
+  </script>
+  <script src="../../../js/visores/administrador/api/ajustes/configuracion.js?v=20260917-delapunte6">
+  </script>
+  <script src="../../../js/visores/administrador/api/github/archivos.js?v=20260917-delapunte6">
+  </script>
+  <script src="../../../js/visores/administrador/api/datos/almacen.js?v=20260917-delapunte6">
+  </script>
+  <script src="../../../js/visores/administrador/api/escritura/guardado.js?v=20260917-delapunte6">
+  </script>
+  <script src="../../../js/visores/administrador/api/rutas/respuestas.js">
+  </script>
+  <script src="../../../js/visores/administrador/api/arranque.js">
+  </script>
+  <script src="../../../js/visores/administrador/contexto/global.js">
+  </script>
+  <script src="../../../js/visores/administrador/contexto/cambios.js">
+  </script>
+  <script src="../../../js/estado/navegacion.js">
+  </script>
+  <script src="../../../js/visores/administrador/estado/teclado.js">
+  </script>
+  <script src="../../../js/visores/administrador/contexto/apertura.js">
+  </script>
+  <script src="../../../js/visores/administrador/rama/selectorrama.js">
+  </script>
+  <script src="../../../js/visores/administrador/vistas/tarjetas.js">
+  </script>
+  <script src="../../../js/visores/administrador/vistas/estadisticas.js">
+  </script>
+  <script src="../../../js/visores/administrador/vistas/cuadricula.js">
+  </script>
+  <script src="../../../js/visores/administrador/vistas/renderizadodocumento.js">
+  </script>
+  <script src="../../../js/visores/administrador/modales/alertas.js">
+  </script>
+  <script src="../../../js/visores/administrador/modales/limpiardatos.js">
+  </script>
+  <script src="../../../js/visores/administrador/modales/sistema.js">
+  </script>
+  <script src="../../../js/visores/administrador/enunciados/crear.js">
+  </script>
+  <script src="../../../js/visores/administrador/enunciados/editar.js">
+  </script>
+  <script src="../../../js/visores/administrador/enunciados/ventanaemergente.js">
+  </script>
+  <script src="../../../js/visores/administrador/imagenes/ventanaemergenteimagenes.js">
+  </script>
+  <script src="../../../js/visores/administrador/imagenes/acciones.js">
+  </script>
+  <script src="../../../js/visores/administrador/imagenes/internet.js">
+  </script>
+  <script src="../../../js/visores/administrador/dibujo/selector.js">
+  </script>
+  <script src="../../../js/visores/administrador/dibujo/guardar.js">
+  </script>
+  <script src="../../../js/visores/administrador/dibujo/eventos.js">
+  </script>
+  <script src="../../../js/visores/administrador/dibujo/lienzo.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/utilidades.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/detectorfuentes.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/geometriapdf.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/eliminarpuntoscalientes.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/eliminarfotopuntocaliente.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/sustitucionenunciado.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/reflujoflujo.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/recuadroseliminacion.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/sustitucionrecuadros.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/recuadros.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/reflujoraster.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/reflujoautomatico.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/eliminacionimagen.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/enunciados.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/nombres.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/colegios.js">
+  </script>
+  <script src="../../../js/visores/administrador/puntoscalientes/capassuperpuestas.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/precargadocumentos.js?v=20260917-delapunte6">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/mupdf.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/sincronizaciondesplazamiento.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/paginasustitucion.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/paginaeliminacion.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/marcadores.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/actualizaciondocumento.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/documento.js">
+  </script>
+  <script src="../../../js/visores/administrador/acciones/comprobaciones.js">
+  </script>
+  <script src="../../../js/visores/administrador/acciones/decisionesarchivo.js">
+  </script>
+  <script src="../../../js/visores/administrador/acciones/confirmacion.js">
+  </script>
+  <script src="../../../js/visores/administrador/acciones/apuntes.js?v=20260917-delapunte6">
+  </script>
+  <script src="../../../js/visores/administrador/acciones/aliasapuntes.js">
+  </script>
+  <script src="../../../js/visores/administrador/renderizado/exportadorpdfvectorial.js">
+  </script>
+  <script src="../../../js/descargas/notificador.js?v=20260911-0930">
+  </script>
+  <script src="../../../js/visores/administrador/notificador/inicializacion.js"></script>
+  <script src="../../../js/visores/administrador/acciones/descargadocumentos.js">
+  </script>
+  <script src="../../../js/visores/administrador/acciones/sincronizaciongithub.js">
+  </script>
+  <script src="../../../js/visores/administrador/barranavegacion/navegacionglobal.js">
+  </script>
+  <script src="../../../js/visores/administrador/aplicacion.js">
+  </script>
+  <script src="../../../js/visores/administrador/barranavegacion/sincronizar_selectores.js"></script>
+  <script src="../../../js/visores/administrador/arranque.js">
+  </script>
+  <script src="../../../js/visores/administrador/enlaces.js">
+  </script>
+  <script src="../../../js/visores/administrador/herramientas/movil.js"></script>
+ </body>
+</html>
+

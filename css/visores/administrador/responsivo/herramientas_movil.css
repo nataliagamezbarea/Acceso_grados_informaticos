@@ -1,0 +1,83 @@
+/* ============================================================
+   VISOR ADMIN — HERRAMIENTAS EN DISPOSITIVOS MÓVILES
+   En pantallas estrechas los controles ocupan filas completas.
+   No se utiliza desplazamiento horizontal para las barras.
+============================================================ */
+
+#ov,
+#ov * {
+  box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+  /* ----- BARRA SUPERIOR DEL DOCUMENTO ----- */
+  #ov .ov-topbar {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 6px;
+    gap: 6px;
+  }
+
+  #ov .ov-nav-group,
+  #ov .ov-right {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+  }
+
+  #ov .ov-nav-group > *,
+  #ov .ov-right > * {
+    min-width: 0;
+    max-width: 100%;
+    flex: 0 1 auto;
+  }
+
+  #ov .ov-files {
+    display: none;
+  }
+
+  #ov .ov-right {
+    justify-content: flex-start;
+  }
+
+  #ov .ov-right .btn-act {
+    flex: 1 1 0;
+    min-width: 0;
+    white-space: normal;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #ov .ov-close {
+    flex: 0 0 32px;
+    width: 32px;
+  }
+
+  /* ----- BOTÓN HERRAMIENTAS ----- */
+  #ov .visor-mobile-tools-toggle {
+    display: flex;
+    width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
+    min-width: 0;
+    margin: 5px 6px;
+    padding: 9px 11px;
+    align-items: center;
+    gap: 7px;
+  }
+
+  #ov .visor-mobile-tools {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: visible;
+  }
+}

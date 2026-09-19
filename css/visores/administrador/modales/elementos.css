@@ -1,0 +1,31 @@
+/* ============================================================
+   ESTILOS ESPECÍFICOS DEL COMPONENTE — PARTE 6
+   Lineas: <= 100 | Nombres en espanol
+============================================================ */
+
+.css-inline-af9b0a4d92 {
+  background: #374151; color: #fff; border: 0; padding: 8px 14px; border-radius: 6px; cursor: pointer;
+}
+.css-inline-b44a765b41 { margin: 0; font-size: 17px; color: #a78bfa; }
+.css-inline-be5eaac538 { display: flex; gap: 12px; justify-content: center; }
+.css-inline-befda3886d { color: #a5b4fc; }
+.css-inline-c47521e0ab { margin: 0; font-size: 16px; color: #fca5a5; }
+.css-inline-c73cb88578 { color: #60a5fa; }
+.css-inline-c87525adb8 { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.css-inline-cb7427136f { margin: 0; font-size: 16px; color: #f87171; }
+.css-inline-e4627f80c3 {
+  display: none;
+  background: #0ea5e9;
+  color: #fff;
+  border: 2px solid #7dd3fc;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+.css-inline-e4638fa873 { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--app-text-color, #fff); }
+.css-inline-e4887c6585 { display: flex; align-items: center; }

@@ -1,0 +1,58 @@
+/* La búsqueda se mantiene como herramienta de contenido, no como otra navbar. */
+.file-search-bar {
+  position: relative;
+  top: auto;
+  z-index: 10;
+  width: min(1200px, calc(100% - 32px));
+  margin: 12px auto 0;
+  padding: 0;
+  background: transparent;
+}
+.file-search-inner { display: flex; align-items: center; gap: 8px; }
+.visor-cache-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  color: #64748b;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.visor-cache-inline input { margin: 0; }
+/* Loader de navegación entre páginas del visor. */
+#visor-navbar-loading {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: 34px;
+  z-index: 100001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  background: rgba(15,23,42,.97);
+  border-bottom: 1px solid #334155;
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+#visor-navbar-loading.on { display: flex; }
+#visor-navbar-loading::after {
+  content: "";
+  position: absolute;
+  left: -35%;
+  bottom: 0;
+  width: 35%;
+  height: 2px;
+  background: #60a5fa;
+  animation: visor-loading-bar 1s linear infinite;
+}
+#visor-navbar-loading > i { color: #60a5fa; font-size: 12px; }
+#visor-navbar-loading > span { display: inline; }
+@keyframes visor-loading-bar {
+  from { left: -35%; }
+  to { left: 100%; }
+}

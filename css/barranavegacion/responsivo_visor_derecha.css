@@ -1,0 +1,64 @@
+@container navbar-general (max-width: 820px){
+  /* Visor-Admin: ocultamos los controles de la derecha, pero NO el contenedor
+     porque la hamburguesa vive dentro de .nav-general-actions. */
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-page-actions{
+    display:none;
+    width:0;min-width:0;max-width:0;
+    height:0;min-height:0;max-height:0;
+    margin:0;padding:0;flex:0 0 0;overflow:hidden;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:var(--navbar-gap);
+    width:auto;
+    min-width:0;
+    max-width:none;
+    height:auto;
+    margin-left:0;
+    padding:0;
+    flex:0 0 auto;
+    overflow:visible;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions > #btn-modo-oscuro,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions > #boton-ajustes,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions > #btn-cerrar-sesion{
+    display:none;
+    width:0;min-width:0;max-width:0;
+    height:0;min-height:0;max-height:0;
+    margin:0;padding:0;flex:0 0 0;overflow:hidden;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior > .nav-right > .btn-hamburguesa,
+  navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-general-actions > .btn-hamburguesa{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-visor-group,
+  navbar-general[data-navbar-context="visor-admin"] #navbar-menu-panel:popover-open .popup-general-group{
+    display:flex;
+    flex-direction:column;
+  }
+}
+
+/* INICIO: solo colapsa su derecha cuando de verdad ya no cabe con la izquierda. */
+@container navbar-general (max-width: 500px){
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior .nav-general-actions{
+    display:none;
+    width:0;min-width:0;max-width:0;
+    height:0;min-height:0;max-height:0;
+    margin:0;padding:0;flex:0 0 0;overflow:hidden;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #barra-superior > .nav-right > .btn-hamburguesa{
+    display:inline-flex;
+  }
+  body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed) #navbar-menu-panel:popover-open .popup-general-group{
+    display:flex;
+    flex-direction:column;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   NIVEL 2 — CENTRO
+   -------------------------------------------------------------------------- */

@@ -1,0 +1,88 @@
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-nav{
+  display:flex !important;
+  flex:0 0 42px !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-admin-edit{
+  display:flex !important;
+  flex:0 0 42px !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  margin:0 !important;
+  padding:0 12px !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-selector{
+  display:flex !important;
+  flex:0 0 42px !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
+/* En Inicio los selectores de Visor no existen visualmente. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-selector{
+  display:none !important;
+}
+
+/* En Visor-Admin: Rama y Trimestre son filas consecutivas dentro del
+   MISMO grupo, justo después de Volver atrás. */
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-selector{
+  display:flex !important;
+}
+
+/* En Visor-Admin no hay Lectura/Edición. */
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-admin-edit{
+  display:none !important;
+}
+
+/* En Inicio, Editar es exactamente la tercera fila del mismo grupo. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-admin-edit{
+  display:flex !important;
+}
+
+/* Los demás grupos van después del bloque izquierdo completo. */
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-visor-group{
+  display:flex !important;
+  flex-direction:column !important;
+  order:2 !important;
+  width:100% !important;
+  gap:8px !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-general-group{
+  display:flex !important;
+  flex-direction:column !important;
+  order:3 !important;
+  width:100% !important;
+  gap:8px !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-visor-group > .popup-extra,
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-general-group > .popup-general{
+  order:initial !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-general-group .popup-general,
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-visor-group .popup-extra{
+  display:flex !important;
+  width:100% !important;
+}
+
+/* En Inicio no se muestran las acciones específicas del visor. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-visor-group{
+  display:none !important;
+}

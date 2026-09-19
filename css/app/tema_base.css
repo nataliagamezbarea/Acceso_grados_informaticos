@@ -1,0 +1,244 @@
+/* Sistema de tema global. Debe cargarse antes que el resto de estilos. */
+html {
+  --app-background: radial-gradient(circle at 50% 10%, #ffffff 0%, #f1f5f9 60%, #e2e8f0 100%);
+  --app-text-color: #172033;
+  --navbar-bg: #ffffff;
+  --navbar-border: #d8e1eb;
+  --navbar-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+  --navbar-btn-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --navbar-logout-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+  --surface-bg: #ffffff;
+  --surface-subtle: #f8fafc;
+  --surface-border: #e2e8f0;
+  --surface-text: #172033;
+  --ajustes-btn-bg: #f8fafc;
+  --navbar-btn-bg: #f8fafc;
+  --navbar-btn-border: #d8e1eb;
+  --navbar-btn-color: #475569;
+  --navbar-btn-bg-hover: #f8fafc;
+  --navbar-btn-color-hover: #7e22ce;
+  --navbar-btn-border-hover: #d8b4fe;
+  --navbar-menu-active-bg: #7e22ce;
+  --navbar-menu-active-color: #ffffff;
+  --navbar-menu-active-border: #6b21a8;
+  --ajustes-panel-bg: rgba(255, 255, 255, 0.96);
+  --ajustes-panel-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.6);
+  --ajustes-close-bg: #f1f5f9;
+  --ajustes-close-border: #e2e8f0;
+  --ajustes-close-color: #64748b;
+  --ajustes-row-hover: rgba(241, 245, 249, 0.8);
+  --ajustes-title-color: #0f172a;
+  background: var(--app-background);
+  color: var(--app-text-color);
+  color-scheme: light;
+}
+
+/* En claro, la navbar nace clara desde el primer frame.
+   El tema oscuro se aplica exclusivamente cuando <html> lleva .modo-oscuro. */
+html:not(.modo-oscuro) #barra-superior {
+  background: var(--navbar-bg);
+  border-bottom-color: var(--navbar-border);
+  box-shadow: var(--navbar-shadow);
+}
+
+html.modo-oscuro {
+  --app-background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 50%, #090d16 100%) fixed;
+  --app-text-color: #e5e7eb;
+  --navbar-bg: rgba(15, 23, 42, 0.96);
+  --navbar-border: #1e293b;
+  --navbar-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --navbar-btn-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  --navbar-logout-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+  --surface-bg: #111827;
+  --surface-subtle: #172033;
+  --surface-border: #334155;
+  --surface-text: #e5e7eb;
+  --ajustes-btn-bg: #1e293b;
+  --navbar-btn-bg: #1e293b;
+  --navbar-btn-border: #334155;
+  --navbar-btn-color: #e5e7eb;
+  --navbar-btn-bg-hover: #334155;
+  --navbar-btn-color-hover: #c084fc;
+  --navbar-btn-border-hover: #475569;
+  --navbar-menu-active-bg: #7e22ce;
+  --navbar-menu-active-color: #ffffff;
+  --navbar-menu-active-border: #6b21a8;
+  --ajustes-panel-bg: rgba(15, 23, 42, 0.94);
+  --ajustes-panel-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --ajustes-close-bg: #334155;
+  --ajustes-close-border: #475569;
+  --ajustes-close-color: #94a3b8;
+  --ajustes-row-hover: rgba(30, 41, 59, 0.8);
+  --ajustes-title-color: #f8fafc;
+  color-scheme: dark;
+}
+
+html.tema-preboot,
+html.tema-preboot body,
+html.tema-preboot #app-root,
+html.tema-preboot #panel-ajustes {
+  background: var(--app-background);
+  color: var(--app-text-color);
+}
+
+html.tema-preboot body {
+  min-height: 100vh;
+  visibility: visible;
+}
+
+#app-root {
+  background: var(--app-background);
+  color: var(--app-text-color);
+}
+
+#barra-superior {
+  background: var(--navbar-bg);
+  border-bottom-color: var(--navbar-border);
+  box-shadow: var(--navbar-shadow);
+}
+
+#panel-ajustes {
+  background: var(--ajustes-panel-bg);
+  border: none;
+  color: var(--surface-text);
+  box-shadow: var(--ajustes-panel-shadow);
+}
+
+#app-navbar-cargando #barra-superior { justify-content: flex-start; gap: 12px; }
+
+
+/* Estabiliza las vistas dinámicas antes de mostrar su contenido: reserva el espacio
+   sin enseñar mensajes de carga ni permitir un salto mientras terminan estilos/fonts. */
+app-view-clase > .app-vista[hidden],
+app-view-asignaturas > .app-vista[hidden],
+app-view-asignatura > .app-vista[hidden],
+app-view-apuntes > .app-vista[hidden],
+app-view-inicio > .app-vista[hidden] {
+  display: none;
+}
+app-view-clase > .app-vista:not([hidden]) #lista-asignaturas,
+app-view-asignaturas > .app-vista:not([hidden]) #lista-asignaturas,
+app-view-asignatura > .app-vista:not([hidden]) #contenedor-apuntes,
+app-view-asignatura > .app-vista:not([hidden]) #contenedor-practicas,
+app-view-apuntes > .app-vista:not([hidden]) #contenedor-apuntes,
+app-view-apuntes > .app-vista:not([hidden]) #contenedor-practicas {
+  min-height: 180px;
+}
+.vista-estabilizando {
+  visibility: hidden;
+}
+.vista-estabilizada {
+  visibility: visible;
+}
+
+/* Vistas de contenido: durante la fase de estabilización no se muestra contenido
+   parcialmente maquetado. Se reserva el espacio para evitar saltos al terminar
+   de cargar las hojas DSD/responsive. No introduce ningún mensaje de carga. */
+app-view-asignaturas > .app-vista.vista-estabilizando,
+app-view-clase > .app-vista.vista-estabilizando {
+  visibility: hidden;
+  min-height: 320px;
+}
+
+app-view-asignaturas > .app-vista.vista-estabilizada,
+app-view-clase > .app-vista.vista-estabilizada {
+  visibility: visible;
+}
+
+/* Transición suave exclusiva para el admin al recibir su tema real del servidor */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+html.tema-fade-admin,
+html.tema-fade-admin body,
+html.tema-fade-admin #app-root,
+html.tema-fade-admin #barra-superior,
+html.tema-fade-admin .selector-rama,
+html.tema-fade-admin .selector-rama select,
+html.tema-fade-admin .selector-rama label,
+html.tema-fade-admin h1,
+html.tema-fade-admin button {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+
+/* El iframe del visor comparte exactamente el fondo del index durante su carga. */
+html.visor-admin-embed, html.visor-admin-embed body { background: var(--app-background); }
+html.visor-admin-embed #visor-admin-spa-frame { background: var(--app-background); }
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

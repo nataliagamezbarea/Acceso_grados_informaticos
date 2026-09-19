@@ -1,0 +1,28 @@
+/* ============================================================
+   PREBOOT: REGLAS DE ESCRITORIO
+   Impiden que las reglas antiguas basadas en @container hagan
+   aparecer el selector o oculten una de las columnas durante el primer paint.
+============================================================ */
+@media (min-width: 1101px) {
+  html.visor-preboot.visor-document-open #ov .visor-responsive-switch {
+    display: none !important;
+  }
+  html.visor-preboot.visor-document-open #ov .ovcols {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+  html.visor-preboot.visor-document-open #ov .ovcols > visor-columna {
+    display: contents !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  html.visor-preboot.visor-document-open #ov .ovcols .ovcol,
+  html.visor-preboot.visor-document-open #ov .ovcols .ovcol.is-responsive-active {
+    display: flex !important;
+    flex: 1 1 0 !important;
+    width: 50% !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+}

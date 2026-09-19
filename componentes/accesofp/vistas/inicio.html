@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+<link href="/css/barranavegacion/navbar.css" rel="stylesheet" data-navbar-template="1">
+</head>
+ <body>
+  <app-view-inicio data-app-component="inicio">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <section class="app-vista vista-estabilizada" data-app-view="inicio">
+    <template shadowrootmode="open">
+     <link data-dsd-shell-css="1" href="/css/componentes/carcasasombra.css" rel="stylesheet">
+      <slot>
+      </slot>
+     </link>
+    </template>
+    <selector-clase data-component="selector-clase">
+     <template shadowrootmode="open">
+      <slot>
+      </slot>
+     </template>
+     <div class="selector-rama">
+      <label for="selector-rama">
+       Rama:
+      </label>
+      <select id="selector-rama">
+       <option selected="" value="">
+        SELECCIONAR RAMA
+       </option>
+      </select>
+      <div aria-label="Acciones de la rama seleccionada" class="acciones-selector-rama" id="acciones-selector-rama">
+       <boton-descarga-rama data-component="descargar-rama">
+        <template shadowrootmode="open">
+         <slot>
+         </slot>
+        </template>
+        <button aria-label="Descargar rama seleccionada" class="btn-descarga" id="btn-descargar-rama-selector" title="Descargar rama seleccionada" type="button">
+         <i class="fa-solid fa-download">
+         </i>
+        </button>
+       </boton-descarga-rama>
+       <boton-visor-rama data-component="visor-rama">
+        <template shadowrootmode="open">
+         <slot>
+         </slot>
+        </template>
+        <button aria-label="Abrir Visor Admin de la rama seleccionada" class="btn-descarga btn-visor-contextual" id="btn-visor-rama-selector" title="Abrir Visor Admin de la rama seleccionada" type="button">
+         <i class="fa-solid fa-file-pen">
+         </i>
+        </button>
+       </boton-visor-rama>
+      </div>
+     </div>
+    </selector-clase>
+   </section>
+  </app-view-inicio>
+ <script src="../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

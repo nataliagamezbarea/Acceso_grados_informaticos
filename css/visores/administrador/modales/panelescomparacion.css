@@ -1,0 +1,35 @@
+.ovcols { flex: 1; display: flex; gap: 10px; padding: 10px 16px; min-height: 0; height: calc(100vh - 120px); }
+.ovcol {
+  flex: 1;
+  background: #0c0917;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+.col-header {
+  padding: 6px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+.col-header.orig { background: #26131c; color: #fca5a5; }
+.col-header.clean { background: #0f291e; color: #86efac; }
+/* RESPONSIVE & HAMBURGER ADAPTATIONS */
+.btn-act.accept-github { background: #2563eb; color: #fff; }
+.btn-act.accept-github:hover { background: #1d4ed8; }
+.btn-act.accept-local { background: #10b981; color: #fff; }
+.btn-act.accept-local:hover { background: #059669; }
+@container app (max-width: 1100px){
+  .ov-topbar { flex-wrap: wrap; gap: 8px; padding: 6px 10px; }
+  .ov-nav-group { flex-wrap: wrap; gap: 6px; }
+  .ov-right { flex-wrap: wrap; gap: 6px; }
+  .ov-files { max-width: 280px; font-size: 11px; }
+  .ov-actionbar { gap: 6px; padding: 4px 8px; }
+  .pill-check { font-size: 11px; padding: 3px 6px; }
+  .btn-act { padding: 5px 8px; font-size: 11px; }
+}

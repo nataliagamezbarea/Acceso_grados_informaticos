@@ -1,0 +1,27 @@
+/* En iframe: la navbar pertenece exclusivamente a la SPA padre.
+       Ocultar cualquier elemento de navbar, header o popup del visor embebido. */
+    html.visor-embebido #app-navbar-cargando,
+    html.visor-embebido .app-navbar-host,
+    html.visor-embebido navbar-general,
+    html.visor-embebido visor-navbar,
+    html.visor-embebido #barra-superior,
+    html.visor-embebido .barra-superior,
+    html.visor-embebido header,
+    html.visor-embebido #navbar-menu-panel,
+    html.visor-embebido [data-component="navbar-general"],
+    html.visor-embebido [data-navbar-context="visor-admin"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      height: 0 !important;
+      max-height: 0 !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      overflow: hidden !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }

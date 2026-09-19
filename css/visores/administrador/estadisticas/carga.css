@@ -1,0 +1,12 @@
+
+/* Los dos indicadores de carga jamas se colocan por encima de la navbar. */
+#visor-navbar-loading, #global-navbar-loading { top: 64px; z-index: 99990; }
+#visor-navbar-loading {
+  background: rgba(255,255,255,.97);
+  border-bottom: 1px solid #dbe4ef;
+  color: #475569;
+  box-shadow: 0 2px 8px rgba(15,23,42,.06);
+}
+#visor-navbar-loading > i, #global-navbar-loading i { color: #4f46e5; }
+/* LIGHT: una sola identidad visual, sin restos del tema oscuro. */
+html:not(.modo-oscuro) body { background: var(--app-background); color: var(--app-text-color); }

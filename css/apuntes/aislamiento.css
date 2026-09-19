@@ -1,0 +1,6 @@
+/* Indice de aislamiento para vista de apuntes (< 100 lineas por archivo) */
+@import url("aislamiento_base.css");
+@import url("aislamiento_tarjeta.css");
+@import url("aislamiento_estructura.css");
+@import url("aislamiento_responsivo.css");
+@import url("aislamiento_modo_claro.css");

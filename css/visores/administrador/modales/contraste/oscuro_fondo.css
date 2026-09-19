@@ -1,0 +1,73 @@
+
+    /* MODO OSCURO */
+    html.modo-oscuro .blocker,
+    html[data-theme="dark"] .blocker,
+    html.modo-oscuro #customModal,
+    html.modo-oscuro #summaryModal,
+    html.modo-oscuro #modalCrearEnunciado,
+    html.modo-oscuro #modalEditarEnunciado,
+    html.modo-oscuro #modalLimpiarDatos,
+    html.modo-oscuro .css-inline-02ecaefe68,
+    html.modo-oscuro #blocker {
+      background: rgba(0, 0, 0, 0.75) !important;
+      backdrop-filter: blur(4px) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
+    }
+    html.modo-oscuro .blocker-box,
+    html[data-theme="dark"] .blocker-box,
+    html.modo-oscuro #customModalBox,
+    html[data-theme="dark"] #customModalBox,
+    html.modo-oscuro .modal-box,
+    html.modo-oscuro .css-inline-1d2beb08d3,
+    html.modo-oscuro .css-inline-a25ba2b8d1,
+    html.modo-oscuro .css-inline-5dc4a242f4,
+    html.modo-oscuro .css-inline-4ce6b84a35,
+    html.modo-oscuro .css-inline-8d132760b3,
+    html.modo-oscuro .css-inline-746d2e5408,
+    html.modo-oscuro #modalLimpiarDatos > div,
+    html.modo-oscuro #modalLimpiarDatos .css-inline-746d2e5408 {
+      background: #1e1b4b !important;
+      color: #f8fafc !important;
+      border: 1px solid #4338ca !important;
+      border-radius: 14px !important;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5) !important;
+    }
+    html.modo-oscuro #customModalTitle,
+    html[data-theme="dark"] #customModalTitle,
+    html.modo-oscuro .css-inline-e4638fa873,
+    html.modo-oscuro .modal-title,
+    html.modo-oscuro .css-inline-b44a765b41,
+    html.modo-oscuro .css-inline-e7e8278b59,
+    html.modo-oscuro .css-inline-c47521e0ab,
+    html.modo-oscuro .css-inline-cb7427136f,
+    html.modo-oscuro #modalLimpiarDatos h3,
+    html.modo-oscuro .modal-header h3,
+    html.modo-oscuro .blocker-box h3 {
+      color: #ffffff !important;
+      font-size: 17px !important;
+      font-weight: 700 !important;
+    }
+    html.modo-oscuro #customModalText,
+    html[data-theme="dark"] #customModalText,
+    html.modo-oscuro .css-inline-1356299a78,
+    html.modo-oscuro #blockerText,
+    html.modo-oscuro .css-inline-226e9adf13,
+    html.modo-oscuro .css-inline-037aa495e4,
+    html.modo-oscuro #modalLimpiarDatos p,
+    html.modo-oscuro .css-inline-1a1d3cb220,
+    html.modo-oscuro .css-inline-e93923cab2,
+    html.modo-oscuro .css-inline-4049faa557,
+    html.modo-oscuro .modal-desc,
+    html.modo-oscuro .modal-label,
+    html.modo-oscuro .blocker-box p,
+    html.modo-oscuro .blocker-box label {
+      color: #cbd5e1 !important;
+      font-size: 13.5px !important;
+      font-weight: 500 !important;
+      line-height: 1.55 !important;
+    }
+    html.modo-oscuro .css-inline-68d9815d1e,
+    html.modo-oscuro #modalLimpiarDatos #lblRamaLimpiar {
+      color: #38bdf8 !important;
+      font-weight: 700 !important;
+    }

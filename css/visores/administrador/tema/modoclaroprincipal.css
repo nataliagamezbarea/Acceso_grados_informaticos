@@ -1,0 +1,54 @@
+/* ===== MODO CLARO DEL VISOR ADMIN =====
+   El visor tiene muchos estilos historicos con colores oscuros fijos. Estos
+   overrides hacen que el boton global de Light/Dark tambien afecte al visor,
+   sin modificar el modo oscuro existente. */
+html:not(.modo-oscuro) body {
+  --bg-main: var(--app-background);
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-bar: #ffffff;
+  --border-color: #d7deea;
+  --text-main: #172033;
+  --text-muted: #64748b;
+  background: var(--app-background);
+  color: var(--app-text-color);
+}
+
+
+
+
+
+html:not(.modo-oscuro) .file-search-bar { background: linear-gradient(#f5f7fb 72%, transparent); }
+html:not(.modo-oscuro) .file-search-inner { background: #fff; border-color: #cbd5e1; color: #334155; }
+html:not(.modo-oscuro) .card {
+  background: #fff; border-color: #d7deea; color: #172033; box-shadow: 0 3px 12px rgba(15,23,42,.07);
+}
+html:not(.modo-oscuro) .card:hover { background: #f8fafc; }
+html:not(.modo-oscuro) .card .name, html:not(.modo-oscuro) .card .row { color: #334155; }
+html:not(.modo-oscuro) .stats .stat { background: #fff; border-color: #d7deea; color: #334155; }
+html:not(.modo-oscuro) .ov { background: #f8fafc; }
+html:not(.modo-oscuro) .ov-topbar, html:not(.modo-oscuro) .ov-actionbar {
+  background: #fff; color: #172033; border-color: #d7deea;
+}
+html:not(.modo-oscuro) .ov-nav-group button, html:not(.modo-oscuro) .back-btn {
+  background: #f1f5f9; border-color: #cbd5e1; color: #334155;
+}
+html:not(.modo-oscuro) .ov-files { color: #334155; }
+html:not(.modo-oscuro) .ov-counter, html:not(.modo-oscuro) .ov-changes-counter { color: #475569; }
+html:not(.modo-oscuro) .ovcols, html:not(.modo-oscuro) .ovcol {
+  background: #fff; color: #334155; border-color: #d7deea;
+}
+
+html:not(.modo-oscuro) #visor-navbar-loading { background: #fff; color: #334155; border-color: #d7deea; }
+/* ============================================================================
+   RESPONSIVE 100% — VISOR ADMIN
+   No cambia el diseno de escritorio. A partir de tablet/mobile reorganiza
+   barras, controles, tarjetas, modales y el visor para evitar desbordamientos.
+   ============================================================================ */
+html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+img, canvas, video, iframe { max-width: 100%; }
+button, input, select, textarea { max-width: 100%; }
+/* Nunca permitir que un hijo fuerce el ancho de su contenedor. */
+header, header > *, .header-left, .header-right, .file-search-inner, .wrap, .stats, .sec, .ov, .ov-topbar, .ov-nav-group, .ov-files, .ov-right, .ov-actionbar, .editor-box, .editor-tools, .apunte-bar, .ovcols, .ovcol, .modal-actions {
+  min-width: 0;
+}

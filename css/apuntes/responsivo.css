@@ -1,0 +1,94 @@
+* { box-sizing: border-box; }
+html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+.container, .contenido, .detalle-seccion, .contenedor-tablas { width: 100%; max-width: 100%; }
+.contenedor-tablas { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.contenedor-tablas table { min-width: 600px; width: 100%; }
+@container app (max-width: 700px){
+  #app-root { padding-top: 64px; }
+  .container { padding: 8px; }
+  .contenido { padding: 0; }
+  .portada_emoji_contenedor { width: 100%; }
+  .detalle-seccion { border-radius: 12px; }
+  .detalle-seccion summary { padding: 12px; font-size: .9rem; }
+  .contenedor-tablas { padding: 8px; }
+  .campo { flex-direction: column; gap: 5px; }
+  .clave, .valor { flex: 1 1 auto; width: 100%; }
+  .item-archivo { align-items: flex-start; }
+}
+@container app (max-width: 430px){
+  #app-root { padding-top: 58px; }
+  .detalle-apunte { padding: 14px; border-radius: 12px; }
+  .detalle-seccion summary { font-size: .82rem; }
+  .item-archivo { flex-direction: column; }
+  .item-archivo .btn-descarga, .item-archivo .btn-toggle-archivo { align-self: flex-end; }
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

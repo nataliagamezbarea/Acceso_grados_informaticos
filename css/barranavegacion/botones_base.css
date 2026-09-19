@@ -1,0 +1,85 @@
+#boton-modo-edicion{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:116px;
+  width:auto;
+  height:42px;
+  min-height:42px;
+  padding:0 16px;
+  box-sizing:border-box;
+  border:1px solid #c94a8d;
+  border-radius:999px;
+  background:var(--navbar-pink);
+  color:#fff;
+  font:600 14px/1 "Poppins","Segoe UI",sans-serif;
+  white-space:nowrap;
+  box-shadow:0 3px 10px rgba(214,90,155,.22);
+  cursor:pointer;
+}
+
+.btn-cerrar-sesion{color:#ef4444;}
+
+#barra-superior .btn-hamburguesa{
+  display:none;
+  flex:0 0 var(--navbar-btn-size);
+  width:var(--navbar-btn-size);
+  min-width:var(--navbar-btn-size);
+  height:var(--navbar-btn-size);
+  min-height:var(--navbar-btn-size);
+}
+
+/* =========================
+   VISOR-ADMIN
+   ========================= */
+.visor-admin-only,
+.visor-popup-only,
+.visor-admin-spa-only{display:none;}
+
+html.visor-admin-active .visor-admin-only,
+html.visor-admin-embed .visor-admin-only,
+body.visor-admin-active .visor-admin-only,
+body.visor-admin-embed .visor-admin-only,
+navbar-general[data-navbar-context="visor-admin"] .visor-admin-only{
+  display:flex;
+}
+
+/* Inicio es un contexto independiente: nunca hereda controles del visor. */
+html[data-vista="inicio"]:not(.visor-admin-active):not(.visor-admin-embed) .visor-admin-only,
+body[data-vista="inicio"]:not(.visor-admin-active):not(.visor-admin-embed) .visor-admin-only,
+html[data-vista="inicio"]:not(.visor-admin-active):not(.visor-admin-embed) .visor-admin-spa-only,
+body[data-vista="inicio"]:not(.visor-admin-active):not(.visor-admin-embed) .visor-admin-spa-only{
+  display:none;
+}
+
+html.visor-admin-active .visor-admin-spa-only,
+html.visor-admin-embed .visor-admin-spa-only,
+body.visor-admin-active .visor-admin-spa-only,
+body.visor-admin-embed .visor-admin-spa-only,
+navbar-general[data-navbar-context="visor-admin"] .visor-admin-spa-only{
+  display:flex;
+}
+
+navbar-general[data-navbar-context="visor-admin"] #barra-superior .nav-center-actions,
+html.visor-admin-active #barra-superior .nav-center-actions,
+html.visor-admin-embed #barra-superior .nav-center-actions,
+body.visor-admin-active #barra-superior .nav-center-actions,
+body.visor-admin-embed #barra-superior .nav-center-actions{
+  display:none;
+  width:0;
+  min-width:0;
+  height:0;
+  margin:0;
+  padding:0;
+  flex:0 0 0;
+}
+
+navbar-general[data-navbar-context="visor-admin"] #boton-modo-edicion,
+html.visor-admin-active #boton-modo-edicion,
+html.visor-admin-embed #boton-modo-edicion,
+body.visor-admin-active #boton-modo-edicion,
+body.visor-admin-embed #boton-modo-edicion{
+  display:none;
+}
+
+/* Selectores Rama/Trimestre en la navbar */

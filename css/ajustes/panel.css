@@ -1,0 +1,129 @@
+#panel-ajustes span { margin: 0; filter: none; }
+#panel-ajustes.abierto, #panel-ajustes.visible {
+  display: block; animation: modalEntrada 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes modalEntrada {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+#panel-ajustes .cabecera-ajustes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 14px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ajustes-title-color);
+  background: transparent;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  letter-spacing: -0.01em;
+}
+#panel-ajustes .btn-cerrar-ajustes {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: var(--ajustes-close-bg);
+  border: 1px solid var(--ajustes-close-border);
+  border-radius: 50%;
+  color: var(--ajustes-close-color);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+#panel-ajustes .btn-cerrar-ajustes:hover { background: #e2e8f0; color: #0f172a; transform: scale(1.08); }
+html.modo-oscuro #panel-ajustes .btn-cerrar-ajustes {
+  background: #334155; border-color: #475569; color: #94a3b8;
+}
+html.modo-oscuro #panel-ajustes .btn-cerrar-ajustes:hover {
+  background: #475569; color: #f8fafc;
+}
+#panel-ajustes .seccion-ajustes-titulo {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6366f1;
+  padding: 12px 14px 4px 14px;
+  margin-top: 6px;
+}
+.cabecera-ajustes-icono { margin-right: 8px; color: #6366f1; }
+.seccion-ajustes-icono { margin-right: 6px; color: #6366f1; }
+.cuerpo-ajustes-cargando { padding: 24px 16px; text-align: center; }
+/* Icono Google Classroom usado en "Mostrar en grados". */
+.icono-ajuste-fila.icono-ajuste-imagen { overflow: hidden; }
+.icono-classroom-ajuste { display: block; width: 20px; height: 20px; object-fit: contain; }
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

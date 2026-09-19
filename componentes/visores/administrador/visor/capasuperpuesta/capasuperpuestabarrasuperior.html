@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+ 
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+ <link href="css/notificador.css" rel="stylesheet"/>
+</head>
+ <body>
+  <visor-overlay-topbar data-component="topbar">
+   <template shadowrootmode="open">
+    <slot>
+    </slot>
+   </template>
+   <div class="ov-topbar">
+    <div class="ov-nav-group">
+     <button class="back-btn" data-event-click="closeOv()" title="Volver a la lista general">
+      <i class="fa-solid fa-arrow-left">
+      </i>
+      Lista
+     </button>
+     <button data-event-click="nav(-1)" id="btnNavPrev" title="Anterior (Tecla ←)">
+      <i class="fa-solid fa-chevron-left">
+      </i>
+     </button>
+     <span class="ov-counter" id="ovPosText">
+      1 / 1
+     </span>
+     <button class="nav-filter-btn active" data-event-click="toggleNavSeleccionados()" id="btnNavFiltro" title="Navegar solo entre archivos seleccionados por los checks activos">
+      <i class="fa-solid fa-filter">
+      </i>
+      Seleccionados
+     </button>
+     <button class="nav-change-btn" data-event-click="navCambio(-1)" id="btnCambioPrev" title="Ir al cambio anterior de este PDF">
+      <i class="fa-solid fa-arrow-left">
+      </i>
+     </button>
+     <button class="nav-change-btn" data-event-click="irAlPrimerCambio()" id="btnCambios" title="Ir directamente al primer texto sustituido o eliminado de este PDF">
+      <i class="fa-solid fa-location-crosshairs">
+      </i>
+      Cambios
+     </button>
+     <span class="ov-changes-counter" id="ovCambiosText">
+      0 / 0
+     </span>
+     <button class="nav-change-btn" data-event-click="navCambio(1)" id="btnCambioNext" title="Ir al siguiente cambio de este PDF">
+      <i class="fa-solid fa-arrow-right">
+      </i>
+     </button>
+     <button data-event-click="nav(1)" id="btnNavNext" title="Siguiente (Tecla →)">
+      <i class="fa-solid fa-chevron-right">
+      </i>
+     </button>
+    </div>
+    <div class="ov-files">
+     <span>
+      <i class="fa-solid fa-file-pdf ov-file-orig">
+      </i>
+      <b class="orig-name-text" id="spanOrigName">
+      </b>
+     </span>
+     <span class="ov-arrow" id="spanRenameArrow">
+      ➔
+     </span>
+     <span>
+      <i class="fa-solid fa-file-circle-check ov-file-clean">
+      </i>
+      <b class="clean-name-text" id="spanCleanName">
+      </b>
+     </span>
+    </div>
+    <div class="ov-right">
+     <button class="btn-act accept-github" data-event-click="confirmItem(true, true)" title="Aceptar y Subir cambios directamente a GitHub">
+      <i class="fa-brands fa-github">
+      </i>
+      Subir GitHub
+     </button>
+     <button class="btn-act download-pdf-btn btn-download-pdf" data-event-click="descargarPDFActual()" title="Descargar este archivo PDF procesado">
+      <i class="fa-solid fa-download">
+      </i>
+      Descargar
+     </button>
+     <button class="btn-act skip" data-event-click="confirmItem(false)" id="btnDejarOriginal" title="Mantener archivo original sin modificar">
+      <i class="fa-solid fa-rotate-left">
+      </i>
+      <span id="btnDejarOriginalTexto">
+       Dejar Original
+      </span>
+     </button>
+     <div class="ov-close" data-event-click="closeOv()" title="Cerrar (Esc)">
+      ×
+     </div>
+    </div>
+   </div>
+  </visor-overlay-topbar>
+ <script src="../../../../../js/descargas/notificador.js?v=20260911-0930"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.floating-pdf-menu, .floating-img-menu, .floating-col-menu, .floating-name-menu, .floating-add-menu {
+  position: absolute;
+  top: 38px;
+  left: 10px;
+  right: 10px;
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 8px;
+  padding: 6px 10px;
+  z-index: 301;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+}
+.floating-pdf-menu { border: 1.5px solid #ef4444; }
+.floating-img-menu { border: 1.5px solid #a855f7; }
+.floating-col-menu { border: 1.5px solid #f59e0b; }
+.floating-name-menu { border: 1.5px solid #3b82f6; }
+.floating-add-menu { border: 1.5px solid #6366f1; }
+.floating-col-menu button, .floating-name-menu button, .floating-img-menu button, .floating-pdf-menu button, .floating-add-menu button {
+  border: 0;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+.floating-add-menu button:hover, .floating-pdf-menu button:hover, .floating-col-menu button:hover, .floating-name-menu button:hover, .floating-img-menu button:hover {
+  filter: brightness(1.2); transform: translateY(-1px);
+}

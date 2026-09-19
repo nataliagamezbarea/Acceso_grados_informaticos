@@ -1,0 +1,20 @@
+.card-info-box { flex: 1; min-width: 0; }
+.card .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }
+.card .name { font-weight: 700; font-size: 13px; color: #fff; }
+.badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.badge.cv { background: #1e3a8a; color: #93c5fd; }
+.badge.nm { background: #3730a3; color: #c7d2fe; }
+.badge.ren { background: #4c1d95; color: #ddd6fe; }
+.badge.v { background: #065f46; color: #a7f3d0; }
+.badge.nv { background: #374151; color: #9ca3af; }
+.box { padding: 6px 10px; border-radius: 6px; font-size: 11.5px; margin-top: 4px; line-height: 1.4; }
+.box.old { background: rgba(239,68,68,0.12); border-left: 3px solid var(--accent-red); color: #fca5a5; }
+.box.new { background: rgba(16,185,129,0.12); border-left: 3px solid var(--accent-green); color: #86efac; }

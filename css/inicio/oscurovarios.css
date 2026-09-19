@@ -1,0 +1,97 @@
+/* Acciones de rama en la pantalla inicial: una sola fila por rama. */
+.lista-ramas-acciones {
+  display: flex; flex-direction: column; gap: 10px; width: min(100%, 900px); margin: 18px auto 28px;
+}
+.rama-accion-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fff;
+}
+.rama-accion-nombre {
+  font-weight: 700; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.rama-accion-botones { display: flex; gap: 8px; flex-shrink: 0; }
+.rama-accion-botones .btn-descarga { margin: 0; }
+html.modo-oscuro .rama-accion-fila, html.modo-oscuro .rama-accion-fila {
+  background: #1e293b; border-color: #334155;
+}
+@container app (max-width:600px){
+  .rama-accion-fila { align-items: flex-start; flex-direction: column; }
+  .rama-accion-botones { width: 100%; }
+  .rama-accion-botones .btn-descarga { flex: 1; }
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

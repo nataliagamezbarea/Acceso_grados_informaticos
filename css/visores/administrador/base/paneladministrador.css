@@ -1,0 +1,14 @@
+/* ============================================================
+   ESTILOS ESPECÍFICOS DEL PANEL
+   Lineas: < 100 | Nombres en espanol
+============================================================ */
+/* Corrección visor responsive: en tablet/móvil solo se muestra la pestaña activa.
+   Ambos documentos siguen cargándose en segundo plano para que cambiar de pestaña
+   sea inmediato. Esta regla está al final del CSS del panel para ganar a reglas
+   responsive anteriores que pudieran volver a mostrar las dos columnas. */
+@container app (max-width: 1100px){
+  #ov .ovcols { display: block; overflow: hidden; }
+  #ov .ovcols > visor-columna { display: block; width: 100%; height: 100%; min-height: 0; }
+  #ov .ovcol { display: none; width: 100%; height: 100%; min-height: 0; }
+  #ov .ovcol.is-responsive-active { display: flex; flex-direction: column; }
+}

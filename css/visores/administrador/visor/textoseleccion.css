@@ -1,0 +1,62 @@
+/* ESTILOS DE SELECCIÓN DE TEXTO EN EL PDF
+ * IMPORTANTE: color TRANSPARENTE a propósito. Este span se coloca ENCIMA
+ * del canvas (que ya pinta el PDF real) solo para permitir seleccionar y
+ * copiar texto como en un lector nativo. Si se le pone un color visible
+ * (p.ej. #1e293b) el texto queda pintado DOS VECES casi en la misma
+ * posición → efecto de "duplicado / tachado" en el panel ORIGINAL. */
+.pdf-line-span {
+  position: absolute;
+  color: transparent;
+  background: transparent;
+  pointer-events: auto;
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+}
+.pdf-line-span::selection { background: rgba(59, 130, 246, 0.35); color: #ffffff; }
+.pdf-line-span::-moz-selection { background: rgba(59, 130, 246, 0.35); color: #ffffff; }
+/* ARRastre en vivo: el recuadro relleno (el color) sigue al cursor */
+.blue-name-hotspot.dragging, .gray-name-hotspot.dragging, .school-hotspot.dragging, .gray-school-hotspot.dragging, .orange-hotspot.dragging, .red-hotspot.dragging, .image-hotspot.dragging {
+  opacity: 0.85; box-shadow: 0 0 0 2px rgba(255,255,255,0.65), 0 6px 18px rgba(0,0,0,0.45); cursor: grabbing;
+}
+/* MIENTRAS SE ARRASTRA: SOLO BORDE, SIN RELLENO.
+ * El color de fondo tapaba el texto de debajo y no se podía colocar bien el
+ * recuadro: en arrastre el interior se vuelve transparente (queda el borde,
+ * igual que en reposo pero sin fill) para ver EXACTAMENTE qué se está
+ * seleccionando debajo. */
+.blue-name-hotspot.dragging, .gray-name-hotspot.dragging, .school-hotspot.dragging, .gray-school-hotspot.dragging, .orange-hotspot.dragging, .red-hotspot.dragging {
+  background: transparent; box-shadow: 0 0 0 1px rgba(255,255,255,0.55), 0 4px 14px rgba(0,0,0,0.35);
+}
+/* ===== MOTOR NATIVO PDF.js · capa de texto seleccionable/copiable ===== */
+.pdfjs-page { position: relative; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.pdfTextLayer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  line-height: 1;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  z-index: 5;
+  cursor: text;
+}
+.pdfTextLayer span, .pdfTextLayer br {
+  /* TRANSPARENTE a propósito (igual que el visor oficial de PDF.js):
+   * esta capa solo existe para poder SELECCIONAR/COPIAR texto; el texto
+   * que se VE ya está pintado en el <canvas> de debajo. Si aquí se pone
+   * un color visible, el texto queda pintado dos veces con fuentes/
+   * posiciones ligeramente distintas → efecto de texto "duplicado". */
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  transform-origin: 0% 0%;
+  cursor: text;
+}
+.pdfTextLayer ::selection { background: rgba(59,130,246,.35); }
+.pdfTextLayer span::selection { background: rgba(59,130,246,.35); }
+.drawing-active .pdfTextLayer, .drawing-active .pdf-line-span { pointer-events: none; }
+.drawing-active { user-select: none; -webkit-user-select: none; }

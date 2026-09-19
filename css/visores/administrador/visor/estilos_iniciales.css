@@ -1,0 +1,7 @@
+/* Estado inicial sin parpadeo: en tablet/móvil/táctil solo se muestra el visor activo.
+   Se mantiene aquí, junto al HTML, para que la regla exista antes de que termine
+   de cargarse el CSS externo. */
+@container app (max-width: 1100px){
+  #ov .ovcols > visor-columna .ovcol { display: none; }
+  #ov .ovcols > visor-columna .ovcol.is-responsive-active { display: flex; flex-direction: column; }
+}

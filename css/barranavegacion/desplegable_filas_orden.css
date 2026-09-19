@@ -1,0 +1,87 @@
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-admin-edit{
+  display:flex !important;
+  order:3 !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  flex:0 0 42px !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-selector{
+  display:flex !important;
+  order:3 !important;
+  width:100% !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-selector + .popup-left-selector{
+  order:4 !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-general-group{
+  display:flex !important;
+  flex-direction:column !important;
+  order:2 !important;
+  width:100% !important;
+  gap:8px !important;
+}
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-visor-group{
+  display:flex !important;
+  flex-direction:column !important;
+  order:3 !important;
+  width:100% !important;
+  gap:8px !important;
+}
+/* En Inicio, el popup no contiene Rama/Trimestre ni extras del visor. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-selector,
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-visor-group{
+  display:none !important;
+}
+/* En Visor-Admin: nunca mostrar Lectura/Edición. */
+navbar-general[data-navbar-context="visor-admin"]
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-admin-edit{
+  display:none !important;
+}
+/* En Inicio, mostrar la copia de edición cuando el rol es admin. */
+body.pagina-index:not(.visor-admin-active):not(.visor-admin-embed)
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-admin-edit{
+  display:flex !important;
+}
+
+
+/* ============================================================
+   POPUP — ORDEN DEFINITIVO
+   No usamos display:contents ni order sobre hijos sueltos.
+   El grupo izquierdo contiene físicamente, en este orden:
+     Inicio -> Volver atrás -> Editar (Inicio)
+     Inicio -> Volver atrás -> Rama -> Trimestre (Visor-Admin)
+   Así el orden es estable y el responsive no puede invertirlo.
+   ============================================================ */
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:8px !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  order:1 !important;
+  width:100% !important;
+  gap:8px !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-nav,
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-admin-edit,
+#navbar-menu-panel.navbar-popup-ordered:popover-open > .navbar-popup-list > .popup-left-group > .popup-left-selector{
+  order:initial !important;
+  width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+}

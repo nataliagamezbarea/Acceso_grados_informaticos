@@ -1,0 +1,53 @@
+/* ============================================================
+   ESTILOS ESPECÍFICOS DEL COMPONENTE — PARTE 3
+   Lineas: <= 100 | Nombres en espanol
+============================================================ */
+
+.css-inline-3f6bc2e52d {
+  width: 100%;
+  height: 70px;
+  box-sizing: border-box;
+  background: #0c1322;
+  border: 1px solid #ef4444;
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  resize: vertical;
+}
+.css-inline-4049faa557 {
+  font-size: 12px; color: #34d399; font-weight: 700; display: block; margin-bottom: 4px;
+}
+.css-inline-42a734a9dd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #374151;
+  padding-bottom: 10px;
+}
+.css-inline-4ce6b84a35 { border: 2px solid #6366f1; max-width: 580px; text-align: left; }
+.css-inline-4d1462c150 { background: #3b82f6; }
+.css-inline-5192b201c4 { background: #0284c7; }
+.css-inline-5592c5dc14 {
+  background: #4b5563;
+  color: #fff;
+  border: 0;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.css-inline-565f82f7db {
+  background: #09101f;
+  border: 1px solid #3b82f6;
+  color: #34d399;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  flex: 1;
+  max-width: 400px;
+}
+.css-inline-5dbc6fa9a9 { background: #4338ca; color: #c7d2fe; }
+.css-inline-5dc4a242f4 { border: 2px solid #8b5cf6; max-width: 650px; text-align: left; }

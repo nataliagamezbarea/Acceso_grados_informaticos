@@ -1,0 +1,81 @@
+    html:not(.modo-oscuro) .css-inline-12bf8bc54f,
+    html:not(.modo-oscuro) .css-inline-e4887c6585,
+    html:not(.modo-oscuro) .css-inline-09d05bc230,
+    html:not(.modo-oscuro) .css-inline-39805bee3a,
+    html:not(.modo-oscuro) #modalLimpiarDatos label {
+      color: #1e293b !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      cursor: pointer !important;
+    }
+    html:not(.modo-oscuro) .css-inline-a1b7c13de2,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-a1b7c13de2 {
+      color: #dc2626 !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      cursor: pointer !important;
+    }
+    html:not(.modo-oscuro) .css-inline-f8290b94e3,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-f8290b94e3 {
+      color: #334155 !important;
+      font-weight: 600 !important;
+      font-size: 12.5px !important;
+      cursor: pointer !important;
+    }
+    html:not(.modo-oscuro) #modalLimpiarDatos input[type="checkbox"] {
+      accent-color: #dc2626 !important;
+      cursor: pointer !important;
+    }
+    html:not(.modo-oscuro) #customModalOkBtn,
+    html[data-theme="light"] #customModalOkBtn,
+    html:not(.modo-oscuro) .btn-act.accept,
+    html[data-theme="light"] .btn-act.accept,
+    html:not(.modo-oscuro) .css-inline-90b7755797,
+    html:not(.modo-oscuro) .css-inline-75d36b272c {
+      background: #10b981 !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      border-radius: 8px !important;
+      border: none !important;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.28) !important;
+      cursor: pointer !important;
+    }
+    html:not(.modo-oscuro) #customModalOkBtn:hover,
+    html:not(.modo-oscuro) .btn-act.accept:hover,
+    html:not(.modo-oscuro) .css-inline-90b7755797:hover,
+    html:not(.modo-oscuro) .css-inline-75d36b272c:hover {
+      background: #059669 !important;
+    }
+    html:not(.modo-oscuro) .css-inline-f24f90f9ee,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-f24f90f9ee {
+      background: #dc2626 !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      border-radius: 8px !important;
+      border: none !important;
+      padding: 9px 18px !important;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.28) !important;
+      cursor: pointer !important;
+    }
+    html:not(.modo-oscuro) .css-inline-f24f90f9ee:hover,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-f24f90f9ee:hover {
+      background: #b91c1c !important;
+    }
+    html:not(.modo-oscuro) #customModalCancelBtn,
+    html[data-theme="light"] #customModalCancelBtn,
+    html:not(.modo-oscuro) .btn-act.skip,
+    html[data-theme="light"] .btn-act.skip,
+    html:not(.modo-oscuro) .css-inline-a0fd43aec1,
+    html:not(.modo-oscuro) .css-inline-af9b0a4d92,
+    html:not(.modo-oscuro) #modalLimpiarDatos .css-inline-af9b0a4d92 {
+      background: #f1f5f9 !important;
+      color: #475569 !important;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+      border-radius: 8px !important;
+      border: 1px solid #cbd5e1 !important;
+      padding: 9px 18px !important;
+      cursor: pointer !important;
+    }

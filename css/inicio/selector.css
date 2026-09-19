@@ -1,0 +1,138 @@
+.selector-rama select:hover { border-color: #9333ea; }
+.selector-rama select:focus { border-color: #9333ea; box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.15); }
+#lista-asignaturas, #lista-trimestres, .lista-asignaturas, .lista-trimestres {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  word-break: normal;
+  overflow-wrap: normal;
+  position: relative;
+  overflow: hidden;
+}
+.flex strong {
+  margin: 0; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.flex a {
+  text-decoration: none;
+  font-family: var(--font-heading, "Poppins", sans-serif);
+  font-size: 1.05rem;
+  color: #1e293b;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-break: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.flex::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #9333ea, #c14c8a);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.flex:hover {
+  transform: translateY(-3px);
+  border-color: #d8b4fe;
+  box-shadow: 0 12px 20px -4px rgba(147, 51, 234, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

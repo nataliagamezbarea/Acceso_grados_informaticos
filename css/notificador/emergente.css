@@ -1,0 +1,137 @@
+.modal-overlay-cancelar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", -apple-system, sans-serif;
+}
+.modal-card-cancelar {
+  background: #1e293b;
+  color: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  max-width: 340px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid #334155;
+  text-align: center;
+  box-sizing: border-box;
+}
+.modal-card-cancelar .icono-warning { font-size: 32px; margin-bottom: 8px; }
+.modal-card-cancelar h3 { margin: 0 0 8px 0; font-size: 17px; font-weight: 700; color: #f87171; }
+.modal-card-cancelar p { font-size: 13px; color: #94a3b8; margin: 0 0 18px 0; line-height: 1.4; }
+.modal-card-cancelar .acciones-cancelar { display: flex; flex-direction: column; gap: 8px; }
+.btn-cancelar-solo {
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+.btn-cancelar-solo:hover { background: #dc2626; }
+.btn-cancelar-todas {
+  background: #991b1b;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+.btn-cancelar-todas:hover { background: #7f1d1d; }
+.btn-cancelar-no {
+  background: #334155;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 4px;
+  transition: background 0.2s ease;
+}
+.btn-cancelar-no:hover { background: #475569; }
+
+
+/* Ajuste responsive del visor: los controles bajan de línea, no desplazan el documento */
+@media (max-width: 900px) {
+  .visor-documento,
+  .visor-documento-container,
+  .contenedor-documento,
+  .documento-contenedor,
+  .panel-documento {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .controles-documento > *,
+  .controles-visor > *,
+  .acciones-documento > *,
+  .barra-documento > *,
+  .toolbar-documento > *,
+  .documento-controles > * {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+
+  .visor-documento,
+  .visor-documento-container {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .controles-documento,
+  .controles-visor,
+  .acciones-documento,
+  .barra-documento,
+  .toolbar-documento,
+  .documento-controles {
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 8px;
+  }
+
+  .controles-documento button,
+  .controles-visor button,
+  .acciones-documento button,
+  .barra-documento button,
+  .toolbar-documento button,
+  .documento-controles button {
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+}

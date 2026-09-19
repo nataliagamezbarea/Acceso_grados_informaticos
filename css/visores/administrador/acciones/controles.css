@@ -1,0 +1,43 @@
+/* ============================================================
+   ESTILOS ESPECÍFICOS DEL COMPONENTE — PARTE 2
+   Lineas: <= 100 | Nombres en espanol
+============================================================ */
+
+.css-inline-1a1d3cb220 {
+  font-size: 12px; color: #93c5fd; font-weight: 700; display: block; margin-bottom: 4px;
+}
+.css-inline-1cc923efed {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: #065f46;
+  color: #34d399;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.css-inline-1d2beb08d3 { max-width: 460px; text-align: center; }
+.css-inline-1ed25d1f77 {
+  font-size: 12px; font-weight: 700; color: #a5b4fc; display: flex; align-items: center; gap: 8px;
+}
+.css-inline-20679505b4 { color: #fbbf24; }
+.css-inline-226e9adf13 { font-size: 14px; color: #cbd5e1; line-height: 1.6; text-align: center; }
+.css-inline-2a73309298 {
+  width: 100%;
+  box-sizing: border-box;
+  background: #0c1322;
+  border: 1px solid #3b82f6;
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.css-inline-2be897b184 { justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.css-inline-2fa08c3aa4 { background: #8b5cf6; }
+.css-inline-345565bae7 { color: #34d399; font-size: 16px; }
+.css-inline-39805bee3a {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; color: #67e8f9;
+}
+.css-inline-3f42941089 { display: none; }
