@@ -42,51 +42,92 @@ jobs:
         run: |
           python - <<'PY2'
           import os
+          import re
           from pathlib import Path
 
-          base = os.environ.get("PAGES_BASE_PATH", "/") or "/"
+          base = os.environ.get("PAGES_BASE_PATH", "").strip()
+          print(f"PAGES_BASE_PATH detectado: {base!r}")
+          if not base:
+              raise SystemExit("ERROR: configure-pages no devolvio base_path")
           if not base.startswith("/"):
               base = "/" + base
           if not base.endswith("/"):
               base += "/"
 
           root = Path(".")
+          patron = re.compile(r'<base\s+href\s*=\s*["\']/["\']\s*/?>', re.I)
           for path in root.rglob("*.html"):
               if ".git" in path.parts:
                   continue
               text = path.read_text(encoding="utf-8")
-              new = text.replace('<base href="/">', f'<base href="{base}">')
-              new = new.replace("<base href='/'>", f"<base href='{base}'>")
+              new = patron.sub(f'<base href="{base}">', text)
               if new != text:
                   path.write_text(new, encoding="utf-8")
                   print(f"Base Pages: {path} -> {base}")
+
+          restantes = []
+          for path in root.rglob("*.html"):
+              if ".git" in path.parts:
+                  continue
+              text = path.read_text(encoding="utf-8")
+              if re.search(r'<base\s+href\s*=\s*["\']/["\']\s*/?>', text, re.I):
+                  restantes.append(str(path))
+          if restantes:
+              raise SystemExit("ERROR: quedan <base href="/"> sin sustituir: " + ", ".join(restantes))
           PY2
 
-      - name: Normalizar recursos con base
+      - name: Normalizar recursos para GitHub Pages
         run: |
           python - <<'PY3'
           import re
           from pathlib import Path
 
-          # Al conservar <base>, todos los recursos locales deben partir
-          # de la raíz del proyecto y no usar ../, porque <base> sustituye
-          # la carpeta física del HTML como referencia.
-          attr_re = re.compile(r'(\b(?:src|href)=["\'])(\.{2}/)+(?!https?://|//)', re.I)
+          # Con <base> apuntando al subdirectorio de GitHub Pages, las
+          # referencias locales deben ser relativas. Las que empiezan por /
+          # ignoran completamente <base> y vuelven al dominio raíz.
+          attr_re = re.compile(r'(\b(?:src|href)=)(["\'])([^"\']+)\2', re.I)
 
-          for path in Path(".").rglob("*.html"):
-              if ".git" in path.parts:
+          def normalizar_url(url):
+              # Nunca tocar URLs externas ni protocolos especiales.
+              if url.startswith(('https://', 'http://', '//', '#', 'data:', 'mailto:', 'javascript:')):
+                  return url
+
+              # Quitar cualquier cantidad de ../ de las rutas locales.
+              while url.startswith('../'):
+                  url = url[3:]
+
+              # Las rutas /css, /js y los favicons eran absolutas al dominio.
+              # Con <base> de Pages deben pasar a ser relativas.
+              for prefijo in ('/css/', '/js/', '/favicon.ico', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png'):
+                  if url.startswith(prefijo):
+                      return url[1:]
+
+              return url
+
+          for path in Path('.').rglob('*.html'):
+              if '.git' in path.parts:
                   continue
-              text = path.read_text(encoding="utf-8")
+              text = path.read_text(encoding='utf-8')
 
-              def fix(m):
-                  return m.group(1)
+              def repl(m):
+                  return m.group(1) + m.group(2) + normalizar_url(m.group(3)) + m.group(2)
 
-              new_text = attr_re.sub(fix, text)
-
+              new_text = attr_re.sub(repl, text)
               if new_text != text:
-                  path.write_text(new_text, encoding="utf-8")
-                  print(f"Recursos normalizados: {path}")
+                  path.write_text(new_text, encoding='utf-8')
+                  print(f'Recursos normalizados: {path}')
           PY3
+
+      - name: Verificar rutas antes de publicar
+        run: |
+          echo "Repositorio: $GITHUB_REPOSITORY"
+          echo "Archivos HTML con base:"
+          grep -RIn --include='*.html' '<base' . --exclude-dir=.git || true
+          echo "Comprobacion de recursos principales:"
+          test -f css/app/arranque.css
+          test -f js/app/arranque.js
+          test -f js/permisos/supabase.js
+          echo "OK: recursos principales existen en el artefacto"
 
       - name: Comprobar configuración generada
         run: |
