@@ -12,11 +12,8 @@ function publicarConfigPublica(cfg){
 
 window.Permisos = (() =>  {
   let usuario = null;
+  // El rol admin nunca se obtiene de sessionStorage.
   let rol = null;
-  try {
-    if (sessionStorage.getItem("esAdmin") === "true") { rol = "admin"; }
-  } catch (e) {
-  }
   let invitadosActivos = true;
   try { invitadosActivos = localStorage.getItem("invitados_activos_live") !== "false"; }
   catch (e) {
@@ -47,13 +44,8 @@ window.Permisos = (() =>  {
     promesaSesion = null;
     sesionCargada = false;
     usuario = null;
-    // No borres el rol visual durante una transición de vista. Si existe una
-    // marca de sesión admin, la conservamos hasta tener una comprobación nueva.
-    try {
-      rol = sessionStorage.getItem("esAdmin") === "true" ? "admin" : null;
-    } catch (_) {
-      rol = null;
-    }
+    rol = null;
+    try { document.documentElement.dataset.rol = ""; if (document.body) document.body.dataset.rol = ""; } catch (_) {}
     promesaCargoSesionEnVuelo = null;
   };
 

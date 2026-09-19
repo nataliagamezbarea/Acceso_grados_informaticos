@@ -14,6 +14,15 @@ html.app-preboot #boton-modo-edicion {
   opacity:0 !important;
   pointer-events:none !important;
 }
+html[data-rol="invitado"] .navbar-admin-only,
+html[data-rol="invitado"] #boton-modo-edicion,
+body[data-rol="invitado"] .navbar-admin-only,
+body[data-rol="invitado"] #boton-modo-edicion {
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
 </style>
   <meta charset="utf-8"/>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>

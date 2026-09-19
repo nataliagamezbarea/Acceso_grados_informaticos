@@ -1,95 +1,65 @@
-// ============================================================
-// LÓGICA DEL FORMULARIO DE LOGIN (Google y GitHub OAuth)
-// ============================================================
-(() =>  {
+// Login principal: Google/GitHub solo si public.perfiles.rol === "admin".
+(() => {
   const errorBox = document.getElementById("mensaje-error");
   const btnGoogle = document.getElementById("btn-google");
   const btnGithub = document.getElementById("btn-github");
-  const mostrarError = (msg) =>  {
-    if (!errorBox) return;
-    errorBox.textContent = msg;
-    errorBox.hidden = false;
-  }
-  ;
-  const errParam = new URLSearchParams(window.location.search).get("error");
-  if (errParam === "no_access") { mostrarError("Acceso denegado: tu cuenta no tiene permisos de acceso al repositorio."); }
-  const conseguirSupabase = async () =>  {
+  const mostrarError = msg => {
+    if (errorBox) { errorBox.textContent = msg; errorBox.hidden = false; }
+  };
+  const getClient = async () => {
     if (window.supabaseClient) return window.supabaseClient;
-    if (window.PermisosSupabase?.esperarCliente) {
-      const c = await window.PermisosSupabase.esperarCliente();
-      if (c) return c;
-    }
-    const url = window.SUPABASE_URL || "https://lztatgnlplpduiatmlrv.supabase.co";
-    const key = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
-    if (window.supabase?.createClient) {
-      try {
-        window.supabaseClient = window.supabase.createClient(url, key, {
-          db: { schema: "grados-informaticos" },
-          auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
-        });
-        return window.supabaseClient;
-      } catch (_) {}
-    }
-    for (let i = 0; i < 30; i++) {
-      if (window.supabaseClient) return window.supabaseClient;
-      if (window.supabase?.createClient) {
-        try {
-          window.supabaseClient = window.supabase.createClient(url, key, {
-            db: { schema: "grados-informaticos" },
-            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
-          });
-          return window.supabaseClient;
-        } catch (_) {}
+    if (!window.supabase?.createClient) return null;
+    try {
+      const url = window.SUPABASE_URL || "https://lztatgnlplpduiatmlrv.supabase.co";
+      const key = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
+      window.supabaseClient = window.supabase.createClient(url, key, {
+        db: { schema: "grados-informaticos" },
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+      });
+      return window.supabaseClient;
+    } catch (_) { return null; }
+  };
+  const isAdmin = async (c, user) => {
+    if (!c || !user?.id) return false;
+    try {
+      const { data, error } = await c.schema("public").from("perfiles")
+        .select("rol").eq("id", user.id).maybeSingle();
+      return !error && String(data?.rol || "").trim().toLowerCase() === "admin";
+    } catch (_) { return false; }
+  };
+  const validateOAuthCallback = async () => {
+    const c = await getClient();
+    if (!c) return;
+    try {
+      const { data: { session } } = await c.auth.getSession();
+      if (!session?.user) return;
+      if (!(await isAdmin(c, session.user))) {
+        await c.auth.signOut().catch(() => {});
+        try { sessionStorage.removeItem("esAdmin"); sessionStorage.removeItem("esInvitado"); } catch (_) {}
+        mostrarError("Acceso denegado: solo los administradores pueden iniciar sesión con Google o GitHub.");
+        return;
       }
-      await new Promise((r) => setTimeout(r, 100));
+      try { sessionStorage.removeItem("esInvitado"); sessionStorage.setItem("esAdmin", "true"); } catch (_) {}
+      window.location.replace(new URL("../index.html", window.location.href).href);
+    } catch (_) {
+      await c.auth.signOut().catch(() => {});
+      mostrarError("No se pudo verificar el permiso de administrador.");
     }
-    return null;
-  }
-  ;
-  let oauthEnCurso = false;
-  const iniciarOAuth = async (proveedor, boton, textoOriginal, textoCargando) =>  {
-    if (oauthEnCurso) return;
-    oauthEnCurso = true;
-    if (errorBox) errorBox.hidden = true;
-    const supabase = await conseguirSupabase();
-    if (!supabase) {
-      oauthEnCurso = false;
-      mostrarError("Error al conectar con el servicio de autenticación.");
-      return;
-    }
-    if (boton) {
-      boton.disabled = true;
-      boton.style.opacity = "0.7";
-      boton.textContent = textoCargando;
-    }
-    const opciones = {
-      redirectTo: new URL("paginas/login.html", window.location.href).href
-    };
-    if (proveedor === "google") {
-      opciones.queryParams = { access_type: "offline", prompt: "consent" };
-    }
-    const  { error }
-    = await supabase.auth.signInWithOAuth( {
-      provider: proveedor,
-      options: opciones
-    }
-  );
+  };
+  const loginOAuth = async (provider, button, label) => {
+    const c = await getClient();
+    if (!c) return mostrarError("Error al conectar con Supabase.");
+    if (button) { button.disabled = true; button.textContent = "Comprobando…"; }
+    const { error } = await c.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: new URL("paginas/login.html", window.location.href).href }
+    });
     if (error) {
-      oauthEnCurso = false;
+      if (button) { button.disabled = false; button.textContent = label; }
       mostrarError(error.message);
-      if (boton) {
-        boton.disabled = false;
-        boton.style.opacity = "1";
-        boton.textContent = textoOriginal;
-      }
     }
-  }
-  ;
-  if (btnGoogle) {
-    btnGoogle.addEventListener("click", () => iniciarOAuth("google", btnGoogle, "Entrar con Google", "Conectando con Google..."));
-  }
-  if (btnGithub) {
-    btnGithub.addEventListener("click", () => iniciarOAuth("github", btnGithub, "Entrar con GitHub", "Conectando con GitHub..."));
-  }
-}
-)();
+  };
+  btnGoogle?.addEventListener("click", () => loginOAuth("google", btnGoogle, "Entrar con Google"));
+  btnGithub?.addEventListener("click", () => loginOAuth("github", btnGithub, "Entrar con GitHub"));
+  validateOAuthCallback();
+})();

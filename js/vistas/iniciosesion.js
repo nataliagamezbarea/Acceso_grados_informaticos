@@ -200,6 +200,11 @@ function inicializarVistaLogin() {
       sessionStorage.removeItem("esAdmin");
       sessionStorage.setItem("esInvitado", "true");
       sessionStorage.setItem("esAdmin", "false");
+      // El rol se fija antes de renderizar la siguiente vista para que EDITAR
+      // y Lectura/Edición nunca aparezcan durante el primer frame del invitado.
+      document.documentElement.dataset.rol = "invitado";
+      document.documentElement.classList.remove("admin-autorizado");
+      if (document.body) document.body.dataset.rol = "invitado";
       if (window.Permisos?.activarInvitado) window.Permisos.activarInvitado();
       // Invitado: predeterminado SIEMPRE Light.
       sessionStorage.setItem("guest_modo_oscuro", "false");

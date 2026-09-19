@@ -42,6 +42,9 @@ document.documentElement.classList.add("auth-cargando");
         const oscuro = sessionStorage.getItem("guest_modo_oscuro") === "true";
         document.documentElement.classList.toggle("modo-oscuro", oscuro);
         document.documentElement.dataset.theme = oscuro ? "dark" : "light";
+        document.documentElement.dataset.rol = "invitado";
+        document.documentElement.classList.remove("admin-autorizado");
+        if (document.body) document.body.dataset.rol = "invitado";
         window.sesionActual = null;
         try { window.Permisos?.activarInvitado?.(); } catch (_) {}
 
@@ -136,6 +139,8 @@ document.documentElement.classList.add("auth-cargando");
             sessionStorage.removeItem("esInvitado");
             sessionStorage.setItem("esAdmin", "true");
           } catch (_) {}
+          document.documentElement.dataset.rol = "admin";
+          if (document.body) document.body.dataset.rol = "admin";
           try { if (window.Permisos?.asegurarSesion) await window.Permisos.asegurarSesion(); } catch (_) {}
           try {
             const pCsv = window.PermisosVisibilidad?.asegurarCsvIniciales?.();
