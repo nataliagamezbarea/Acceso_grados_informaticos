@@ -128,7 +128,9 @@ document.documentElement.classList.add("auth-cargando");
             sessionStorage.removeItem("esAdmin");
             sessionStorage.removeItem("esInvitado");
           } catch (_) {}
-          document.documentElement.dataset.rol = "invitado";
+          document.documentElement.dataset.rol = "";
+          // Bloqueo explícito: una sesión OAuth/email no puede caer en modo invitado.
+          window.__AUTH_ACCESS_DENIED = true;
         } else {
           try {
             sessionStorage.removeItem("esInvitado");
@@ -140,6 +142,17 @@ document.documentElement.classList.add("auth-cargando");
             if (pCsv && typeof pCsv.catch === "function") pCsv.catch(() => {});
           } catch (_) {}
         }
+      }
+      if (window.__AUTH_ACCESS_DENIED === true) {
+        await mostrar("login");
+        const errorBox = document.getElementById("mensaje-error");
+        if (errorBox) {
+          errorBox.textContent = "Acceso denegado: esta cuenta no es administradora.";
+          errorBox.hidden = false;
+        }
+        window.__AUTH_ROUTING_DONE = true;
+        try { window.dispatchEvent(new CustomEvent("auth-ruta-lista", { detail: { ruta: "login", contexto: {} } })); } catch (_) {}
+        return;
       }
       const esInvitadoActual = sessionStorage.getItem("esInvitado") === "true";
       const tieneAcceso = Boolean((session?.user && esAdminAutorizado) || esInvitadoActual);

@@ -176,11 +176,8 @@ window.Permisos = (() =>  {
       }
     }
     if (!cliente) {
-      // Fallo/transición de inicialización: nunca degradas una sesión admin
-      // válida a invitado solo porque el cliente aún no esté disponible.
-      let adminCache = false;
-      try { adminCache = sessionStorage.getItem("esAdmin") === "true"; } catch (_) {}
-      rol = adminCache ? "admin" : (document.documentElement.dataset.rol || "invitado");
+      // Sin cliente no se puede verificar el rol. No concedemos admin por cache.
+      rol = null;
       sesionCargada = true;
       try { window.SUPABASE_URL = "https://lztatgnlplpduiatmlrv.supabase.co"; } catch (_) {}
       window.dispatchEvent(new CustomEvent("permisos-sesion-cargada", { detail: { rol, esAdmin: rol === "admin" } }));
@@ -297,12 +294,10 @@ window.Permisos = (() =>  {
       // Nunca heredamos "esAdmin=true" de una sesión anterior si hay un
       // usuario autenticado cuyo perfil actual no confirma administrador.
       // Evita que un invitado vea EDITAR/LECTURA por un valor antiguo.
-      const adminPorSesion =
-      !!usuario &&
-      !perfilConsultado &&
-      !perfilRol &&
-      sessionStorage.getItem("esAdmin") === "true";
-      if (perfilRol === "admin" || adminPorSesion) {
+      // NUNCA conceder admin por sessionStorage ni por una sesión anterior.
+      // Si el perfil no se puede consultar, se deniega.
+      const adminPorSesion = false;
+      if (perfilConsultado && perfilRol === "admin") {
         rol = "admin";
         sessionStorage.setItem("esAdmin", "true");
       } else {

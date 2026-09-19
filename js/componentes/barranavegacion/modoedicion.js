@@ -70,6 +70,7 @@
   function asegurar() {
     const boton = document.getElementById("boton-modo-edicion");
     if (!boton) return false;
+    boton.classList.add("navbar-admin-only");
 
     // Nunca sobrescribir el valor persistido durante el arranque.
     const admin = esAdmin();

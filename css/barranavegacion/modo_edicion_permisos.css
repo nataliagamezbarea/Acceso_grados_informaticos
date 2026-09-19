@@ -1,5 +1,6 @@
 /* Popup admin: solo el admin puede ver EDITAR/Ajustes. */
-.navbar-admin-only{
+.navbar-admin-only,
+#boton-modo-edicion:not(.navbar-admin-only){
   display:none;
   width:0;min-width:0;max-width:0;
   height:0;min-height:0;max-height:0;

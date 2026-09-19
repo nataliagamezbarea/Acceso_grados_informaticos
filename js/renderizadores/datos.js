@@ -69,6 +69,7 @@ window.inicializarMostrarDatos = function inicializarMostrarDatos() {
         if (!boton) {
           boton = document.createElement("button");
           boton.id = "boton-modo-edicion";
+          boton.classList.add("navbar-admin-only");
           const actualizarBoton = () =>  {
             boton.innerHTML = `<span class="btn-icon">${modoEdicion ? "📖" : "✏️"}</span><span class="btn-text"> ${modoEdicion ? "LECTURA" : "EDITAR"}</span>`;
             boton.classList.toggle("modo-encendido", modoEdicion);

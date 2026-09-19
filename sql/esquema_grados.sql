@@ -146,28 +146,13 @@ language plpgsql
 security definer
 set search_path = public
 as $$
-declare
-  rol_asignar text := 'invitado';
 begin
-
-  if new.email ilike '%nataliagbarea%'
-     or new.email ilike '%nataliagamezbarea%'
-     or new.email ilike '%natalia%' then
-    rol_asignar := 'admin';
-  end if;
-
+  -- SEGURIDAD: ninguna cuenta obtiene admin por su email.
+  -- El rol de administrador debe asignarse explícitamente en public.perfiles.
   insert into public.perfiles (id, email, rol)
-  values (new.id, new.email, rol_asignar)
+  values (new.id, new.email, 'invitado')
   on conflict (id) do update
-  set
-    email = excluded.email,
-    rol = case
-      when excluded.email ilike '%nataliagbarea%'
-        or excluded.email ilike '%nataliagamezbarea%'
-        or excluded.email ilike '%natalia%'
-      then 'admin'
-      else public.perfiles.rol
-    end;
+  set email = excluded.email;
 
   return new;
 end;
@@ -407,27 +392,10 @@ set valor = excluded.valor;
 -- ============================================================
 
 insert into public.perfiles (id, email, rol)
-select
-  id,
-  email,
-  case
-    when email ilike '%nataliagbarea%'
-      or email ilike '%nataliagamezbarea%'
-      or email ilike '%natalia%'
-    then 'admin'
-    else 'invitado'
-  end
+select id, email, 'invitado'
 from auth.users
 on conflict (id) do update
-set
-  email = excluded.email,
-  rol = case
-    when excluded.email ilike '%nataliagbarea%'
-      or excluded.email ilike '%nataliagamezbarea%'
-      or excluded.email ilike '%natalia%'
-    then 'admin'
-    else public.perfiles.rol
-  end;
+set email = excluded.email;
 
 
 -- ============================================================

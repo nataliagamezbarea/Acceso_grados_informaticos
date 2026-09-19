@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html class="app-preboot" lang="es">
  <head>
+<style id="auth-admin-early-guard">
+/* Nunca mostrar controles de edición durante el arranque ni a invitados. */
+html:not([data-rol="admin"]) .navbar-admin-only,
+html:not([data-rol="admin"]) #boton-modo-edicion,
+html.auth-cargando .navbar-admin-only,
+html.auth-cargando #boton-modo-edicion,
+html.app-preboot .navbar-admin-only,
+html.app-preboot #boton-modo-edicion {
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+</style>
   <meta charset="utf-8"/>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
   <meta http-equiv="Pragma" content="no-cache"/>
