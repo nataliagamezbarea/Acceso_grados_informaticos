@@ -50,9 +50,8 @@ const esPaginaLogin = /login\.html/.test(window.location.pathname);
   const verificarPermiso = async (u) =>  {
     if (!u) return false;
     const email = (u.email || "").toLowerCase();
-    const uName = (u.user_metadata?.user_name || u.user_metadata?.preferred_username || u.identities?.[0]?.identity_data?.user_name || "").toLowerCase();
-    if (email === "nataliagbarea@gmail.com" || uName === "nataliagamezbarea") return true;
-    // La autorizacion del ADMIN la decide Supabase/RLS mediante public.perfiles.
+    // La autorización del ADMIN la decide exclusivamente Supabase mediante public.perfiles.
+    // No se autoriza por email/username ni por proveedor (Google/GitHub).
     // El gh_token de GitHub se carga después desde configuracion_privada de Supabase para el ADMIN.
     try {
       const  { data, error }

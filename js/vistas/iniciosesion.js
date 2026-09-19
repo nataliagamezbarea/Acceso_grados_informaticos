@@ -75,6 +75,43 @@ function inicializarVistaLogin() {
     return null;
   }
   ;
+  const comprobarAdmin = async (supabase, user) => {
+    if (!supabase || !user) return false;
+    try {
+      const { data, error } = await supabase
+        .schema("public")
+        .from("perfiles")
+        .select("rol")
+        .eq("id", user.id)
+        .maybeSingle();
+      return !error && String(data?.rol || "").trim().toLowerCase() === "admin";
+    } catch (_) {
+      return false;
+    }
+  };
+  const validarSesionOAuth = async () => {
+    const supabase = await conseguirSupabase();
+    if (!supabase) return;
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) return;
+      const esAdmin = await comprobarAdmin(supabase, session.user);
+      if (!esAdmin) {
+        await supabase.auth.signOut();
+        sessionStorage.removeItem("esAdmin");
+        sessionStorage.removeItem("esInvitado");
+        mostrarError("Acceso denegado: solo los administradores pueden iniciar sesión con Google o GitHub.");
+        return;
+      }
+      sessionStorage.removeItem("esInvitado");
+      sessionStorage.setItem("esAdmin", "true");
+      window.sesionActual = session;
+      await irAlInicio();
+    } catch (_) {
+      await supabase.auth.signOut().catch(() => {});
+      mostrarError("No se pudo verificar el permiso de administrador.");
+    }
+  };
   form.addEventListener("submit", async e =>  {
     e.preventDefault();
     if (errorBox) errorBox.hidden = true;
@@ -97,6 +134,17 @@ function inicializarVistaLogin() {
       if (btnEmail) {
         btnEmail.disabled=false;
         btnEmail.textContent="Iniciar sesión";
+      }
+      return;
+    }
+    const esAdmin = await comprobarAdmin(supabase, data?.user);
+    if (!esAdmin) {
+      await supabase.auth.signOut();
+      sessionStorage.removeItem("esAdmin");
+      mostrarError("Acceso denegado: solo los administradores pueden iniciar sesión.");
+      if (btnEmail) {
+        btnEmail.disabled = false;
+        btnEmail.textContent = "Iniciar sesión";
       }
       return;
     }
@@ -125,6 +173,8 @@ function inicializarVistaLogin() {
     }
   }
   ;
+  // Tras volver de Google/GitHub, Supabase ya tiene la sesión: comprobar el rol antes de entrar.
+  validarSesionOAuth();
   btnGoogle?.addEventListener("click", () => loginConOAuth("google"));
   btnGithub?.addEventListener("click", () => loginConOAuth("github"));
   btnInvitado?.addEventListener("click", async () =>  {
