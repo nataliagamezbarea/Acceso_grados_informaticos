@@ -105,28 +105,44 @@ document.documentElement.classList.add("auth-cargando");
           }
         }
       }
+      let esAdminAutorizado = false;
       if (session?.user) {
-        /*
-         * IMPORTANTE: no verificarAdmin antes de hidratar Permisos.
-         * Esa comprobación consultaba public.perfiles demasiado pronto y,
-         * ante un fallo/transición de Supabase, devolvía false y cerraba una
-         * sesión que sí era válida. Primero esperamos al rol real y después
-         * dejamos que la aplicación decida la vista.
-         */
-        try { if (window.Permisos?.asegurarSesion) await window.Permisos.asegurarSesion(); }
-        catch (e) {
-        }
-        sessionStorage.removeItem("esInvitado");
+        // La sesión de Supabase NO implica permiso. El único criterio de
+        // autorización es public.perfiles.rol = "admin".
         try {
-          const pCsv = window.PermisosVisibilidad?.asegurarCsvIniciales?.();
-          if (pCsv && typeof pCsv.catch === "function") pCsv.catch(() =>  {
-          }
-  );
+          const { data: perfil, error: perfilError } = await supabase
+            .schema("public")
+            .from("perfiles")
+            .select("rol")
+            .eq("id", session.user.id)
+            .maybeSingle();
+          esAdminAutorizado = !perfilError && String(perfil?.rol || "").trim().toLowerCase() === "admin";
         } catch (_) {
+          esAdminAutorizado = false;
+        }
+
+        if (!esAdminAutorizado) {
+          await supabase.auth.signOut().catch(() => {});
+          session = null;
+          try {
+            sessionStorage.removeItem("esAdmin");
+            sessionStorage.removeItem("esInvitado");
+          } catch (_) {}
+          document.documentElement.dataset.rol = "invitado";
+        } else {
+          try {
+            sessionStorage.removeItem("esInvitado");
+            sessionStorage.setItem("esAdmin", "true");
+          } catch (_) {}
+          try { if (window.Permisos?.asegurarSesion) await window.Permisos.asegurarSesion(); } catch (_) {}
+          try {
+            const pCsv = window.PermisosVisibilidad?.asegurarCsvIniciales?.();
+            if (pCsv && typeof pCsv.catch === "function") pCsv.catch(() => {});
+          } catch (_) {}
         }
       }
       const esInvitadoActual = sessionStorage.getItem("esInvitado") === "true";
-      const tieneAcceso = Boolean(session || esInvitadoActual);
+      const tieneAcceso = Boolean((session?.user && esAdminAutorizado) || esInvitadoActual);
       const MSG_BLOQUEO = "Acceso restringido: Esta cuenta no pertenece a un administrador ni colaborador del repositorio. En este momento el material está en revisión o actualización y el acceso temporal a invitados está desactivado. Inténtalo de nuevo más tarde. Si necesitas acceso, contacta con la propietaria del repositorio.";
       try { await window.Permisos?.cargarAjustesServidor?.(); }
       catch (_) {

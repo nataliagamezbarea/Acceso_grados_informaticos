@@ -7,7 +7,24 @@ function inicializarVistaLogin() {
   const btnGoogle = document.getElementById("btn-google");
   const btnGithub = document.getElementById("btn-github");
   const btnInvitado = document.getElementById("btn-invitado");
-  if (!form) return;
+  if (!form) {
+    const supabase = window.supabaseClient || null;
+    const mostrarErrorDirecto = msg => { if (errorBox) { errorBox.textContent = msg; errorBox.hidden = false; } };
+    const loginOAuthDirecto = async proveedor => {
+      try {
+        const c = supabase || (window.PermisosSupabase?.esperarCliente ? await window.PermisosSupabase.esperarCliente() : null);
+        if (!c) return mostrarErrorDirecto("Error al conectar con Supabase.");
+        const { error } = await c.auth.signInWithOAuth({
+          provider: proveedor,
+          options: { redirectTo: new URL("index.html", window.location.href).href }
+        });
+        if (error) mostrarErrorDirecto(error.message);
+      } catch (_) { mostrarErrorDirecto("No se pudo iniciar sesión."); }
+    };
+    btnGoogle?.addEventListener("click", () => loginOAuthDirecto("google"));
+    btnGithub?.addEventListener("click", () => loginOAuthDirecto("github"));
+    return;
+  }
   if (form.dataset.inicializado === "1") return;
   form.dataset.inicializado = "1";
   const mostrarError = msg =>  {

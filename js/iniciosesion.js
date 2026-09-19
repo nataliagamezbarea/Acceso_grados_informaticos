@@ -62,12 +62,11 @@
       boton.style.opacity = "0.7";
       boton.textContent = textoCargando;
     }
-    const opciones =  {
-    }
-    ;
+    const opciones = {
+      redirectTo: new URL("paginas/login.html", window.location.href).href
+    };
     if (proveedor === "google") {
-      opciones.queryParams =  { access_type: "offline", prompt: "consent" }
-      ;
+      opciones.queryParams = { access_type: "offline", prompt: "consent" };
     }
     const  { error }
     = await supabase.auth.signInWithOAuth( {
