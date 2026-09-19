@@ -38,42 +38,54 @@ jobs:
 
       - name: Preparar base de GitHub Pages
         env:
-          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           python - <<'PY2'
           import os
           import re
           from pathlib import Path
 
-          base = os.environ.get("PAGES_BASE_PATH", "").strip()
-          print(f"PAGES_BASE_PATH detectado: {base!r}")
-          if not base:
-              raise SystemExit("ERROR: configure-pages no devolvio base_path")
-          if not base.startswith("/"):
-              base = "/" + base
-          if not base.endswith("/"):
-              base += "/"
+          # Para un GitHub Pages de proyecto, la base es el nombre del
+          # repositorio. No dependemos de configure-pages para averiguarlo.
+          repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
+          if not repo or "/" not in repo:
+              raise SystemExit(f"ERROR: GITHUB_REPOSITORY invalido: {repo!r}")
+          nombre_repo = repo.split("/", 1)[1].strip()
+          if not nombre_repo:
+              raise SystemExit("ERROR: no se pudo obtener el nombre del repositorio")
 
-          root = Path(".")
-          patron = re.compile(r'<base\s+href\s*=\s*["\']/["\']\s*/?>', re.I)
-          for path in root.rglob("*.html"):
+          base = f"/{nombre_repo}/"
+          print(f"Repositorio detectado: {repo}")
+          print(f"Base Pages que se aplicara: {base}")
+
+          patron = re.compile(
+              r'<base\s+href\s*=\s*["\'](?:/|[^"\']*)["\']\s*/?>',
+              re.I,
+          )
+
+          encontrados = 0
+          for path in Path(".").rglob("*.html"):
               if ".git" in path.parts:
                   continue
               text = path.read_text(encoding="utf-8")
               new = patron.sub(f'<base href="{base}">', text)
               if new != text:
                   path.write_text(new, encoding="utf-8")
+                  encontrados += 1
                   print(f"Base Pages: {path} -> {base}")
 
-          restantes = []
-          for path in root.rglob("*.html"):
+          if encontrados == 0:
+              raise SystemExit("ERROR: no se encontro ningun <base> para sustituir")
+
+          # Verificacion final: JAMAS publicar una base raiz en este Pages.
+          for path in Path(".").rglob("*.html"):
               if ".git" in path.parts:
                   continue
               text = path.read_text(encoding="utf-8")
               if re.search(r'<base\s+href\s*=\s*["\']/["\']\s*/?>', text, re.I):
-                  restantes.append(str(path))
-          if restantes:
-              raise SystemExit("ERROR: quedan <base href="/"> sin sustituir: " + ", ".join(restantes))
+                  raise SystemExit(f"ERROR: {path} conserva <base href=\"/\">")
+
+          print("OK: todos los <base> apuntan al subdirectorio de Pages")
           PY2
 
       - name: Normalizar recursos para GitHub Pages
