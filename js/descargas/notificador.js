@@ -1,4 +1,51 @@
 window._descargasCanceladas = window._descargasCanceladas || new Set();
+// Un AbortController por trabajo (lo rellena compresorzip.js). Es la fuente de
+// verdad de "qué descargas están en marcha" y permite abortar el fetch en curso.
+window.__controladoresDescarga = window.__controladoresDescarga || new Map();
+
+/* Cancela UN trabajo: lo marca como cancelado (los bucles de descarga lo
+   consultan entre archivo y archivo) y aborta el fetch que tenga en vuelo. */
+function cancelarTrabajoEnCola(jobId) {
+  if (!jobId) return;
+  window._descargasCanceladas.add(jobId);
+  const controlador = window.__controladoresDescarga.get(jobId);
+  if (controlador) { try { controlador.abort(); } catch (_) {} }
+}
+
+/* Ids de TODAS las descargas que siguen activas: ZIP en curso, PDFs en curso,
+   toasts visibles sin terminar y estados persistidos en sessionStorage. */
+function obtenerJobIdsDescargasActivas() {
+  const ids = new Set();
+  try { window.__controladoresDescarga.forEach((_, id) => ids.add(id)); } catch (_) {}
+  try { if (window.__descargasPDFActivas) window.__descargasPDFActivas.forEach((_, id) => ids.add(id)); } catch (_) {}
+  try {
+    document.querySelectorAll(".toast-descarga-card").forEach(t => {
+      if (t.dataset.final === "1") return;
+      const id = String(t.id || "").replace(/^toast-descarga-/, "");
+      if (id) ids.add(id);
+    });
+  } catch (_) {}
+  try {
+    const prefijo = "descarga_activa_";
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const k = sessionStorage.key(i);
+      if (k && k.startsWith(prefijo)) ids.add(k.slice(prefijo.length));
+    }
+  } catch (_) {}
+  return ids;
+}
+
+/* Cancela todas las descargas activas AHORA. No usa un booleano global: cada
+   trabajo se marca por su id, así una descarga nueva posterior no se ve afectada. */
+function cancelarTodasLasDescargasEnCola() {
+  const ids = obtenerJobIdsDescargasActivas();
+  ids.forEach(cancelarTrabajoEnCola);
+  return Array.from(ids);
+}
+
+window.cancelarTrabajoEnCola = cancelarTrabajoEnCola;
+window.obtenerJobIdsDescargasActivas = obtenerJobIdsDescargasActivas;
+window.cancelarTodasLasDescargasEnCola = cancelarTodasLasDescargasEnCola;
 
 
 function obtenerTemaRealNotificador() {
@@ -100,10 +147,7 @@ function pedirConfirmacionCancelarDescarga(jobId) {
 
 function cancelarDescargaDesdePopup(jobId, todas) {
   if (!todas) {
-    if (jobId) {
-      window._descargasCanceladas.add(jobId);
-      if (typeof window.cancelarTrabajoEnCola === "function") window.cancelarTrabajoEnCola(jobId);
-    }
+    if (jobId) cancelarTrabajoEnCola(jobId);
     if (typeof navigator !== "undefined" && "serviceWorker" in navigator && navigator.serviceWorker.controller) {
       navigator.serviceWorker.controller.postMessage({ type: "CANCELAR_DESCARGA", jobId });
     }
@@ -117,9 +161,10 @@ function cancelarDescargaDesdePopup(jobId, todas) {
 
   // Cancelación por trabajo: nunca usamos un booleano global que pueda
   // quedarse activo y cancelar accidentalmente la siguiente descarga.
-  if (typeof window.cancelarTodasLasDescargasEnCola === "function") {
-    window.cancelarTodasLasDescargasEnCola();
-  }
+  // (Antes se llamaba a una función que no existía y el trabajo del propio
+  // popup ni siquiera se marcaba como cancelado: por eso no hacía nada.)
+  const idsCancelados = cancelarTodasLasDescargasEnCola();
+  if (jobId) cancelarTrabajoEnCola(jobId);
   if (typeof navigator !== "undefined" && "serviceWorker" in navigator && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage({ type: "CANCELAR_DESCARGA", jobId: "ALL" });
   }
@@ -131,8 +176,19 @@ function cancelarDescargaDesdePopup(jobId, todas) {
     }
     localStorage.removeItem("descarga_activa_live");
   } catch (e) {}
-  window.dispatchEvent(new CustomEvent("descarga-cancelada", { detail: { jobId, todas: true } }));
-  mostrarNotificacionDescarga("Todas las descargas canceladas.", 50, jobId);
+  window.dispatchEvent(new CustomEvent("descarga-cancelada", { detail: { jobId, todas: true, jobIds: idsCancelados } }));
+  // Cada descarga que tenga toast pasa a "cancelada" al instante; el resto de
+  // trabajos se detienen solos en cuanto miran su marca / se aborta su fetch.
+  idsCancelados.forEach(id => {
+    if (id === jobId) return;
+    const t = document.getElementById(`toast-descarga-${id}`);
+    if (!t) return;
+    const pct = t.dataset.pct ? parseInt(t.dataset.pct, 10) : 50;
+    mostrarNotificacionDescarga("Descarga cancelada.", pct, id);
+  });
+  const tPropio = jobId ? document.getElementById(`toast-descarga-${jobId}`) : null;
+  const pctPropio = tPropio && tPropio.dataset.pct ? parseInt(tPropio.dataset.pct, 10) : 50;
+  mostrarNotificacionDescarga("Todas las descargas canceladas.", pctPropio, jobId);
 }
 
 function obtenerContenedorToasts() {
@@ -168,6 +224,7 @@ function mostrarNotificacionDescarga(estado, porcentaje, jobIdParam) {
   const esCancelado = Boolean(estado && estado.toLowerCase().includes("cancelad"));
   const esCompleto = (p >= 100 || (estado && estado.toLowerCase().includes("completad"))) && !esCancelado;
   const esError = Boolean(estado && estado.toLowerCase().includes("error"));
+  toast.dataset.final = (esCancelado || esCompleto || esError) ? "1" : "0";
   
   let icono = '<i class="fa-solid fa-cloud-arrow-down fa-bounce icono-descarga-progreso"></i>';
   let barraClase = "barra-azul";

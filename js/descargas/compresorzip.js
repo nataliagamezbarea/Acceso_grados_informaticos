@@ -370,6 +370,7 @@ async function descargarTodosArchivos(lista, onEstado, opciones) {
       const msgCan = "Descarga cancelada.";
       if (typeof window.mostrarNotificacionDescarga === "function") window.mostrarNotificacionDescarga(msgCan, 85, jobId);
       if (typeof onEstado === "function") onEstado(msgCan, 85, lista.length, lista.length);
+      __finalizarCancelacion(jobId);
       return;
     }
 
@@ -377,6 +378,7 @@ async function descargarTodosArchivos(lista, onEstado, opciones) {
       const msgVacio = "No se ha incluido ningún archivo descargable.";
       if (typeof window.mostrarNotificacionDescarga === "function") window.mostrarNotificacionDescarga(msgVacio, 100, jobId);
       if (typeof onEstado === "function") onEstado(msgVacio, 100, lista.length, lista.length);
+      __limpiarControladorDescarga(jobId);
       return;
     }
 
@@ -385,6 +387,15 @@ async function descargarTodosArchivos(lista, onEstado, opciones) {
     if (typeof onEstado === "function") onEstado(msgZip, 92, lista.length, lista.length);
 
     const blob = await zip.generateAsync({ type: "blob" });
+    // generateAsync no se puede abortar: si mientras tanto se canceló, el ZIP
+    // ya generado se descarta en vez de descargarse igualmente.
+    if (__jobCancelado(jobId)) {
+      const msgCan = "Descarga cancelada.";
+      if (typeof window.mostrarNotificacionDescarga === "function") window.mostrarNotificacionDescarga(msgCan, 92, jobId);
+      if (typeof onEstado === "function") onEstado(msgCan, 92, lista.length, lista.length);
+      __finalizarCancelacion(jobId);
+      return;
+    }
     const objUrl = URL.createObjectURL(blob);
     const enlace = document.createElement("a");
     enlace.href = objUrl;
@@ -402,6 +413,7 @@ async function descargarTodosArchivos(lista, onEstado, opciones) {
     const fueCancelada = e?.name === "AbortError" || __jobCancelado(jobId);
     __limpiarControladorDescarga(jobId);
     if (fueCancelada) {
+      __finalizarCancelacion(jobId);
       const msgCan = "Descarga cancelada.";
       if (typeof window.mostrarNotificacionDescarga === "function") window.mostrarNotificacionDescarga(msgCan, 100, jobId);
       if (typeof onEstado === "function") onEstado(msgCan, 100, 0, lista?.length || 0);

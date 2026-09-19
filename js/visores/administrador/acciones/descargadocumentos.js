@@ -2,6 +2,12 @@
    los canvas/miniaturas visibles del visor. El visor no se modifica. */
 window.__descargasPDFActivas = window.__descargasPDFActivas || new Map();
 function _idDescargaPDF(rama, archivo) { return `pdf::${String(rama || '').trim()}::${String(archivo || '').trim()}`; }
+function _pdfCancelado(jobId) {
+  return !!(window._descargasCanceladas && window._descargasCanceladas.has(jobId));
+}
+function _pdfLanzarSiCancelado(jobId) {
+  if (_pdfCancelado(jobId)) throw new DOMException('Descarga cancelada', 'AbortError');
+}
 function _estadoDescargaPDF(jobId, estado, porcentaje) {
   if (typeof window.mostrarNotificacionDescarga === 'function') {
     window.mostrarNotificacionDescarga(estado, porcentaje, jobId);
@@ -36,6 +42,7 @@ async function _descargaGenerarVectorial(jobId) {
   _estadoDescargaPDF(jobId, 'Preparando PDF...', 8);
   const  { it, ramaItem, bytes }
   = await _descargaObtenerPDFCompleto();
+  _pdfLanzarSiCancelado(jobId);
   _estadoDescargaPDF(jobId, 'Preparando PDF original...', 22);
   let infoOriginal = null;
   // IMPORTANTE: nunca confiar a ciegas en window.__DDD_VISOR_INFO para la
@@ -61,10 +68,12 @@ async function _descargaGenerarVectorial(jobId) {
     ? window.__DDD_VISOR_INFO : null;
     if (infoVisor) infoOriginal = infoVisor;
   }
+  _pdfLanzarSiCancelado(jobId);
   window.__DDD_PLANES_EXPORT = Object.create(null);
   _estadoDescargaPDF(jobId, 'Generando PDF procesado...', 38);
   const out = await window.exportarPDFVectorialDDD( { bytes, ramaItem, it, infoOriginal }
   );
+  _pdfLanzarSiCancelado(jobId);
   _estadoDescargaPDF(jobId, 'Preparando descarga...', 92);
   return  {
     blob: new Blob([out],  { type:'application/pdf' }
@@ -81,6 +90,9 @@ async function descargarPDFActual() {
     _estadoDescargaPDF(jobId, 'Preparando PDF...', 50);
     return window.__descargasPDFActivas.get(jobId);
   }
+  // El id del PDF es fijo (rama+archivo): una cancelación anterior no debe
+  // afectar a esta nueva descarga.
+  try { window._descargasCanceladas?.delete(jobId); } catch (_) {}
   const btn = document.querySelector('.btn-download-pdf');
   if (btn) {
     btn.dataset.descargando = '1';
@@ -94,6 +106,7 @@ async function descargarPDFActual() {
       const resultado = await _descargaGenerarVectorial(jobId);
       const  { blob, it }
       = resultado;
+      _pdfLanzarSiCancelado(jobId);
       window._PDF_FINAL_GENERADO = blob;
       const objectUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -106,6 +119,11 @@ async function descargarPDFActual() {
       _estadoDescargaPDF(jobId, '¡Descarga completada!', 100);
       return resultado;
     } catch (err) {
+      if (err?.name === 'AbortError' || _pdfCancelado(jobId)) {
+        const tCan = document.getElementById(`toast-descarga-${jobId}`);
+        _estadoDescargaPDF(jobId, 'Descarga cancelada.', tCan?.dataset?.pct ? parseInt(tCan.dataset.pct, 10) : 50);
+        return null;
+      }
       _estadoDescargaPDF(jobId, 'Error al preparar PDF', 100);
       if (typeof showCustomAlert === 'function') {
         await showCustomAlert('No se pudo descargar el PDF', err?.message || 'Error al generar el PDF con MuPDF.js.', '<i class="fa-solid fa-triangle-exclamation"></i>', '#ef4444');
@@ -113,6 +131,7 @@ async function descargarPDFActual() {
       throw err;
     } finally {
       window.__descargasPDFActivas.delete(jobId);
+      try { window._descargasCanceladas?.delete(jobId); } catch (_) {}
       const botones = document.querySelectorAll('.btn-download-pdf');
       botones.forEach((boton) =>  {
         if (boton.dataset.descargando === '1') {
