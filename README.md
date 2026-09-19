@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="img/captura_representativa.jpg" alt="Captura Representativa de Grados Informáticos en Brave Browser" width="800"><br><br>
-  <a href="https://nataliagamezbarea.github.io/Acceso_grados_informaticos/modulos/login.html"><strong>Visita el sitio web</strong></a>
+  <a href="https://nataliagamezbarea.github.io/Acceso_grados_informaticos/"><strong>Visita el sitio web</strong></a>
 </p>
 
 Esta plataforma web está diseñada para centralizar, seguir y visualizar en tiempo real el progreso académico de los ciclos formativos de Informática de **Grado Medio** y **Grados Superiores** (DAW, DAM, ...), permitiendo consultar en un único espacio todas las asignaturas por trimestres, acceder a apuntes y ejercicios resueltos, previsualizar y descargar documentos (PDFs, Markdown, código), gestionar la visibilidad de contenidos mediante un Modo Edición y acceder de forma inmediata como Invitado o mediante autenticación segura con Supabase y OAuth.
