@@ -25,7 +25,7 @@
         localStorage.setItem('app_ultima_vista', 'inicio');
         localStorage.setItem('app_ultimo_contexto', JSON.stringify({ vista:'inicio', rama:'', asignatura:'', trimestre:'', archivo:'', abierto:false }));
         localStorage.setItem('visor_contexto', JSON.stringify({ rama:'', todas:false, asignatura:'', trimestre:'', archivo:'', directo:false, abrirLista:true, abierto:false }));
-        window.history.replaceState({}, document.title, '/');
+        window.history.replaceState({}, document.title, (window.APP_BASE || '/'));
       } catch (_) {}
       return;
     }
@@ -94,7 +94,7 @@
     // Al recargar mientras un documento está abierto, reabrimos el Visor Admin
     // embebido en el documento principal (/) sin navegar a /paginas ni alterar
     // la URL del navegador, manteniéndola siempre en http://127.0.0.1:5500/.
-    const u = new URL('/paginas/visores/administrador/paneladministrador.html', location.origin);
+    const u = new URL((window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html', location.origin);
     if (rama && rama !== '__TODAS__') u.searchParams.set('rama', rama);
     else u.searchParams.set('todas', '1');
     if (archivo) u.searchParams.set('archivo', archivo);
@@ -107,7 +107,7 @@
     const tri = String(f5Recovery.trimestre || ctx.trimestre || vctxInicial.trimestre || '').trim();
     if (asig) u.searchParams.set('asignatura', asig);
     if (tri) u.searchParams.set('trimestre', tri);
-    u.searchParams.set('return', '/');
+    u.searchParams.set('return', (window.APP_BASE || '/'));
     u.searchParams.set('_embed', '1');
 
     try { sessionStorage.setItem('visor_boot_search', u.search); } catch (_) {}

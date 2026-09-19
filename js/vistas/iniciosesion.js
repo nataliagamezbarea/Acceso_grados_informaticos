@@ -116,7 +116,7 @@ function inicializarVistaLogin() {
     if (!supabase) return mostrarError("Error al conectar con Supabase.");
     const  { error }
     = await supabase.auth.signInWithOAuth( {
-      provider: proveedor, options:  { redirectTo: window.location.origin + "/" }
+      provider: proveedor, options:  { redirectTo: window.location.origin + (window.APP_BASE || "/") }
     }
   );
     if (error) {

@@ -36,9 +36,9 @@ function _actualizarURLVisor() {
       u.searchParams.set('archivo', ctx.archivo);
       if (ctx.pos !== undefined && ctx.pos !== null) u.searchParams.set('pos', String(ctx.pos));
     }
-    u.searchParams.set('return', ctx.returnPath || '/');
+    u.searchParams.set('return', ctx.returnPath || (window.APP_BASE || '/'));
     if (window.top === window && window.parent === window && !document.documentElement.classList.contains('visor-embebido')) {
-      history.replaceState({ visor: true, visorRutaReal: '/paginas/visores/administrador/paneladministrador.html' }, document.title, '/');
+      history.replaceState({ visor: true, visorRutaReal: (window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html' }, document.title, (window.APP_BASE || '/'));
     }
   } catch (_) {
   }
@@ -72,7 +72,7 @@ function openOv() {
       asignatura: String(asigPersistida || ''),
       archivo: String(it.archivo || ''),
       pos: POS,
-      returnPath: '/'
+      returnPath: (window.APP_BASE || '/')
     }));
   } catch (_) {}
   try {
@@ -83,20 +83,20 @@ function openOv() {
       asignatura: String(asigPersistida || ''),
       archivo: String(it.archivo || ''),
       pos: POS,
-      returnPath: '/'
+      returnPath: (window.APP_BASE || '/')
     }));
   } catch (_) {}
   try {
     localStorage.setItem('visor_contexto', JSON.stringify( {
       ...(JSON.parse(localStorage.getItem('visor_contexto') || '{}') ||  {
       }
-      ), rama: ramaPersistida, trimestre: trimPersistido, asignatura: asigPersistida, todas: grad === '__TODAS__', archivo: it.archivo || '', directo: true, abrirLista: false, pos: POS, abierto: true, returnPath: '/'
+      ), rama: ramaPersistida, trimestre: trimPersistido, asignatura: asigPersistida, todas: grad === '__TODAS__', archivo: it.archivo || '', directo: true, abrirLista: false, pos: POS, abierto: true, returnPath: (window.APP_BASE || '/')
     }
     ));
   } catch(_) {
   }
   _guardarEstadoVisorPersistente( {
-    rama: ramaPersistida, todas: grad === '__TODAS__', archivo: it.archivo || '', directo: true, abrirLista: false, pos: POS, abierto: true, returnPath: '/'
+    rama: ramaPersistida, todas: grad === '__TODAS__', archivo: it.archivo || '', directo: true, abrirLista: false, pos: POS, abierto: true, returnPath: (window.APP_BASE || '/')
   }
   );
   _actualizarURLVisor();
@@ -148,7 +148,7 @@ function closeOv(desdePopstate = false) {
     ['archivo','pos'].forEach(k => u.searchParams.delete(k));
     if (!desdePopstate && window.history.state?.visorDocAbierto) { window.history.back(); }
     else if (window.top === window && window.parent === window && !document.documentElement.classList.contains('visor-embebido')) {
-      history.replaceState({ visor: true, visorRutaReal: '/paginas/visores/administrador/paneladministrador.html' }, document.title, '/');
+      history.replaceState({ visor: true, visorRutaReal: (window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html' }, document.title, (window.APP_BASE || '/'));
     }
   } catch(_) {
   }
@@ -191,7 +191,7 @@ async function openPos(p, options =  {
       asignatura: String(asigPersistida || ''),
       archivo: String(it.archivo || ''),
       pos: POS,
-      returnPath: '/'
+      returnPath: (window.APP_BASE || '/')
     }));
   } catch (_) {}
   try {
@@ -202,7 +202,7 @@ async function openPos(p, options =  {
       asignatura: String(asigPersistida || ''),
       archivo: String(it.archivo || ''),
       pos: POS,
-      returnPath: '/'
+      returnPath: (window.APP_BASE || '/')
     }));
   } catch (_) {}
   _guardarEstadoVisorPersistente( {

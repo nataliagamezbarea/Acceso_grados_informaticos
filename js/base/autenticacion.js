@@ -164,7 +164,7 @@ document.documentElement.classList.add("auth-cargando");
         let ultimoContexto = {};
         try {
           const rutaActual = String(window.location.pathname || "").toLowerCase();
-          const esSelector = rutaActual === "/" || rutaActual.endsWith("/index.html") || rutaActual.includes("inicio");
+          const esSelector = rutaActual === String((window.APP_BASE || "/")).toLowerCase() || rutaActual.endsWith("/index.html") || rutaActual.includes("inicio");
           forzarSelector = sessionStorage.getItem("forzar_selector_rama") === "1" || (esSelector && (window.RamaActual?.estaForzadoSelector?.() === true || sessionStorage.getItem("forzar_selector_rama") === "1"));
         } catch (_) {}
         if (!forzarSelector) {
@@ -187,7 +187,7 @@ document.documentElement.classList.add("auth-cargando");
         }
         if (!forzarSelector && (ultimaVista === 'visores/administrador' || localStorage.getItem('visor_admin_abierto') === '1')) {
           try {
-            const u = new URL('/paginas/visores/administrador/paneladministrador.html', window.location.origin);
+            const u = new URL((window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html', window.location.origin);
             const r = (ultimoContexto.rama && ultimoContexto.rama !== '__TODAS__') ? ultimoContexto.rama : (localStorage.getItem('last_grado') || localStorage.getItem('rama_actual') || '');
             if (r && r !== '__TODAS__') u.searchParams.set('rama', String(r));
             else u.searchParams.set('todas', '1');
@@ -197,7 +197,7 @@ document.documentElement.classList.add("auth-cargando");
             }
             if (ultimoContexto.asignatura) u.searchParams.set('asignatura', String(ultimoContexto.asignatura));
             if (ultimoContexto.trimestre) u.searchParams.set('trimestre', String(ultimoContexto.trimestre));
-            u.searchParams.set('return', '/');
+            u.searchParams.set('return', (window.APP_BASE || '/'));
             u.searchParams.set('_embed', '1');
             if (typeof window.abrirVisorAdministradorEmbebido === 'function') {
               window.abrirVisorAdministradorEmbebido(u.href);

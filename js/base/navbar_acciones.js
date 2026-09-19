@@ -30,7 +30,7 @@
       // Google/GitHub y no incluye el botón de invitado. La vista de login
       // real, con invitado, la muestra index.html vía AppViews al detectar
       // que no hay sesión.
-      window.location.replace('/');
+      window.location.replace((window.APP_BASE || '/'));
     }
   }
 
@@ -95,7 +95,7 @@
       }));
       sessionStorage.setItem('forzar_selector_rama', '1');
     } catch (_) {}
-    window.location.assign('/');
+    window.location.assign((window.APP_BASE || '/'));
   }, true);
 
   document.addEventListener('click', (e) => {

@@ -646,9 +646,9 @@
   ;
   // La aplicación es siempre /; cualquier query usada para recuperar contexto
   // se guarda y se elimina de la barra sin convertirla en una ruta visible.
-  if (window.location.pathname !== "/" && window.history?.replaceState) {
+  if (window.location.pathname !== (window.APP_BASE || "/") && window.history?.replaceState) {
     try { window.history.replaceState( { }
-      , document.title, "/");
+      , document.title, (window.APP_BASE || "/"));
     } catch (_) {
     }
   }

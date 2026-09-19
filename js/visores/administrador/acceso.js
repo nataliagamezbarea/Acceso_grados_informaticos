@@ -75,8 +75,8 @@
   ) {
     const script = Array.from(document.scripts).find(s => /(?:^|\/)js\/visores\/administrador\/acceso\.js(?:$|[?])/.test(s.src) );
     const base = script
-    ? new URL('/paginas/visores/administrador/paneladministrador.html', script.src)
-    : new URL('/paginas/visores/administrador/paneladministrador.html', window.location.href);
+    ? new URL((window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html', script.src)
+    : new URL((window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html', window.location.href);
     const tieneArchivo = !!String(opciones.archivo || "").trim();
     guardarContextoVisor( { ...opciones, abrirLista: !tieneArchivo }
   );
@@ -139,7 +139,7 @@
     if (opciones.archivo) add('archivo', opciones.archivo);
     if (opciones.nombre) add('nombre', opciones.nombre);
     if (opciones.todas === true) u.searchParams.set('todas', '1');
-    u.searchParams.set('return', '/');
+    u.searchParams.set('return', (window.APP_BASE || '/'));
     return u;
   }
   function esAdminActual() {

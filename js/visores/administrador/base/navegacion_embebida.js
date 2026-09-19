@@ -3,11 +3,12 @@
       try {
         if (window.top !== window.self) {
           document.addEventListener('click', function(ev){
-            const a = ev.target && ev.target.closest ? ev.target.closest('a[href="/"]') : null;
+            const a = ev.target && ev.target.closest ? ev.target.closest('a[href="/"], a[href="./"]') : null;
             if (!a) return;
             ev.preventDefault();
             ev.stopPropagation();
-            try { window.top.location.href = '/'; } catch (_) { window.location.href = '/'; }
+            var raiz = (window.APP_BASE || '/');
+            try { window.top.location.href = raiz; } catch (_) { window.location.href = raiz; }
           }, true);
         }
       } catch (_) {}

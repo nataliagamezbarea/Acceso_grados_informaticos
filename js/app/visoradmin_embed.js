@@ -24,13 +24,13 @@
     const tri = String((activoRecovery ? recoveryBase.trimestre : '') || ctx.trimestre || app.trimestre || '').trim();
     const archivo = String((activoRecovery ? recoveryBase.archivo : '') || ctx.archivo || localStorage.getItem('last_archivo') || '').trim();
     const pos = activoRecovery ? recoveryBase.pos : (ctx.pos ?? localStorage.getItem('visor_pos') ?? localStorage.getItem('last_pos'));
-    const u = new URL('/paginas/visores/administrador/paneladministrador.html', location.origin);
+    const u = new URL((window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html', location.origin);
     if (rama && rama !== '__TODAS__') u.searchParams.set('rama', rama); else u.searchParams.set('todas', '1');
     if (asig) u.searchParams.set('asignatura', asig);
     if (tri) u.searchParams.set('trimestre', tri);
     if (archivo) u.searchParams.set('archivo', archivo);
     if (pos !== null && pos !== undefined && String(pos) !== '') u.searchParams.set('pos', String(pos));
-    u.searchParams.set('return', '/');
+    u.searchParams.set('return', (window.APP_BASE || '/'));
     u.searchParams.set('_embed', '1');
     u.searchParams.set('_v', '20260917-delapunte6');
     return u.href;
@@ -151,7 +151,7 @@
         ['rama_actual','last_grado','last_open','last_archivo','visor_pos','visor_recovery_snapshot','visor_f5_recovery'].forEach(k => localStorage.removeItem(k));
         localStorage.setItem('visor_contexto', JSON.stringify({rama:'',todas:false,asignatura:'',trimestre:'',archivo:'',directo:false,abrirLista:true,abierto:false}));
       } catch (_) {}
-      window.location.assign('/');
+      window.location.assign((window.APP_BASE || '/'));
     }, true);
 
     document.addEventListener('click', (e) => {

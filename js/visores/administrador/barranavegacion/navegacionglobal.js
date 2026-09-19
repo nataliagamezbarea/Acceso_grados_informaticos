@@ -47,9 +47,9 @@
     // HOME indica explícitamente que queremos el selector. Una entrada
     // directa a /, en cambio, restaura el último Visor Admin.
     if (window.top && window.top !== window) {
-      try { window.top.location.assign('/'); return; } catch (_) {}
+      try { window.top.location.assign((window.APP_BASE || '/')); return; } catch (_) {}
     }
-    window.location.assign('/');
+    window.location.assign((window.APP_BASE || '/'));
   }
   function volverDesdeVisor(evento) {
     if (evento) {

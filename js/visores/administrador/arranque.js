@@ -9,7 +9,7 @@ window.__APP_VISTA="visor";
     sessionStorage.removeItem("visor_boot_search");
   } catch (_) {}
   const p = new URLSearchParams(rawSearch);
-  if (!p.toString() && location.pathname === "/" && f5Recovery.activo === true && f5Recovery.archivo) {
+  if (!p.toString() && location.pathname === (window.APP_BASE || "/") && f5Recovery.activo === true && f5Recovery.archivo) {
     try {
       const previo = JSON.parse(localStorage.getItem('visor_contexto') || '{}') || {};
       const contextoF5 = { ...previo, ...f5Recovery, abierto: true, directo: true, abrirLista: false };
@@ -22,7 +22,7 @@ window.__APP_VISTA="visor";
       }
     } catch (_) {}
   }
-  if (!p.toString() && location.pathname === "/") return;
+  if (!p.toString() && location.pathname === (window.APP_BASE || "/")) return;
   try {
     const previo = JSON.parse(localStorage.getItem("visor_contexto") || "{}");
     const archivo = p.get("archivo") || "";
@@ -75,7 +75,7 @@ window.__APP_VISTA="visor";
     // La rama/documento/posición se conservan en localStorage y se reconstruyen al recargar.
     try {
       if (window.top === window && window.parent === window && !document.documentElement.classList.contains('visor-embebido')) {
-        window.history.replaceState({ visor: true, visorRutaReal: window.location.pathname }, document.title, '/');
+        window.history.replaceState({ visor: true, visorRutaReal: window.location.pathname }, document.title, (window.APP_BASE || '/'));
       }
     } catch (_) {
     }

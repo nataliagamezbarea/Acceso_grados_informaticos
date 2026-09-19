@@ -3,7 +3,8 @@
        padre (index.html). Se marca visor-embebido inmediatamente antes de cualquier CSS. */
     (function(){
       try {
-        var path = window.location.pathname || "/";
+        var ROOT = window.APP_BASE || "/";
+        var path = window.location.pathname || ROOT;
         var search = window.location.search || "";
         var bootSearch = "";
         try { bootSearch = sessionStorage.getItem("visor_boot_search") || ""; } catch (_) {}
@@ -14,17 +15,17 @@
         if (isEmbed) {
           document.documentElement.classList.add("visor-embebido");
         }
-        if (path !== "/" && window.history && window.history.replaceState) {
+        if (path !== ROOT && window.history && window.history.replaceState) {
           try { sessionStorage.setItem("visor_boot_search", search); } catch (_) {}
           // Solo la ventana principal (no embebida) reescribe su ruta visible a /
           if (!isEmbed) {
             window.history.replaceState(
               Object.assign({}, window.history.state || {}, { visor: true, visorBoot: true }),
               document.title,
-              "/"
+              ROOT
             );
           }
-        } else if (path === "/" && !isEmbed) {
+        } else if (path === ROOT && !isEmbed) {
           try { sessionStorage.removeItem("visor_boot_search"); } catch (_) {}
         }
       } catch (_) {}

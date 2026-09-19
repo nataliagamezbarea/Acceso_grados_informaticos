@@ -67,7 +67,7 @@ function abrirVisorDesdeSelector(selector) {
     }
     sessionStorage.setItem("visorAdminBranchMode", rama ? "branch" : "all");
     sessionStorage.setItem("visorAdminBranch", rama);
-    const url = new URL("/paginas/visores/administrador/paneladministrador.html", document.baseURI);
+    const url = new URL("paginas/visores/administrador/paneladministrador.html", document.baseURI);
     if (rama) url.searchParams.set("rama", rama);
     else url.searchParams.set("todas", "1");
     if (abrirDocumento && ultimoArchivo) {
@@ -77,7 +77,7 @@ function abrirVisorDesdeSelector(selector) {
     if (ctx.asignatura) url.searchParams.set("asignatura", ctx.asignatura);
     // Entrada desde el selector de ramas: empezar siempre en TODOS LOS TRIMESTRES.
     url.searchParams.delete("trimestre");
-    url.searchParams.set("return", "/");
+    url.searchParams.set("return", (window.APP_BASE || "/"));
     url.searchParams.set("_embed", "1");
     if (typeof window.abrirVisorAdministradorEmbebido === 'function') {
       window.abrirVisorAdministradorEmbebido(url.href);

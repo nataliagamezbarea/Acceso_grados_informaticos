@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html class="app-preboot" lang="es">
  <head>
+  <meta charset="utf-8"/>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
-  <base href="/"/>
-  <meta charset="utf-8"/>
+  <script>
+  /* BASE DE LA APLICACION (debe ir antes de cualquier recurso relativo).
+     Se calcula al cargar para que el mismo codigo funcione en la raiz
+     (localhost, dominio propio, usuario.github.io) y en un GitHub Pages de
+     proyecto (usuario.github.io/repositorio/). Sin build ni reescritura. */
+  (function () {
+    var base = '/';
+    try {
+      if (/\.github\.io$/i.test(location.hostname)) {
+        var seg = location.pathname.split('/')[1] || '';
+        var propias = /^(paginas|componentes|css|js|img|visores|sql|bibliotecas_latex|index\.html|login\.html)$/i;
+        if (seg && !propias.test(seg)) base = '/' + seg + '/';
+      }
+    } catch (_) {}
+    window.APP_BASE = base;
+    document.write('<base href="' + base + '">');
+  }());
+  </script>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link href="css/app/arranque.css" rel="stylesheet"/>
   <script src="js/app/tema_precarga.js">
@@ -53,8 +70,7 @@
   <script src="js/base/iniciotema.js">
   </script>
  
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" type="image/png" href="classroom_icon.png"/>
  <link href="css/notificador.css" rel="stylesheet"/>
 
 
@@ -72,10 +88,10 @@
    <navbar-general data-component="navbar-general">
     <header aria-label="Navegación principal" class="barra-superior navbar-template" id="barra-superior">
       <div class="nav-left" aria-label="Navegación izquierda">
-        <a aria-label="Inicio" href="/" id="btn-inicio" title="Inicio">
+        <a aria-label="Inicio" href="./" id="btn-inicio" title="Inicio">
           <i aria-hidden="true" class="fa-solid fa-house"></i><span class="nav-label">Inicio</span>
         </a>
-        <a aria-label="Volver atrás" class="btn-volver navbar-boton" href="/" id="volver-atras" title="Volver atrás">
+        <a aria-label="Volver atrás" class="btn-volver navbar-boton" href="./" id="volver-atras" title="Volver atrás">
           <i aria-hidden="true" class="fa-solid fa-arrow-left"></i><span class="nav-label">Volver atrás</span>
         </a>
 
@@ -142,10 +158,10 @@
 
     <div class="navbar-menu-panel" id="navbar-menu-panel" popover="auto" aria-label="Menú de navegación">
       <div class="navbar-popup-list" role="menu">
-        <a class="navbar-popup-item popup-home" href="/" title="Inicio">
+        <a class="navbar-popup-item popup-home" href="./" title="Inicio">
           <i class="fa-solid fa-house"></i><span>Inicio</span>
         </a>
-        <a class="navbar-popup-item popup-back" href="/" title="Volver atrás">
+        <a class="navbar-popup-item popup-back" href="./" title="Volver atrás">
           <i class="fa-solid fa-arrow-left"></i><span>Volver atrás</span>
         </a>
         <button class="navbar-popup-item popup-edit navbar-admin-only" type="button" data-navbar-popup-edit="true" title="Lectura / Edición">

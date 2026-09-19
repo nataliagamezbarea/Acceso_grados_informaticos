@@ -66,7 +66,7 @@ window.Ajustes = (() =>  {
   const panelToogleHTML = (id, chequed, label, icono = "fa-gear") =>  {
     const esClassroom = icono === "classroom";
     const iconoHTML = esClassroom
-    ? '<img class="icono-classroom-ajuste" src="/classroom_icon.png" alt="" aria-hidden="true">'
+    ? '<img class="icono-classroom-ajuste" src="classroom_icon.png" alt="" aria-hidden="true">'
     : `<i class="fa-solid ${icono}"></i>`;
     return `
 <label class="fila-ajuste" for="${id}" title="${label}">

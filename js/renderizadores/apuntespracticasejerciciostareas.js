@@ -34,7 +34,7 @@ window.inicializarVistaApuntes = async function() {
       contenidoDiv.innerHTML = `
         <div class="detalle-apunte" style="text-align: center; padding: 32px 20px;">
           <p style="font-size: 16px; margin: 0 0 16px 0; color: inherit;">ℹ️ No se especificó ningún apunte o tarea para visualizar.</p>
-          <button type="button" class="navbar-boton" id="btn-volver-vacio" style="display: inline-flex; width: auto; padding: 8px 18px; border-radius: 8px; cursor: pointer; gap: 8px;" onclick="window.AppViews?.atras ? window.AppViews.atras() : (location.href='/')">
+          <button type="button" class="navbar-boton" id="btn-volver-vacio" style="display: inline-flex; width: auto; padding: 8px 18px; border-radius: 8px; cursor: pointer; gap: 8px;" onclick="window.AppViews?.atras ? window.AppViews.atras() : (location.href=window.APP_BASE||'/')">
             <i class="fa-solid fa-arrow-left"></i><span>Volver atrás</span>
           </button>
         </div>`;
@@ -280,7 +280,7 @@ window.inicializarVistaApuntes = async function() {
           html = `
             <div class="detalle-apunte" style="text-align: center; padding: 32px 20px;">
               <p style="font-size: 16px; margin: 0 0 16px 0; color: inherit;">📚 El tema solicitado no tiene material asociado en este momento.</p>
-              <button type="button" class="navbar-boton" style="display: inline-flex; width: auto; padding: 8px 18px; border-radius: 8px; cursor: pointer; gap: 8px;" onclick="window.AppViews?.atras ? window.AppViews.atras() : (location.href='/')">
+              <button type="button" class="navbar-boton" style="display: inline-flex; width: auto; padding: 8px 18px; border-radius: 8px; cursor: pointer; gap: 8px;" onclick="window.AppViews?.atras ? window.AppViews.atras() : (location.href=window.APP_BASE||'/')">
                 <i class="fa-solid fa-arrow-left"></i><span>Volver a la asignatura</span>
               </button>
             </div>`;

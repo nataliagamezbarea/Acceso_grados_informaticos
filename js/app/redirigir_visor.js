@@ -1,3 +1,3 @@
 location.replace(
-"/paginas/visores/administrador/paneladministrador.html",
+"../../paginas/visores/administrador/paneladministrador.html",
   );

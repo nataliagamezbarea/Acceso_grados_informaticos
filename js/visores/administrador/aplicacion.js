@@ -158,10 +158,10 @@ async function cerrarSesionUsuario() {
   try { sessionStorage.clear(); } catch (_) {}
   try { window.sesionActual = null; } catch (_) {}
   try {
-    if (window.top && window.top !== window) window.top.location.replace('/');
-    else window.location.replace('/');
+    if (window.top && window.top !== window) window.top.location.replace((window.APP_BASE || '/'));
+    else window.location.replace((window.APP_BASE || '/'));
   } catch (_) {
-    window.location.replace('/');
+    window.location.replace((window.APP_BASE || '/'));
   }
 }
 function openSummaryModal() {
@@ -186,10 +186,10 @@ function closeSummaryModal() {
 }
 function mostrarAccesoDenegadoVisor() {
   try {
-    if (window.top && window.top !== window) window.top.location.replace('/');
-    else window.location.replace('/');
+    if (window.top && window.top !== window) window.top.location.replace((window.APP_BASE || '/'));
+    else window.location.replace((window.APP_BASE || '/'));
   } catch (_) {
-    window.location.replace('/');
+    window.location.replace((window.APP_BASE || '/'));
   }
 }
 window.openSummaryModal = openSummaryModal;
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       selFinal.value = (typeof modoTodas !== 'undefined' && modoTodas) || grad === '__TODAS__' ? 'TODAS LAS RAMAS' : grad;
     }
     if (window.top === window && window.parent === window && !document.documentElement.classList.contains('visor-embebido')) {
-      window.history.replaceState({ visor: true, visorRutaReal: '/paginas/visores/administrador/paneladministrador.html' }, document.title, '/');
+      window.history.replaceState({ visor: true, visorRutaReal: (window.APP_BASE || '/') + 'paginas/visores/administrador/paneladministrador.html' }, document.title, (window.APP_BASE || '/'));
     }
     if (typeof initCacheToggle === 'function') initCacheToggle();
   } finally {

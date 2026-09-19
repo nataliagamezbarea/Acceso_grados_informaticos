@@ -11,16 +11,22 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   desplegar:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
       - name: Configurar Pages
-        id: pages
         uses: actions/configure-pages@v5
 
       - name: Configurar Python
@@ -36,110 +42,54 @@ jobs:
         run: |
           python generarconfiguracion.py
 
-      - name: Preparar base de GitHub Pages
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          python - <<'PY2'
-          import os
-          import re
-          from pathlib import Path
-
-          # Para un GitHub Pages de proyecto, la base es el nombre del
-          # repositorio. No dependemos de configure-pages para averiguarlo.
-          repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
-          if not repo or "/" not in repo:
-              raise SystemExit(f"ERROR: GITHUB_REPOSITORY invalido: {repo!r}")
-          nombre_repo = repo.split("/", 1)[1].strip()
-          if not nombre_repo:
-              raise SystemExit("ERROR: no se pudo obtener el nombre del repositorio")
-
-          base = f"/{nombre_repo}/"
-          print(f"Repositorio detectado: {repo}")
-          print(f"Base Pages que se aplicara: {base}")
-
-          patron = re.compile(
-              r'<base\s+href\s*=\s*["\'](?:/|[^"\']*)["\']\s*/?>',
-              re.I,
-          )
-
-          encontrados = 0
-          for path in Path(".").rglob("*.html"):
-              if ".git" in path.parts:
-                  continue
-              text = path.read_text(encoding="utf-8")
-              new = patron.sub(f'<base href="{base}">', text)
-              if new != text:
-                  path.write_text(new, encoding="utf-8")
-                  encontrados += 1
-                  print(f"Base Pages: {path} -> {base}")
-
-          if encontrados == 0:
-              raise SystemExit("ERROR: no se encontro ningun <base> para sustituir")
-
-          # Verificacion final: JAMAS publicar una base raiz en este Pages.
-          for path in Path(".").rglob("*.html"):
-              if ".git" in path.parts:
-                  continue
-              text = path.read_text(encoding="utf-8")
-              if re.search(r'<base\s+href\s*=\s*["\']/["\']\s*/?>', text, re.I):
-                  raise SystemExit(f"ERROR: {path} conserva <base href=\"/\">")
-
-          print("OK: todos los <base> apuntan al subdirectorio de Pages")
-          PY2
-
-      - name: Normalizar recursos para GitHub Pages
-        run: |
-          python - <<'PY3'
-          import re
-          from pathlib import Path
-
-          # Con <base> apuntando al subdirectorio de GitHub Pages, las
-          # referencias locales deben ser relativas. Las que empiezan por /
-          # ignoran completamente <base> y vuelven al dominio raíz.
-          attr_re = re.compile(r'(\b(?:src|href)=)(["\'])([^"\']+)\2', re.I)
-
-          def normalizar_url(url):
-              # Nunca tocar URLs externas ni protocolos especiales.
-              if url.startswith(('https://', 'http://', '//', '#', 'data:', 'mailto:', 'javascript:')):
-                  return url
-
-              # Quitar cualquier cantidad de ../ de las rutas locales.
-              while url.startswith('../'):
-                  url = url[3:]
-
-              # Las rutas /css, /js y los favicons eran absolutas al dominio.
-              # Con <base> de Pages deben pasar a ser relativas.
-              for prefijo in ('/css/', '/js/', '/favicon.ico', '/favicon-16x16.png', '/favicon-32x32.png', '/apple-touch-icon.png'):
-                  if url.startswith(prefijo):
-                      return url[1:]
-
-              return url
-
-          for path in Path('.').rglob('*.html'):
-              if '.git' in path.parts:
-                  continue
-              text = path.read_text(encoding='utf-8')
-
-              def repl(m):
-                  return m.group(1) + m.group(2) + normalizar_url(m.group(3)) + m.group(2)
-
-              new_text = attr_re.sub(repl, text)
-              if new_text != text:
-                  path.write_text(new_text, encoding='utf-8')
-                  print(f'Recursos normalizados: {path}')
-          PY3
-
+      # La base (/repositorio/) ya NO se reescribe aquí: cada HTML la calcula
+      # en el navegador (ver el <script> del <head> que define window.APP_BASE).
+      # Este paso solo comprueba que no se ha colado ninguna ruta rota.
       - name: Verificar rutas antes de publicar
         run: |
-          echo "Repositorio: $GITHUB_REPOSITORY"
-          echo "Archivos HTML con base:"
-          grep -RIn --include='*.html' '<base' . --exclude-dir=.git || true
-          echo "Comprobacion de recursos principales:"
-          test -f css/app/arranque.css
-          test -f js/app/arranque.js
-          test -f js/permisos/supabase.js
-          echo "OK: recursos principales existen en el artefacto"
+          python - <<'PY'
+          import re, sys
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          ATTRS = {"src", "href"}
+          EXTERNAS = ("http://", "https://", "//", "#", "data:", "mailto:", "javascript:")
+
+          class P(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.refs = []
+              def handle_starttag(self, tag, attrs):
+                  if tag in ("a", "base"):
+                      return
+                  for k, v in attrs:
+                      if k in ATTRS and v:
+                          self.refs.append(v)
+
+          errores = []
+          for html in ("index.html",
+                       "paginas/visores/administrador/paneladministrador.html",
+                       "paginas/visores/administrador/iniciarsesion.html"):
+              texto = Path(html).read_text(encoding="utf-8")
+              if re.search(r'<base\s+href="/"\s*/?>', texto):
+                  errores.append(f"{html}: <base href=\"/\"> estático (debe calcularse en el navegador)")
+              if "window.APP_BASE" not in texto:
+                  errores.append(f"{html}: falta el script que define window.APP_BASE")
+              p = P(); p.feed(texto)
+              for ref in p.refs:
+                  if ref.startswith(EXTERNAS) or ref.startswith("/favicon") or ref.startswith("/apple-touch"):
+                      continue
+                  if ref.startswith("/"):
+                      errores.append(f"{html}: ruta absoluta que ignora la base: {ref}")
+                      continue
+                  ruta = Path(ref.split("?")[0].split("#")[0])
+                  if not ruta.exists():
+                      errores.append(f"{html}: no existe {ref}")
+
+          if errores:
+              print("\n".join(errores)); sys.exit(1)
+          print("OK: recursos referenciados existen y no hay rutas absolutas")
+          PY
 
       - name: Comprobar configuración generada
         run: |
@@ -152,4 +102,5 @@ jobs:
           path: .
 
       - name: Publicar en Pages
+        id: deployment
         uses: actions/deploy-pages@v4

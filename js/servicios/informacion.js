@@ -262,7 +262,7 @@ window.InformacionGrado = (() =>  {
                   rama: r, trimestre: t.valor, asignatura: ""
                 }
   );
-                else window.location.href = rutaAsignaturas;
+                else window.location.href = (window.APP_BASE || "/");
               }
   );
             }

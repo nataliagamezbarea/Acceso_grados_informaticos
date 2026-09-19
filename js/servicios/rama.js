@@ -3,7 +3,7 @@ window.RamaActual = window.RamaActual || (() =>  {
   const CLAVE_FORZAR_SELECTOR = 'forzar_selector_rama';
   const esPantallaSelector = () =>  {
     const ruta = String(window.location.pathname || '').toLowerCase();
-    return ruta === '/' || ruta.endsWith('/index.html') || ruta.includes('/inicio');
+    return ruta === String((window.APP_BASE || '/')).toLowerCase() || ruta.endsWith('/index.html') || ruta.includes('/inicio');
   }
   ;
   const estaForzadoSelector = () =>  {

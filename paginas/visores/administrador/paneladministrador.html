@@ -1,137 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
  <head>
+  <meta charset="utf-8"/>
+  <script>
+  /* BASE DE LA APLICACION (debe ir antes de cualquier recurso relativo).
+     Se calcula al cargar para que el mismo codigo funcione en la raiz
+     (localhost, dominio propio, usuario.github.io) y en un GitHub Pages de
+     proyecto (usuario.github.io/repositorio/). Sin build ni reescritura. */
+  (function () {
+    var base = '/';
+    try {
+      if (/\.github\.io$/i.test(location.hostname)) {
+        var seg = location.pathname.split('/')[1] || '';
+        var propias = /^(paginas|componentes|css|js|img|visores|sql|bibliotecas_latex|index\.html|login\.html)$/i;
+        if (seg && !propias.test(seg)) base = '/' + seg + '/';
+      }
+    } catch (_) {}
+    window.APP_BASE = base;
+    document.write('<base href="' + base + '">');
+  }());
+  </script>
  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
  <meta http-equiv="Pragma" content="no-cache"/>
  <meta http-equiv="Expires" content="0"/>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <script src="../../../js/visores/administrador/base/deteccion_embebido.js"></script>
-  <base href="/"/>
-  <link id="visor-css-first-paint-gate" href="../../../css/visores/administrador/base/espera_estilos.css" rel="stylesheet"/>
-  <script id="visor-css-first-paint-start" src="../../../js/visores/administrador/base/inicio_espera_estilos.js"></script>
-  <script src="../../../js/visores/administrador/base/navegacion_embebida.js"></script>
-  <script src="../../../js/visores/administrador/tema/embebido.js"></script>
-  <script src="../../../js/app/tema_precarga.js">
+  <script src="js/visores/administrador/base/deteccion_embebido.js"></script>
+  <link id="visor-css-first-paint-gate" href="css/visores/administrador/base/espera_estilos.css" rel="stylesheet"/>
+  <script id="visor-css-first-paint-start" src="js/visores/administrador/base/inicio_espera_estilos.js"></script>
+  <script src="js/visores/administrador/base/navegacion_embebida.js"></script>
+  <script src="js/visores/administrador/tema/embebido.js"></script>
+  <script src="js/app/tema_precarga.js">
   </script>
-  <link id="visor-embed-navbar-guard" href="../../../css/visores/administrador/base/ocultar_barra_embebida.css" rel="stylesheet"/>
-  <link id="navbar-popup-no-flash" href="../../../css/visores/administrador/base/desplegable_sin_parpadeo.css" rel="stylesheet"/>
-  <link id="visor-modales-override" href="../../../css/visores/administrador/modales/contraste/contraste.css" rel="stylesheet"/>
-  <link id="visor-theme-first-paint" href="../../../css/visores/administrador/tema/fondo_inicial.css" rel="stylesheet"/>
-  <link href="../../../css/app/tema_base.css" rel="stylesheet"/>
-  <link href="../../../css/app/navbar_tema_estable.css" rel="stylesheet"/>
-  <link href="../../../css/barranavegacion/navbar.css" rel="stylesheet" data-navbar-global="1"/>
-  <link href="../../../css/visores/administrador/visor/estado_precarga.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/estilos_iniciales.css" rel="stylesheet"/>
-  <script src="../../../js/visores/administrador/base/estado_precarga.js">
+  <link id="visor-embed-navbar-guard" href="css/visores/administrador/base/ocultar_barra_embebida.css" rel="stylesheet"/>
+  <link id="navbar-popup-no-flash" href="css/visores/administrador/base/desplegable_sin_parpadeo.css" rel="stylesheet"/>
+  <link id="visor-modales-override" href="css/visores/administrador/modales/contraste/contraste.css" rel="stylesheet"/>
+  <link id="visor-theme-first-paint" href="css/visores/administrador/tema/fondo_inicial.css" rel="stylesheet"/>
+  <link href="css/app/tema_base.css" rel="stylesheet"/>
+  <link href="css/app/navbar_tema_estable.css" rel="stylesheet"/>
+  <link href="css/barranavegacion/navbar.css" rel="stylesheet" data-navbar-global="1"/>
+  <link href="css/visores/administrador/visor/estado_precarga.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/estilos_iniciales.css" rel="stylesheet"/>
+  <script src="js/visores/administrador/base/estado_precarga.js">
   </script>
-  <link id="visor-precarga-estilos" href="../../../css/visores/administrador/visor/estilos_precarga_documento.css" rel="stylesheet"/>
+  <link id="visor-precarga-estilos" href="css/visores/administrador/visor/estilos_precarga_documento.css" rel="stylesheet"/>
   <title>
    Visor y Gestor de Documentos · Grados
   </title>
-  <script src="../../../js/base/iniciotema.js">
+  <script src="js/base/iniciotema.js">
   </script>
   <!-- Navbar y componentes globales de la plataforma: el visor usa la MISMA navbar. -->
-  <link href="../../../css/global/base.css" rel="stylesheet"/>
-  <link href="../../../css/global/iconos.css" rel="stylesheet"/>
-  <link href="../../../css/global/tabla.css" rel="stylesheet"/>
-  <link href="../../../css/global/tablavarios.css" rel="stylesheet"/>
-  <link href="../../../css/global/panelconfiguracionvarios.css" rel="stylesheet"/>
-  <link href="../../../css/global/autenticacion.css" rel="stylesheet"/>
-  <link href="../../../css/botones/animaciones.css" rel="stylesheet"/>
-  <link href="../../../css/botones/claro.css" rel="stylesheet"/>
-  <link href="../../../css/botones/oscuro.css" rel="stylesheet"/>
-  <link href="../../../css/ajustes/boton.css" rel="stylesheet"/>
-  <link href="../../../css/ajustes/panel.css" rel="stylesheet"/>
-  <link href="../../../css/ajustes/panelvarios.css" rel="stylesheet"/>
-  <link href="../../../css/ajustes/paneloscuro.css" rel="stylesheet"/>
-  <link href="../../../css/ajustes/paneloscurovarios.css" rel="stylesheet"/>
-  <link href="../../../css/ajustes/oscuro.css" rel="stylesheet"/>
+  <link href="css/global/base.css" rel="stylesheet"/>
+  <link href="css/global/iconos.css" rel="stylesheet"/>
+  <link href="css/global/tabla.css" rel="stylesheet"/>
+  <link href="css/global/tablavarios.css" rel="stylesheet"/>
+  <link href="css/global/panelconfiguracionvarios.css" rel="stylesheet"/>
+  <link href="css/global/autenticacion.css" rel="stylesheet"/>
+  <link href="css/botones/animaciones.css" rel="stylesheet"/>
+  <link href="css/botones/claro.css" rel="stylesheet"/>
+  <link href="css/botones/oscuro.css" rel="stylesheet"/>
+  <link href="css/ajustes/boton.css" rel="stylesheet"/>
+  <link href="css/ajustes/panel.css" rel="stylesheet"/>
+  <link href="css/ajustes/panelvarios.css" rel="stylesheet"/>
+  <link href="css/ajustes/paneloscuro.css" rel="stylesheet"/>
+  <link href="css/ajustes/paneloscurovarios.css" rel="stylesheet"/>
+  <link href="css/ajustes/oscuro.css" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/variables.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/cabecera.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/elementosdinamicos.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/acciones/botones.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/acciones/botonesprincipales.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/bloqueoemergente.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/estadisticas/panel.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tarjetas/tarjetas.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tarjetas/varios.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/superposicioncomparacion.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/superposicioncomparacionvarios.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/acciones/botonesactuacion.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/panelescomparacion.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/pdf.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/selecciontexto.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/puntoscalientesenunciados.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/puntoscalientesnombrecolegio.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/menusflotantes.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/textoseleccion.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/modales.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/formularios.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/desarrollo.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/acciones/navegacioncambios.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/busqueda/archivos.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/variablestema.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/disposicioncabecera.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/busqueda/barra.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/estadisticas/estadosacceso.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/estadisticas/listado.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/modoclaroprincipal.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/temaclarocompleto.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/temaclaromenus.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/claro_visor.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/estadisticas/carga.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/cabeceraresponsivo.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tarjetas/responsivo.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/base.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/listado.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/superposicioncabecera.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/superposicionbotones.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/superposicionacciones.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/superposicioncolumnas.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/superposicionvisordocumento.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/adaptativo.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/responsivo.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/escritorio_ajustes.css" rel="stylesheet"/>
-  <link href="../../../css/componentes/componentes.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/paneladministrador.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/busqueda/busqueda.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/acciones/controles.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/estadisticas/estadisticas.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/listado.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/modales/elementos.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/base/panel.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/controles_zoom.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/cargando_documento.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/barras_herramientas.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/controles_documento.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/columnas_documento.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/ajustes_precarga.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/geometria_precarga.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/altura_visor.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/variables.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/cabecera.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/elementosdinamicos.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/acciones/botones.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/acciones/botonesprincipales.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/bloqueoemergente.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/estadisticas/panel.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tarjetas/tarjetas.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tarjetas/varios.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/superposicioncomparacion.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/superposicioncomparacionvarios.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/acciones/botonesactuacion.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/panelescomparacion.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/pdf.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/selecciontexto.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/puntoscalientesenunciados.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/puntoscalientesnombrecolegio.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/menusflotantes.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/textoseleccion.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/modales.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/formularios.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/desarrollo.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/acciones/navegacioncambios.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/busqueda/archivos.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/variablestema.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/disposicioncabecera.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/busqueda/barra.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/estadisticas/estadosacceso.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/estadisticas/listado.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/modoclaroprincipal.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/temaclarocompleto.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/temaclaromenus.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/claro_visor.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/estadisticas/carga.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/cabeceraresponsivo.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tarjetas/responsivo.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/base.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/listado.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/superposicioncabecera.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/superposicionbotones.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/superposicionacciones.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/superposicioncolumnas.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/superposicionvisordocumento.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/adaptativo.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/responsivo.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/escritorio_ajustes.css" rel="stylesheet"/>
+  <link href="css/componentes/componentes.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/paneladministrador.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/busqueda/busqueda.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/acciones/controles.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/estadisticas/estadisticas.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/listado.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/modales/elementos.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/base/panel.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/controles_zoom.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/cargando_documento.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/barras_herramientas.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/controles_documento.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/columnas_documento.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/ajustes_precarga.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/geometria_precarga.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/altura_visor.css" rel="stylesheet"/>
  
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
- <link href="../../../css/notificador.css" rel="stylesheet" data-shared-download-notifier="1"/>
-  <link href="../../../css/visores/administrador/responsivo/documento_base.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/documento_tableta.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/documento_movil.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/herramientas_movil.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/paneles_movil.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/pantalla_dividida.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/responsivo/adaptacion_movil.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/reinicio_embebido.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/claro_busqueda.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/claro_cabecera.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/claro_superficies.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/claro_modales.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/claro_botones_modales.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/tema/claro_elementos_cierre.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/filtros_escritorio.css" rel="stylesheet"/>
-  <link href="../../../css/visores/administrador/visor/filtros_movil.css" rel="stylesheet"/>
-  <script id="visor-css-first-paint-finish" src="../../../js/visores/administrador/base/fin_espera_estilos.js"></script>
+  <link rel="icon" type="image/png" href="classroom_icon.png"/>
+ <link href="css/notificador.css" rel="stylesheet" data-shared-download-notifier="1"/>
+  <link href="css/visores/administrador/responsivo/documento_base.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/documento_tableta.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/documento_movil.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/herramientas_movil.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/paneles_movil.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/pantalla_dividida.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/responsivo/adaptacion_movil.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/reinicio_embebido.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/claro_busqueda.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/claro_cabecera.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/claro_superficies.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/claro_modales.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/claro_botones_modales.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/tema/claro_elementos_cierre.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/filtros_escritorio.css" rel="stylesheet"/>
+  <link href="css/visores/administrador/visor/filtros_movil.css" rel="stylesheet"/>
+  <script id="visor-css-first-paint-finish" src="js/visores/administrador/base/fin_espera_estilos.js"></script>
 </head>
  <body>
   <!-- Navbar standalone del Visor-Admin. En modo embebido se oculta y la aporta la SPA padre. -->
@@ -139,8 +155,8 @@
    <navbar-general data-component="navbar-general" data-navbar-context="visor-admin" data-navbar-admin="true">
     <header aria-label="Navegación principal" class="barra-superior navbar-flex-layout" id="barra-superior">
       <div class="nav-left" aria-label="Navegación izquierda">
-        <navbar-boton-inicio data-component="navbar-boton:inicio"><a aria-label="Inicio" href="/" id="btn-inicio" title="Inicio"><i aria-hidden="true" class="fa-solid fa-house"></i><span class="nav-label">Inicio</span></a></navbar-boton-inicio>
-        <navbar-boton-volver data-component="navbar-boton:volver"><a aria-label="Volver atrás" class="btn-volver" href="/" id="volver-atras" title="Volver atrás"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i><span class="nav-label">Volver atrás</span></a></navbar-boton-volver>
+        <navbar-boton-inicio data-component="navbar-boton:inicio"><a aria-label="Inicio" href="./" id="btn-inicio" title="Inicio"><i aria-hidden="true" class="fa-solid fa-house"></i><span class="nav-label">Inicio</span></a></navbar-boton-inicio>
+        <navbar-boton-volver data-component="navbar-boton:volver"><a aria-label="Volver atrás" class="btn-volver" href="./" id="volver-atras" title="Volver atrás"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i><span class="nav-label">Volver atrás</span></a></navbar-boton-volver>
         <div class="nav-left-selectors" aria-label="Rama y trimestre">
           <div class="visor-navbar-selector visor-admin-only" data-visor-navbar="rama">
             <span>Rama</span><select id="selectRamaGithub" aria-label="Rama"></select>
@@ -186,8 +202,8 @@
     </header>
     <div class="navbar-menu-panel" id="navbar-menu-panel" popover="auto" aria-label="Menú de navegación">
       <div class="navbar-popup-list" role="menu">
-        <a class="navbar-popup-item popup-home" aria-label="Inicio" href="/" title="Inicio"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
-        <a class="navbar-popup-item popup-back" aria-label="Volver atrás" href="/" title="Volver atrás"><i class="fa-solid fa-arrow-left"></i><span>Volver atrás</span></a>
+        <a class="navbar-popup-item popup-home" aria-label="Inicio" href="./" title="Inicio"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+        <a class="navbar-popup-item popup-back" aria-label="Volver atrás" href="./" title="Volver atrás"><i class="fa-solid fa-arrow-left"></i><span>Volver atrás</span></a>
         <div class="navbar-popup-item popup-selector popup-rama visor-admin-only" data-visor-popup="rama"><span>Rama</span><select id="navbar-rama-popup" aria-label="Rama"></select></div>
         <div class="navbar-popup-item popup-selector popup-trimestre visor-admin-only" data-visor-popup="trimestre"><span>Trimestre</span><select id="navbar-trimestre-popup" aria-label="Trimestre"><option value="">Todos los trimestres</option><option value="1">1º Trimestre</option><option value="2">2º Trimestre</option><option value="3">3º Trimestre</option></select></div>
         <button class="navbar-popup-item popup-extra" type="button" data-navbar-action="openSummaryModal" title="Resumen"><i class="fa-solid fa-chart-pie"></i><span>Resumen</span></button>
@@ -204,7 +220,7 @@
   <!-- La navbar es propiedad única de la SPA raíz. El visor administra únicamente
        sus extensiones/acciones y nunca monta una segunda navbar. -->
   <template shadowrootmode="open">
-   <link data-dsd-shell-css="1" href="../../../css/componentes/carcasasombra.css" rel="stylesheet"/>
+   <link data-dsd-shell-css="1" href="css/componentes/carcasasombra.css" rel="stylesheet"/>
    <slot>
    </slot>
   </template>
@@ -1167,176 +1183,176 @@
   <!-- MÓDULOS Y BIBLIOTECAS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
   </script>
-  <script src="../../../js/permisos/cifrado.js">
+  <script src="js/permisos/cifrado.js">
   </script>
-  <script src="../../../js/permisos/supabase.js">
+  <script src="js/permisos/supabase.js">
   </script>
-  <script src="../../../js/permisos/github.js">
+  <script src="js/permisos/github.js">
   </script>
-  <script src="../../../js/permisos/visibilidad/configuracion/constantes.js"></script>
-  <script src="../../../js/permisos/visibilidad/configuracion/normalizacion.js"></script>
-  <script src="../../../js/permisos/visibilidad/configuracion/repositorios.js"></script>
-  <script src="../../../js/permisos/visibilidad/red/http/peticiones.js"></script>
-  <script src="../../../js/permisos/visibilidad/red/github/api-github.js"></script>
-  <script src="../../../js/permisos/visibilidad/red/github/historial.js"></script>
-  <script src="../../../js/permisos/visibilidad/archivos/csv/procesador-csv.js"></script>
-  <script src="../../../js/permisos/visibilidad/archivos/rutas/analizador-rutas.js"></script>
-  <script src="../../../js/permisos/visibilidad/operaciones/consulta/consulta-visibilidad.js"></script>
-  <script src="../../../js/permisos/visibilidad/operaciones/publicacion/constructor-publico.js"></script>
-  <script src="../../../js/permisos/visibilidad/operaciones/publicacion/gestor-movimiento.js"></script>
-  <script src="../../../js/permisos/visibilidad/index.js"></script>
-  <script src="../../../js/permisos/visibilidad.js"></script>
-  <script src="../../../js/base/permisos.js">
+  <script src="js/permisos/visibilidad/configuracion/constantes.js"></script>
+  <script src="js/permisos/visibilidad/configuracion/normalizacion.js"></script>
+  <script src="js/permisos/visibilidad/configuracion/repositorios.js"></script>
+  <script src="js/permisos/visibilidad/red/http/peticiones.js"></script>
+  <script src="js/permisos/visibilidad/red/github/api-github.js"></script>
+  <script src="js/permisos/visibilidad/red/github/historial.js"></script>
+  <script src="js/permisos/visibilidad/archivos/csv/procesador-csv.js"></script>
+  <script src="js/permisos/visibilidad/archivos/rutas/analizador-rutas.js"></script>
+  <script src="js/permisos/visibilidad/operaciones/consulta/consulta-visibilidad.js"></script>
+  <script src="js/permisos/visibilidad/operaciones/publicacion/constructor-publico.js"></script>
+  <script src="js/permisos/visibilidad/operaciones/publicacion/gestor-movimiento.js"></script>
+  <script src="js/permisos/visibilidad/index.js"></script>
+  <script src="js/permisos/visibilidad.js"></script>
+  <script src="js/base/permisos.js">
   </script>
-  <script src="../../../js/visores/administrador/base/cache-control.js?v=20260917-delapunte6">
+  <script src="js/visores/administrador/base/cache-control.js?v=20260917-delapunte6">
   </script>
-  <script src="../../../js/visores/administrador/base/sesioncompartida.js">
+  <script src="js/visores/administrador/base/sesioncompartida.js">
   </script>
-  <script src="../../../js/servicios/ramaapi.js">
+  <script src="js/servicios/ramaapi.js">
   </script>
-  <script src="../../../js/componentes/barranavegacion/modoedicion.js">
+  <script src="js/componentes/barranavegacion/modoedicion.js">
   </script>
-<script src="../../../js/componentes/ajustes.js">
+<script src="js/componentes/ajustes.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/motormupdf.js">
+  <script src="js/visores/administrador/renderizado/motormupdf.js">
   </script>
-  <script src="../../../js/visores/administrador/api/ajustes/configuracion.js?v=20260917-delapunte6">
+  <script src="js/visores/administrador/api/ajustes/configuracion.js?v=20260917-delapunte6">
   </script>
-  <script src="../../../js/visores/administrador/api/github/archivos.js?v=20260917-delapunte6">
+  <script src="js/visores/administrador/api/github/archivos.js?v=20260917-delapunte6">
   </script>
-  <script src="../../../js/visores/administrador/api/datos/almacen.js?v=20260917-delapunte6">
+  <script src="js/visores/administrador/api/datos/almacen.js?v=20260917-delapunte6">
   </script>
-  <script src="../../../js/visores/administrador/api/escritura/guardado.js?v=20260917-delapunte6">
+  <script src="js/visores/administrador/api/escritura/guardado.js?v=20260917-delapunte6">
   </script>
-  <script src="../../../js/visores/administrador/api/rutas/respuestas.js">
+  <script src="js/visores/administrador/api/rutas/respuestas.js">
   </script>
-  <script src="../../../js/visores/administrador/api/arranque.js">
+  <script src="js/visores/administrador/api/arranque.js">
   </script>
-  <script src="../../../js/visores/administrador/contexto/global.js">
+  <script src="js/visores/administrador/contexto/global.js">
   </script>
-  <script src="../../../js/visores/administrador/contexto/cambios.js">
+  <script src="js/visores/administrador/contexto/cambios.js">
   </script>
-  <script src="../../../js/estado/navegacion.js">
+  <script src="js/estado/navegacion.js">
   </script>
-  <script src="../../../js/visores/administrador/estado/teclado.js">
+  <script src="js/visores/administrador/estado/teclado.js">
   </script>
-  <script src="../../../js/visores/administrador/contexto/apertura.js">
+  <script src="js/visores/administrador/contexto/apertura.js">
   </script>
-  <script src="../../../js/visores/administrador/rama/selectorrama.js">
+  <script src="js/visores/administrador/rama/selectorrama.js">
   </script>
-  <script src="../../../js/visores/administrador/vistas/tarjetas.js">
+  <script src="js/visores/administrador/vistas/tarjetas.js">
   </script>
-  <script src="../../../js/visores/administrador/vistas/estadisticas.js">
+  <script src="js/visores/administrador/vistas/estadisticas.js">
   </script>
-  <script src="../../../js/visores/administrador/vistas/cuadricula.js">
+  <script src="js/visores/administrador/vistas/cuadricula.js">
   </script>
-  <script src="../../../js/visores/administrador/vistas/renderizadodocumento.js">
+  <script src="js/visores/administrador/vistas/renderizadodocumento.js">
   </script>
-  <script src="../../../js/visores/administrador/modales/alertas.js">
+  <script src="js/visores/administrador/modales/alertas.js">
   </script>
-  <script src="../../../js/visores/administrador/modales/limpiardatos.js">
+  <script src="js/visores/administrador/modales/limpiardatos.js">
   </script>
-  <script src="../../../js/visores/administrador/modales/sistema.js">
+  <script src="js/visores/administrador/modales/sistema.js">
   </script>
-  <script src="../../../js/visores/administrador/enunciados/crear.js">
+  <script src="js/visores/administrador/enunciados/crear.js">
   </script>
-  <script src="../../../js/visores/administrador/enunciados/editar.js">
+  <script src="js/visores/administrador/enunciados/editar.js">
   </script>
-  <script src="../../../js/visores/administrador/enunciados/ventanaemergente.js">
+  <script src="js/visores/administrador/enunciados/ventanaemergente.js">
   </script>
-  <script src="../../../js/visores/administrador/imagenes/ventanaemergenteimagenes.js">
+  <script src="js/visores/administrador/imagenes/ventanaemergenteimagenes.js">
   </script>
-  <script src="../../../js/visores/administrador/imagenes/acciones.js">
+  <script src="js/visores/administrador/imagenes/acciones.js">
   </script>
-  <script src="../../../js/visores/administrador/imagenes/internet.js">
+  <script src="js/visores/administrador/imagenes/internet.js">
   </script>
-  <script src="../../../js/visores/administrador/dibujo/selector.js">
+  <script src="js/visores/administrador/dibujo/selector.js">
   </script>
-  <script src="../../../js/visores/administrador/dibujo/guardar.js">
+  <script src="js/visores/administrador/dibujo/guardar.js">
   </script>
-  <script src="../../../js/visores/administrador/dibujo/eventos.js">
+  <script src="js/visores/administrador/dibujo/eventos.js">
   </script>
-  <script src="../../../js/visores/administrador/dibujo/lienzo.js">
+  <script src="js/visores/administrador/dibujo/lienzo.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/utilidades.js">
+  <script src="js/visores/administrador/puntoscalientes/utilidades.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/detectorfuentes.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/detectorfuentes.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/geometriapdf.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/geometriapdf.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/eliminarpuntoscalientes.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/eliminarpuntoscalientes.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/eliminarfotopuntocaliente.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/eliminarfotopuntocaliente.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/sustitucionenunciado.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/sustitucionenunciado.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/reflujoflujo.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/reflujoflujo.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/recuadroseliminacion.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/recuadroseliminacion.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/sustitucionrecuadros.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/sustitucionrecuadros.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/recuadros.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/recuadros.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/reflujoraster.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/reflujoraster.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/reflujoautomatico.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/reflujoautomatico.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/motorreflujo/eliminacionimagen.js">
+  <script src="js/visores/administrador/puntoscalientes/motorreflujo/eliminacionimagen.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/enunciados.js">
+  <script src="js/visores/administrador/puntoscalientes/enunciados.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/nombres.js">
+  <script src="js/visores/administrador/puntoscalientes/nombres.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/colegios.js">
+  <script src="js/visores/administrador/puntoscalientes/colegios.js">
   </script>
-  <script src="../../../js/visores/administrador/puntoscalientes/capassuperpuestas.js">
+  <script src="js/visores/administrador/puntoscalientes/capassuperpuestas.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/precargadocumentos.js?v=20260917-delapunte6">
+  <script src="js/visores/administrador/renderizado/precargadocumentos.js?v=20260917-delapunte6">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/mupdf.js">
+  <script src="js/visores/administrador/renderizado/mupdf.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/sincronizaciondesplazamiento.js">
+  <script src="js/visores/administrador/renderizado/sincronizaciondesplazamiento.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/paginasustitucion.js">
+  <script src="js/visores/administrador/renderizado/paginasustitucion.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/paginaeliminacion.js">
+  <script src="js/visores/administrador/renderizado/paginaeliminacion.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/marcadores.js">
+  <script src="js/visores/administrador/renderizado/marcadores.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/actualizaciondocumento.js">
+  <script src="js/visores/administrador/renderizado/actualizaciondocumento.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/documento.js">
+  <script src="js/visores/administrador/renderizado/documento.js">
   </script>
-  <script src="../../../js/visores/administrador/acciones/comprobaciones.js">
+  <script src="js/visores/administrador/acciones/comprobaciones.js">
   </script>
-  <script src="../../../js/visores/administrador/acciones/decisionesarchivo.js">
+  <script src="js/visores/administrador/acciones/decisionesarchivo.js">
   </script>
-  <script src="../../../js/visores/administrador/acciones/confirmacion.js">
+  <script src="js/visores/administrador/acciones/confirmacion.js">
   </script>
-  <script src="../../../js/visores/administrador/acciones/apuntes.js?v=20260917-delapunte6">
+  <script src="js/visores/administrador/acciones/apuntes.js?v=20260917-delapunte6">
   </script>
-  <script src="../../../js/visores/administrador/acciones/aliasapuntes.js">
+  <script src="js/visores/administrador/acciones/aliasapuntes.js">
   </script>
-  <script src="../../../js/visores/administrador/renderizado/exportadorpdfvectorial.js">
+  <script src="js/visores/administrador/renderizado/exportadorpdfvectorial.js">
   </script>
-  <script src="../../../js/descargas/notificador.js?v=20260911-0930">
+  <script src="js/descargas/notificador.js?v=20260911-0930">
   </script>
-  <script src="../../../js/visores/administrador/notificador/inicializacion.js"></script>
-  <script src="../../../js/visores/administrador/acciones/descargadocumentos.js">
+  <script src="js/visores/administrador/notificador/inicializacion.js"></script>
+  <script src="js/visores/administrador/acciones/descargadocumentos.js">
   </script>
-  <script src="../../../js/visores/administrador/acciones/sincronizaciongithub.js">
+  <script src="js/visores/administrador/acciones/sincronizaciongithub.js">
   </script>
-  <script src="../../../js/visores/administrador/barranavegacion/navegacionglobal.js">
+  <script src="js/visores/administrador/barranavegacion/navegacionglobal.js">
   </script>
-  <script src="../../../js/visores/administrador/aplicacion.js">
+  <script src="js/visores/administrador/aplicacion.js">
   </script>
-  <script src="../../../js/visores/administrador/barranavegacion/sincronizar_selectores.js"></script>
-  <script src="../../../js/visores/administrador/arranque.js">
+  <script src="js/visores/administrador/barranavegacion/sincronizar_selectores.js"></script>
+  <script src="js/visores/administrador/arranque.js">
   </script>
-  <script src="../../../js/visores/administrador/enlaces.js">
+  <script src="js/visores/administrador/enlaces.js">
   </script>
-  <script src="../../../js/visores/administrador/herramientas/movil.js"></script>
+  <script src="js/visores/administrador/herramientas/movil.js"></script>
  </body>
 </html>
 
