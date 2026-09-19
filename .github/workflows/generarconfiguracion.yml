@@ -62,6 +62,32 @@ jobs:
                   print(f"Base Pages: {path} -> {base}")
           PY2
 
+      - name: Normalizar recursos con base
+        run: |
+          python - <<'PY3'
+          import re
+          from pathlib import Path
+
+          # Al conservar <base>, todos los recursos locales deben partir
+          # de la raíz del proyecto y no usar ../, porque <base> sustituye
+          # la carpeta física del HTML como referencia.
+          attr_re = re.compile(r'(\b(?:src|href)=["\'])(\.{2}/)+(?!https?://|//)', re.I)
+
+          for path in Path(".").rglob("*.html"):
+              if ".git" in path.parts:
+                  continue
+              text = path.read_text(encoding="utf-8")
+
+              def fix(m):
+                  return m.group(1)
+
+              new_text = attr_re.sub(fix, text)
+
+              if new_text != text:
+                  path.write_text(new_text, encoding="utf-8")
+                  print(f"Recursos normalizados: {path}")
+          PY3
+
       - name: Comprobar configuración generada
         run: |
           test -f js/SUPABASETOKEN_pages.js
