@@ -16,7 +16,7 @@ if os.path.exists(env_path):
 
 supabase_url  = os.environ.get("SUPABASE_URL") or env_vars.get("SUPABASE_URL", "")
 supabase_key  = os.environ.get("SUPABASE_ANON_KEY") or env_vars.get("SUPABASE_ANON_KEY", "")
-gh_repo       = os.environ.get("GH_REPO") or env_vars.get("GH_REPO", "nataliagamezbarea/Acceso_grados_informaticos")
+gh_repo       = os.environ.get("GITHUB_REPOSITORY") or env_vars.get("GITHUB_REPOSITORY", "nataliagamezbarea/Acceso_grados_informaticos")
 gh_token      = os.environ.get("GH_TOKEN") or env_vars.get("GH_TOKEN", "")
 suffix        = os.environ.get("CONFIG_SUFFIX") or env_vars.get("CONFIG_SUFFIX", "local")
 
