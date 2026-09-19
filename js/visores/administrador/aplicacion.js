@@ -196,6 +196,16 @@ window.openSummaryModal = openSummaryModal;
 window.closeSummaryModal = closeSummaryModal;
 window.mostrarAccesoDenegadoVisor = mostrarAccesoDenegadoVisor;
 window.cerrarSesionUsuario = cerrarSesionUsuario;
+// En el panel suelto no se carga navbar_acciones.js: nadie enlazaba el botón
+// "Cerrar sesión" (ni el del menú desplegable), así que no hacía nada.
+document.addEventListener('click', (e) => {
+  const el = e.target?.closest?.('#btn-cerrar-sesion, .btn-cerrar-sesion, [data-navbar-action="logout"]');
+  if (!el) return;
+  e.preventDefault();
+  e.stopPropagation();
+  try { document.getElementById('navbar-menu-panel')?.hidePopover?.(); } catch (_) {}
+  cerrarSesionUsuario();
+}, true);
 function mostrarCargandoPagina(mensaje = 'Cargando...') {
   const content = document.getElementById('content');
   if (!content) return;

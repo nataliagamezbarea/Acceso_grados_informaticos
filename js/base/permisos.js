@@ -298,6 +298,7 @@ window.Permisos = (() =>  {
       // usuario autenticado cuyo perfil actual no confirma administrador.
       // Evita que un invitado vea EDITAR/LECTURA por un valor antiguo.
       const adminPorSesion =
+      !!usuario &&
       !perfilConsultado &&
       !perfilRol &&
       sessionStorage.getItem("esAdmin") === "true";

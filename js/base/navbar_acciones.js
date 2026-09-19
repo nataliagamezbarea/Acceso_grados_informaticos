@@ -14,6 +14,10 @@
   }
 
   async function cerrarSesionPorDefecto() {
+    // Cierre completo (Supabase + rol admin + estado del visor + redirección).
+    if (typeof window.__cerrarSesionCompleta === 'function') {
+      return window.__cerrarSesionCompleta();
+    }
     try {
       if (esInvitado()) {
         try {

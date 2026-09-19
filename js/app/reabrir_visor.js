@@ -33,6 +33,26 @@
     // Entrada directa/recarga real: descartar cualquier flag viejo.
     try { sessionStorage.removeItem('forzar_selector_rama'); } catch (_) {}
 
+    // El Visor Admin es solo para administradores: sin token de Supabase no se
+    // reabre (mostraría "No se pudieron cargar los datos" sobre el login).
+    let haySesion = false;
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && /^sb-.+-auth-token$/.test(k) && localStorage.getItem(k)) { haySesion = true; break; }
+      }
+    } catch (_) { haySesion = true; }
+    if (!haySesion) {
+      try {
+        ['visor_admin_abierto','visor_recovery_snapshot','visor_f5_recovery','last_open','last_archivo']
+          .forEach(k => localStorage.removeItem(k));
+        if ((localStorage.getItem('app_ultima_vista') || '') === 'visores/administrador') {
+          localStorage.setItem('app_ultima_vista', 'inicio');
+        }
+      } catch (_) {}
+      return;
+    }
+
     const forced = false;
     const vista = localStorage.getItem('app_ultima_vista') || '';
     let vctxInicial = {};
