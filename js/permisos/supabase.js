@@ -10,7 +10,7 @@ window.PermisosSupabase = (() =>  {
         const key = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
         window.supabaseClient = window.supabase.createClient(url, key, {
           db: { schema: SCHEMA_NAME },
-          auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+          auth: { flowType: "pkce", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
         });
         return window.supabaseClient;
       } catch (_) {}

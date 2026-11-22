@@ -98,13 +98,9 @@ window.Permisos = (() =>  {
   }
   ;
   const asegurarSesion = async () =>  {
-    /*
-     * La sesión de Supabase y el perfil de public.perfiles no siempre llegan
-     * en el mismo instante (especialmente tras OAuth/recarga). Esperamos a
-     * cargoSesion y, si existe usuario pero todavía no tenemos rol admin,
-     * damos hasta dos reintentos antes de que una vista protegida decida que
-     * no hay permisos. Esto evita falsos "Acceso solo para administradores".
-     */
+    if (sesionCargada && (rol === "admin" || rol === "invitado") && window.GITHUB_CONFIG?.token) {
+      return;
+    }
     for (let intento = 0; intento < 3; intento++) {
       if (!promesaSesion || (usuario && rol !== "admin" && intento > 0)) {
         promesaSesion = cargoSesion();
@@ -119,6 +115,9 @@ window.Permisos = (() =>  {
   }
   ;
   const cargoSesion = async () =>  {
+    if (sesionCargada && (rol === "admin" || rol === "invitado") && window.GITHUB_CONFIG?.token) {
+      return;
+    }
     if (promesaCargoSesionEnVuelo) return promesaCargoSesionEnVuelo;
     promesaCargoSesionEnVuelo = (async () => {
       try {
@@ -200,27 +199,47 @@ window.Permisos = (() =>  {
        */
       if (usuario) {
         try {
-          const resultadoPerfil =
-          await window.PermisosSupabase.consultarTablaConFallback(
-          cliente,
-          "perfiles",
-          (tabla) =>
-          tabla
-          .select("id, email, rol")
-          .eq("id", usuario.id)
-          .maybeSingle()
-  );
-          if (
-          !resultadoPerfil.error &&
-          resultadoPerfil.data
-          ) {
-            perfilConsultado = true;
-            perfilRol = String(
-            resultadoPerfil.data.rol || ""
-            )
-            .trim()
-            .toLowerCase();
-          } else if (resultadoPerfil.error) {
+          try {
+            const u = window.SUPABASE_URL || "https://lztatgnlplpduiatmlrv.supabase.co";
+            const k = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
+            const idFiltro = usuario.id ? `id=eq.${encodeURIComponent(usuario.id)}` : (usuario.email ? `email=eq.${encodeURIComponent(usuario.email)}` : null);
+            if (idFiltro) {
+              const resp = await fetch(`${u}/rest/v1/perfiles?select=id,email,rol&${idFiltro}`, {
+                credentials: "omit",
+                headers: { "apikey": k, "Authorization": `Bearer ${k}` }
+              });
+              if (resp.ok) {
+                const rows = await resp.json();
+                if (Array.isArray(rows) && rows.length > 0 && rows[0].rol) {
+                  perfilConsultado = true;
+                  perfilRol = String(rows[0].rol).trim().toLowerCase();
+                }
+              }
+            }
+          } catch (_) {}
+
+          if (!perfilConsultado) {
+            const resultadoPerfil =
+            await window.PermisosSupabase.consultarTablaConFallback(
+            cliente,
+            "perfiles",
+            (tabla) =>
+            tabla
+            .select("id, email, rol")
+            .eq("id", usuario.id)
+            .maybeSingle()
+    );
+            if (
+            !resultadoPerfil.error &&
+            resultadoPerfil.data
+            ) {
+              perfilConsultado = true;
+              perfilRol = String(
+              resultadoPerfil.data.rol || ""
+              )
+              .trim()
+              .toLowerCase();
+            }
           }
           /*
            * Respaldo por email. Sirve para cuentas cuyo registro
@@ -341,10 +360,10 @@ window.Permisos = (() =>  {
       for (const fila of resConfiguracion.data || []) {
         configuracion[String(fila.clave)] = String(fila.valor || "").trim();
       }
-      const repo = configuracion.gh_repo || "";
-      const repoGeneral = configuracion.gh_repo_general || "";
-      const token = configuracion.gh_token || "";
-      const tokenGeneral = configuracion.gh_token_general || "";
+      let repo = configuracion.gh_repo || "";
+      let repoGeneral = configuracion.gh_repo_general || "";
+      let token = configuracion.gh_token || "";
+      let tokenGeneral = configuracion.gh_token_general || "";
       /*
        * Si configuracion_privada no tiene repo/token (p.ej. el deploy todavía
        * no los ha publicado), se usa la configuracion_publica: su token es de

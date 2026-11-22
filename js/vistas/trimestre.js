@@ -154,11 +154,6 @@ function inicializarVistaTrimestre() {
       }
     } catch (e) {
     }
-    try {
-      const res = await fetch(`/api/informacion?rama=${encodeURIComponent(r)}`).catch(() => null);
-      if (res && res.ok) return await res.json();
-    } catch (e) {
-    }
     if (window.InformacionGrado) {
       const datosInf = await window.InformacionGrado.cargar(r);
       if (datosInf) return datosInf;

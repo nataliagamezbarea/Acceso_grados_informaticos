@@ -14,24 +14,73 @@
       const key = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
       window.supabaseClient = window.supabase.createClient(url, key, {
         db: { schema: "grados-informaticos" },
-        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+        auth: { flowType: "pkce", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
       });
       return window.supabaseClient;
     } catch (_) { return null; }
   };
   const isAdmin = async (c, user) => {
-    if (!c || !user?.id) return false;
+    if (!user) return false;
     try {
-      const { data, error } = await c.schema("public").from("perfiles")
-        .select("rol").eq("id", user.id).maybeSingle();
-      return !error && String(data?.rol || "").trim().toLowerCase() === "admin";
+      try {
+        const u = window.SUPABASE_URL || "https://lztatgnlplpduiatmlrv.supabase.co";
+        const k = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
+        const idFiltro = user.id ? `id=eq.${encodeURIComponent(user.id)}` : (user.email ? `email=eq.${encodeURIComponent(user.email)}` : null);
+        if (idFiltro) {
+          const resp = await fetch(`${u}/rest/v1/perfiles?select=rol&${idFiltro}`, {
+            credentials: "omit",
+            headers: { "apikey": k, "Authorization": `Bearer ${k}` }
+          });
+          if (resp.ok) {
+            const arr = await resp.json();
+            if (Array.isArray(arr) && arr.length > 0 && String(arr[0].rol || "").trim().toLowerCase() === "admin") {
+              return true;
+            }
+          }
+        }
+      } catch (_) {}
+
+      if (!c) return false;
+      let data = null;
+      if (user.id) {
+        const resId = await c.schema("public").from("perfiles")
+          .select("rol").eq("id", user.id).maybeSingle();
+        if (!resId.error && resId.data) data = resId.data;
+      }
+      if (!data && user.email) {
+        const resEmail = await c.schema("public").from("perfiles")
+          .select("rol").eq("email", user.email).maybeSingle();
+        if (!resEmail.error && resEmail.data) data = resEmail.data;
+      }
+      return data && String(data.rol || "").trim().toLowerCase() === "admin";
     } catch (_) { return false; }
   };
   const validateOAuthCallback = async () => {
     const c = await getClient();
     if (!c) return;
     try {
-      const { data: { session } } = await c.auth.getSession();
+      let { data: { session } } = await c.auth.getSession();
+      if (!session && (window.location.hash.includes("access_token") || window.location.search.includes("code="))) {
+        if (window.location.search.includes("code=")) {
+          const params = new URLSearchParams(window.location.search);
+          const code = params.get("code");
+          if (code && typeof c.auth.exchangeCodeForSession === "function") {
+            try {
+              const resCode = await c.auth.exchangeCodeForSession(code);
+              if (resCode.data?.session) session = resCode.data.session;
+            } catch (_) {}
+          }
+        }
+        for (let i = 0; i < 30; i++) {
+          if (session) break;
+          await new Promise(r => setTimeout(r, 100));
+          const res = await c.auth.getSession();
+          if (res.data?.session) {
+            session = res.data.session;
+            break;
+          }
+        }
+      }
       if (!session?.user) return;
       if (!(await isAdmin(c, session.user))) {
         await c.auth.signOut().catch(() => {});

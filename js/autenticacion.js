@@ -49,18 +49,35 @@ const esPaginaLogin = /login\.html/.test(window.location.pathname);
   ;
   const verificarPermiso = async (u) =>  {
     if (!u) return false;
-    const email = (u.email || "").toLowerCase();
-    // La autorización del ADMIN la decide exclusivamente Supabase mediante public.perfiles.
-    // No se autoriza por email/username ni por proveedor (Google/GitHub).
-    // El gh_token de GitHub se carga después desde configuracion_privada de Supabase para el ADMIN.
     try {
-      const  { data, error }
-      = await window.supabaseClient
-      .from("perfiles")
-      .select("rol")
-      .eq("id", u.id)
-      .maybeSingle();
-      if (error) return false;
+      try {
+        const url = window.SUPABASE_URL || "https://lztatgnlplpduiatmlrv.supabase.co";
+        const k = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
+        const idFiltro = u.id ? `id=eq.${encodeURIComponent(u.id)}` : (u.email ? `email=eq.${encodeURIComponent(u.email)}` : null);
+        if (idFiltro) {
+          const resp = await fetch(`${url}/rest/v1/perfiles?select=rol&${idFiltro}`, {
+            headers: { "apikey": k, "Authorization": `Bearer ${k}` }
+          });
+          if (resp.ok) {
+            const arr = await resp.json();
+            if (Array.isArray(arr) && arr.length > 0 && arr[0].rol === "admin") return true;
+          }
+        }
+      } catch (_) {}
+
+      let { data, error } = await window.supabaseClient
+        .from("perfiles")
+        .select("rol")
+        .eq("id", u.id)
+        .maybeSingle();
+      if (!data && u.email) {
+        const resEmail = await window.supabaseClient
+          .from("perfiles")
+          .select("rol")
+          .eq("email", u.email)
+          .maybeSingle();
+        if (!resEmail.error && resEmail.data) data = resEmail.data;
+      }
       return data?.rol === "admin";
     } catch (_e) {
       return false;

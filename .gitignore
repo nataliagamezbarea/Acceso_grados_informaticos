@@ -1,1 +1,3 @@
 test_apunte_resultado.*
+.env
+js/SUPABASETOKEN_local.js

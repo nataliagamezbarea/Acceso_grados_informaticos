@@ -76,15 +76,44 @@
     if (!session?.user?.id) return bloquear(client);
 
     try {
-      const { data, error } = await client
-        .schema("public")
-        .from("perfiles")
-        .select("rol")
-        .eq("id", session.user.id)
-        .maybeSingle();
+      let data = null;
+      try {
+        const u = window.SUPABASE_URL || "https://lztatgnlplpduiatmlrv.supabase.co";
+        const k = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
+        const idFiltro = session.user.id ? `id=eq.${encodeURIComponent(session.user.id)}` : (session.user.email ? `email=eq.${encodeURIComponent(session.user.email)}` : null);
+        if (idFiltro) {
+          const resp = await fetch(`${u}/rest/v1/perfiles?select=rol&${idFiltro}`, {
+            headers: { "apikey": k, "Authorization": `Bearer ${k}` }
+          });
+          if (resp.ok) {
+            const arr = await resp.json();
+            if (Array.isArray(arr) && arr.length > 0) data = arr[0];
+          }
+        }
+      } catch (_) {}
+
+      if (!data) {
+        let { data: resData } = await client
+          .schema("public")
+          .from("perfiles")
+          .select("rol")
+          .eq("id", session.user.id)
+          .maybeSingle();
+        if (resData) data = resData;
+      }
+
+      if (!data && session.user.email) {
+        const resEmail = await client
+          .schema("public")
+          .from("perfiles")
+          .select("rol")
+          .eq("email", session.user.email)
+          .maybeSingle();
+        if (!resEmail.error && resEmail.data) data = resEmail.data;
+      }
 
       const esAdmin =
-        !error &&
+        data &&
         String(data?.rol || "").trim().toLowerCase() === "admin";
 
       if (!esAdmin) return bloquear(client);

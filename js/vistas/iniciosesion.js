@@ -71,7 +71,7 @@ function inicializarVistaLogin() {
       try {
         window.supabaseClient = window.supabase.createClient(url, key, {
           db: { schema: "grados-informaticos" },
-          auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+          auth: { flowType: "pkce", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
         });
         return window.supabaseClient;
       } catch (_) {}
@@ -82,7 +82,7 @@ function inicializarVistaLogin() {
         try {
           window.supabaseClient = window.supabase.createClient(url, key, {
             db: { schema: "grados-informaticos" },
-            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+            auth: { flowType: "pkce", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
           });
           return window.supabaseClient;
         } catch (_) {}
@@ -93,15 +93,47 @@ function inicializarVistaLogin() {
   }
   ;
   const comprobarAdmin = async (supabase, user) => {
-    if (!supabase || !user) return false;
+    if (!user) return false;
     try {
-      const { data, error } = await supabase
-        .schema("public")
-        .from("perfiles")
-        .select("rol")
-        .eq("id", user.id)
-        .maybeSingle();
-      return !error && String(data?.rol || "").trim().toLowerCase() === "admin";
+      try {
+        const u = window.SUPABASE_URL || "https://lztatgnlplpduiatmlrv.supabase.co";
+        const k = window.SUPABASE_ANON_KEY || "sb_publishable_z_T7Y3yKqPdXLnvL3ltnQA_ZAPrXImZ";
+        const idFiltro = user.id ? `id=eq.${encodeURIComponent(user.id)}` : (user.email ? `email=eq.${encodeURIComponent(user.email)}` : null);
+        if (idFiltro) {
+          const resp = await fetch(`${u}/rest/v1/perfiles?select=rol&${idFiltro}`, {
+            credentials: "omit",
+            headers: { "apikey": k, "Authorization": `Bearer ${k}` }
+          });
+          if (resp.ok) {
+            const arr = await resp.json();
+            if (Array.isArray(arr) && arr.length > 0 && String(arr[0].rol || "").trim().toLowerCase() === "admin") {
+              return true;
+            }
+          }
+        }
+      } catch (_) {}
+
+      if (!supabase) return false;
+      let data = null;
+      if (user.id) {
+        const resId = await supabase
+          .schema("public")
+          .from("perfiles")
+          .select("rol")
+          .eq("id", user.id)
+          .maybeSingle();
+        if (!resId.error && resId.data) data = resId.data;
+      }
+      if (!data && user.email) {
+        const resEmail = await supabase
+          .schema("public")
+          .from("perfiles")
+          .select("rol")
+          .eq("email", user.email)
+          .maybeSingle();
+        if (!resEmail.error && resEmail.data) data = resEmail.data;
+      }
+      return data && String(data.rol || "").trim().toLowerCase() === "admin";
     } catch (_) {
       return false;
     }
@@ -110,7 +142,27 @@ function inicializarVistaLogin() {
     const supabase = await conseguirSupabase();
     if (!supabase) return;
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      let { data: { session } } = await supabase.auth.getSession();
+      if (!session && window.location.search.includes("code=")) {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code");
+        if (code && typeof supabase.auth.exchangeCodeForSession === "function") {
+          try {
+            const resCode = await supabase.auth.exchangeCodeForSession(code);
+            if (resCode.data?.session) session = resCode.data.session;
+          } catch (_) {}
+        }
+      }
+      if (!session && (window.location.hash.includes("access_token") || window.location.search.includes("code="))) {
+        for (let i = 0; i < 30; i++) {
+          await new Promise(r => setTimeout(r, 100));
+          const res = await supabase.auth.getSession();
+          if (res.data?.session) {
+            session = res.data.session;
+            break;
+          }
+        }
+      }
       if (!session?.user) return;
       const esAdmin = await comprobarAdmin(supabase, session.user);
       if (!esAdmin) {
@@ -173,27 +225,43 @@ function inicializarVistaLogin() {
   }
   );
   let oauthEnCurso = false;
-  const loginConOAuth = async proveedor =>  {
+  const loginConOAuth = async (proveedor, e) =>  {
+    if (e && typeof e.preventDefault === "function") e.preventDefault();
     if (oauthEnCurso) return;
     oauthEnCurso = true;
+    try {
+      sessionStorage.removeItem("esInvitado");
+      localStorage.removeItem("esInvitado");
+    } catch (_) {}
     if (errorBox) errorBox.hidden = true;
     const supabase = await conseguirSupabase();
     if (!supabase) return mostrarError("Error al conectar con Supabase.");
-    const  { error }
-    = await supabase.auth.signInWithOAuth( {
-      provider: proveedor, options:  { redirectTo: window.location.origin + (window.APP_BASE || "/") }
-    }
-  );
+    const logHist = (msg, d = null) => {
+      try {
+        const l = JSON.parse(localStorage.getItem("auth_history") || "[]");
+        l.push({ time: new Date().toLocaleTimeString(), msg, data: d ? JSON.parse(JSON.stringify(d)) : null });
+        localStorage.setItem("auth_history", JSON.stringify(l.slice(-40)));
+      } catch (_) {}
+      console.log(msg, d || "");
+    };
+    logHist("[OAUTH-CLICK] Iniciando con: " + proveedor);
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: proveedor,
+      options: { redirectTo: window.location.origin + (window.APP_BASE || "/") }
+    });
+    logHist("[OAUTH-CLICK] Resultado signInWithOAuth:", { data, error });
     if (error) {
       oauthEnCurso = false;
-      mostrarError(error.message);
+      return mostrarError(error.message);
     }
-  }
-  ;
+    if (data?.url) {
+      window.location.href = data.url;
+    }
+  };
   // Tras volver de Google/GitHub, Supabase ya tiene la sesión: comprobar el rol antes de entrar.
   validarSesionOAuth();
-  btnGoogle?.addEventListener("click", () => loginConOAuth("google"));
-  btnGithub?.addEventListener("click", () => loginConOAuth("github"));
+  btnGoogle?.addEventListener("click", (e) => loginConOAuth("google", e));
+  btnGithub?.addEventListener("click", (e) => loginConOAuth("github", e));
   btnInvitado?.addEventListener("click", async () =>  {
     if (window.Permisos?.invitadosActivos === false) return mostrarError("Acceso restringido: el acceso temporal a invitados está desactivado.");
     try {

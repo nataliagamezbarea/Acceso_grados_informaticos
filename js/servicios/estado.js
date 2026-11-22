@@ -82,6 +82,11 @@ window.Estado = (() =>  {
   ;
   const limpiarUrlVisible = () =>  {
     const params = new URLSearchParams(window.location.search);
+    // IMPORTANTE: Si la URL contiene el código de retorno de OAuth de Supabase o un error,
+    // NO debemos borrarlo aquí; autenticacion.js y el cliente Supabase lo necesitan para iniciar sesión.
+    if (params.has("code") || params.has("error") || params.has("error_description") || window.location.hash.includes("access_token")) {
+      return;
+    }
     let hayParams = false;
     const contexto =  {
     }

@@ -24,7 +24,9 @@
     try {
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const k = localStorage.key(i);
-        if (k && /^sb-.+-auth-token(-code-verifier)?$/.test(k)) localStorage.removeItem(k);
+        if (k && (k.startsWith("sb-") || k.includes("supabase") || k.includes("auth") || k.includes("admin") || k.includes("invitado") || k.includes("verifier"))) {
+          localStorage.removeItem(k);
+        }
       }
     } catch (_) {}
     // Estado de navegación/visor: sin esto se reabre el visor al volver a "/".
@@ -32,6 +34,27 @@
     // Marcas de rol y de invitado (viven en sessionStorage, compartido con el iframe del visor).
     try { sessionStorage.clear(); } catch (_) {}
     try { window.sesionActual = null; } catch (_) {}
+
+    // Purgar cookies del dominio y raíz para olvidar la sesión al recargar
+    try {
+      const cookies = document.cookie.split(";");
+      for (const c of cookies) {
+        const eqPos = c.indexOf("=");
+        const name = eqPos > -1 ? c.substring(0, eqPos).trim() : c.trim();
+        if (name) {
+          document.cookie = `${name}=; Max-Age=-99999999; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+          document.cookie = `${name}=; Max-Age=-99999999; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=;`;
+          document.cookie = `${name}=; Max-Age=-99999999; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname};`;
+          document.cookie = `${name}=; Max-Age=-99999999; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.${window.location.hostname};`;
+        }
+      }
+    } catch (_) {}
+
+    try {
+      if (window.location.hash || window.location.search) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    } catch (_) {}
   }
 
   const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
