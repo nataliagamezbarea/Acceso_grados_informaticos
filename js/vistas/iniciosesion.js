@@ -262,37 +262,16 @@ function inicializarVistaLogin() {
   validarSesionOAuth();
   btnGoogle?.addEventListener("click", (e) => loginConOAuth("google", e));
   btnGithub?.addEventListener("click", (e) => loginConOAuth("github", e));
-  btnInvitado?.addEventListener("click", async () =>  {
-    if (window.Permisos?.invitadosActivos === false) return mostrarError("Acceso restringido: el acceso temporal a invitados está desactivado.");
-    try {
-      sessionStorage.removeItem("esAdmin");
-      sessionStorage.setItem("esInvitado", "true");
-      sessionStorage.setItem("esAdmin", "false");
-      // El rol se fija antes de renderizar la siguiente vista para que EDITAR
-      // y Lectura/Edición nunca aparezcan durante el primer frame del invitado.
-      document.documentElement.dataset.rol = "invitado";
-      document.documentElement.classList.remove("admin-autorizado");
-      if (document.body) document.body.dataset.rol = "invitado";
-      if (window.Permisos?.activarInvitado) window.Permisos.activarInvitado();
-      // Invitado: predeterminado SIEMPRE Light.
-      sessionStorage.setItem("guest_modo_oscuro", "false");
-      try { localStorage.removeItem("guest_modo_oscuro"); } catch (_) {}
-      document.documentElement.classList.remove("modo-oscuro");
-      document.documentElement.dataset.theme = "light";
-      if (document.body) {
-        document.body.classList.remove("modo-oscuro");
-        document.body.dataset.theme = "light";
-      }
-    } catch (_) {}
-    await irAlInicio();
+  if (btnInvitado) {
+    btnInvitado.style.display = "none";
+    btnInvitado.remove();
   }
-  );
   const tarjeta = document.querySelector(".login-tarjeta");
   if (tarjeta && !tarjeta.querySelector("[data-login-aviso]")) {
     const aviso = document.createElement("div");
     aviso.dataset.loginAviso = "1";
     aviso.className = "login-aviso";
-    aviso.innerHTML = '<span class="login-aviso-tag">Nota</span><span>El acceso con Email, Google o GitHub está reservado al administrador. Para ver el contenido pulsa Entrar como Invitado.</span>';
+    aviso.innerHTML = '<span class="login-aviso-tag">Nota</span><span>Acceso protegido. Inicia sesión con Google o GitHub con tu cuenta autorizada.</span>';
     tarjeta.appendChild(aviso);
   }
 }
